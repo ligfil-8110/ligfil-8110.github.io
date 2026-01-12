@@ -265,3 +265,28 @@ body {
     border-radius: 8px;    /* 角を少し丸くして柔らかい印象に */
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 軽い影で高級感を出す */
 }
+
+/* 記事一覧のタイトルサイズを調整 */
+article h3 {
+    font-size: 1.5rem; /* デフォルトより一回り小さく設定 */
+    line-height: 1.3;
+    margin-top: 0;      /* 画像との高さを合わせやすくする */
+    margin-bottom: 10px;
+}
+
+/* タイトルリンクのホバー時の色（お好みで） */
+article h3 a:hover {
+    color: #008cba; /* Foundationの標準的な青 */
+}
+
+/* モバイル表示ではもう少し小さくして収まりを良くする */
+@media only screen and (max-width: 40em) {
+    article h3 {
+        font-size: 1.25rem;
+    }
+}
+
+article h6 {
+    font-size: 0.8rem;
+    color: #777;
+}
