@@ -3,6 +3,11 @@
 {% block content %}
 <article>
 	<h2>{{ article.title }}</h2>
+	{% if article.image %}
+    <div class="article-eyecatch">
+        <img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}">
+	</div>
+    {% endif %}
 	{{ article.content }}
 	<div class="share-buttons" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
         <p style="font-size: 0.8rem; font-weight: bold; color: #666; margin-bottom: 10px;">この記事をシェアする</p>

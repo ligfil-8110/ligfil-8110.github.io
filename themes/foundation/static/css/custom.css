@@ -234,3 +234,34 @@ body {
     padding: 2px 8px !important;
     border-radius: 20px !important;
 }
+
+/* 一覧画面のサムネイル（アイキャッチ）を整える */
+.index-thumbnail {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+/* モバイル表示では高さを自動調整 */
+@media only screen and (max-width: 40em) {
+    .index-thumbnail {
+        height: auto;
+    }
+}
+
+/* 記事詳細ページ（article.html）の画像スタイル */
+.article-eyecatch {
+    margin: 20px 0 30px 0; /* 上下に余白を作る */
+    text-align: center;
+}
+
+.article-eyecatch img {
+    width: 100%;           /* 横幅いっぱい */
+    max-height: 450px;     /* 縦に長くなりすぎないよう制限 */
+    object-fit: cover;     /* 指定サイズ内で綺麗に切り抜き */
+    border-radius: 8px;    /* 角を少し丸くして柔らかい印象に */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 軽い影で高級感を出す */
+}
