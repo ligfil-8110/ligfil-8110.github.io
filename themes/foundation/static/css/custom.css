@@ -1,0 +1,236 @@
+.tag-cloud {
+	padding: 2px;
+	margin: 0;
+	margin-top: -0.25em;
+}
+
+.tag-cloud a {
+	padding: 0px;
+}
+
+.tag-cloud li {
+	display: inline;
+}
+
+.tag-cloud a.tag-1 {
+	font-size: 1.0em;
+	font-weight: 400;
+}
+
+.tag-cloud a.tag-2 {
+	font-size: 0.9em;
+	font-weight: 300;
+}
+
+.tag-cloud a.tag-3 {
+	font-size: 0.8em;
+	font-weight: 200;
+}
+
+.tag-cloud a.tag-4 {
+	font-size: 0.7em;
+	font-weight: 100;
+}
+
+.img-center {
+	width: 100%;
+	background: red;
+	border: 1px solid green;
+}
+
+.image-caption {
+	padding-top: 0.5em;
+	font-size: 0.7em;
+}
+
+.image-container {
+	padding-bottom: 1em;
+}
+
+.highlighttable {
+	background: #272822;
+	border: 1px solid #8f908a;
+	/* uncomment to center the code blocks */
+	/*margin-left: auto;
+	margin-right: auto;*/
+	width: 100%;
+}
+
+.linenos {
+	color: #8f908a;
+	border-right: 1px dotted #464741;
+}
+
+.panel h5 {
+	border-bottom: 2px solid;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 0.25em;
+}
+
+.side-nav {
+	margin: 0;
+	padding: 0;
+}
+
+.side-nav li {
+	margin: 0;
+	padding: 0;
+}
+
+.side-nav a {
+	color: black;
+}
+
+.side-nav li a:before {
+	content: "- ";
+}
+
+code {
+	color: #222222;
+	background: #f8f8f8;
+	border: 1px solid #dddddd;
+	margin: 0 2px;
+	padding: 0 5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-weight: normal;
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+p {
+	text-align: justify;
+}
+
+.continue {
+	width: 100%;
+	text-align: right;
+}
+
+.archive-year {
+	border-top: 1px solid;
+}
+
+.archive-entry {
+	border-top: 1px dotted;
+}
+
+/* 1. 全体の背景を薄いグレーに設定 */
+body {
+    background-color: #f2f2f2 !important;
+}
+
+/* 2. 記事部分を白い角丸カードにする（特定した要素へ適用） */
+.medium-9.columns article {
+    background-color: #ffffff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
+    margin-bottom: 40px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+    display: block !important;
+}
+
+/* 3. サイドバーのパネルも白い角丸カードにする */
+.medium-3.columns .panel {
+    background-color: #ffffff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+}
+
+/* 4. タイトルのデザイン（青色・太字） */
+.medium-9.columns article h2, 
+.medium-9.columns article h2 a {
+    color: #008cba !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    margin-top: 0 !important;
+}
+
+/* 5. タイトルの下に区切り線を入れる（article内の最初の見出しの下に適用） */
+/* 記事の中で一番最初に出てくる h2 をタイトルとして装飾 */
+.medium-9.columns article h2:first-of-type {
+    font-size: 2.2rem !important;      /* タイトルは最大サイズ */
+    color: #008cba !important;         /* 鮮やかな青 */
+    border-bottom: 3px solid #008cba !important; /* 太い下線で目立たせる */
+    padding-bottom: 10px !important;
+    margin-bottom: 30px !important;
+    border-left: none !important;      /* タイトルには左線は不要 */
+    background: transparent !important; /* 背景色もなし */
+}
+
+/* 2. Markdownで書いた「##（見出し2）」のデザイン */
+/* 2番目以降に出現する h2 を「節の見出し」として装飾 */
+.medium-9.columns article h2:not(:first-of-type) {
+    font-size: 1.5rem !important;      /* タイトルより一回り小さく */
+    color: #333 !important;            /* 落ち着いた黒 */
+    border-left: 6px solid #008cba !important; /* 左側にアクセントの縦棒 */
+    padding: 8px 15px !important;      /* 縦棒との余白 */
+    background: #f9f9f9 !important;    /* 薄いグレーの背景で区切りを明確に */
+    border-bottom: none !important;    /* 下線は消す */
+    margin-top: 40px !important;       /* 上の文章との間隔を広く */
+}
+
+/* 6. 記事内の画像も角丸にする */
+.medium-9.columns article img {
+    border-radius: 8px !important;
+    margin: 10px 0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important; /* 画像を少し浮かせるおまけ */
+}
+/* 親要素（aタグ）の設定 */
+.side-nav li a {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    justify-content: flex-start !important; /* 基本は左詰め */
+}
+
+/* 数字（.count）がある場合、その数字だけを右に飛ばす */
+.side-nav li a span.count {
+    margin-left: auto !important; /* 数字だけが右へ移動する */
+    
+    /* デザイン装飾 */
+    background: #e1e1e1 !important;
+    color: #666 !important;
+    font-size: 0.7rem !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+    flex-shrink: 0 !important;
+}
+
+/* ホバー時のバッジ色変化 */
+.side-nav li a:hover span.count {
+    background: #008cba !important;
+    color: #fff !important;
+}
+/* ヘッダーとボディの間に隙間を作る */
+.main-section {
+    margin-top: 20px !important; /* 隙間の大きさ。お好みで 30px などに調整してください */
+}
+
+/* スマホ表示でもバランスを保つための微調整 */
+@media only screen and (max-width: 40em) {
+    .main-section {
+        margin-top: 15px !important;
+    }
+}
+
+/* モバイルメニュー内の数字を右寄せにする */
+.off-canvas-list li a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+.off-canvas-list li a span.count {
+    margin-left: auto !important; /* これで右端へ */
+    background: rgba(255, 255, 255, 0.1) !important; /* 薄白い背景 */
+    color: #ccc !important;
+    font-size: 0.7rem !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+}
