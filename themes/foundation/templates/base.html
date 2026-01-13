@@ -214,10 +214,14 @@
 		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous.min.js"></script>
 		<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			// 記事(article)内の画像すべてを拡大対象にする
 			var images = document.querySelectorAll("article img");
+			
 			if (images.length > 0 && typeof LuminousGallery !== 'undefined') {
-			new LuminousGallery(images);
+			// ギャラリー設定
+			new LuminousGallery(images, {}, {
+				// 重要：<a>のhrefではなく、<img>のsrc属性から画像URLを取得する設定
+				sourceAttribute: 'src'
+			});
 			}
 		});
 		</script>
