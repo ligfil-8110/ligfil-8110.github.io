@@ -54,7 +54,7 @@
 			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 		});
 		</script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.3.2/dist/luminous-basic.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous-basic.min.css">
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -211,11 +211,13 @@
 		<script>
 			$(document).foundation();
 		</script>
-		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.3.2/dist/Luminous.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous.min.js"></script>
 		<script>
-		window.addEventListener('load', function() {
-			if (typeof LuminousGallery !== 'undefined') {
-			new LuminousGallery(document.querySelectorAll("article img"));
+		window.addEventListener('DOMContentLoaded', function() {
+			// 記事(article)内の画像すべてを拡大対象にする
+			var images = document.querySelectorAll("article img");
+			if (images.length > 0 && typeof LuminousGallery !== 'undefined') {
+			new LuminousGallery(images);
 			}
 		});
 		</script>
