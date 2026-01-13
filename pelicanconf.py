@@ -32,6 +32,7 @@ TAG_CLOUD_MAX_ITEMS = 10
 DISPLAY_PAGES_ON_MENU = True
 DISPLAY_CATEGORIES_ON_MENU = True
 USE_FOLDER_AS_CATEGORY = True
+LINKS_NEXT_PREVIOUS = True
 
 # custom.cssを読み込むための設定
 CUSTOM_CSS = 'static/css/custom.css'
@@ -56,4 +57,4 @@ SOCIAL = (
     ("GitHub", "https://github.com/ligfil-8110"),
 )
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 7
