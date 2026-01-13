@@ -321,11 +321,16 @@ article h6 {
 }
 
 /* 記事内の画像をクリック可能に見せる */
-article img {
+article p img {
     cursor: zoom-in;
     transition: opacity 0.3s;
 }
 
-article img:hover {
+article p img:hover {
     opacity: 0.9;
+}
+
+/* 記事一覧の画像は通常のポインタにする */
+.index-thumbnail, a img {
+    cursor: pointer;
 }
