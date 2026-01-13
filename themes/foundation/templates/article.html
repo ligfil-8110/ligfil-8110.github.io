@@ -15,6 +15,27 @@
         <a href="https://www.facebook.com/sharer/sharer.php?u={{ SITEURL }}/{{ article.url }}" target="_blank" class="button tiny radius" style="background: #3b5998; margin-right: 5px;">Facebook</a>
         <a href="https://b.hatena.ne.jp/entry/{{ SITEURL }}/{{ article.url }}" target="_blank" class="button tiny radius" style="background: #00A4DE;">はてブ</a>
     </div>
+	<div class="post-navigation" style="margin: 40px 0; border-top: 1px solid #eee; padding-top: 20px;">
+        <div class="row">
+            <div class="small-4 columns text-left">
+                {% if article.prev_article %}
+                <a href="{{ SITEURL }}/{{ article.prev_article.url }}" class="button tiny secondary radius" style="width: 100%;">« 前の記事</a>
+                <div style="font-size: 0.7rem; color: #999; margin-top: 5px; line-height: 1.2;">{{ article.prev_article.title }}</div>
+                {% endif %}
+            </div>
+
+            <div class="small-4 columns text-center">
+                <a href="{{ SITEURL }}/" class="button tiny secondary radius" style="width: 100%;">トップへ</a>
+            </div>
+
+            <div class="small-4 columns text-right">
+                {% if article.next_article %}
+                <a href="{{ SITEURL }}/{{ article.next_article.url }}" class="button tiny secondary radius" style="width: 100%;">次の記事 »</a>
+                <div style="font-size: 0.7rem; color: #999; margin-top: 5px; line-height: 1.2;">{{ article.next_article.title }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 	<h6>Written by <a href="{{ SITEURL }}/author/{{ article.author|lower|replace(' ', '-') }}.html">{{ article.author }}</a> on {{ article.locale_date }}.</h6>
 </article>
 

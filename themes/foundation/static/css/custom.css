@@ -61,6 +61,11 @@
 	border-right: 1px dotted #464741;
 }
 
+/* サイト全体の最大幅を1200pxに広げる（デフォルトは約1000px） */
+.row {
+    max-width: 75rem; /* 1200px相当 */
+}
+
 .panel h5 {
 	border-bottom: 2px solid;
 	padding: 0;
@@ -289,4 +294,28 @@ article h3 a:hover {
 article h6 {
     font-size: 0.8rem;
     color: #777;
+}
+
+/* 記事ナビゲーションボタンのスタイル */
+.post-navigation .button {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ddd;
+    width: 100%; /* モバイルでも押しやすく */
+    transition: all 0.3s;
+}
+
+.post-navigation .button:hover {
+    background-color: #eee;
+    color: #000;
+    border-color: #bbb;
+}
+
+/* 記事タイトルが長すぎて崩れないようにする */
+.post-navigation span {
+    display: block;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
