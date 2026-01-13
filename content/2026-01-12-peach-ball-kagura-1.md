@@ -1,7 +1,7 @@
 Title: Switchで「PEACH BALL 閃乱カグラ」を購入！紳士には最高のゲームです！
 Date: 2026-01-12 21:00
 Category: ゲーム
-Tags: 閃乱カグラ, Nintendo Switch, ゲーム
+Tags: 閃乱カグラ, Nintendo Switch
 Slug: bought-peach-ball-kagura
 Image: images/kagura-20260112-11.jpg
 Summary: ずっと気になっていた「PEACH BALL 閃乱カグラ」をついに購入。ムフフシーン満載で最高です！
