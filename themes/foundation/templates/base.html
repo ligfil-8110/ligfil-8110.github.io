@@ -54,6 +54,7 @@
 			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 		});
 		</script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/luminous-lightbox/2.3.2/luminous-basic.min.css">
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -209,6 +210,11 @@
 		<script src="{{ SITEURL }}/theme/js/foundation.min.js"></script>
 		<script>
 			$(document).foundation();
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/luminous-lightbox/2.3.2/Luminous.min.js"></script>
+		<script>
+		// 記事内の画像（article img）をすべて拡大対象にする
+		new LuminousGallery(document.querySelectorAll("article img"));
 		</script>
 	</body>
 	<footer style="background: #333; color: #ccc; padding: 40px 0; margin-top: 50px;">

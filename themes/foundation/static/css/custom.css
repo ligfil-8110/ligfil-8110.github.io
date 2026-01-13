@@ -319,3 +319,13 @@ article h6 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* 記事内の画像をクリック可能に見せる */
+article img {
+    cursor: zoom-in;
+    transition: opacity 0.3s;
+}
+
+article img:hover {
+    opacity: 0.9;
+}
