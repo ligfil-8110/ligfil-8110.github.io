@@ -214,12 +214,12 @@
 		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous.min.js"></script>
 		<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			var images = document.querySelectorAll("article img");
+			// 記事一覧(index)ではなく、記事詳細ページ内の「本文」にある画像だけを選択
+			// テンプレートの構造に合わせて .entry-content や article 内を指定
+			var images = document.querySelectorAll("article .article-content img, article p img");
 			
 			if (images.length > 0 && typeof LuminousGallery !== 'undefined') {
-			// ギャラリー設定
 			new LuminousGallery(images, {}, {
-				// 重要：<a>のhrefではなく、<img>のsrc属性から画像URLを取得する設定
 				sourceAttribute: 'src'
 			});
 			}
