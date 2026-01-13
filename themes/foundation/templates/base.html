@@ -212,9 +212,16 @@
 			$(document).foundation();
 		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/luminous-lightbox/2.3.2/Luminous.min.js"></script>
+
 		<script>
-		// 記事内の画像（article img）をすべて拡大対象にする
-		new LuminousGallery(document.querySelectorAll("article img"));
+		// ページ内のすべての読み込みが完了するのを待ってから実行
+		window.onload = function() {
+			if (typeof LuminousGallery !== 'undefined') {
+			new LuminousGallery(document.querySelectorAll("article img"));
+			} else {
+			console.log("Luminous is not loaded yet.");
+			}
+		};
 		</script>
 	</body>
 	<footer style="background: #333; color: #ccc; padding: 40px 0; margin-top: 50px;">
