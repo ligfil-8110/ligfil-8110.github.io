@@ -54,7 +54,7 @@
 			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 		});
 		</script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/luminous-lightbox/2.3.2/luminous-basic.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.3.2/dist/luminous-basic.min.css">
 	</head>
 	<body>
 		<div class="off-canvas-wrap">
@@ -211,17 +211,13 @@
 		<script>
 			$(document).foundation();
 		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/luminous-lightbox/2.3.2/Luminous.min.js"></script>
-
+		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.3.2/dist/Luminous.min.js"></script>
 		<script>
-		// ページ内のすべての読み込みが完了するのを待ってから実行
-		window.onload = function() {
+		window.addEventListener('load', function() {
 			if (typeof LuminousGallery !== 'undefined') {
 			new LuminousGallery(document.querySelectorAll("article img"));
-			} else {
-			console.log("Luminous is not loaded yet.");
 			}
-		};
+		});
 		</script>
 	</body>
 	<footer style="background: #333; color: #ccc; padding: 40px 0; margin-top: 50px;">
