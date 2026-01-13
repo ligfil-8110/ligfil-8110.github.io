@@ -1,7 +1,7 @@
 Title: 「PEACH BALL 閃乱カグラ」、雪泉ちゃんステージクリア！スキンシップも楽しみましたよ！
 Date: 2026-01-13 21:00
 Category: ゲーム
-Tags: 閃乱カグラ, Nintendo Switch, ゲーム
+Tags: 閃乱カグラ, Nintendo Switch
 Slug: peach-ball-kagura-play-0113
 Image: images/kagura-20260113-9.jpg
 Summary: 雪泉ちゃんステージ全5種クリアしました！スキンシップモードも衣装破壊までたっぷり楽しみましたよ！
