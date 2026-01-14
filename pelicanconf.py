@@ -33,7 +33,8 @@ DISPLAY_PAGES_ON_MENU = True
 DISPLAY_CATEGORIES_ON_MENU = True
 USE_FOLDER_AS_CATEGORY = True
 LINKS_NEXT_PREVIOUS = True
-
+# プラグインの設定を追加
+PLUGINS = ['neighbors']
 # custom.cssを読み込むための設定
 CUSTOM_CSS = 'static/css/custom.css'
 

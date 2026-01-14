@@ -3,7 +3,7 @@ name: Deploy Pelican site
 on:
   push:
     branches:
-      - main  # mainブランチにプッシュされたら実行
+      - main
 
 jobs:
   build:
@@ -18,11 +18,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pelican markdown
+          pip install pelican markdown pelican-neighbors
 
       - name: Build site
         run: |
-          # 記事があるcontentフォルダからHTMLを生成
           pelican content -o output -s pelicanconf.py
 
       - name: Upload artifact
