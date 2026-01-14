@@ -14,6 +14,22 @@
 		<title>{% block windowtitle %}{{ SITENAME }}{% endblock %}</title>
 		<meta name="description" content="">
 		<meta name="author" content="{{ AUTHOR }}">
+		<meta property="og:site_name" content="{{ SITENAME }}">
+		<meta property="og:type" content="{% if article %}article{% else %}website{% endif %}">
+		<meta property="og:title" content="{% if article %}{{ article.title }}{% else %}{{ SITENAME }}{% endif %}">
+		<meta property="og:url" content="{{ SITEURL }}/{{ article.url if article else '' }}">
+		<meta property="og:description" content="{% if article %}{{ article.summary|striptags|truncate(100) }}{% else %}{{ SITENAME }}のトップページです{% endif %}">
+
+		{% if article and article.image %}
+		<meta property="og:image" content="{{ SITEURL }}/{{ article.image }}">
+		<meta name="twitter:card" content="summary_large_image">
+		{% else %}
+		<meta property="og:image" content="{{ SITEURL }}/theme/images/ogp-default.jpg">
+		<meta name="twitter:card" content="summary">
+		{% endif %}
+
+		<meta name="twitter:title" content="{% if article %}{{ article.title }}{% else %}{{ SITENAME }}{% endif %}">
+		<meta name="twitter:description" content="{% if article %}{{ article.summary|striptags|truncate(100) }}{% else %}{{ SITENAME }}のトップページです{% endif %}">
 
 		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/foundation.css" />
 		{% if not FOUNDATION_PYGMENT_THEME %}
