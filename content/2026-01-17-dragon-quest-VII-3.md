@@ -1,7 +1,7 @@
 Title: ドラクエ7リメイク、なぞの神殿探索！！
 Category: ゲーム
 Tags: ドラクエ, Nintendo Switch
-Slug: dragon-quest-vii-play-0115
+Slug: dragon-quest-vii-play-0117
 Image: images/dq-viire-20260114-8.jpg
 Summary: 今日はドラクエ7リメイクをプレイ！なぞの神殿を探索し、アミット漁を終えたお父さんにも会ってきましたよ！
 
