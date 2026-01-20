@@ -15,6 +15,18 @@
         <a href="https://www.facebook.com/sharer/sharer.php?u={{ SITEURL }}/{{ article.url }}" target="_blank" class="button tiny radius" style="background: #3b5998; margin-right: 5px;">Facebook</a>
         <a href="https://b.hatena.ne.jp/entry/{{ SITEURL }}/{{ article.url }}" target="_blank" class="button tiny radius" style="background: #00A4DE;">はてブ</a>
     </div>
+    {% if article.tags|selectattr('name', 'equalto', 'ドラクエ')|list %}
+    <div class="article-affiliate" style="margin: 30px 0; padding: 20px; border: 1px dashed #ccc; background: #fff; text-align: center; font-size: 0.9rem;">
+        <div style="display: inline-block; max-width: 300px;">
+            <a href="//af.moshimo.com/af/c/click?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18378428%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbook%2Fi%2F21744753%2F" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" style="text-decoration: none; color: #333;">
+                <img src="//thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2089/4988601012089.jpg?_ex=128x128" alt="ドラクエ7リメイク" style="border: none; margin-bottom: 10px;" /><br>
+                <strong>【特典】ドラゴンクエストVII Reimagined NintendoSwitch2版</strong><br>
+                <span style="font-size: 0.8rem; color: #666;">(早期購入特典・セーブデータ特典付き)</span>
+            </a>
+            <img src="//i.moshimo.com/af/i/impression?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=616" alt="" loading="lazy" width="1" height="1" style="border: 0px;">
+        </div>
+    </div>
+    {% endif %}
 	<div class="post-navigation" style="margin: 40px 0; border-top: 1px solid #eee; padding-top: 20px;">
         <div class="row">
             <div class="small-4 columns text-left">
