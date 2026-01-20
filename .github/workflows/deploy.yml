@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pelican markdown pelican-neighbors
+          pip install pelican markdown pelican-neighbors pelican-sitemap
 
       - name: Build site
         run: |
