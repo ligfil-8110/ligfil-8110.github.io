@@ -48,8 +48,32 @@
             </div>
         </div>
     </div>
-	<h6>Written by <a href="{{ SITEURL }}/author/{{ article.author|lower|replace(' ', '-') }}.html">{{ article.author }}</a> on {{ article.locale_date }}.</h6>
-</article>
+	<div class="article-metadata" style="margin-top: 30px; padding: 15px; background: #f9f9f9; border-radius: 4px; font-size: 0.85rem; color: #666;">
+        <span class="meta-item" style="margin-right: 15px;">
+            <strong>著者:</strong> {{ article.author }}
+        </span>
+        
+        <span class="meta-item" style="margin-right: 15px;">
+            <strong>カテゴリー:</strong> 
+            <a href="{{ SITEURL }}/{{ article.category.url }}" style="color: #008cba; text-decoration: none;">{{ article.category }}</a>
+        </span>
+
+        {% if article.tags %}
+        <span class="meta-item">
+            <strong>タグ:</strong> 
+            {% for tag in article.tags %}
+                <a href="{{ SITEURL }}/{{ tag.url }}" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #{{ tag }}
+                </a>
+            {% endfor %}
+        </span>
+        {% endif %}
+        
+        <div style="margin-top: 10px; font-size: 0.8rem; color: #999;">
+            公開日: {{ article.locale_date }}
+        </div>
+    </div>
+    </article>
 
 {% if DISQUS_SITENAME %}
 <hr/>
