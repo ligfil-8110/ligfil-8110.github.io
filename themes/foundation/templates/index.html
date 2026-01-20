@@ -21,7 +21,6 @@
             <h3 style="margin-top: 0;"><a href="{{ SITEURL }}/{{ article.url }}" style="color: #333; text-decoration: none;">{{ article.title }}</a></h3>
             
             <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
-                <span style="margin-right: 10px;">👤 {{ article.author }}</span>
                 <span style="margin-right: 10px;">📁 <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></span>
                 <span>📅 {{ article.locale_date }}</span>
             </div>
@@ -38,8 +37,10 @@
             </div>
             {% endif %}
 
-            <div style="margin-top: 15px;">
-                <a href="{{ SITEURL }}/{{ article.url }}" class="button tiny radius secondary">続きを読む »</a>
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="{{ SITEURL }}/{{ article.url }}" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
             </div>
         </div>
     </div>
