@@ -2,7 +2,7 @@ Title: ドラクエ7リメイク、東の神殿でついにマリベルちゃん
 Category: ゲーム
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0120
-Image: images/2026012100161800-6D3206A05723963FB3932AD7FFE661B1.jpg
+Image: images/dq-viire-20260114-8.jpg
 Summary: 今日もドラクエ7リメイクをプレイ！ついに東の神殿でマリベルちゃんと合流できましたよ！！
 
 ## いざ、東の神殿へ！
