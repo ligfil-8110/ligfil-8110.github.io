@@ -34,7 +34,7 @@ DISPLAY_CATEGORIES_ON_MENU = True
 USE_FOLDER_AS_CATEGORY = True
 LINKS_NEXT_PREVIOUS = True
 # プラグインの設定を追加
-PLUGINS = ['neighbors']
+PLUGINS = ['sitemap','neighbors']
 # custom.cssを読み込むための設定
 CUSTOM_CSS = 'static/css/custom.css'
 
@@ -59,3 +59,17 @@ SOCIAL = (
 )
 
 DEFAULT_PAGINATION = 7
+
+SITEMAP = {
+    'format': 'xml',
+    'priorities': {
+        'articles': 0.8,
+        'indexes': 0.5,
+        'pages': 0.5
+    },
+    'changefreqs': {
+        'articles': 'monthly',
+        'indexes': 'daily',
+        'pages': 'monthly'
+    }
+}
