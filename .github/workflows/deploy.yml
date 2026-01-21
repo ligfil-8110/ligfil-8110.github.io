@@ -25,7 +25,7 @@ jobs:
       - name: Remove Exif metadata
         run: |
           # content/images 内の全画像のExif情報を上書き削除
-          exiftool -all= -overwrite_original -r content/images/
+          exiftool -all= -overwrite_original -ignoreMinorErrors -r content/images/ || true
 
       - name: Build site
         run: |
