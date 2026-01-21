@@ -18,7 +18,14 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # exiftool をインストール
+          sudo apt-get update && sudo apt-get install -y exiftool
           pip install pelican markdown pelican-neighbors pelican-sitemap
+
+      - name: Remove Exif metadata
+        run: |
+          # content/images 内の全画像のExif情報を上書き削除
+          exiftool -all= -overwrite_original -r content/images/
 
       - name: Build site
         run: |
