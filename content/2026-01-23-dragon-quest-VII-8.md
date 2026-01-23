@@ -1,7 +1,7 @@
 Title: ドラクエ7リメイク、ウッドパルナに到着！！
 Date: 2026-01-23 23:00
 Tags: ドラクエ, Nintendo Switch
-Slug: dragon-quest-vii-play-0122
+Slug: dragon-quest-vii-play-0123
 Image: images/dq-viire-20260114-8.jpg
 Summary: 今日もドラクエ7リメイクをプレイ！マチルダさんと出会い、ウッドパルナに到着です！！
 
