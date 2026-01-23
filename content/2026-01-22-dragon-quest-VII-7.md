@@ -1,4 +1,5 @@
 Title: ドラクエ7リメイク、石版案内人との出会い、そしてついに初の戦闘勝利！！
+Category: ゲーム
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0122
 Image: images/dq-viire-20260114-8.jpg
