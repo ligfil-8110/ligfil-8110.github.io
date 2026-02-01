@@ -4,7 +4,7 @@ Date: 2026-02-01 22:00
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0201-east-tower
 Image: images/dq-viire-20260114-8.jpg
-Summary: 今日は昨日の続き、東の塔の攻略からウッドパルナ編の完結までをお届けします！画像250枚超えの超特大ボリュームです！
+Summary: 今日は昨日の続き、東の塔の攻略からウッドパルナ編の完結までをお届けします！画像200枚超えの超特大ボリュームです！
 
 ## 東の塔へ挑む！
 
