@@ -20,6 +20,16 @@ SHOW_CATEGORY_COUNT_ON_SIDEBAR = True
 
 # タグ内の記事数を表示
 SHOW_TAG_COUNT_ON_SIDEBAR = True
+
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

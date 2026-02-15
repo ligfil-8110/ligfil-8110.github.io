@@ -281,7 +281,7 @@ article h3 {
 
 /* タイトルリンクのホバー時の色（お好みで） */
 article h3 a:hover {
-    color: #008cba; /* Foundationの標準的な青 */
+    color: #008cba; /* Foundation of the standard blue */
 }
 
 /* モバイル表示ではもう少し小さくして収まりを良くする */
@@ -333,4 +333,52 @@ article p img:hover {
 /* 記事一覧の画像は通常のポインタにする */
 .index-thumbnail, a img {
     cursor: pointer;
+}
+
+/* --- コードブロックの装飾 --- */
+.highlight {
+    position: relative;
+    margin: 1.5em 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.highlight pre {
+    margin: 0;
+    padding: 1.2em;
+    font-family: 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    background-color: #272822 !important; /* Monokai background */
+    color: #f8f8f2;
+    overflow-x: auto;
+}
+
+/* コピペボタンのスタイル */
+.copy-code-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.copy-code-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.copy-code-button.copied {
+    background-color: #28a745;
+    color: #fff;
+    border-color: #28a745;
 }

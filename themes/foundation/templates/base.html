@@ -248,6 +248,37 @@
 				sourceAttribute: 'src'
 			});
 			}
+
+			// --- コードコピー機能の追加 ---
+			const highlightBlocks = document.querySelectorAll('.highlight');
+			highlightBlocks.forEach((block) => {
+				// コピーボタンの作成
+				const button = document.createElement('button');
+				button.className = 'copy-code-button';
+				button.type = 'button';
+				button.innerText = 'Copy';
+
+				// ボタンをブロックに追加
+				block.appendChild(button);
+
+				button.addEventListener('click', () => {
+					// code要素またはpre要素からテキストを取得
+					const code = block.querySelector('pre').innerText;
+					
+					navigator.clipboard.writeText(code).then(() => {
+						button.innerText = 'Copied!';
+						button.classList.add('copied');
+
+						setTimeout(() => {
+							button.innerText = 'Copy';
+							button.classList.remove('copied');
+						}, 2000);
+					}, (err) => {
+						console.error('Could not copy text: ', err);
+						button.innerText = 'Error';
+					});
+				});
+			});
 		});
 		</script>
 	</body>
