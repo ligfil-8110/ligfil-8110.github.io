@@ -20,7 +20,7 @@ jobs:
         run: |
           # exiftool をインストール
           sudo apt-get update && sudo apt-get install -y exiftool
-          pip install pelican markdown pelican-neighbors pelican-sitemap
+          pip install pelican markdown pelican-neighbors pelican-sitemap Pygments
 
       - name: Remove Exif metadata
         run: |

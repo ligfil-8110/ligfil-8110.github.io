@@ -337,48 +337,57 @@ article p img:hover {
 
 /* --- コードブロックの装飾 --- */
 .highlight {
-    position: relative;
-    margin: 1.5em 0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative !important;
+    margin: 1.5em 0 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    background-color: #272822 !important; /* 背景色を強制 */
 }
 
 .highlight pre {
-    margin: 0;
-    padding: 1.2em;
-    font-family: 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    background-color: #272822 !important; /* Monokai background */
-    color: #f8f8f2;
-    overflow-x: auto;
+    margin: 0 !important;
+    padding: 1.2em !important;
+    font-family: 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    background-color: transparent !important; /* 親の背景色を使う */
+    color: #f8f8f2 !important; /* 文字色を白っぽく強制 */
+    overflow-x: auto !important;
+    border: none !important;
 }
 
-/* コピペボタンのスタイル */
-.copy-code-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    padding: 4px 8px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ccc;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 10;
+/* コピペボタンのスタイルをFoundationから守る */
+button.copy-code-button {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    width: auto !important;      /* 横幅をリセット */
+    height: auto !important;     /* 高さをリセット */
+    min-height: 0 !important;    /* Foundationの最小高さをリセット */
+    margin: 0 !important;        /* 外白をリセット */
+    padding: 4px 10px !important; /* 内白を調整 */
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ccc !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 4px !important;
+    font-size: 0.75rem !important;
+    line-height: 1.2 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    z-index: 10 !important;
+    display: block !important;    /* 表示形式を固定 */
+    box-shadow: none !important;  /* Foundationの影を消す */
 }
 
-.copy-code-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.5);
+button.copy-code-button:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-.copy-code-button.copied {
-    background-color: #28a745;
-    color: #fff;
-    border-color: #28a745;
+button.copy-code-button.copied {
+    background-color: #28a745 !important;
+    color: #fff !important;
+    border-color: #28a745 !important;
 }
