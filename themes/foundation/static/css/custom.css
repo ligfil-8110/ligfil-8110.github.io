@@ -335,112 +335,144 @@ article p img:hover {
     cursor: pointer;
 }
 
-/* --- コードブロックの装飾 (Modern Mac-style) --- */
+/* --- コードブロックの装飾 (Standard Editor Style) --- */
 .highlight {
     position: relative !important;
     margin: 2em 0 !important;
-    border-radius: 10px !important;
+    border-radius: 6px !important; /* 角丸を少し控えめに */
     overflow: hidden !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
-    background-color: #282a36 !important; /* Dracula Background */
-    border: 1px solid #44475a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    background-color: #1e1e1e !important; /* VS Code Default Dark Background */
+    border: 1px solid #333 !important;
 }
 
-/* コードブロック上部のヘッダーバー */
+/* コードブロック上部のヘッダーバー (シンプルに) */
 .highlight::before {
     content: "" !important;
     display: block !important;
-    height: 34px !important;
-    background: #343746 !important; /* Header background */
+    height: 36px !important;
+    background: #252526 !important; /* Header background */
     width: 100% !important;
-    border-bottom: 1px solid #44475a !important;
+    border-bottom: 1px solid #333 !important;
 }
 
-/* Mac風の3色ボタン */
+/* Mac風の3色ボタンは削除 */
 .highlight::after {
-    content: "● ● ●" !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 15px !important;
-    font-size: 10px !important;
-    line-height: 34px !important;
-    letter-spacing: 2px !important;
-    color: #ff5f56 !important;
-    text-shadow: 18px 0 #ffbd2e, 36px 0 #27c93f !important;
-    font-family: sans-serif !important;
-    pointer-events: none !important;
+    display: none !important;
 }
 
-/* 言語名の表示ラベル (JSで後ほど制御) */
+/* 言語名の表示ラベル */
 .highlight .code-lang {
     position: absolute !important;
     top: 0 !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    line-height: 34px !important;
-    color: #bd93f9 !important; /* Dracula Purple */
-    font-size: 0.8rem !important;
+    left: 15px !important; /* 左寄せに変更 */
+    transform: none !important;
+    line-height: 36px !important;
+    color: #cccccc !important;
+    font-size: 0.85rem !important;
     font-weight: bold !important;
-    font-family: 'JetBrains Mono', 'Cascadia Code', monospace !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
+    font-family: 'Consolas', 'Monaco', monospace !important;
+    text-transform: capitalize !important; /* 大文字変換をやめる */
     z-index: 5 !important;
 }
 
 .highlight pre {
     margin: 0 !important;
-    padding: 1.5em !important;
-    font-family: 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace !important;
+    padding: 1.2em 1.5em !important;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
     font-size: 0.95rem !important;
-    line-height: 1.6 !important;
+    line-height: 1.5 !important;
     background-color: transparent !important;
-    color: #f8f8f2 !important; /* Dracula Foreground */
+    color: #d4d4d4 !important; /* Standard Editor Text Color (Light Gray/White) */
     overflow-x: auto !important;
     border: none !important;
 }
 
-/* コピーボタンの洗練 */
+/* コピーボタンの視認性向上 */
 button.copy-code-button {
     position: absolute !important;
-    top: 5px !important;
+    top: 4px !important;
     right: 8px !important;
     width: auto !important;
-    height: 24px !important;
-    padding: 0 12px !important;
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    color: #6272a4 !important; /* Dracula Comment Color */
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    height: 28px !important;
+    padding: 0 16px !important;
+    background-color: #0e639c !important; /* VS Code Blue */
+    color: #ffffff !important;
+    border: 1px solid transparent !important;
     border-radius: 4px !important;
-    font-size: 0.7rem !important;
-    font-weight: bold !important;
-    line-height: 22px !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    line-height: 26px !important;
     cursor: pointer !important;
-    transition: all 0.3s ease !important;
+    transition: all 0.2s ease !important;
     z-index: 10 !important;
     display: block !important;
-    text-transform: uppercase !important;
-    box-shadow: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
 }
 
 button.copy-code-button:hover {
-    background-color: #44475a !important;
-    color: #f8f8f2 !important;
-    border-color: #6272a4 !important;
+    background-color: #1177bb !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    transform: translateY(-1px) !important;
+}
+
+button.copy-code-button:active {
+    transform: translateY(1px) !important;
+    box-shadow: none !important;
 }
 
 button.copy-code-button.copied {
-    background-color: #50fa7b !important; /* Dracula Green */
-    color: #282a36 !important;
-    border-color: #50fa7b !important;
+    background-color: #4ec9b0 !important; /* Success Green-Blue */
+    color: #1e1e1e !important;
+    border-color: transparent !important;
 }
 
-/* シンタックスハイライトの色調整 (Dracula風への強制上書き) */
-.highlight .k { color: #ff79c6 !important; } /* Keyword */
-.highlight .s, .highlight .s1, .highlight .s2 { color: #f1fa8c !important; } /* String */
-.highlight .c, .highlight .c1 { color: #6272a4 !important; font-style: italic !important; } /* Comment */
-.highlight .nf { color: #50fa7b !important; } /* Function */
-.highlight .nc { color: #8be9fd !important; } /* Class */
-.highlight .nb { color: #8be9fd !important; } /* Builtin */
-.highlight .nv { color: #f8f8f2 !important; } /* Variable */
-.highlight .kn { color: #ff79c6 !important; } /* Import */
-.highlight .m, .highlight .mi { color: #bd93f9 !important; } /* Number */
+/* シンタックスハイライトの色調整 (VS Code Dark風) */
+/* 通常のテキストは pre の color で指定済み */
+
+/* コメント (緑色) */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs { 
+    color: #6a9955 !important; 
+    font-style: italic !important;
+}
+
+/* キーワード (青/ピンク) */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt { 
+    color: #569cd6 !important; 
+}
+
+/* 文字列 (オレンジ/茶色) */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .ss { 
+    color: #ce9178 !important; 
+}
+
+/* 関数名 (黄色) */
+.highlight .nf, .highlight .fm { 
+    color: #dcdcaa !important; 
+}
+
+/* クラス名 (緑青色) */
+.highlight .nc, .highlight .vc, .highlight .nd { 
+    color: #4ec9b0 !important; 
+}
+
+/* 変数・属性 (水色) */
+.highlight .nv, .highlight .na, .highlight .no { 
+    color: #9cdcfe !important; 
+}
+
+/* 数値 (薄緑) */
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo { 
+    color: #b5cea8 !important; 
+}
+
+/* 演算子・区切り文字 (白/グレー) */
+.highlight .o, .highlight .ow, .highlight .p { 
+    color: #d4d4d4 !important; 
+}
+
+/* マーカー(ハイライト背景)を無効化し、文字色のみにする */
+.highlight .hll { 
+    background-color: transparent !important; 
+    border: 1px solid #d4d4d4 !important; /* 枠線で強調するなど、控えめな表現に変更 */
+}
