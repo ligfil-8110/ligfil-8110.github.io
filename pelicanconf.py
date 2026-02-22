@@ -70,6 +70,9 @@ SOCIAL = (
 
 DEFAULT_PAGINATION = 7
 
+# 未来の日付の記事は公開しない（ドラフト扱いにする）
+WITH_FUTURE_DATES = False
+
 SITEMAP = {
     'format': 'xml',
     'priorities': {

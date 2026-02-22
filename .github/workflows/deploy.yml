@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # 3時間おきに自動実行 (UTC時間基準)
+    - cron: '0 */3 * * *'
 
 jobs:
   build:
