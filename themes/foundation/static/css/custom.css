@@ -471,8 +471,4 @@ button.copy-code-button.copied {
     color: #d4d4d4 !important; 
 }
 
-/* マーカー(ハイライト背景)を無効化し、文字色のみにする */
-.highlight .hll { 
-    background-color: transparent !important; 
-    border: 1px solid #d4d4d4 !important; /* 枠線で強調するなど、控えめな表現に変更 */
-}
+
