@@ -252,6 +252,35 @@
 			// --- コードコピー機能の追加 ---
 			const highlightBlocks = document.querySelectorAll('.highlight');
 			highlightBlocks.forEach((block) => {
+				// 言語名の取得
+				let langName = "";
+				const pre = block.querySelector('pre');
+				if (pre) {
+					// Pelican/Pygmentsは通常クラス名に言語を含める (例: .highlight .language-python)
+					const classList = block.className.split(' ');
+					classList.forEach(cls => {
+						if (cls !== 'highlight' && cls !== 'hll') {
+							langName = cls;
+						}
+					});
+					
+					// 見つからない場合は内部のspanタグなどから推測
+					if (!langName) {
+						const code = block.querySelector('code');
+						if (code && code.className) {
+							langName = code.className.replace('language-', '');
+						}
+					}
+				}
+
+				// 言語名表示ラベルの作成
+				if (langName) {
+					const langLabel = document.createElement('span');
+					langLabel.className = 'code-lang';
+					langLabel.innerText = langName;
+					block.appendChild(langLabel);
+				}
+
 				// コピーボタンの作成
 				const button = document.createElement('button');
 				button.className = 'copy-code-button';
@@ -263,9 +292,9 @@
 
 				button.addEventListener('click', () => {
 					// code要素またはpre要素からテキストを取得
-					const code = block.querySelector('pre').innerText;
+					const codeText = block.querySelector('pre').innerText;
 					
-					navigator.clipboard.writeText(code).then(() => {
+					navigator.clipboard.writeText(codeText).then(() => {
 						button.innerText = 'Copied!';
 						button.classList.add('copied');
 

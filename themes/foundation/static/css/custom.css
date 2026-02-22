@@ -335,59 +335,112 @@ article p img:hover {
     cursor: pointer;
 }
 
-/* --- コードブロックの装飾 --- */
+/* --- コードブロックの装飾 (Modern Mac-style) --- */
 .highlight {
     position: relative !important;
-    margin: 1.5em 0 !important;
-    border-radius: 8px !important;
+    margin: 2em 0 !important;
+    border-radius: 10px !important;
     overflow: hidden !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
-    background-color: #272822 !important; /* 背景色を強制 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+    background-color: #282a36 !important; /* Dracula Background */
+    border: 1px solid #44475a !important;
+}
+
+/* コードブロック上部のヘッダーバー */
+.highlight::before {
+    content: "" !important;
+    display: block !important;
+    height: 34px !important;
+    background: #343746 !important; /* Header background */
+    width: 100% !important;
+    border-bottom: 1px solid #44475a !important;
+}
+
+/* Mac風の3色ボタン */
+.highlight::after {
+    content: "● ● ●" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 15px !important;
+    font-size: 10px !important;
+    line-height: 34px !important;
+    letter-spacing: 2px !important;
+    color: #ff5f56 !important;
+    text-shadow: 18px 0 #ffbd2e, 36px 0 #27c93f !important;
+    font-family: sans-serif !important;
+    pointer-events: none !important;
+}
+
+/* 言語名の表示ラベル (JSで後ほど制御) */
+.highlight .code-lang {
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    line-height: 34px !important;
+    color: #bd93f9 !important; /* Dracula Purple */
+    font-size: 0.8rem !important;
+    font-weight: bold !important;
+    font-family: 'JetBrains Mono', 'Cascadia Code', monospace !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    z-index: 5 !important;
 }
 
 .highlight pre {
     margin: 0 !important;
-    padding: 1.2em !important;
-    font-family: 'Cascadia Code', 'Consolas', 'Monaco', 'Courier New', monospace !important;
-    font-size: 0.9rem !important;
+    padding: 1.5em !important;
+    font-family: 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace !important;
+    font-size: 0.95rem !important;
     line-height: 1.6 !important;
-    background-color: transparent !important; /* 親の背景色を使う */
-    color: #f8f8f2 !important; /* 文字色を白っぽく強制 */
+    background-color: transparent !important;
+    color: #f8f8f2 !important; /* Dracula Foreground */
     overflow-x: auto !important;
     border: none !important;
 }
 
-/* コピペボタンのスタイルをFoundationから守る */
+/* コピーボタンの洗練 */
 button.copy-code-button {
     position: absolute !important;
-    top: 8px !important;
+    top: 5px !important;
     right: 8px !important;
-    width: auto !important;      /* 横幅をリセット */
-    height: auto !important;     /* 高さをリセット */
-    min-height: 0 !important;    /* Foundationの最小高さをリセット */
-    margin: 0 !important;        /* 外白をリセット */
-    padding: 4px 10px !important; /* 内白を調整 */
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    color: #ccc !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    width: auto !important;
+    height: 24px !important;
+    padding: 0 12px !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #6272a4 !important; /* Dracula Comment Color */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 4px !important;
-    font-size: 0.75rem !important;
-    line-height: 1.2 !important;
+    font-size: 0.7rem !important;
+    font-weight: bold !important;
+    line-height: 22px !important;
     cursor: pointer !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.3s ease !important;
     z-index: 10 !important;
-    display: block !important;    /* 表示形式を固定 */
-    box-shadow: none !important;  /* Foundationの影を消す */
+    display: block !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
 }
 
 button.copy-code-button:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    color: #fff !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
+    background-color: #44475a !important;
+    color: #f8f8f2 !important;
+    border-color: #6272a4 !important;
 }
 
 button.copy-code-button.copied {
-    background-color: #28a745 !important;
-    color: #fff !important;
-    border-color: #28a745 !important;
+    background-color: #50fa7b !important; /* Dracula Green */
+    color: #282a36 !important;
+    border-color: #50fa7b !important;
 }
+
+/* シンタックスハイライトの色調整 (Dracula風への強制上書き) */
+.highlight .k { color: #ff79c6 !important; } /* Keyword */
+.highlight .s, .highlight .s1, .highlight .s2 { color: #f1fa8c !important; } /* String */
+.highlight .c, .highlight .c1 { color: #6272a4 !important; font-style: italic !important; } /* Comment */
+.highlight .nf { color: #50fa7b !important; } /* Function */
+.highlight .nc { color: #8be9fd !important; } /* Class */
+.highlight .nb { color: #8be9fd !important; } /* Builtin */
+.highlight .nv { color: #f8f8f2 !important; } /* Variable */
+.highlight .kn { color: #ff79c6 !important; } /* Import */
+.highlight .m, .highlight .mi { color: #bd93f9 !important; } /* Number */
