@@ -388,6 +388,16 @@ article p img:hover {
     border: none !important;
 }
 
+/* コードブロック内の code タグの背景をリセット (マーカー除去) */
+.highlight code {
+    background-color: transparent !important;
+    color: inherit !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+}
+
 /* コピーボタンの視認性向上 */
 button.copy-code-button {
     position: absolute !important;
@@ -471,4 +481,8 @@ button.copy-code-button.copied {
     color: #d4d4d4 !important; 
 }
 
-
+/* マーカー(ハイライト背景)を無効化し、文字色のみにする */
+.highlight .hll { 
+    background-color: transparent !important; 
+    border: 1px solid #d4d4d4 !important; /* 枠線で強調するなど、控えめな表現に変更 */
+}
