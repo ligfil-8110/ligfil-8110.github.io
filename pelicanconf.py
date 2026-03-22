@@ -49,11 +49,12 @@ PLUGINS = ['sitemap','neighbors']
 CUSTOM_CSS = 'static/css/custom.css'
 
 # 静的ファイルのパスを通す
-STATIC_PATHS = ['images', 'css']
+STATIC_PATHS = ['images', 'css', 'extra/ads.txt']
 
 # 出力先を指定（テーマの構造に合わせる）
 EXTRA_PATH_METADATA = {
     'css/custom.css': {'path': 'theme/css/custom.css'},
+    'extra/ads.txt': {'path': 'ads.txt'},
 }
 # Blogroll (サイドバーなどに表示されるリンク)
 # 不要なサンプルリンクは消すか、自分のSNSなどに書き換えるとスッキリします
