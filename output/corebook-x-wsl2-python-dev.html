@@ -1,0 +1,2409 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-JDKE8JVXLC"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-JDKE8JVXLC');
+		</script>
+		<title>みっちーのブログ</title>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8290235019998561" crossorigin="anonymous"></script>
+		<meta name="description" content="">
+		<meta name="author" content="みっちー">
+		<meta property="og:site_name" content="みっちーのブログ">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="Windowsの中に潜むLinux：CoreBook XにWSL2で最強のPython開発環境を構築する">
+		<meta property="og:url" content="https://ligfil-8110.github.io/corebook-x-wsl2-python-dev.html">
+		<meta property="og:description" content="Windows 11を搭載したCoreBook X (Ryzen 5 7430U) 上に、WSL2（Ubuntu）を用いた理想的なPython開発環境を構築。Ryzen...">
+
+		<meta property="og:image" content="https://ligfil-8110.github.io/theme/images/ogp-default.jpg">
+		<meta name="twitter:card" content="summary">
+
+		<meta name="twitter:title" content="Windowsの中に潜むLinux：CoreBook XにWSL2で最強のPython開発環境を構築する">
+		<meta name="twitter:description" content="Windows 11を搭載したCoreBook X (Ryzen 5 7430U) 上に、WSL2（Ubuntu）を用いた理想的なPython開発環境を構築。Ryzen...">
+
+		<link rel="stylesheet" href="https://ligfil-8110.github.io/theme/css/foundation.css" />
+		<link rel="stylesheet" href="https://ligfil-8110.github.io/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="https://ligfil-8110.github.io/theme/css/custom.css" />
+
+
+		<script src="https://ligfil-8110.github.io/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous-basic.min.css">
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">みっちーのブログ</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="https://ligfil-8110.github.io">Home</a></li>
+						
+						<li><label>Categories</label></li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/desukusetsutoatsupu.html">デスクセットアップ <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/etsusei.html">エッセイ <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/etsuseiri-ji.html">エッセイ/日記 <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsuto.html">ガジェット <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutodeisupurei.html">ガジェット/ディスプレイ <span class="count">4</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutodesukuhuan-jing.html">ガジェット/デスク環境 <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutogpu.html">ガジェット/GPU <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutoki-bo-do.html">ガジェット/キーボード <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutokurieiteibu.html">ガジェット/クリエイティブ <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutomausu.html">ガジェット/マウス <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutooszui-shi-hua.html">ガジェット/OS最適化 <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutopc.html">ガジェット/PC <span class="count">4</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutoshe-ding.html">ガジェット/設定 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/gazietsutosheng-chan-xing.html">ガジェット/生産性 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ge-mu.html">ゲーム <span class="count">28</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ge-mu4kpurei.html">ゲーム/4Kプレイ <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ge-mudorakue.html">ゲーム/ドラクエ <span class="count">6</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ge-muji-shu.html">ゲーム/技術 <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ge-muretoroemiyure-shiyon.html">ゲーム/レトロエミュレーション <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ge-mushan-luan-kagura.html">ゲーム/閃乱カグラ <span class="count">5</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ha-douea.html">ハードウェア <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/huo-yong-ji-shu.html">活用/技術 <span class="count">1</span></a>
+							</li>
+							<li class="active">
+								<a href="https://ligfil-8110.github.io/category/ji-shu.html">技術 <span class="count">3</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ji-shu-memo.html">技術メモ <span class="count">4</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ji-shu-rebiyu-.html">技術/レビュー <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/koramukao-cha.html">コラム/考察 <span class="count">3</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/kurieiteibu.html">クリエイティブ <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/kurieiteibuji-shu.html">クリエイティブ/技術 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/kurieiteibujian-zheng.html">クリエイティブ/検証 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/o-deioji-shu.html">オーディオ/技術 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/oszui-shi-hua.html">OS最適化 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ozhi-rase.html">お知らせ <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/raihuhatsuku.html">ライフハック <span class="count">3</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ranningu.html">ランニング <span class="count">16</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ranningugazietsuto.html">ランニング/ガジェット <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ranninguri-ji.html">ランニング/日記 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ranningutore-ningu.html">ランニング/トレーニング <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/rebiyu-bi-jiao.html">レビュー/比較 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ri-ji.html">日記 <span class="count">13</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ri-ji-de-tafen-xi.html">日記/データ分析 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ri-ji-ranningu.html">日記/ランニング <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/sekiyuritei.html">セキュリティ <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/shi-shi-shu-xiao-lu-hua.html">仕事術/効率化 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/xiao-lu-hua.html">効率化 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/xiao-lu-hua-ji-shu.html">効率化/技術 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/za-ji.html">雑記 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zi-zuo-pcbenchima-ku.html">自作PC/ベンチマーク <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zi-zuo-pcbirudo.html">自作PC/ビルド <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zi-zuo-pcha-douea.html">自作PC/ハードウェア <span class="count">9</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zi-zuo-pchuan-jing.html">自作PC/環境 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zi-zuo-pckoramu.html">自作PC/コラム <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zi-zuo-pcsohutouea.html">自作PC/ソフトウェア <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zi-zuo-pczhou-bian-ji-qi.html">自作PC/周辺機器 <span class="count">2</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zui-xin-ji-shu-jian-zheng.html">最新技術/検証 <span class="count">5</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/zui-xin-ji-shu-zi-dong-hua.html">最新技術/自動化 <span class="count">1</span></a>
+							</li>
+				
+						<li><label>Links</label></li>
+							<li><a href="https://www.google.com/">Google</a></li>
+							<li><a href="https://www.nintendo.co.jp/">任天堂公式サイト</a></li>
+							<li><a href="https://runnet.jp/smp/">RUNNET</a></li>
+				
+						<li><label>Tags</label></li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/144hz.html">144Hz <span class="count">5</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/15kmzou.html">15km走 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/16gb.html">16GB <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/16gb-vram.html">16GB VRAM <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/21km.html">21km <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/21kmkara42kmhe.html">21kmから42kmへ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/25km.html">25km <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/25sui.html">25歳 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/26sui.html">26歳 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/2kdeisupurei.html">2Kディスプレイ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/30kmzou.html">30km走 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/32.html">3:2 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/32deisupurei.html">3:2ディスプレイ <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/3dcg.html">3DCG <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/3dmark.html">3DMark <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/3dmoderu.html">3Dモデル <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/3ds.html">3DS <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/3yue.html">3月 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/3yue-matome.html">3月まとめ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/400m.html">400m <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/43u7n.html">43U7N <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/4k.html">4K <span class="count">32</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/4k60fps.html">4K60fps <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/4kdong-hua.html">4K動画 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/4kge-mingu.html">4Kゲーミング <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/4kmonita-.html">4Kモニター <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/4yue.html">4月 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/5yue.html">5月 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/6yue.html">6月 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/80plus-gold.html">80PLUS GOLD <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/a-ronchiea.html">アーロンチェア <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/adeidasu.html">アディダス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ai.html">AI <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/aia-to.html">AIアート <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/aie-ziento.html">AIエージェント <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/air75-v2.html">Air75 V2 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/aixue-xi.html">AI学習 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/an-wu-mai-inoqian-shi-i.html">安物買いの銭失い <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/anbokushingu.html">アンボクシング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/apple-silicon.html">Apple Silicon <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ashitsukusu.html">アシックス <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/atsupusuke-ru.html">アップスケール <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/autoretsuto.html">アウトレット <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/av1.html">AV1 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ban.html">絆 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bao-su.html">爆速 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/barentain.html">バレンタイン <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/batsukuguraundopurosesu.html">バックグラウンドプロセス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/batsuteri-xing-neng.html">バッテリー性能 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bei-ju.html">悲劇 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/benchima-ku.html">ベンチマーク <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bi-jiao.html">比較 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bian-li-tsu-ru.html">便利ツール <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bios.html">BIOS <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bitlocker.html">BitLocker <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/boriyu-muraisensu.html">ボリュームライセンス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bu-gei-shi.html">補給食 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/bu-zheng-raisensu.html">不正ライセンス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/burauza.html">ブラウザ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/burst-renewal.html">Burst Re:Newal <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cao-zuo-xing.html">操作性 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/capcut.html">CapCut <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chang-qi-rebiyu-.html">長期レビュー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chao-hui-fu.html">超回復 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cheng-chang.html">成長 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cheng-shi-sa.html">誠実さ <span class="count">7</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chiyu-ningu.html">チューニング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chong-ji.html">衝撃 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chu-shi.html">除湿 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chuang-zao-xing.html">創造性 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chui-zhi-tabu.html">垂直タブ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chun-hua.html">春花 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chuwi.html">CHUWI <span class="count">10</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cinebench.html">Cinebench <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cinebench-r23.html">Cinebench R23 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/citra.html">Citra <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/corebook-x.html">CoreBook X <span class="count">45</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cpu.html">CPU <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cpu-z.html">CPU-Z <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cpuwei-zhuang.html">CPU偽装 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/css.html">CSS <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cuo-ying-shu.html">撮影術 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/cyberpunk-2077.html">Cyberpunk 2077 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/da-ban-cheng-gong-yuan.html">大阪城公園 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/da-cheng-gan.html">達成感 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/da-jian-gan.html">打鍵感 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/da-mashen-dian.html">ダーマ神殿 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dan-sheng-ri.html">誕生日 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dao-ju-henoai.html">道具への愛 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/davinci-resolve.html">DaVinci Resolve <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/de-tafen-xi.html">データ分析 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/desukuhuan-jing.html">デスク環境 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/desukunoao-xing-ki.html">デスクの奥行き <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/desukusetsutoatsupu.html">デスクセットアップ <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/desukutotsupuhuan-jing.html">デスクトップ環境 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/desukuwa-ku.html">デスクワーク <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/deyuarudeisupurei.html">デュアルディスプレイ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dezitarumei-xue.html">デジタル美学 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dezitaruraihu.html">デジタルライフ <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dian-yuan.html">電源 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/diao-zheng.html">調整 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/diy.html">DIY <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dlss-3.html">DLSS 3 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dlss-35.html">DLSS 3.5 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dong-hua-bian-ji.html">動画編集 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dong-hua-pei-xin.html">動画配信 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dong-hua-tou-gao.html">動画投稿 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/doragonkuesutovii.html">ドラゴンクエストVII <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/doraiba.html">ドライバ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dorakue.html">ドラクエ <span class="count">19</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dorakuevii.html">ドラクエVII <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/eadasuta-.html">エアダスター <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/eahuro-.html">エアフロー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/emiyure-shiyon.html">エミュレーション <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/emiyure-ta.html">エミュレータ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/enitsukusu.html">エニックス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/equalizer-apo.html">Equalizer APO <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/eri-.html">エリー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/erugonomikusu.html">エルゴノミクス <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/etsusei.html">エッセイ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/fan-ying-su-du.html">反応速度 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/fen-jie.html">分解 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/floorp.html">Floorp <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/fps.html">FPS <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/fractal-design-north.html">Fractal Design North <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/g502-x-plus.html">G502 X PLUS <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/garmin.html">Garmin <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gazietsuto.html">ガジェット <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gazietsutoai.html">ガジェット愛 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gazietsutobi-jiao.html">ガジェット比較 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gazietsutodao.html">ガジェット道 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gazietsutorebiyu-.html">ガジェットレビュー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gazietsutoxuan-bi.html">ガジェット選び <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-mingumausu.html">ゲーミングマウス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-mingumonita-.html">ゲーミングモニター <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-mu.html">ゲーム <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-mudezain.html">ゲームデザイン <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-mupei-xin.html">ゲーム配信 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-mupi-ping.html">ゲーム批評 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-murebiyu-.html">ゲームレビュー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ge-mushinario.html">ゲームシナリオ <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/geekbench.html">Geekbench <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/geng-yi-shi.html">更衣室 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/giarebiyu-.html">ギアレビュー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/github-copilot.html">GitHub Copilot <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gong-lue.html">攻略 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/google-earth.html">Google Earth <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gou-pei.html">勾配 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gou-zao-fen-xi.html">構造分析 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gpu.html">GPU <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gu-du.html">孤独 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gu-zhang-yu-fang.html">故障予防 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gurahuitsuku.html">グラフィック <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gurume.html">グルメ <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ha-douea.html">ハードウェア <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ha-humarason.html">ハーフマラソン <span class="count">13</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hdr.html">HDR <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hdr-1000.html">HDR 1000 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hei-nodi-mari.html">黒の締まり <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/herman-miller.html">Herman Miller <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hisense.html">Hisense <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hisense-43-u7n.html">Hisense 43 U7N <span class="count">19</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ho-mushiata-.html">ホームシアター <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hua-muuea.html">ファームウェア <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hua-rakasa.html">滑らかさ <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hua-xiang-sheng-cheng-ai.html">画像生成AI <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/huan-jing-gou-zhu.html">環境構築 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/huanka-bu.html">ファンカーブ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hui-du.html">輝度 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/huo-mugai-shan.html">フォーム改善 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/huonto.html">フォント <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/huorotsudocheng.html">フォロッド城 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hure-musheng-cheng.html">フレーム生成 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hurumarason.html">フルマラソン <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hurumarasonhenodao.html">フルマラソンへの道 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/hwinfo64.html">HWiNFO64 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ikoraiza-.html">イコライザー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/inta-baruzou.html">インターバル走 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ji-shu.html">技術 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ji-shu-jian-zheng.html">技術検証 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ji-shu-jie-shuo.html">技術解説 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ji-shu-jie-xi.html">技術解析 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jian-kang.html">健康 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jian-korifang-zhi.html">肩こり防止 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jian-zheng.html">検証 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jing-dian-qi-dui-ce.html">静電気対策 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jing-shen-li.html">精神力 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jing-shen-xing.html">精神性 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jing-yin-xing.html">静音性 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jiu-ji.html">救済 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ju-da-monita-.html">巨大モニター <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jue-bie.html">決別 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jue-wang.html">絶望 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/jue-yi.html">決意 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ka-boro-deingu.html">カーボローディング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kahuezuo-ye.html">カフェ作業 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kai-fa-huan-jing.html">開発環境 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kai-feng.html">開封 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kao-cha.html">考察 <span class="count">5</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kasutamaizu.html">カスタマイズ <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ke-burumanezimento.html">ケーブルマネジメント <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ke-xue-de-tore-ningu.html">科学的トレーニング <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ki-bo-do.html">キーボード <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kiyarakuta-kao-cha.html">キャラクター考察 <span class="count">5</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kiyarameiku.html">キャラメイク <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ko-sufen-xi.html">コース分析 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kondeishiyoningu.html">コンディショニング <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kosupa.html">コスパ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ku-ringu.html">クーリング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kuri-ninsuto-ru.html">クリーンインストール <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kurieiteibu.html">クリエイティブ <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/kurieiteibuwa-ku.html">クリエイティブワーク <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/leng-que.html">冷却 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/li-qie-ri.html">裏切り <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/lightroom.html">Lightroom <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/llama-3.html">Llama 3 <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/llm.html">LLM <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/lm-studio.html">LM Studio <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/logicool.html">Logicool <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/lu-li-chi.html">旅立ち <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/lun-li-guan.html">倫理観 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/macbook-air.html">MacBook Air <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/makudonarudo.html">マクドナルド <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/marason.html">マラソン <span class="count">12</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/markdown.html">Markdown <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/maruchitasuku.html">マルチタスク <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mausu.html">マウス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/maza-bo-do.html">マザーボード <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/me-ka-xin-lai.html">メーカー信頼 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/media-server.html">Media Server <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mei-ru-gan.html">没入感 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mei-xue.html">美学 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mei-yu.html">梅雨 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mei-yu-noqing-rejian.html">梅雨の晴れ間 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mekanikaruki-bo-do.html">メカニカルキーボード <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/memori.html">メモリ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/memorizeng-she.html">メモリ増設 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mentarukea.html">メンタルケア <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mentarukontoro-ru.html">メンタルコントロール <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mentenansu.html">メンテナンス <span class="count">7</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/metasupi-dosukaipari.html">メタスピードスカイパリ <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/miniled.html">ミニLED <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/monita-.html">モニター <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/monita-pei-zhi.html">モニター配置 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/mu-biao-she-ding.html">目標設定 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nai-jiu-shi-yan.html">耐久試験 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/naiki.html">ナイキ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nas.html">NAS <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nei-sheng.html">内省 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nintendo-switch.html">Nintendo Switch <span class="count">22</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/noizukiyanseringu.html">ノイズキャンセリング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nomadowa-ku.html">ノマドワーク <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nuphy.html">NuPhy <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nvidia.html">NVIDIA <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nvme.html">NVMe <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/o-deio.html">オーディオ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/obs.html">OBS <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/office-2024.html">Office 2024 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ollama.html">Ollama <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/oxiu-mi.html">お休み <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pasutore-shingu.html">パストレーシング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pc.html">PC <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pcge-mu.html">PCゲーム <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pckasutamaizu.html">PCカスタマイズ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pdchong-dian.html">PD充電 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/peace.html">Peace <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pelican.html">Pelican <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/plex.html">Plex <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/powertoys.html">PowerToys <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/professional-plus.html">Professional Plus <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ps1.html">PS1 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/puraibashi-.html">プライバシー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/purokishibian-ji.html">プロキシ編集 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/python.html">Python <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/qian-ye.html">前夜 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/qing-bao-lou-xie-dui-ce.html">情報漏洩対策 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/qing-sao.html">清掃 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rag.html">RAG <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/raihuhatsuku.html">ライフハック <span class="count">5</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/raihurogu.html">ライフログ <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/raisensu.html">ライセンス <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/raiteingu.html">ライティング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ranningu.html">ランニング <span class="count">19</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ranningushiyu-zu.html">ランニングシューズ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rawxian-xiang.html">Raw現像 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/re-dui-ce.html">熱対策 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/re-guan-li.html">熱管理 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/re-surepo-to.html">レースレポート <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/re-zhong-zheng-dui-ce.html">熱中症対策 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rebiyu-.html">レビュー <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/reitore-shingu.html">レイトレーシング <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ren-bian-shen.html">忍変身 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ren-nai.html">忍耐 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ren-nochi-jiu-li.html">忍の持久力 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ren-nomei-xue.html">忍の美学 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ren-sheng-guan.html">人生観 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/retoroge-mu.html">レトロゲーム <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/retroarch.html">RetroArch <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rezisutori.html">レジストリ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ri-ji.html">日記 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rihuretsushiyure-to.html">リフレッシュレート <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rikabari-.html">リカバリー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rimo-towa-ku.html">リモートワーク <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ro-karuai.html">ローカルAI <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ro-karullm.html">ローカルLLM <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rong-yang-xue.html">栄養学 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ronguran.html">ロングラン <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rou-ti-gai-zao.html">肉体改造 <span class="count">5</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/rtx-4070-ti-super.html">RTX 4070 Ti Super <span class="count">27</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ru-men.html">ルーメン <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ryzen.html">Ryzen <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ryzen-5-5500u.html">Ryzen 5 5500U <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ryzen-5-7430u.html">Ryzen 5 7430U <span class="count">12</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ryzen-7-7800x3d.html">Ryzen 7 7800X3D <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sabu2.html">サブ2 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sabu4.html">サブ4 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/samsung-990-pro.html">Samsung 990 PRO <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/san-bu.html">散歩 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sdxl.html">SDXL <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sekiyuritei.html">セキュリティ <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shan-luan-kagura.html">閃乱カグラ <span class="count">24</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/she-nu.html">蛇女 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shen-ye.html">深夜 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sheng-chan-xing.html">生産性 <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sheng-chan-xing-xiang-shang.html">生産性向上 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sheng-cheng-ai.html">生成AI <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sheng-dian-li.html">省電力 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-ban.html">石版 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-du.html">湿度 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-jue-nobao-li.html">視覚の暴力 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-jue-ti-yan.html">視覚体験 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-nei-tore-ningu.html">室内トレーニング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-qi-dui-ce.html">湿気対策 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-shi-zhi-xian.html">食事制限 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-ting-ju-li.html">視聴距離 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shi-zou.html">試走 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shimiyure-shiyon.html">シミュレーション <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shinariokao-cha.html">シナリオ考察 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shiyo-tokatsuto.html">ショートカット <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/shu-re-shun-hua.html">暑熱順化 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sorohobi-.html">ソロホビー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ssdhuan-zhuang.html">SSD換装 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ssdzeng-she.html">SSD増設 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/stable-diffusion.html">Stable Diffusion <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/steam.html">Steam <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/suke-ringu.html">スケーリング <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sukuri-nshiyotsuto.html">スクリーンショット <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/supi-dolian-xi.html">スピード練習 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/supi-ka-.html">スピーカー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/sutore-ziguan-li.html">ストレージ管理 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/te-paringu.html">テーパリング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/teams.html">Teams <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/terebi.html">テレビ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/terewa-ku.html">テレワーク <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ti-gan-qiang-hua.html">体幹強化 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/toraburushiyu-teingu.html">トラブルシューティング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/toransuko-do.html">トランスコード <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/tore-ninguji-lu.html">トレーニング記録 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/tore-ninguli-lun.html">トレーニング理論 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ubuntu.html">Ubuntu <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/usb-c.html">USB-C <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/usb-chabu.html">USB-Cハブ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/vpn.html">VPN <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/vram.html">VRAM <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/vs-code.html">VS Code <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/vscode.html">VSCode <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wa-kuchiea.html">ワークチェア <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wai-chu-xian.html">外出先 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wan-jie.html">完結 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wan-zou.html">完走 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/webkamera.html">Webカメラ <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wei-lai.html">未来 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wei-xian-xing.html">危険性 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/windows.html">Windows <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/windows-11.html">Windows 11 <span class="count">8</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/windows-hello.html">Windows Hello <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/windowsshe-ding.html">Windows設定 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wireguard.html">WireGuard <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wsl2.html">WSL2 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/wu-li-de-zhen-shi.html">物理的真実 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xia-zhi-du.html">夏支度 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xiao-lu-hua.html">効率化 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xie-zhen-bian-ji.html">写真編集 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xie-zhen-xian-xiang.html">写真現像 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xin-fei-qiang-hua.html">心肺強化 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xin-lai.html">信頼 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xin-lai-xing.html">信頼性 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xin-nozai-richu.html">心の在り処 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xin-pai-shu.html">心拍数 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xing-neng-bi-jiao.html">性能比較 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xiu-xi.html">休息 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/xiu-xi-ri.html">休息日 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ya-dao-de-mei-ru-gan.html">圧倒的没入感 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/yan-chu-lun.html">演出論 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/yao-tong-dui-ce.html">腰痛対策 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ye-wu-xiao-lu-hua.html">業務効率化 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/yi-shi.html">儀式 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/yin-le.html">音楽 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/yin-zhi-gai-shan.html">音質改善 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ying-hua-jian-shang.html">映画鑑賞 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/youtube.html">YouTube <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/yuan-feng-jing.html">原風景 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/yun-que.html">雲雀 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zai-qi.html">再起 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zebotsuto.html">ゼボット <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhen-rifan-ri.html">振り返り <span class="count">9</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhen-shi.html">真実 <span class="count">61</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zheng-li-zheng-dun.html">整理整頓 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhi-bi.html">執筆 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhi-bi-huan-jing.html">執筆環境 <span class="count">6</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhi-gan.html">質感 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhi-xing.html">知性 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhong-hua-pc.html">中華PC <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhou-bian-ji-qi.html">周辺機器 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhou-mo.html">週末 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhuang-bei-chietsuku.html">装備チェック <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zhun-bei.html">準備 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zi-dong-hua.html">自動化 <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zi-ji-besuto.html">自己ベスト <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zi-ji-gai-shan.html">自己改善 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zi-ran.html">自然 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zi-zhai-sa-ba-.html">自宅サーバー <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zi-zhong-tore-ningu.html">自重トレーニング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zi-zuo-pc.html">自作PC <span class="count">44</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zong-gua.html">総括 <span class="count">4</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zoom.html">Zoom <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zu-mili-te.html">組み立て <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zui-shi-hua.html">最適化 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zui-zhong-hui.html">最終回 <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/zuo-ye-xiao-lu.html">作業効率 <span class="count">1</span></a>
+							</li>
+				
+				
+						<li><label>Social</label></li>
+							<li><a href="https://github.com/ligfil-8110">GitHub</a></li>
+					</ul>   
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="https://ligfil-8110.github.io/">みっちーのブログ</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+									<li ><a href="https://ligfil-8110.github.io/pages/about.html">自己紹介</a></li>
+									<li ><a href="https://ligfil-8110.github.io/pages/contact.html">お問い合わせ</a></li>
+									<li ><a href="https://ligfil-8110.github.io/pages/privacy-policy.html">プライバシーポリシー</a></li>
+					
+						</ul>
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+<article>
+	<h2>Windowsの中に潜むLinux：CoreBook XにWSL2で最強のPython開発環境を構築する</h2>
+	<h2>はじめに：CoreBook Xを「真の開発マシン」へ変える</h2>
+<p>皆さん、こんにちは。CoreBook X（Ryzen 5 7430Uモデル）を手に入れてから数週間、私のデジタルライフは劇的な変化を遂げました。特に、この3:2の広大なディスプレイと、モバイルノートとしては破格のマルチスレッド性能を持つRyzen 5の組み合わせは、コードを書く人間にとって「至福」の一言に尽きます。</p>
+<p>しかし、いくらハードウェアが素晴らしくても、ソフトウェア環境が整っていなければ宝の持ち腐れです。私は長年、Web開発やデータ分析、そしてこのブログ（Pelican）のビルドにPythonを多用してきましたが、Windows上での環境構築には常に「パスの不整合」や「ライブラリのバイナリ互換性」といった、地味ながらもストレスの溜まる問題が付きまとっていました。</p>
+<p>例えば、あるライブラリがLinuxでしか動作しないバイナリに依存していたり、パスの区切り文字が <code>\</code> か <code>/</code> かでスクリプトが落ちたりといった経験は、Windows開発者なら一度は通る道でしょう。仮想マシン（VirtualBoxやVMware）を立てるという手もありますが、リソースの消費が激しく、ホストOSとの行き来がスムーズではありません。</p>
+<p>そこで今回は、CoreBook Xのポテンシャルを最大限に引き出すべく、<strong>WSL2（Windows Subsystem for Linux 2）</strong>を用いた最強のPython開発環境構築プロセスについて語りたいと思います。CoreBook Xという「ハード」と、WSL2という「ソフト」がどのように共鳴し、開発者のクリエイティビティを加速させるのか。3,200文字を超える圧倒的なディテールで、その全貌を解き明かします。</p>
+<hr>
+<h2>なぜCoreBook XでWSL2なのか？：Ryzen 5 7430Uの破壊力</h2>
+<p>まず、なぜこのマシンでWSL2なのかを深く掘り下げましょう。CoreBook Xに搭載されているRyzen 5 7430Uは、Zen 3アーキテクチャを採用した6コア12スレッドのプロセッサです。これまでの低価格ノートPCにありがちだった「なんとか動く」レベルのスペックとは一線を画します。</p>
+<h3>1. 12スレッドの並列処理能力</h3>
+<p>WSL2はHyper-Vのサブセットを利用した軽量仮想化技術ですが、LinuxカーネルはWindowsから割り当てられた全リソースを自在に操れます。Pythonの環境構築において、ライブラリのビルドや大規模なデータセットの処理を行う際、この12スレッドが同時に稼働するインパクトは絶大です。Intelの同世代Core i5（特にUシリーズ）と比較しても、マルチスレッドの粘り強さはRyzenに軍配が上がることが多く、WSL2内でのコンパイル速度に直結します。</p>
+<h3>2. メモリ管理の柔軟性</h3>
+<p>WSL2は必要に応じてWindows側のメモリを動的に確保・解放します。CoreBook Xの16GBメモリ（LPDDR4X）は、Windows 11を動かしながら、バックグラウンドで重厚なUbuntu環境を走らせるのに十分な容量です。VS Codeを開き、ブラウザで数十個のタブを開き、さらにWSL2で開発サーバーを立てても、スワップが発生して動作がガクつくことはありません。以前の8GB環境では、WSL2を立ち上げた瞬間にOS全体が重くなることがありましたが、16GBという余裕が「開発の自由」を支えています。</p>
+<h3>3. 3:2ディスプレイとターミナルの相性</h3>
+<p>これはハードウェア面での最大の特徴ですが、2160×1440という解像度は、開発効率を物理的に底上げします。一般的な16:9のディスプレイに比べ、縦方向の表示領域が約1.5倍（体感）広いため、エディタの下部にターミナルを表示しても、コードの可読性が失われません。ログを流し見しながらコードを修正する際、この「縦の余裕」がストレスを劇的に軽減します。具体的には、標準的なフォントサイズであれば、ターミナルを15行分表示しても、エディタ側で40行以上のコードを視認し続けることができます。</p>
+<hr>
+<h2>徹底解説：Ryzen vs Intel 開発機としての選択</h2>
+<p>ここで少し技術的な寄り道をしましょう。多くの人が「開発ならMacBook」か「Intel搭載機」と考えがちですが、なぜ私はRyzen 5 7430U搭載のCoreBook Xを推すのか。</p>
+<p>Ryzen 5 7430UのZen 3コアは、ブランチ予測の精度向上とL3キャッシュの統合により、ビルドタスクにおいて非常に高いIPC（クロックあたりの命令実行数）を叩き出します。特にPythonのように、背後でC言語のコンパイルが走るようなパッケージ（NumPy, Pandas, Scikit-learnなど）を扱う場合、コア数の多さとキャッシュの効率がそのまま「待ち時間の短縮」に直結します。</p>
+<p>また、Intelの第12世代以降の「Pコア/Eコア」構成は、Windows上でのタスク割り当てが稀に不安定になることがありますが、Ryzenは全てのコアが「フルスペック」のZen 3コアであるため、WSL2のような仮想化環境でもパフォーマンスが予測しやすく、安定しています。この「予測可能性」こそが、プロフェッショナルなツールとして最も重要な資質です。</p>
+<hr>
+<h2>実践：最強のPython環境を構築するステップ</h2>
+<p>それでは、実際に私がCoreBook X上で行ったセットアップを、躓きやすいポイントを交えて徹底的に解説します。</p>
+<h3>ステップ1：WSL2の有効化とUbuntuのインストール</h3>
+<p>Windows 11であれば、導入は驚くほど簡単になりました。</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Windows Terminal (PowerShell) を管理者権限で実行</span>
+<span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span>
+</code></pre></div>
+
+<p>このコマンド一つで、仮想マシンプラットフォームの有効化、Linuxカーネルのダウンロード、そしてデフォルトのディストリビューションであるUbuntuのインストールが完了します。再起動後、Ubuntuのターミナルが立ち上がれば成功です。</p>
+<p><strong>重要:</strong> Windows 10から移行してきた方は、古いバージョンのWSL1が動いている可能性があります。<code>wsl -l -v</code> でバージョンを確認し、もし <code>1</code> になっていれば <code>wsl --set-version Ubuntu 2</code> を実行してください。WSL1とWSL2ではファイルシステムの構造が根本的に異なり、WSL2の方が圧倒的にモダンで高速です。</p>
+<h3>ステップ2：Ubuntu内部の最適化</h3>
+<p>インストール直後のUbuntuは、まず最新の状態に更新しましょう。CoreBook Xの高速なNVMe SSDのおかげで、数百個のパッケージ更新も数分で完了します。</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+</code></pre></div>
+
+<p>次に、Python開発に不可欠なビルドツール一式を導入します。これは、後述する <code>pyenv</code> でPython本体をビルドするために必要です。これらが不足していると、後で「謎のエラー」に悩まされることになります。</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>make<span class="w"> </span>build-essential<span class="w"> </span>libssl-dev<span class="w"> </span>zlib1g-dev<span class="w"> </span><span class="se">\</span>
+libbz2-dev<span class="w"> </span>libreadline-dev<span class="w"> </span>libsqlite3-dev<span class="w"> </span>wget<span class="w"> </span>curl<span class="w"> </span>llvm<span class="w"> </span><span class="se">\</span>
+libncursesw5-dev<span class="w"> </span>xz-utils<span class="w"> </span>tk-dev<span class="w"> </span>libxml2-dev<span class="w"> </span>libxmlsec1-dev<span class="w"> </span>libffi-dev<span class="w"> </span>liblzma-dev
+</code></pre></div>
+
+<h3>ステップ3：pyenvによるPythonバージョンの制御</h3>
+<p>私はプロジェクトごとにPythonのバージョンを厳密に使い分けるため、<code>pyenv</code> を愛用しています。</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>https://pyenv.run<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</code></pre></div>
+
+<p><code>.bashrc</code> にパスを通した後、いよいよPythonのインストールです。ここでRyzen 5のパワーを最大限に引き出します。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 全12スレッドをフル活用してビルド</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MAKEFLAGS</span><span class="o">=</span><span class="s2">&quot;-j12&quot;</span>
+pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.11.5
+pyenv<span class="w"> </span>global<span class="w"> </span><span class="m">3</span>.11.5
+</code></pre></div>
+
+<p>12個のコアが並列でCソースをコンパイルしていく様子を <code>htop</code> で確認するのは、まさにPCを「使い切っている」という実感を得られる瞬間です。CoreBook Xの冷却ファンが静かに回り始めますが、高周波な不快な音ではなく、安定した排熱が行われている安心感があります。Ryzenの効率の良さが光る場面です。</p>
+<h3>ステップ4：Poetryによるモダンな依存関係管理</h3>
+<p>最近のPython開発において、<code>pip</code> 直接叩きはもはや時代遅れと言っても過言ではありません。私は <code>Poetry</code> を使ってプロジェクトごとの仮想環境と依存関係を管理しています。</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sSL<span class="w"> </span>https://install.python-poetry.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-
+</code></pre></div>
+
+<p><code>Poetry</code> は依存関係の解決が非常に厳格で信頼性が高いのですが、その分計算負荷が高いのが難点でした。しかし、Ryzen 5搭載のCoreBook Xなら、複雑な依存関係のグラフ解消も一瞬で終わります。設定で <code>virtualenvs.in-project true</code> にしておくと、プロジェクトディレクトリ内に <code>.venv</code> が作られるため、管理が楽になります。</p>
+<hr>
+<h2>開発体験の極致：VS Code Remote WSL</h2>
+<p>環境が整ったら、次はいよいよエディタとの連携です。私はVS Codeに拡張機能 <strong>「Remote - WSL」</strong> を導入しています。</p>
+<p>これがもたらす体験は革命的です。VS Code自体はWindows側で動作していますが、そのエンジン部分はWSL2の中で動きます。つまり、UIはWindowsの快適さを保ちつつ、実行環境はピュアなLinuxという「いいとこ取り」が可能なのです。</p>
+<ul>
+<li><strong>ファイルシステムの爆速アクセス:</strong> WSL2内部のディレクトリ（<code>\\wsl$\Ubuntu\home\...</code>）を <code>code .</code> で開くと、ネットワーク越しのような遅延は一切なく、数千ファイルのプロジェクトでも瞬時にロードされます。</li>
+<li><strong>完璧なターミナル統合:</strong> VS Codeのターミナルを叩けば、そこはすでにUbuntuのシェルの上。パスの変換を意識する必要はありません。</li>
+<li><strong>デバッグの容易さ:</strong> Windows側のGUIデバッガを使いながら、WSL2内のプロセスをステップ実行できます。</li>
+</ul>
+<p>CoreBook Xのキーボードは、US配列でキーピッチが広く、長文のコードを書くのに適しています。適度なストロークがあり、「カチッ」とした確かなフィードバックが、コーディングのテンポを生みます。特に、インデントを多用するPythonにおいて、この「指に馴染む感覚」は生産性に直結します。</p>
+<hr>
+<h2>衝撃の検証：Pelicanによる静的サイト生成</h2>
+<p>私のこのブログも、Python製のジェネレーター <strong>Pelican</strong> で作られています。今回の環境移行で最も驚いたのは、ビルド速度の変化です。</p>
+<p>Pelicanは多数のMarkdownファイルを読み込み、Jinja2テンプレートを適用してHTMLを生成しますが、このプロセスはディスクI/OとCPU負荷の両方がかかります。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">環境</th>
+<th style="text-align: left;">ビルド時間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">旧型Intelノート (WSL1)</td>
+<td style="text-align: left;">22.4秒</td>
+</tr>
+<tr>
+<td style="text-align: left;">CoreBook X (Windows直)</td>
+<td style="text-align: left;">8.2秒</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CoreBook X (WSL2 / Ubuntu)</strong></td>
+<td style="text-align: left;"><strong>3.7秒</strong></td>
+</tr>
+</tbody>
+</table>
+<p>なんと、以前の環境から約6倍、同じマシンのWindowsネイティブ実行と比較しても2倍以上の高速化を達成しました。WSL2のファイルシステムが、いかにLinuxネイティブに近いパフォーマンスを出しているかの証明です。3.7秒という数字は、記事を書いて保存し、ブラウザをリロードするまでの間に全てが終わっているという感覚です。この「ゼロ・レイテンシ」な執筆・開発体験が、私のモチベーションを支えています。</p>
+<hr>
+<h2>トラブルシューティング：WSL2のメモリ消費と戦う</h2>
+<p>唯一の弱点は、WSL2がメモリを食い過ぎることがある点です。何もしないと搭載メモリの半分以上を勝手に確保してしまうことがあります。これを防ぐために、<code>.wslconfig</code> ファイルで制限をかけています。</p>
+<p><code>C:\Users\ユーザー名\.wslconfig</code> を作成し、以下のように記述します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">[wsl2]</span>
+<span class="na">memory</span><span class="o">=</span><span class="s">8GB</span><span class="w"> </span><span class="c1"># CoreBook Xの16GBのうち半分を割り当て</span>
+<span class="na">processors</span><span class="o">=</span><span class="s">12</span>
+<span class="c1"># スワップを無効にしてディスクへの負荷を減らす</span>
+<span class="na">swap</span><span class="o">=</span><span class="s">0</span>
+</code></pre></div>
+
+<p>これにより、Windows側の動作を安定させつつ、WSL2にも十分なパワーを分配できます。こうした細かいチューニングに応えてくれるのも、CoreBook Xのような「弄りがいのある」マシンの楽しさです。また、長時間使用してWSL2がメモリを抱え込んでしまった場合は、<code>wsl --shutdown</code> で一度リセットするのも有効な手です。</p>
+<hr>
+<h2>コラム：CoreBook Xのキーボードとショートカット</h2>
+<p>開発者にとって、キーボードは体の一部です。CoreBook Xのキーボードは、US配列愛好家にはたまらないレイアウトになっています。
+特に、右側の <code>Shift</code> キーや <code>Enter</code> キーのサイズが適切で、ミスタイプが少ないのが特徴です。また、<code>Fn</code> キーとの組み合わせによる音量調節や輝度変更も直感的です。私は <code>Caps Lock</code> を <code>Ctrl</code> に入れ替えていますが、この設定もWindowsの <code>PowerToys</code> を使えば一瞬です。WSL2内の <code>emacs</code> や <code>vim</code> を使う際も、このカスタマイズのおかげで指が迷うことはありません。</p>
+<hr>
+<h2>おわりに：CoreBook Xは最高の「相棒」になる</h2>
+<p>WSL2とPython。この強力な組み合わせを、CoreBook Xという美しいパッケージで持ち歩く。それは、どこでも世界中のサーバーと同じ環境でコードが書けるという自由を手に入れることを意味します。</p>
+<p>Ryzen 5 7430Uのパワーは、もはや「サブ機」の域を超えています。メインマシンとして十分に通用する実力を、WSL2が引き出してくれました。3:2の画面を見つめながら、静かなカフェでコードを書く。キーボードの心地よい打鍵感を感じながら、自分の考えが形になっていく。そのプロセスこそが、私たちがテクノロジーを愛する理由ではないでしょうか。</p>
+<p>もし、あなたがCoreBook Xを手にして、「Windowsだから開発には……」と悩んでいるなら、ぜひWSL2をインストールしてみてください。そこには、Windowsの使いやすさとLinuxの強力さが同居する、理想郷が広がっています。</p>
+<p>明日は、この開発環境をさらに拡張するために導入した、1本のケーブルがもたらす魔法――USB-Cハブの選び方と活用術について語りたいと思います。ポート不足という物理的な限界を、いかにエレガントに解決するか。ご期待ください。</p>
+<p>それでは、ハッピー・コーディング！</p>
+	<div class="share-buttons" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+        <p style="font-size: 0.8rem; font-weight: bold; color: #666; margin-bottom: 10px;">この記事をシェアする</p>
+        <a href="https://twitter.com/intent/tweet?text=Windowsの中に潜むLinux：CoreBook XにWSL2で最強のPython開発環境を構築する&url=https://ligfil-8110.github.io/corebook-x-wsl2-python-dev.html" target="_blank" class="button tiny radius" style="background: #000; margin-right: 5px;">X (Twitter)</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://ligfil-8110.github.io/corebook-x-wsl2-python-dev.html" target="_blank" class="button tiny radius" style="background: #3b5998; margin-right: 5px;">Facebook</a>
+        <a href="https://b.hatena.ne.jp/entry/https://ligfil-8110.github.io/corebook-x-wsl2-python-dev.html" target="_blank" class="button tiny radius" style="background: #00A4DE;">はてブ</a>
+    </div>
+	<div class="post-navigation" style="margin: 40px 0; border-top: 1px solid #eee; padding-top: 20px;">
+        <div class="row">
+            <div class="small-4 columns text-left">
+                <a href="https://ligfil-8110.github.io/science-of-supercompensation-and-data-analysis.html" class="button tiny secondary radius" style="width: 100%;">« 前の記事</a>
+                <div style="font-size: 0.7rem; color: #999; margin-top: 5px; line-height: 1.2;">超回復の科学：25kmロングラン後の「肉体の再構築」とCoreBook Xによるパフォーマンス分析</div>
+            </div>
+
+            <div class="small-4 columns text-center">
+                <a href="https://ligfil-8110.github.io/" class="button tiny secondary radius" style="width: 100%;">トップへ</a>
+            </div>
+
+            <div class="small-4 columns text-right">
+                <a href="https://ligfil-8110.github.io/corebook-x-usb-c-hub-guide.html" class="button tiny secondary radius" style="width: 100%;">次の記事 »</a>
+                <div style="font-size: 0.7rem; color: #999; margin-top: 5px; line-height: 1.2;">一本のケーブルから広がる世界：CoreBook Xの拡張性を最大化するUSB-Cハブの選び方</div>
+            </div>
+        </div>
+    </div>
+	<div class="article-metadata" style="margin-top: 30px; padding: 15px; background: #f9f9f9; border-radius: 4px; font-size: 0.85rem; color: #666;">
+        
+        <span class="meta-item" style="margin-right: 15px;">
+            <strong>カテゴリー:</strong> 
+            <a href="https://ligfil-8110.github.io/category/ji-shu.html" style="color: #008cba; text-decoration: none;">技術</a>
+        </span>
+
+        <span class="meta-item">
+            <strong>タグ:</strong> 
+                <a href="https://ligfil-8110.github.io/tag/corebook-x.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #CoreBook X
+                </a>
+                <a href="https://ligfil-8110.github.io/tag/wsl2.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #WSL2
+                </a>
+                <a href="https://ligfil-8110.github.io/tag/python.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #Python
+                </a>
+                <a href="https://ligfil-8110.github.io/tag/ubuntu.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #Ubuntu
+                </a>
+                <a href="https://ligfil-8110.github.io/tag/vs-code.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #VS Code
+                </a>
+                <a href="https://ligfil-8110.github.io/tag/kai-fa-huan-jing.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #開発環境
+                </a>
+                <a href="https://ligfil-8110.github.io/tag/pelican.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #Pelican
+                </a>
+                <a href="https://ligfil-8110.github.io/tag/ryzen-5-7430u.html" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
+                    #Ryzen 5 7430U
+                </a>
+        </span>
+        
+        <div style="margin-top: 10px; font-size: 0.8rem; color: #999;">
+            公開日: 水 11 3月 2026
+        </div>
+    </div>
+    </article>
+
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Google</a></li>
+									<li><a href="https://www.nintendo.co.jp/" target="_blank" rel="noopener noreferrer">任天堂公式サイト</a></li>
+									<li><a href="https://runnet.jp/smp/" target="_blank" rel="noopener noreferrer">RUNNET</a></li>
+									<li style="list-style: none; text-align: center; margin-top: 20px; padding: 0;">
+										<div style="display: inline-block;">
+											<a href="//af.moshimo.com/af/c/click?a_id=5345202&p_id=54&pc_id=54&pl_id=1235" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" attributionsrc>
+												<img src="//image.moshimo.com/af-img/0032/000000001235.gif" width="120" height="120" style="border:none; display: block; margin: 0 auto;">
+											</a>
+											<img src="//i.moshimo.com/af/i/impression?a_id=5345202&p_id=54&pc_id=54&pl_id=1235" width="1" height="1" style="border:none;" loading="lazy">
+										</div>
+									</li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Categories</h5>
+								<ul class="side-nav">
+										<li ><a href="https://ligfil-8110.github.io/category/desukusetsutoatsupu.html">デスクセットアップ<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/etsusei.html">エッセイ<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/etsuseiri-ji.html">エッセイ/日記<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsuto.html">ガジェット<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutodeisupurei.html">ガジェット/ディスプレイ<span class="count">4</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutodesukuhuan-jing.html">ガジェット/デスク環境<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutogpu.html">ガジェット/GPU<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutoki-bo-do.html">ガジェット/キーボード<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutokurieiteibu.html">ガジェット/クリエイティブ<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutomausu.html">ガジェット/マウス<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutooszui-shi-hua.html">ガジェット/OS最適化<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutopc.html">ガジェット/PC<span class="count">4</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutoshe-ding.html">ガジェット/設定<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/gazietsutosheng-chan-xing.html">ガジェット/生産性<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ge-mu.html">ゲーム<span class="count">28</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ge-mu4kpurei.html">ゲーム/4Kプレイ<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ge-mudorakue.html">ゲーム/ドラクエ<span class="count">6</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ge-muji-shu.html">ゲーム/技術<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ge-muretoroemiyure-shiyon.html">ゲーム/レトロエミュレーション<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ge-mushan-luan-kagura.html">ゲーム/閃乱カグラ<span class="count">5</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ha-douea.html">ハードウェア<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/huo-yong-ji-shu.html">活用/技術<span class="count">1</span></a></li>
+										<li class="active"><a href="https://ligfil-8110.github.io/category/ji-shu.html">技術<span class="count">3</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ji-shu-memo.html">技術メモ<span class="count">4</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ji-shu-rebiyu-.html">技術/レビュー<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/koramukao-cha.html">コラム/考察<span class="count">3</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/kurieiteibu.html">クリエイティブ<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/kurieiteibuji-shu.html">クリエイティブ/技術<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/kurieiteibujian-zheng.html">クリエイティブ/検証<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/o-deioji-shu.html">オーディオ/技術<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/oszui-shi-hua.html">OS最適化<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ozhi-rase.html">お知らせ<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/raihuhatsuku.html">ライフハック<span class="count">3</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ranningu.html">ランニング<span class="count">16</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ranningugazietsuto.html">ランニング/ガジェット<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ranninguri-ji.html">ランニング/日記<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ranningutore-ningu.html">ランニング/トレーニング<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/rebiyu-bi-jiao.html">レビュー/比較<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ri-ji.html">日記<span class="count">13</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ri-ji-de-tafen-xi.html">日記/データ分析<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ri-ji-ranningu.html">日記/ランニング<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/sekiyuritei.html">セキュリティ<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/shi-shi-shu-xiao-lu-hua.html">仕事術/効率化<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/xiao-lu-hua.html">効率化<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/xiao-lu-hua-ji-shu.html">効率化/技術<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/za-ji.html">雑記<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zi-zuo-pcbenchima-ku.html">自作PC/ベンチマーク<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zi-zuo-pcbirudo.html">自作PC/ビルド<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zi-zuo-pcha-douea.html">自作PC/ハードウェア<span class="count">9</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zi-zuo-pchuan-jing.html">自作PC/環境<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zi-zuo-pckoramu.html">自作PC/コラム<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zi-zuo-pcsohutouea.html">自作PC/ソフトウェア<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zi-zuo-pczhou-bian-ji-qi.html">自作PC/周辺機器<span class="count">2</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zui-xin-ji-shu-jian-zheng.html">最新技術/検証<span class="count">5</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/zui-xin-ji-shu-zi-dong-hua.html">最新技術/自動化<span class="count">1</span></a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="side-nav"> 										<li><a href="https://ligfil-8110.github.io/tag/144hz.html">144Hz<span class="count">5</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/15kmzou.html">15km走<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/16gb.html">16GB<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/16gb-vram.html">16GB VRAM<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/21km.html">21km<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/21kmkara42kmhe.html">21kmから42kmへ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/25km.html">25km<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/25sui.html">25歳<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/26sui.html">26歳<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/2kdeisupurei.html">2Kディスプレイ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/30kmzou.html">30km走<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/32.html">3:2<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/32deisupurei.html">3:2ディスプレイ<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/3dcg.html">3DCG<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/3dmark.html">3DMark<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/3dmoderu.html">3Dモデル<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/3ds.html">3DS<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/3yue.html">3月<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/3yue-matome.html">3月まとめ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/400m.html">400m<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/43u7n.html">43U7N<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/4k.html">4K<span class="count">32</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/4k60fps.html">4K60fps<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/4kdong-hua.html">4K動画<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/4kge-mingu.html">4Kゲーミング<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/4kmonita-.html">4Kモニター<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/4yue.html">4月<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/5yue.html">5月<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/6yue.html">6月<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/80plus-gold.html">80PLUS GOLD<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/a-ronchiea.html">アーロンチェア<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/adeidasu.html">アディダス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ai.html">AI<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/aia-to.html">AIアート<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/aie-ziento.html">AIエージェント<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/air75-v2.html">Air75 V2<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/aixue-xi.html">AI学習<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/an-wu-mai-inoqian-shi-i.html">安物買いの銭失い<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/anbokushingu.html">アンボクシング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/apple-silicon.html">Apple Silicon<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ashitsukusu.html">アシックス<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/atsupusuke-ru.html">アップスケール<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/autoretsuto.html">アウトレット<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/av1.html">AV1<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ban.html">絆<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bao-su.html">爆速<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/barentain.html">バレンタイン<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/batsukuguraundopurosesu.html">バックグラウンドプロセス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/batsuteri-xing-neng.html">バッテリー性能<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bei-ju.html">悲劇<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/benchima-ku.html">ベンチマーク<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bi-jiao.html">比較<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bian-li-tsu-ru.html">便利ツール<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bios.html">BIOS<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bitlocker.html">BitLocker<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/boriyu-muraisensu.html">ボリュームライセンス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bu-gei-shi.html">補給食<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/bu-zheng-raisensu.html">不正ライセンス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/burauza.html">ブラウザ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/burst-renewal.html">Burst Re:Newal<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cao-zuo-xing.html">操作性<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/capcut.html">CapCut<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chang-qi-rebiyu-.html">長期レビュー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chao-hui-fu.html">超回復<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cheng-chang.html">成長<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cheng-shi-sa.html">誠実さ<span class="count">7</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chiyu-ningu.html">チューニング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chong-ji.html">衝撃<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chu-shi.html">除湿<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chuang-zao-xing.html">創造性<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chui-zhi-tabu.html">垂直タブ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chun-hua.html">春花<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chuwi.html">CHUWI<span class="count">10</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cinebench.html">Cinebench<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cinebench-r23.html">Cinebench R23<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/citra.html">Citra<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/corebook-x.html">CoreBook X<span class="count">45</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cpu.html">CPU<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cpu-z.html">CPU-Z<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cpuwei-zhuang.html">CPU偽装<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/css.html">CSS<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cuo-ying-shu.html">撮影術<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/cyberpunk-2077.html">Cyberpunk 2077<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/da-ban-cheng-gong-yuan.html">大阪城公園<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/da-cheng-gan.html">達成感<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/da-jian-gan.html">打鍵感<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/da-mashen-dian.html">ダーマ神殿<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dan-sheng-ri.html">誕生日<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dao-ju-henoai.html">道具への愛<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/davinci-resolve.html">DaVinci Resolve<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/de-tafen-xi.html">データ分析<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/desukuhuan-jing.html">デスク環境<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/desukunoao-xing-ki.html">デスクの奥行き<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/desukusetsutoatsupu.html">デスクセットアップ<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/desukutotsupuhuan-jing.html">デスクトップ環境<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/desukuwa-ku.html">デスクワーク<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/deyuarudeisupurei.html">デュアルディスプレイ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dezitarumei-xue.html">デジタル美学<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dezitaruraihu.html">デジタルライフ<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dian-yuan.html">電源<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/diao-zheng.html">調整<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/diy.html">DIY<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dlss-3.html">DLSS 3<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dlss-35.html">DLSS 3.5<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dong-hua-bian-ji.html">動画編集<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dong-hua-pei-xin.html">動画配信<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dong-hua-tou-gao.html">動画投稿<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/doragonkuesutovii.html">ドラゴンクエストVII<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/doraiba.html">ドライバ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dorakue.html">ドラクエ<span class="count">19</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dorakuevii.html">ドラクエVII<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/eadasuta-.html">エアダスター<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/eahuro-.html">エアフロー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/emiyure-shiyon.html">エミュレーション<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/emiyure-ta.html">エミュレータ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/enitsukusu.html">エニックス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/equalizer-apo.html">Equalizer APO<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/eri-.html">エリー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/erugonomikusu.html">エルゴノミクス<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/etsusei.html">エッセイ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/fan-ying-su-du.html">反応速度<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/fen-jie.html">分解<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/floorp.html">Floorp<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/fps.html">FPS<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/fractal-design-north.html">Fractal Design North<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/g502-x-plus.html">G502 X PLUS<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/garmin.html">Garmin<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gazietsuto.html">ガジェット<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gazietsutoai.html">ガジェット愛<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gazietsutobi-jiao.html">ガジェット比較<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gazietsutodao.html">ガジェット道<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gazietsutorebiyu-.html">ガジェットレビュー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gazietsutoxuan-bi.html">ガジェット選び<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-mingumausu.html">ゲーミングマウス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-mingumonita-.html">ゲーミングモニター<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-mu.html">ゲーム<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-mudezain.html">ゲームデザイン<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-mupei-xin.html">ゲーム配信<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-mupi-ping.html">ゲーム批評<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-murebiyu-.html">ゲームレビュー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ge-mushinario.html">ゲームシナリオ<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/geekbench.html">Geekbench<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/geng-yi-shi.html">更衣室<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/giarebiyu-.html">ギアレビュー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/github-copilot.html">GitHub Copilot<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gong-lue.html">攻略<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/google-earth.html">Google Earth<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gou-pei.html">勾配<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gou-zao-fen-xi.html">構造分析<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gpu.html">GPU<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gu-du.html">孤独<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gu-zhang-yu-fang.html">故障予防<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gurahuitsuku.html">グラフィック<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gurume.html">グルメ<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ha-douea.html">ハードウェア<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ha-humarason.html">ハーフマラソン<span class="count">13</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hdr.html">HDR<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hdr-1000.html">HDR 1000<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hei-nodi-mari.html">黒の締まり<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/herman-miller.html">Herman Miller<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hisense.html">Hisense<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hisense-43-u7n.html">Hisense 43 U7N<span class="count">19</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ho-mushiata-.html">ホームシアター<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hua-muuea.html">ファームウェア<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hua-rakasa.html">滑らかさ<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hua-xiang-sheng-cheng-ai.html">画像生成AI<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/huan-jing-gou-zhu.html">環境構築<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/huanka-bu.html">ファンカーブ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hui-du.html">輝度<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/huo-mugai-shan.html">フォーム改善<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/huonto.html">フォント<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/huorotsudocheng.html">フォロッド城<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hure-musheng-cheng.html">フレーム生成<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hurumarason.html">フルマラソン<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hurumarasonhenodao.html">フルマラソンへの道<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/hwinfo64.html">HWiNFO64<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ikoraiza-.html">イコライザー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/inta-baruzou.html">インターバル走<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ji-shu.html">技術<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ji-shu-jian-zheng.html">技術検証<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ji-shu-jie-shuo.html">技術解説<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ji-shu-jie-xi.html">技術解析<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jian-kang.html">健康<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jian-korifang-zhi.html">肩こり防止<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jian-zheng.html">検証<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jing-dian-qi-dui-ce.html">静電気対策<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jing-shen-li.html">精神力<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jing-shen-xing.html">精神性<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jing-yin-xing.html">静音性<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jiu-ji.html">救済<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ju-da-monita-.html">巨大モニター<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jue-bie.html">決別<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jue-wang.html">絶望<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/jue-yi.html">決意<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ka-boro-deingu.html">カーボローディング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kahuezuo-ye.html">カフェ作業<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kai-fa-huan-jing.html">開発環境<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kai-feng.html">開封<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kao-cha.html">考察<span class="count">5</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kasutamaizu.html">カスタマイズ<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ke-burumanezimento.html">ケーブルマネジメント<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ke-xue-de-tore-ningu.html">科学的トレーニング<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ki-bo-do.html">キーボード<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kiyarakuta-kao-cha.html">キャラクター考察<span class="count">5</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kiyarameiku.html">キャラメイク<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ko-sufen-xi.html">コース分析<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kondeishiyoningu.html">コンディショニング<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kosupa.html">コスパ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ku-ringu.html">クーリング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kuri-ninsuto-ru.html">クリーンインストール<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kurieiteibu.html">クリエイティブ<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/kurieiteibuwa-ku.html">クリエイティブワーク<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/leng-que.html">冷却<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/li-qie-ri.html">裏切り<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/lightroom.html">Lightroom<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/llama-3.html">Llama 3<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/llm.html">LLM<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/lm-studio.html">LM Studio<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/logicool.html">Logicool<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/lu-li-chi.html">旅立ち<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/lun-li-guan.html">倫理観<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/macbook-air.html">MacBook Air<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/makudonarudo.html">マクドナルド<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/marason.html">マラソン<span class="count">12</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/markdown.html">Markdown<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/maruchitasuku.html">マルチタスク<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mausu.html">マウス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/maza-bo-do.html">マザーボード<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/me-ka-xin-lai.html">メーカー信頼<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/media-server.html">Media Server<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mei-ru-gan.html">没入感<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mei-xue.html">美学<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mei-yu.html">梅雨<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mei-yu-noqing-rejian.html">梅雨の晴れ間<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mekanikaruki-bo-do.html">メカニカルキーボード<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/memori.html">メモリ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/memorizeng-she.html">メモリ増設<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mentarukea.html">メンタルケア<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mentarukontoro-ru.html">メンタルコントロール<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mentenansu.html">メンテナンス<span class="count">7</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/metasupi-dosukaipari.html">メタスピードスカイパリ<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/miniled.html">ミニLED<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/monita-.html">モニター<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/monita-pei-zhi.html">モニター配置<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/mu-biao-she-ding.html">目標設定<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nai-jiu-shi-yan.html">耐久試験<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/naiki.html">ナイキ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nas.html">NAS<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nei-sheng.html">内省<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nintendo-switch.html">Nintendo Switch<span class="count">22</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/noizukiyanseringu.html">ノイズキャンセリング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nomadowa-ku.html">ノマドワーク<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nuphy.html">NuPhy<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nvidia.html">NVIDIA<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nvme.html">NVMe<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/o-deio.html">オーディオ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/obs.html">OBS<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/office-2024.html">Office 2024<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ollama.html">Ollama<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/oxiu-mi.html">お休み<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pasutore-shingu.html">パストレーシング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pc.html">PC<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pcge-mu.html">PCゲーム<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pckasutamaizu.html">PCカスタマイズ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pdchong-dian.html">PD充電<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/peace.html">Peace<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pelican.html">Pelican<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/plex.html">Plex<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/powertoys.html">PowerToys<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/professional-plus.html">Professional Plus<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ps1.html">PS1<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/puraibashi-.html">プライバシー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/purokishibian-ji.html">プロキシ編集<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/python.html">Python<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/qian-ye.html">前夜<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/qing-bao-lou-xie-dui-ce.html">情報漏洩対策<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/qing-sao.html">清掃<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rag.html">RAG<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/raihuhatsuku.html">ライフハック<span class="count">5</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/raihurogu.html">ライフログ<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/raisensu.html">ライセンス<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/raiteingu.html">ライティング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ranningu.html">ランニング<span class="count">19</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ranningushiyu-zu.html">ランニングシューズ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rawxian-xiang.html">Raw現像<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/re-dui-ce.html">熱対策<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/re-guan-li.html">熱管理<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/re-surepo-to.html">レースレポート<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/re-zhong-zheng-dui-ce.html">熱中症対策<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rebiyu-.html">レビュー<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/reitore-shingu.html">レイトレーシング<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ren-bian-shen.html">忍変身<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ren-nai.html">忍耐<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ren-nochi-jiu-li.html">忍の持久力<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ren-nomei-xue.html">忍の美学<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ren-sheng-guan.html">人生観<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/retoroge-mu.html">レトロゲーム<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/retroarch.html">RetroArch<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rezisutori.html">レジストリ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ri-ji.html">日記<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rihuretsushiyure-to.html">リフレッシュレート<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rikabari-.html">リカバリー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rimo-towa-ku.html">リモートワーク<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ro-karuai.html">ローカルAI<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ro-karullm.html">ローカルLLM<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rong-yang-xue.html">栄養学<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ronguran.html">ロングラン<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rou-ti-gai-zao.html">肉体改造<span class="count">5</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/rtx-4070-ti-super.html">RTX 4070 Ti Super<span class="count">27</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ru-men.html">ルーメン<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ryzen.html">Ryzen<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ryzen-5-5500u.html">Ryzen 5 5500U<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ryzen-5-7430u.html">Ryzen 5 7430U<span class="count">12</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ryzen-7-7800x3d.html">Ryzen 7 7800X3D<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sabu2.html">サブ2<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sabu4.html">サブ4<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/samsung-990-pro.html">Samsung 990 PRO<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/san-bu.html">散歩<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sdxl.html">SDXL<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sekiyuritei.html">セキュリティ<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shan-luan-kagura.html">閃乱カグラ<span class="count">24</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/she-nu.html">蛇女<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shen-ye.html">深夜<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sheng-chan-xing.html">生産性<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sheng-chan-xing-xiang-shang.html">生産性向上<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sheng-cheng-ai.html">生成AI<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sheng-dian-li.html">省電力<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-ban.html">石版<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-du.html">湿度<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-jue-nobao-li.html">視覚の暴力<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-jue-ti-yan.html">視覚体験<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-nei-tore-ningu.html">室内トレーニング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-qi-dui-ce.html">湿気対策<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-shi-zhi-xian.html">食事制限<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-ting-ju-li.html">視聴距離<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shi-zou.html">試走<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shimiyure-shiyon.html">シミュレーション<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shinariokao-cha.html">シナリオ考察<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shiyo-tokatsuto.html">ショートカット<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/shu-re-shun-hua.html">暑熱順化<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sorohobi-.html">ソロホビー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ssdhuan-zhuang.html">SSD換装<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ssdzeng-she.html">SSD増設<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/stable-diffusion.html">Stable Diffusion<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/steam.html">Steam<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/suke-ringu.html">スケーリング<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sukuri-nshiyotsuto.html">スクリーンショット<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/supi-dolian-xi.html">スピード練習<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/supi-ka-.html">スピーカー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/sutore-ziguan-li.html">ストレージ管理<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/te-paringu.html">テーパリング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/teams.html">Teams<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/terebi.html">テレビ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/terewa-ku.html">テレワーク<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ti-gan-qiang-hua.html">体幹強化<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/toraburushiyu-teingu.html">トラブルシューティング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/toransuko-do.html">トランスコード<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/tore-ninguji-lu.html">トレーニング記録<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/tore-ninguli-lun.html">トレーニング理論<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ubuntu.html">Ubuntu<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/usb-c.html">USB-C<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/usb-chabu.html">USB-Cハブ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/vpn.html">VPN<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/vram.html">VRAM<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/vs-code.html">VS Code<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/vscode.html">VSCode<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wa-kuchiea.html">ワークチェア<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wai-chu-xian.html">外出先<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wan-jie.html">完結<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wan-zou.html">完走<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/webkamera.html">Webカメラ<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wei-lai.html">未来<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wei-xian-xing.html">危険性<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/windows.html">Windows<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/windows-11.html">Windows 11<span class="count">8</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/windows-hello.html">Windows Hello<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/windowsshe-ding.html">Windows設定<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wireguard.html">WireGuard<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wsl2.html">WSL2<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/wu-li-de-zhen-shi.html">物理的真実<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xia-zhi-du.html">夏支度<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xiao-lu-hua.html">効率化<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xie-zhen-bian-ji.html">写真編集<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xie-zhen-xian-xiang.html">写真現像<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xin-fei-qiang-hua.html">心肺強化<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xin-lai.html">信頼<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xin-lai-xing.html">信頼性<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xin-nozai-richu.html">心の在り処<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xin-pai-shu.html">心拍数<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xing-neng-bi-jiao.html">性能比較<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xiu-xi.html">休息<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/xiu-xi-ri.html">休息日<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ya-dao-de-mei-ru-gan.html">圧倒的没入感<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/yan-chu-lun.html">演出論<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/yao-tong-dui-ce.html">腰痛対策<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ye-wu-xiao-lu-hua.html">業務効率化<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/yi-shi.html">儀式<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/yin-le.html">音楽<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/yin-zhi-gai-shan.html">音質改善<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ying-hua-jian-shang.html">映画鑑賞<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/youtube.html">YouTube<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/yuan-feng-jing.html">原風景<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/yun-que.html">雲雀<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zai-qi.html">再起<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zebotsuto.html">ゼボット<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhen-rifan-ri.html">振り返り<span class="count">9</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhen-shi.html">真実<span class="count">61</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zheng-li-zheng-dun.html">整理整頓<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhi-bi.html">執筆<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhi-bi-huan-jing.html">執筆環境<span class="count">6</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhi-gan.html">質感<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhi-xing.html">知性<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhong-hua-pc.html">中華PC<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhou-bian-ji-qi.html">周辺機器<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhou-mo.html">週末<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhuang-bei-chietsuku.html">装備チェック<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zhun-bei.html">準備<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zi-dong-hua.html">自動化<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zi-ji-besuto.html">自己ベスト<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zi-ji-gai-shan.html">自己改善<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zi-ran.html">自然<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zi-zhai-sa-ba-.html">自宅サーバー<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zi-zhong-tore-ningu.html">自重トレーニング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zi-zuo-pc.html">自作PC<span class="count">44</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zong-gua.html">総括<span class="count">4</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zoom.html">Zoom<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zu-mili-te.html">組み立て<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zui-shi-hua.html">最適化<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zui-zhong-hui.html">最終回<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/zuo-ye-xiao-lu.html">作業効率<span class="count">1</span></a></li>
+								</ul>
+							</div>
+
+
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://github.com/ligfil-8110">GitHub</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="https://ligfil-8110.github.io/theme/js/jquery.js"></script>
+		<script src="https://ligfil-8110.github.io/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous.min.js"></script>
+		<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			// 記事一覧(index)ではなく、記事詳細ページ内の「本文」にある画像だけを選択
+			// テンプレートの構造に合わせて .entry-content や article 内を指定
+			var images = document.querySelectorAll("article .article-content img, article p img");
+			
+			if (images.length > 0 && typeof LuminousGallery !== 'undefined') {
+			new LuminousGallery(images, {}, {
+				sourceAttribute: 'src'
+			});
+			}
+
+			// --- コードコピー機能の追加 ---
+			const highlightBlocks = document.querySelectorAll('.highlight');
+			highlightBlocks.forEach((block) => {
+				// 言語名の取得
+				let langName = "";
+				const pre = block.querySelector('pre');
+				if (pre) {
+					// Pelican/Pygmentsは通常クラス名に言語を含める (例: .highlight .language-python)
+					const classList = block.className.split(' ');
+					classList.forEach(cls => {
+						if (cls !== 'highlight' && cls !== 'hll') {
+							langName = cls;
+						}
+					});
+					
+					// 見つからない場合は内部のspanタグなどから推測
+					if (!langName) {
+						const code = block.querySelector('code');
+						if (code && code.className) {
+							langName = code.className.replace('language-', '');
+						}
+					}
+				}
+
+				// 言語名表示ラベルの作成
+				if (langName) {
+					const langLabel = document.createElement('span');
+					langLabel.className = 'code-lang';
+					langLabel.innerText = langName;
+					block.appendChild(langLabel);
+				}
+
+				// コピーボタンの作成
+				const button = document.createElement('button');
+				button.className = 'copy-code-button';
+				button.type = 'button';
+				button.innerText = 'Copy';
+
+				// ボタンをブロックに追加
+				block.appendChild(button);
+
+				button.addEventListener('click', () => {
+					// code要素またはpre要素からテキストを取得
+					const codeText = block.querySelector('pre').innerText;
+					
+					navigator.clipboard.writeText(codeText).then(() => {
+						button.innerText = 'Copied!';
+						button.classList.add('copied');
+
+						setTimeout(() => {
+							button.innerText = 'Copy';
+							button.classList.remove('copied');
+						}, 2000);
+					}, (err) => {
+						console.error('Could not copy text: ', err);
+						button.innerText = 'Error';
+					});
+				});
+			});
+		});
+		</script>
+	</body>
+	<footer style="background: #333; color: #ccc; padding: 40px 0; margin-top: 50px;">
+		<div class="row">
+			<div class="medium-4 columns">
+				<h5 style="color: #fff;">みっちーのブログ</h5>
+				<p style="font-size: 0.8rem;">ゲームのこととかランニングのこととかをゆる～く書くブログ</p>
+			</div>
+	
+			<div class="medium-4 columns">
+				<h5 style="color: #fff;">Links</h5>
+				<ul style="list-style: none; margin: 0; font-size: 0.8rem;">
+					<li><a href="https://ligfil-8110.github.io/" style="color: #ccc;">Home</a></li>
+						<li><a href="https://ligfil-8110.github.io/pages/about.html" style="color: #ccc;">自己紹介</a></li>
+						<li><a href="https://ligfil-8110.github.io/pages/contact.html" style="color: #ccc;">お問い合わせ</a></li>
+						<li><a href="https://ligfil-8110.github.io/pages/privacy-policy.html" style="color: #ccc;">プライバシーポリシー</a></li>
+				</ul>
+			</div>
+	
+			<div class="medium-4 columns">
+				<h5 style="color: #fff;">Social</h5>
+				<ul style="list-style: none; margin: 0; font-size: 0.8rem;">
+						<li><a href="https://github.com/ligfil-8110" style="color: #ccc;">GitHub</a></li>
+				</ul>
+			</div>
+		</div>
+	
+		<div class="row" style="border-top: 1px solid #444; margin-top: 20px; padding-top: 20px;">
+			<div class="small-12 columns text-center">
+				<p style="font-size: 0.7rem; color: #888; margin-bottom: 5px;">
+					Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.
+				</p>
+				<div class="copyright-notice" style="font-size: 0.8rem; color: #666; line-height: 1.4;">
+					<p>このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。<br>
+					© ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX</p>
+				</div>
+				<ul class="inline-list">
+                <li><a href="https://ligfil-8110.github.io/pages/contact.html">お問い合わせ</a></li>
+                <li><a href="https://ligfil-8110.github.io/pages/privacy-policy.html">プライバシーポリシー</a></li>
+            	</ul>
+				<p style="font-size: 0.7rem;">&copy; 2026 みっちー. All rights reserved.</p>
+			</div>
+		</div>
+	</footer>
+</html>

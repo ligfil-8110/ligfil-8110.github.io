@@ -1,0 +1,488 @@
+.tag-cloud {
+	padding: 2px;
+	margin: 0;
+	margin-top: -0.25em;
+}
+
+.tag-cloud a {
+	padding: 0px;
+}
+
+.tag-cloud li {
+	display: inline;
+}
+
+.tag-cloud a.tag-1 {
+	font-size: 1.0em;
+	font-weight: 400;
+}
+
+.tag-cloud a.tag-2 {
+	font-size: 0.9em;
+	font-weight: 300;
+}
+
+.tag-cloud a.tag-3 {
+	font-size: 0.8em;
+	font-weight: 200;
+}
+
+.tag-cloud a.tag-4 {
+	font-size: 0.7em;
+	font-weight: 100;
+}
+
+.img-center {
+	width: 100%;
+	background: red;
+	border: 1px solid green;
+}
+
+.image-caption {
+	padding-top: 0.5em;
+	font-size: 0.7em;
+}
+
+.image-container {
+	padding-bottom: 1em;
+}
+
+.highlighttable {
+	background: #272822;
+	border: 1px solid #8f908a;
+	/* uncomment to center the code blocks */
+	/*margin-left: auto;
+	margin-right: auto;*/
+	width: 100%;
+}
+
+.linenos {
+	color: #8f908a;
+	border-right: 1px dotted #464741;
+}
+
+/* サイト全体の最大幅を1200pxに広げる（デフォルトは約1000px） */
+.row {
+    max-width: 75rem; /* 1200px相当 */
+}
+
+.panel h5 {
+	border-bottom: 2px solid;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 0.25em;
+}
+
+.side-nav {
+	margin: 0;
+	padding: 0;
+}
+
+.side-nav li {
+	margin: 0;
+	padding: 0;
+}
+
+.side-nav a {
+	color: black;
+}
+
+.side-nav li a:before {
+	content: "- ";
+}
+
+code {
+	color: #222222;
+	background: #f8f8f8;
+	border: 1px solid #dddddd;
+	margin: 0 2px;
+	padding: 0 5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-weight: normal;
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+p {
+	text-align: justify;
+}
+
+.continue {
+	width: 100%;
+	text-align: right;
+}
+
+.archive-year {
+	border-top: 1px solid;
+}
+
+.archive-entry {
+	border-top: 1px dotted;
+}
+
+/* 1. 全体の背景を薄いグレーに設定 */
+body {
+    background-color: #f2f2f2 !important;
+}
+
+/* 2. 記事部分を白い角丸カードにする（特定した要素へ適用） */
+.medium-9.columns article {
+    background-color: #ffffff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
+    margin-bottom: 40px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+    display: block !important;
+}
+
+/* 3. サイドバーのパネルも白い角丸カードにする */
+.medium-3.columns .panel {
+    background-color: #ffffff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+}
+
+/* 4. タイトルのデザイン（青色・太字） */
+.medium-9.columns article h2, 
+.medium-9.columns article h2 a {
+    color: #008cba !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    margin-top: 0 !important;
+}
+
+/* 5. タイトルの下に区切り線を入れる（article内の最初の見出しの下に適用） */
+/* 記事の中で一番最初に出てくる h2 をタイトルとして装飾 */
+.medium-9.columns article h2:first-of-type {
+    font-size: 2.2rem !important;      /* タイトルは最大サイズ */
+    color: #008cba !important;         /* 鮮やかな青 */
+    border-bottom: 3px solid #008cba !important; /* 太い下線で目立たせる */
+    padding-bottom: 10px !important;
+    margin-bottom: 30px !important;
+    border-left: none !important;      /* タイトルには左線は不要 */
+    background: transparent !important; /* 背景色もなし */
+}
+
+/* 2. Markdownで書いた「##（見出し2）」のデザイン */
+/* 2番目以降に出現する h2 を「節の見出し」として装飾 */
+.medium-9.columns article h2:not(:first-of-type) {
+    font-size: 1.5rem !important;      /* タイトルより一回り小さく */
+    color: #333 !important;            /* 落ち着いた黒 */
+    border-left: 6px solid #008cba !important; /* 左側にアクセントの縦棒 */
+    padding: 8px 15px !important;      /* 縦棒との余白 */
+    background: #f9f9f9 !important;    /* 薄いグレーの背景で区切りを明確に */
+    border-bottom: none !important;    /* 下線は消す */
+    margin-top: 40px !important;       /* 上の文章との間隔を広く */
+}
+
+/* 6. 記事内の画像も角丸にする */
+.medium-9.columns article img {
+    border-radius: 8px !important;
+    margin: 10px 0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important; /* 画像を少し浮かせるおまけ */
+}
+/* 親要素（aタグ）の設定 */
+.side-nav li a {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    justify-content: flex-start !important; /* 基本は左詰め */
+}
+
+/* 数字（.count）がある場合、その数字だけを右に飛ばす */
+.side-nav li a span.count {
+    margin-left: auto !important; /* 数字だけが右へ移動する */
+    
+    /* デザイン装飾 */
+    background: #e1e1e1 !important;
+    color: #666 !important;
+    font-size: 0.7rem !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+    flex-shrink: 0 !important;
+}
+
+/* ホバー時のバッジ色変化 */
+.side-nav li a:hover span.count {
+    background: #008cba !important;
+    color: #fff !important;
+}
+/* ヘッダーとボディの間に隙間を作る */
+.main-section {
+    margin-top: 20px !important; /* 隙間の大きさ。お好みで 30px などに調整してください */
+}
+
+/* スマホ表示でもバランスを保つための微調整 */
+@media only screen and (max-width: 40em) {
+    .main-section {
+        margin-top: 15px !important;
+    }
+}
+
+/* モバイルメニュー内の数字を右寄せにする */
+.off-canvas-list li a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+.off-canvas-list li a span.count {
+    margin-left: auto !important; /* これで右端へ */
+    background: rgba(255, 255, 255, 0.1) !important; /* 薄白い背景 */
+    color: #ccc !important;
+    font-size: 0.7rem !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+}
+
+/* 一覧画面のサムネイル（アイキャッチ）を整える */
+.index-thumbnail {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+/* モバイル表示では高さを自動調整 */
+@media only screen and (max-width: 40em) {
+    .index-thumbnail {
+        height: auto;
+    }
+}
+
+/* 記事詳細ページ（article.html）の画像スタイル */
+.article-eyecatch {
+    margin: 20px 0 30px 0; /* 上下に余白を作る */
+    text-align: center;
+}
+
+.article-eyecatch img {
+    width: 100%;           /* 横幅いっぱい */
+    max-height: 450px;     /* 縦に長くなりすぎないよう制限 */
+    object-fit: cover;     /* 指定サイズ内で綺麗に切り抜き */
+    border-radius: 8px;    /* 角を少し丸くして柔らかい印象に */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 軽い影で高級感を出す */
+}
+
+/* 記事一覧のタイトルサイズを調整 */
+article h3 {
+    font-size: 1.5rem; /* デフォルトより一回り小さく設定 */
+    line-height: 1.3;
+    margin-top: 0;      /* 画像との高さを合わせやすくする */
+    margin-bottom: 10px;
+}
+
+/* タイトルリンクのホバー時の色（お好みで） */
+article h3 a:hover {
+    color: #008cba; /* Foundation of the standard blue */
+}
+
+/* モバイル表示ではもう少し小さくして収まりを良くする */
+@media only screen and (max-width: 40em) {
+    article h3 {
+        font-size: 1.25rem;
+    }
+}
+
+article h6 {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* 記事ナビゲーションボタンのスタイル */
+.post-navigation .button {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ddd;
+    width: 100%; /* モバイルでも押しやすく */
+    transition: all 0.3s;
+}
+
+.post-navigation .button:hover {
+    background-color: #eee;
+    color: #000;
+    border-color: #bbb;
+}
+
+/* 記事タイトルが長すぎて崩れないようにする */
+.post-navigation span {
+    display: block;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 記事内の画像をクリック可能に見せる */
+article p img {
+    cursor: zoom-in;
+    transition: opacity 0.3s;
+}
+
+article p img:hover {
+    opacity: 0.9;
+}
+
+/* 記事一覧の画像は通常のポインタにする */
+.index-thumbnail, a img {
+    cursor: pointer;
+}
+
+/* --- コードブロックの装飾 (Standard Editor Style) --- */
+.highlight {
+    position: relative !important;
+    margin: 2em 0 !important;
+    border-radius: 6px !important; /* 角丸を少し控えめに */
+    overflow: hidden !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    background-color: #1e1e1e !important; /* VS Code Default Dark Background */
+    border: 1px solid #333 !important;
+}
+
+/* コードブロック上部のヘッダーバー (シンプルに) */
+.highlight::before {
+    content: "" !important;
+    display: block !important;
+    height: 36px !important;
+    background: #252526 !important; /* Header background */
+    width: 100% !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+/* Mac風の3色ボタンは削除 */
+.highlight::after {
+    display: none !important;
+}
+
+/* 言語名の表示ラベル */
+.highlight .code-lang {
+    position: absolute !important;
+    top: 0 !important;
+    left: 15px !important; /* 左寄せに変更 */
+    transform: none !important;
+    line-height: 36px !important;
+    color: #cccccc !important;
+    font-size: 0.85rem !important;
+    font-weight: bold !important;
+    font-family: 'Consolas', 'Monaco', monospace !important;
+    text-transform: capitalize !important; /* 大文字変換をやめる */
+    z-index: 5 !important;
+}
+
+.highlight pre {
+    margin: 0 !important;
+    padding: 1.2em 1.5em !important;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    background-color: transparent !important;
+    color: #d4d4d4 !important; /* Standard Editor Text Color (Light Gray/White) */
+    overflow-x: auto !important;
+    border: none !important;
+}
+
+/* コードブロック内の code タグの背景をリセット (マーカー除去) */
+.highlight code {
+    background-color: transparent !important;
+    color: inherit !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+}
+
+/* コピーボタンの視認性向上 */
+button.copy-code-button {
+    position: absolute !important;
+    top: 4px !important;
+    right: 8px !important;
+    width: auto !important;
+    height: 28px !important;
+    padding: 0 16px !important;
+    background-color: #0e639c !important; /* VS Code Blue */
+    color: #ffffff !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    line-height: 26px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    z-index: 10 !important;
+    display: block !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+}
+
+button.copy-code-button:hover {
+    background-color: #1177bb !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    transform: translateY(-1px) !important;
+}
+
+button.copy-code-button:active {
+    transform: translateY(1px) !important;
+    box-shadow: none !important;
+}
+
+button.copy-code-button.copied {
+    background-color: #4ec9b0 !important; /* Success Green-Blue */
+    color: #1e1e1e !important;
+    border-color: transparent !important;
+}
+
+/* シンタックスハイライトの色調整 (VS Code Dark風) */
+/* 通常のテキストは pre の color で指定済み */
+
+/* コメント (緑色) */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs { 
+    color: #6a9955 !important; 
+    font-style: italic !important;
+}
+
+/* キーワード (青/ピンク) */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt { 
+    color: #569cd6 !important; 
+}
+
+/* 文字列 (オレンジ/茶色) */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .ss { 
+    color: #ce9178 !important; 
+}
+
+/* 関数名 (黄色) */
+.highlight .nf, .highlight .fm { 
+    color: #dcdcaa !important; 
+}
+
+/* クラス名 (緑青色) */
+.highlight .nc, .highlight .vc, .highlight .nd { 
+    color: #4ec9b0 !important; 
+}
+
+/* 変数・属性 (水色) */
+.highlight .nv, .highlight .na, .highlight .no { 
+    color: #9cdcfe !important; 
+}
+
+/* 数値 (薄緑) */
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo { 
+    color: #b5cea8 !important; 
+}
+
+/* 演算子・区切り文字 (白/グレー) */
+.highlight .o, .highlight .ow, .highlight .p { 
+    color: #d4d4d4 !important; 
+}
+
+/* マーカー(ハイライト背景)を無効化し、文字色のみにする */
+.highlight .hll { 
+    background-color: transparent !important; 
+    border: 1px solid #d4d4d4 !important; /* 枠線で強調するなど、控えめな表現に変更 */
+}

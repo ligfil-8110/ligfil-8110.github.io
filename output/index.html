@@ -1,49 +1,623 @@
-<!DOCTYPE html>
-<html lang="japanese">
-        <head>
-                        <meta charset="utf-8" />
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                        <meta name="generator" content="Pelican" />
-                        <title>My Game Blog</title>
-                        <link rel="stylesheet" href="/theme/css/main.css" />
-        </head>
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <body id="index" class="home">
-                <header id="banner" class="body">
-                        <h1><a href="/">My Game Blog</a></h1>
-                        <nav><ul>
-                        </ul></nav>
-                </header><!-- /#banner -->
-        <section id="content" class="body">
-                <p>This site currently has no content.</p>
-        </section>
-                <section id="extras" class="body">
-                                <div class="blogroll">
-                                        <h2>links</h2>
-                                        <ul>
-                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
-                                                        <li><a href="https://www.python.org/">Python.org</a></li>
-                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
-                                                        <li><a href="#">You can modify those links in your config file</a></li>
-                                        </ul>
-                                </div><!-- /.blogroll -->
-                                <div class="social">
-                                        <h2>social</h2>
-                                        <ul>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-JDKE8JVXLC"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-JDKE8JVXLC');
+		</script>
+		<title>みっちーのブログ</title>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8290235019998561" crossorigin="anonymous"></script>
+		<meta name="description" content="">
+		<meta name="author" content="みっちー">
+		<meta property="og:site_name" content="みっちーのブログ">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="みっちーのブログ">
+		<meta property="og:url" content="https://ligfil-8110.github.io/">
+		<meta property="og:description" content="みっちーのブログのトップページです">
 
-                                                        <li><a href="#">You can add links in your config file</a></li>
-                                                        <li><a href="#">Another social link</a></li>
-                                        </ul>
-                                </div><!-- /.social -->
-                </section><!-- /#extras -->
+		<meta property="og:image" content="https://ligfil-8110.github.io/theme/images/ogp-default.jpg">
+		<meta name="twitter:card" content="summary">
 
-                <footer id="contentinfo" class="body">
-                        <address id="about" class="vcard body">
-                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-                        </address><!-- /#about -->
+		<meta name="twitter:title" content="みっちーのブログ">
+		<meta name="twitter:description" content="みっちーのブログのトップページです">
 
-                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-                </footer><!-- /#contentinfo -->
+		<link rel="stylesheet" href="https://ligfil-8110.github.io/theme/css/foundation.css" />
+		<link rel="stylesheet" href="https://ligfil-8110.github.io/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="https://ligfil-8110.github.io/theme/css/custom.css" />
 
-        </body>
+
+		<script src="https://ligfil-8110.github.io/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
+
+
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous-basic.min.css">
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">みっちーのブログ</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="https://ligfil-8110.github.io">Home</a></li>
+						
+						<li><label>Categories</label></li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ge-mu.html">ゲーム <span class="count">15</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/goai-zan.html">ご挨拶 <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ji-shu-memo.html">技術メモ <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ozhi-rase.html">お知らせ <span class="count">1</span></a>
+							</li>
+							<li >
+								<a href="https://ligfil-8110.github.io/category/ri-ji.html">日記 <span class="count">7</span></a>
+							</li>
+				
+						<li><label>Links</label></li>
+							<li><a href="https://www.google.com/">Google</a></li>
+							<li><a href="https://www.nintendo.co.jp/">任天堂公式サイト</a></li>
+							<li><a href="https://runnet.jp/smp/">RUNNET</a></li>
+				
+						<li><label>Tags</label></li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/autoretsuto.html">アウトレット <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/chuwi.html">CHUWI <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/corebook-x.html">CoreBook X <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/dorakue.html">ドラクエ <span class="count">19</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gazietsuto.html">ガジェット <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/gurume.html">グルメ <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/makudonarudo.html">マクドナルド <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/nintendo-switch.html">Nintendo Switch <span class="count">16</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/oxiu-mi.html">お休み <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pc.html">PC <span class="count">2</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/pelican.html">Pelican <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ranningu.html">ランニング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/ri-ji.html">日記 <span class="count">3</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/toraburushiyu-teingu.html">トラブルシューティング <span class="count">1</span></a>
+							</li>
+							<li>
+								<a href="https://ligfil-8110.github.io/tag/windows.html">Windows <span class="count">1</span></a>
+							</li>
+				
+				
+						<li><label>Social</label></li>
+							<li><a href="https://github.com/ligfil-8110">GitHub</a></li>
+					</ul>   
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="https://ligfil-8110.github.io/">みっちーのブログ</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+									<li ><a href="https://ligfil-8110.github.io/pages/about.html">自己紹介</a></li>
+									<li ><a href="https://ligfil-8110.github.io/pages/contact.html">お問い合わせ</a></li>
+									<li ><a href="https://ligfil-8110.github.io/pages/privacy-policy.html">プライバシーポリシー</a></li>
+					
+						</ul>
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+
+<article style="margin-bottom: 40px;">
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <a href="https://ligfil-8110.github.io/sinyoutorihiki.html">
+                    <img src="https://ligfil-8110.github.io/images/default-eyecatch.jpg" alt="Default Image" class="index-thumbnail">
+            </a>
+        </div>
+
+        <div class="small-12 medium-8 columns">
+            <h3 style="margin-top: 0;"><a href="https://ligfil-8110.github.io/sinyoutorihiki.html" style="color: #333; text-decoration: none;">久々のブログ執筆です！！</a></h3>
+            
+            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📁 <a href="https://ligfil-8110.github.io/category/goai-zan.html">ご挨拶</a></span>
+                <span>📅 土 27 6月 2026</span>
+            </div>
+
+            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
+                久々のブログ更新です！！これから不定期でも有用な情報をお届けできるように頑張ります！
+            </div>
+
+            <div class="tags" style="margin-top: 10px;">
+                    <a href="https://ligfil-8110.github.io/tag/ri-ji.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#日記</a>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="https://ligfil-8110.github.io/sinyoutorihiki.html" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+<hr />
+<article style="margin-bottom: 40px;">
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <a href="https://ligfil-8110.github.io/chuwi-corebook-x-os-reinstall.html">
+                    <img src="https://ligfil-8110.github.io/images/default-eyecatch.jpg" alt="Default Image" class="index-thumbnail">
+            </a>
+        </div>
+
+        <div class="small-12 medium-8 columns">
+            <h3 style="margin-top: 0;"><a href="https://ligfil-8110.github.io/chuwi-corebook-x-os-reinstall.html" style="color: #333; text-decoration: none;">CHUWI CoreBook XのOS再インストール方法と注意点</a></h3>
+            
+            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📁 <a href="https://ligfil-8110.github.io/category/ji-shu-memo.html">技術メモ</a></span>
+                <span>📅 木 12 2月 2026</span>
+            </div>
+
+            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
+                CHUWI CoreBook XのOSリカバリ（再インストール）を行いました。USBメモリの作成時に重要な注意点（WINPEラベル）があったので備忘録として残します。
+            </div>
+
+            <div class="tags" style="margin-top: 10px;">
+                    <a href="https://ligfil-8110.github.io/tag/pc.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#PC</a>
+                    <a href="https://ligfil-8110.github.io/tag/chuwi.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#CHUWI</a>
+                    <a href="https://ligfil-8110.github.io/tag/corebook-x.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#CoreBook X</a>
+                    <a href="https://ligfil-8110.github.io/tag/windows.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#Windows</a>
+                    <a href="https://ligfil-8110.github.io/tag/toraburushiyu-teingu.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#トラブルシューティング</a>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="https://ligfil-8110.github.io/chuwi-corebook-x-os-reinstall.html" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+<hr />
+<article style="margin-bottom: 40px;">
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <a href="https://ligfil-8110.github.io/chuwi-corebook-x-review.html">
+                    <img src="https://ligfil-8110.github.io/images/default-eyecatch.jpg" alt="Default Image" class="index-thumbnail">
+            </a>
+        </div>
+
+        <div class="small-12 medium-8 columns">
+            <h3 style="margin-top: 0;"><a href="https://ligfil-8110.github.io/chuwi-corebook-x-review.html" style="color: #333; text-decoration: none;">CHUWI CoreBook Xを買いました！</a></h3>
+            
+            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📁 <a href="https://ligfil-8110.github.io/category/ri-ji.html">日記</a></span>
+                <span>📅 水 11 2月 2026</span>
+            </div>
+
+            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
+                新しいノートパソコン、CHUWI CoreBook Xを買いました！開封の儀をお届けします。
+            </div>
+
+            <div class="tags" style="margin-top: 10px;">
+                    <a href="https://ligfil-8110.github.io/tag/pc.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#PC</a>
+                    <a href="https://ligfil-8110.github.io/tag/gazietsuto.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#ガジェット</a>
+                    <a href="https://ligfil-8110.github.io/tag/chuwi.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#CHUWI</a>
+                    <a href="https://ligfil-8110.github.io/tag/corebook-x.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#CoreBook X</a>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="https://ligfil-8110.github.io/chuwi-corebook-x-review.html" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+<hr />
+<article style="margin-bottom: 40px;">
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <a href="https://ligfil-8110.github.io/dq7-re-full-review.html">
+                    <img src="https://ligfil-8110.github.io/images/dq-viire-20260114-8.jpg" alt="ドラクエ7リメイクがボリューム満点で最高に面白かった！100時間遊べる神ゲーレビュー" class="index-thumbnail">
+            </a>
+        </div>
+
+        <div class="small-12 medium-8 columns">
+            <h3 style="margin-top: 0;"><a href="https://ligfil-8110.github.io/dq7-re-full-review.html" style="color: #333; text-decoration: none;">ドラクエ7リメイクがボリューム満点で最高に面白かった！100時間遊べる神ゲーレビュー</a></h3>
+            
+            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📁 <a href="https://ligfil-8110.github.io/category/ge-mu.html">ゲーム</a></span>
+                <span>📅 月 09 2月 2026</span>
+            </div>
+
+            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
+                1週間、寝食を忘れて没頭した『ドラゴンクエストVII Reimagined』！ついに一段落ついたので、その圧倒的なボリュームと魅力を徹底レビュー！
+            </div>
+
+            <div class="tags" style="margin-top: 10px;">
+                    <a href="https://ligfil-8110.github.io/tag/dorakue.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#ドラクエ</a>
+                    <a href="https://ligfil-8110.github.io/tag/nintendo-switch.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#Nintendo Switch</a>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="https://ligfil-8110.github.io/dq7-re-full-review.html" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+<hr />
+<article style="margin-bottom: 40px;">
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <a href="https://ligfil-8110.github.io/dq7-re-hell-armor-farming.html">
+                    <img src="https://ligfil-8110.github.io/images/dq-viire-20260114-8.jpg" alt="ドラクエ7リメイク攻略：じごくのよろいのレアドロップ狙いはここ！おすすめのイズライール出現場所を紹介" class="index-thumbnail">
+            </a>
+        </div>
+
+        <div class="small-12 medium-8 columns">
+            <h3 style="margin-top: 0;"><a href="https://ligfil-8110.github.io/dq7-re-hell-armor-farming.html" style="color: #333; text-decoration: none;">ドラクエ7リメイク攻略：じごくのよろいのレアドロップ狙いはここ！おすすめのイズライール出現場所を紹介</a></h3>
+            
+            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📁 <a href="https://ligfil-8110.github.io/category/ge-mu.html">ゲーム</a></span>
+                <span>📅 日 08 2月 2026</span>
+            </div>
+
+            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
+                ドラクエ7リメイクでの「じごくのよろい」のレアドロップ狙い、効率的な狩り場を見つけました！地底ピラミッドB2Fが最高におすすめです。
+            </div>
+
+            <div class="tags" style="margin-top: 10px;">
+                    <a href="https://ligfil-8110.github.io/tag/dorakue.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#ドラクエ</a>
+                    <a href="https://ligfil-8110.github.io/tag/nintendo-switch.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#Nintendo Switch</a>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="https://ligfil-8110.github.io/dq7-re-hell-armor-farming.html" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+<hr />
+<article style="margin-bottom: 40px;">
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <a href="https://ligfil-8110.github.io/dq-excuse-20260207.html">
+                    <img src="https://ligfil-8110.github.io/images/dq-viire-20260114-8.jpg" alt="1週間ブログサボってました…ドラクエ7が発売されてずっとやってました！！" class="index-thumbnail">
+            </a>
+        </div>
+
+        <div class="small-12 medium-8 columns">
+            <h3 style="margin-top: 0;"><a href="https://ligfil-8110.github.io/dq-excuse-20260207.html" style="color: #333; text-decoration: none;">1週間ブログサボってました…ドラクエ7が発売されてずっとやってました！！</a></h3>
+            
+            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📁 <a href="https://ligfil-8110.github.io/category/ri-ji.html">日記</a></span>
+                <span>📅 土 07 2月 2026</span>
+            </div>
+
+            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
+                1週間ブログ更新が止まっていてごめんなさい！ドラクエ7製品版に没頭し、実績フルコンプまでやり込んでいました。明日は感想ブログ書きます！
+            </div>
+
+            <div class="tags" style="margin-top: 10px;">
+                    <a href="https://ligfil-8110.github.io/tag/dorakue.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#ドラクエ</a>
+                    <a href="https://ligfil-8110.github.io/tag/nintendo-switch.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#Nintendo Switch</a>
+                    <a href="https://ligfil-8110.github.io/tag/ri-ji.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#日記</a>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="https://ligfil-8110.github.io/dq-excuse-20260207.html" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+<hr />
+<article style="margin-bottom: 40px;">
+    <div class="row">
+        <div class="small-12 medium-4 columns">
+            <a href="https://ligfil-8110.github.io/dragon-quest-vii-play-0201-east-tower.html">
+                    <img src="https://ligfil-8110.github.io/images/dq-viire-20260114-8.jpg" alt="ドラクエ7リメイクプレイ日記　東の塔の決戦、そして…哀しき別れ" class="index-thumbnail">
+            </a>
+        </div>
+
+        <div class="small-12 medium-8 columns">
+            <h3 style="margin-top: 0;"><a href="https://ligfil-8110.github.io/dragon-quest-vii-play-0201-east-tower.html" style="color: #333; text-decoration: none;">ドラクエ7リメイクプレイ日記　東の塔の決戦、そして…哀しき別れ</a></h3>
+            
+            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📁 <a href="https://ligfil-8110.github.io/category/ge-mu.html">ゲーム</a></span>
+                <span>📅 日 01 2月 2026</span>
+            </div>
+
+            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
+                今日は昨日の続き、東の塔の攻略からウッドパルナ編の完結までをお届けします！画像200枚超えの超特大ボリュームです！
+            </div>
+
+            <div class="tags" style="margin-top: 10px;">
+                    <a href="https://ligfil-8110.github.io/tag/dorakue.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#ドラクエ</a>
+                    <a href="https://ligfil-8110.github.io/tag/nintendo-switch.html" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#Nintendo Switch</a>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="https://ligfil-8110.github.io/dragon-quest-vii-play-0201-east-tower.html" class="button tiny radius secondary" style="margin-bottom: 0;">
+                    続きを読む »
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+<hr />
+
+<div class="row">
+	<div class="small-12 columns text-center">
+		<div class="pagination-centered">
+			<ul class="pagination">
+				<li class="arrow unavailable"><a href="#">&larr; Previous</a></li>
+				<li class="current"><a href="https://ligfil-8110.github.io/index.html">1</a></li>
+				<li class=""><a href="https://ligfil-8110.github.io/index2.html">2</a></li>
+				<li class=""><a href="https://ligfil-8110.github.io/index3.html">3</a></li>
+				<li class=""><a href="https://ligfil-8110.github.io/index4.html">4</a></li>
+				<li class="arrow"><a href="https://ligfil-8110.github.io/index2.html">Next &rarr;</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">Google</a></li>
+									<li><a href="https://www.nintendo.co.jp/" target="_blank" rel="noopener noreferrer">任天堂公式サイト</a></li>
+									<li><a href="https://runnet.jp/smp/" target="_blank" rel="noopener noreferrer">RUNNET</a></li>
+									<li style="list-style: none; text-align: center; margin-top: 20px; padding: 0;">
+										<div style="display: inline-block;">
+											<a href="//af.moshimo.com/af/c/click?a_id=5345202&p_id=54&pc_id=54&pl_id=1235" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" attributionsrc>
+												<img src="//image.moshimo.com/af-img/0032/000000001235.gif" width="120" height="120" style="border:none; display: block; margin: 0 auto;">
+											</a>
+											<img src="//i.moshimo.com/af/i/impression?a_id=5345202&p_id=54&pc_id=54&pl_id=1235" width="1" height="1" style="border:none;" loading="lazy">
+										</div>
+									</li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Categories</h5>
+								<ul class="side-nav">
+										<li ><a href="https://ligfil-8110.github.io/category/ge-mu.html">ゲーム<span class="count">15</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/goai-zan.html">ご挨拶<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ji-shu-memo.html">技術メモ<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ozhi-rase.html">お知らせ<span class="count">1</span></a></li>
+										<li ><a href="https://ligfil-8110.github.io/category/ri-ji.html">日記<span class="count">7</span></a></li>
+								</ul>
+							</div>
+
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="side-nav"> 										<li><a href="https://ligfil-8110.github.io/tag/autoretsuto.html">アウトレット<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/chuwi.html">CHUWI<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/corebook-x.html">CoreBook X<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/dorakue.html">ドラクエ<span class="count">19</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gazietsuto.html">ガジェット<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/gurume.html">グルメ<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/makudonarudo.html">マクドナルド<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/nintendo-switch.html">Nintendo Switch<span class="count">16</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/oxiu-mi.html">お休み<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pc.html">PC<span class="count">2</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/pelican.html">Pelican<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ranningu.html">ランニング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/ri-ji.html">日記<span class="count">3</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/toraburushiyu-teingu.html">トラブルシューティング<span class="count">1</span></a></li>
+										<li><a href="https://ligfil-8110.github.io/tag/windows.html">Windows<span class="count">1</span></a></li>
+								</ul>
+							</div>
+
+
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="https://github.com/ligfil-8110">GitHub</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
+
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="https://ligfil-8110.github.io/theme/js/jquery.js"></script>
+		<script src="https://ligfil-8110.github.io/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous.min.js"></script>
+		<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			// 記事一覧(index)ではなく、記事詳細ページ内の「本文」にある画像だけを選択
+			// テンプレートの構造に合わせて .entry-content や article 内を指定
+			var images = document.querySelectorAll("article .article-content img, article p img");
+			
+			if (images.length > 0 && typeof LuminousGallery !== 'undefined') {
+			new LuminousGallery(images, {}, {
+				sourceAttribute: 'src'
+			});
+			}
+
+			// --- コードコピー機能の追加 ---
+			const highlightBlocks = document.querySelectorAll('.highlight');
+			highlightBlocks.forEach((block) => {
+				// 言語名の取得
+				let langName = "";
+				const pre = block.querySelector('pre');
+				if (pre) {
+					// Pelican/Pygmentsは通常クラス名に言語を含める (例: .highlight .language-python)
+					const classList = block.className.split(' ');
+					classList.forEach(cls => {
+						if (cls !== 'highlight' && cls !== 'hll') {
+							langName = cls;
+						}
+					});
+					
+					// 見つからない場合は内部のspanタグなどから推測
+					if (!langName) {
+						const code = block.querySelector('code');
+						if (code && code.className) {
+							langName = code.className.replace('language-', '');
+						}
+					}
+				}
+
+				// 言語名表示ラベルの作成
+				if (langName) {
+					const langLabel = document.createElement('span');
+					langLabel.className = 'code-lang';
+					langLabel.innerText = langName;
+					block.appendChild(langLabel);
+				}
+
+				// コピーボタンの作成
+				const button = document.createElement('button');
+				button.className = 'copy-code-button';
+				button.type = 'button';
+				button.innerText = 'Copy';
+
+				// ボタンをブロックに追加
+				block.appendChild(button);
+
+				button.addEventListener('click', () => {
+					// code要素またはpre要素からテキストを取得
+					const codeText = block.querySelector('pre').innerText;
+					
+					navigator.clipboard.writeText(codeText).then(() => {
+						button.innerText = 'Copied!';
+						button.classList.add('copied');
+
+						setTimeout(() => {
+							button.innerText = 'Copy';
+							button.classList.remove('copied');
+						}, 2000);
+					}, (err) => {
+						console.error('Could not copy text: ', err);
+						button.innerText = 'Error';
+					});
+				});
+			});
+		});
+		</script>
+	</body>
+	<footer style="background: #333; color: #ccc; padding: 40px 0; margin-top: 50px;">
+		<div class="row">
+			<div class="medium-4 columns">
+				<h5 style="color: #fff;">みっちーのブログ</h5>
+				<p style="font-size: 0.8rem;">ゲームのこととかランニングのこととかをゆる～く書くブログ</p>
+			</div>
+	
+			<div class="medium-4 columns">
+				<h5 style="color: #fff;">Links</h5>
+				<ul style="list-style: none; margin: 0; font-size: 0.8rem;">
+					<li><a href="https://ligfil-8110.github.io/" style="color: #ccc;">Home</a></li>
+						<li><a href="https://ligfil-8110.github.io/pages/about.html" style="color: #ccc;">自己紹介</a></li>
+						<li><a href="https://ligfil-8110.github.io/pages/contact.html" style="color: #ccc;">お問い合わせ</a></li>
+						<li><a href="https://ligfil-8110.github.io/pages/privacy-policy.html" style="color: #ccc;">プライバシーポリシー</a></li>
+				</ul>
+			</div>
+	
+			<div class="medium-4 columns">
+				<h5 style="color: #fff;">Social</h5>
+				<ul style="list-style: none; margin: 0; font-size: 0.8rem;">
+						<li><a href="https://github.com/ligfil-8110" style="color: #ccc;">GitHub</a></li>
+				</ul>
+			</div>
+		</div>
+	
+		<div class="row" style="border-top: 1px solid #444; margin-top: 20px; padding-top: 20px;">
+			<div class="small-12 columns text-center">
+				<p style="font-size: 0.7rem; color: #888; margin-bottom: 5px;">
+					Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.
+				</p>
+				<div class="copyright-notice" style="font-size: 0.8rem; color: #666; line-height: 1.4;">
+					<p>このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。<br>
+					© ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX</p>
+				</div>
+				<ul class="inline-list">
+                <li><a href="https://ligfil-8110.github.io/pages/contact.html">お問い合わせ</a></li>
+                <li><a href="https://ligfil-8110.github.io/pages/privacy-policy.html">プライバシーポリシー</a></li>
+            	</ul>
+				<p style="font-size: 0.7rem;">&copy; 2026 みっちー. All rights reserved.</p>
+			</div>
+		</div>
+	</footer>
 </html>
