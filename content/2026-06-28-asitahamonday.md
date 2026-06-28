@@ -1,8 +1,8 @@
 Title: 明日が怖い…イランと米国の戦争再開…
-Date: 2026-06-27 18:30
-Category: ご挨拶
-Tags: 日記
-Slug: sinyoutorihiki
+Date: 2026-06-28 18:30
+Category: 投資活動
+Tags: 投資
+Slug: kowai-sensou
 Summary: 明日の株式市場はどうなってしまうのでしょうか？もう怖くて寝られません！
 
 ## はじめに
