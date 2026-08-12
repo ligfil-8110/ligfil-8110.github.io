@@ -23,7 +23,7 @@ jobs:
         run: |
           # exiftool をインストール
           sudo apt-get update && sudo apt-get install -y exiftool
-          pip install pelican markdown pelican-neighbors pelican-sitemap Pygments
+          pip install pelican markdown pelican-neighbors pelican-sitemap Pygments Pillow
 
       - name: Remove Exif metadata
         run: |
@@ -32,7 +32,8 @@ jobs:
 
       - name: Build site
         run: |
-          pelican content -o output -s pelicanconf.py
+          python scripts/prepare_build_content.py content .build-content
+          pelican .build-content -o output -s pelicanconf.py
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

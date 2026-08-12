@@ -1,6 +1,8 @@
 AUTHOR = 'みっちー'
 SITENAME = 'みっちーのブログ'
 SITEURL = "https://ligfil-8110.github.io"
+SITE_DESCRIPTION = 'ゲーム、ランニング、PC、日々の気づきを自分の言葉で記録するブログです。'
+GOOGLE_ANALYTICS_ID = 'G-JDKE8JVXLC'
 
 PATH = "content"
 

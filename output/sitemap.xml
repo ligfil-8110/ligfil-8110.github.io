@@ -6,7 +6,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ligfil-8110.github.io/</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -20,98 +20,112 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ligfil-8110.github.io/archives.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/author/mitsuchi-.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/author/mitsuchi-2.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/author/mitsuchi-3.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/author/mitsuchi-4.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/authors.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
+<loc>https://ligfil-8110.github.io/blog-restart-2026-08.html</loc>
+<lastmod>2026-08-12T18:30:00+09:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
 <loc>https://ligfil-8110.github.io/categories.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/category/ge-mu.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/category/ge-mu2.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/category/ge-mu3.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/category/goai-zan.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/category/ji-shu-memo.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/category/ozhi-rase.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/category/ri-ji.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ligfil-8110.github.io/category/tou-zi-huo-dong.html</loc>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -265,23 +279,30 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ligfil-8110.github.io/index2.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/index3.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/index4.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ligfil-8110.github.io/kowai-sensou.html</loc>
+<lastmod>2026-06-28T18:30:00+09:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -328,140 +349,154 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/autoretsuto.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ligfil-8110.github.io/tag/burogu.html</loc>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/chuwi.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/corebook-x.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/dorakue.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/dorakue2.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/dorakue3.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/gazietsuto.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/gurume.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/makudonarudo.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/nintendo-switch.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/nintendo-switch2.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/nintendo-switch3.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/oxiu-mi.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/pc.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/pelican.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/ranningu.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/ri-ji.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/toraburushiyu-teingu.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ligfil-8110.github.io/tag/tou-zi.html</loc>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tag/windows.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ligfil-8110.github.io/tags.html</loc>
-<lastmod>2026-06-27T18:43:19-00:00</lastmod>
+<lastmod>2026-08-13T00:44:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

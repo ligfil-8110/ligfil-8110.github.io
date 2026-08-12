@@ -1,94 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<article>
-	<h2>{{ article.title }}</h2>
-	{% if article.image %}
-    <div class="article-eyecatch">
-        <img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}">
-	</div>
+<article class="article-page">
+    <header class="article-header">
+        <div class="post-meta"><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></div>
+        <h1>{{ article.title }}</h1>
+        {% if article.summary %}<p class="article-lead">{{ article.summary|striptags }}</p>{% endif %}
+    </header>
+    {% if article.image %}
+    <figure class="article-cover"><img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" width="1200" height="675" fetchpriority="high"></figure>
     {% endif %}
-	{{ article.content }}
-	<div class="share-buttons" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
-        <p style="font-size: 0.8rem; font-weight: bold; color: #666; margin-bottom: 10px;">この記事をシェアする</p>
-        <a href="https://twitter.com/intent/tweet?text={{ article.title }}&url={{ SITEURL }}/{{ article.url }}" target="_blank" class="button tiny radius" style="background: #000; margin-right: 5px;">X (Twitter)</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ SITEURL }}/{{ article.url }}" target="_blank" class="button tiny radius" style="background: #3b5998; margin-right: 5px;">Facebook</a>
-        <a href="https://b.hatena.ne.jp/entry/{{ SITEURL }}/{{ article.url }}" target="_blank" class="button tiny radius" style="background: #00A4DE;">はてブ</a>
-    </div>
-    {% if article.tags|selectattr('name', 'equalto', 'ドラクエ')|list %}
-    <div class="article-affiliate" style="margin: 30px 0; padding: 20px; border: 1px dashed #ccc; background: #fff; text-align: center; font-size: 0.9rem;">
-        <div style="display: inline-block; max-width: 300px;">
-            <a href="//af.moshimo.com/af/c/click?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18378428%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbook%2Fi%2F21744753%2F" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" style="text-decoration: none; color: #333;">
-                <img src="//thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2089/4988601012089.jpg?_ex=128x128" alt="ドラクエ7リメイク" style="border: none; margin-bottom: 10px;" /><br>
-                <strong>【特典】ドラゴンクエストVII Reimagined NintendoSwitch2版</strong><br>
-                <span style="font-size: 0.8rem; color: #666;">(早期購入特典・セーブデータ特典付き)</span>
-            </a>
-            <img src="//i.moshimo.com/af/i/impression?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=616" alt="" loading="lazy" width="1" height="1" style="border: 0px;">
-        </div>
-    </div>
-    {% endif %}
-	<div class="post-navigation" style="margin: 40px 0; border-top: 1px solid #eee; padding-top: 20px;">
-        <div class="row">
-            <div class="small-4 columns text-left">
-                {% if article.prev_article %}
-                <a href="{{ SITEURL }}/{{ article.prev_article.url }}" class="button tiny secondary radius" style="width: 100%;">« 前の記事</a>
-                <div style="font-size: 0.7rem; color: #999; margin-top: 5px; line-height: 1.2;">{{ article.prev_article.title }}</div>
-                {% endif %}
-            </div>
+    <div class="article-body">{{ article.content|replace('<img ', '<img loading="lazy" decoding="async" ') }}</div>
 
-            <div class="small-4 columns text-center">
-                <a href="{{ SITEURL }}/" class="button tiny secondary radius" style="width: 100%;">トップへ</a>
-            </div>
+    <div class="share-row"><span>この記事をシェア</span><a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={{ SITEURL }}/{{ article.url }}" target="_blank" rel="noopener noreferrer">X</a><a href="https://b.hatena.ne.jp/entry/{{ SITEURL }}/{{ article.url }}" target="_blank" rel="noopener noreferrer">B!</a></div>
+    <div class="article-tags"><strong>タグ</strong>{% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>{% endfor %}</div>
 
-            <div class="small-4 columns text-right">
-                {% if article.next_article %}
-                <a href="{{ SITEURL }}/{{ article.next_article.url }}" class="button tiny secondary radius" style="width: 100%;">次の記事 »</a>
-                <div style="font-size: 0.7rem; color: #999; margin-top: 5px; line-height: 1.2;">{{ article.next_article.title }}</div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-	<div class="article-metadata" style="margin-top: 30px; padding: 15px; background: #f9f9f9; border-radius: 4px; font-size: 0.85rem; color: #666;">
-        
-        <span class="meta-item" style="margin-right: 15px;">
-            <strong>カテゴリー:</strong> 
-            <a href="{{ SITEURL }}/{{ article.category.url }}" style="color: #008cba; text-decoration: none;">{{ article.category }}</a>
-        </span>
-
-        {% if article.tags %}
-        <span class="meta-item">
-            <strong>タグ:</strong> 
-            {% for tag in article.tags %}
-                <a href="{{ SITEURL }}/{{ tag.url }}" style="display: inline-block; background: #e1f5fe; color: #039be5; padding: 2px 8px; border-radius: 12px; margin-right: 5px; font-size: 0.75rem; text-decoration: none;">
-                    #{{ tag }}
-                </a>
-            {% endfor %}
-        </span>
-        {% endif %}
-        
-        <div style="margin-top: 10px; font-size: 0.8rem; color: #999;">
-            公開日: {{ article.locale_date }}
-        </div>
-    </div>
-    </article>
-
-{% if DISQUS_SITENAME %}
-<hr/>
-<div class="row">
-	<div class="small-12 columns">
-		<h3>Comments</h3>
-		<div id="disqus_thread"></div>
-		<script type="text/javascript">
-			var disqus_shortname = '{{ DISQUS_SITENAME }}';
-			(function() {
-				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-				dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-			})();
-		</script>
-		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-		<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-	</div>
-</div>
-{% endif %}
+    <nav class="post-navigation" aria-label="記事ナビゲーション">
+        {% if article.prev_article %}<a href="{{ SITEURL }}/{{ article.prev_article.url }}"><small>前の記事</small><strong>← {{ article.prev_article.title }}</strong></a>{% else %}<span></span>{% endif %}
+        <a class="back-home" href="{{ SITEURL }}/">記事一覧へ</a>
+        {% if article.next_article %}<a class="next" href="{{ SITEURL }}/{{ article.next_article.url }}"><small>次の記事</small><strong>{{ article.next_article.title }} →</strong></a>{% else %}<span></span>{% endif %}
+    </nav>
+</article>
 {% endblock %}

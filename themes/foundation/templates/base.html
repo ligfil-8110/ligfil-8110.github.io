@@ -1,358 +1,119 @@
 <!doctype html>
-<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="{{ DEFAULT_LANG|default('ja') }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f172a">
+    {% set page_title = article.title ~ ' | ' ~ SITENAME if article else (page.title ~ ' | ' ~ SITENAME if page else SITENAME) %}
+    {% set page_description = article.summary|striptags|truncate(150) if article else (SITE_DESCRIPTION|default('ゲーム、ランニング、PC、日々の気づきを記録するブログです。')) %}
+    <title>{% block windowtitle %}{{ page_title }}{% endblock %}</title>
+    <meta name="description" content="{{ page_description }}">
+    <meta name="author" content="{{ AUTHOR }}">
+    <link rel="canonical" href="{{ SITEURL }}/{{ article.url if article else (page.url if page else '') }}">
 
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-JDKE8JVXLC"></script>
-		<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-JDKE8JVXLC');
-		</script>
-		<title>{% block windowtitle %}{{ SITENAME }}{% endblock %}</title>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8290235019998561" crossorigin="anonymous"></script>
-		<meta name="description" content="">
-		<meta name="author" content="{{ AUTHOR }}">
-		<meta property="og:site_name" content="{{ SITENAME }}">
-		<meta property="og:type" content="{% if article %}article{% else %}website{% endif %}">
-		<meta property="og:title" content="{% if article %}{{ article.title }}{% else %}{{ SITENAME }}{% endif %}">
-		<meta property="og:url" content="{{ SITEURL }}/{{ article.url if article else '' }}">
-		<meta property="og:description" content="{% if article %}{{ article.summary|striptags|truncate(100) }}{% else %}{{ SITENAME }}のトップページです{% endif %}">
+    <meta property="og:site_name" content="{{ SITENAME }}">
+    <meta property="og:type" content="{{ 'article' if article else 'website' }}">
+    <meta property="og:title" content="{{ page_title }}">
+    <meta property="og:description" content="{{ page_description }}">
+    <meta property="og:url" content="{{ SITEURL }}/{{ article.url if article else (page.url if page else '') }}">
+    {% if article and article.image %}
+    <meta property="og:image" content="{{ SITEURL }}/{{ article.image }}">
+    <meta name="twitter:card" content="summary_large_image">
+    {% else %}
+    <meta name="twitter:card" content="summary">
+    {% endif %}
+    <meta name="twitter:title" content="{{ page_title }}">
+    <meta name="twitter:description" content="{{ page_description }}">
 
-		{% if article and article.image %}
-		<meta property="og:image" content="{{ SITEURL }}/{{ article.image }}">
-		<meta name="twitter:card" content="summary_large_image">
-		{% else %}
-		<meta property="og:image" content="{{ SITEURL }}/theme/images/ogp-default.jpg">
-		<meta name="twitter:card" content="summary">
-		{% endif %}
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/custom.css">
+    {% if GOOGLE_ANALYTICS_ID %}
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ GOOGLE_ANALYTICS_ID }}');</script>
+    {% endif %}
+    {% if FEED_ALL_ATOM %}
+    <link rel="alternate" type="application/atom+xml" href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" title="{{ SITENAME }} Atom Feed">
+    {% endif %}
+    {% include "analytics.html" %}
+</head>
+<body>
+    <a class="skip-link" href="#main-content">本文へ移動</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="{{ SITEURL }}/" aria-label="{{ SITENAME }} ホーム">
+                <span class="brand-mark" aria-hidden="true">み</span>
+                <span class="brand-copy">
+                    <strong>{{ SITENAME }}</strong>
+                    <small>ゲーム・ランニング・日々の記録</small>
+                </span>
+            </a>
 
-		<meta name="twitter:title" content="{% if article %}{{ article.title }}{% else %}{{ SITENAME }}{% endif %}">
-		<meta name="twitter:description" content="{% if article %}{{ article.summary|striptags|truncate(100) }}{% else %}{{ SITENAME }}のトップページです{% endif %}">
+            <nav class="desktop-nav" aria-label="メインナビゲーション">
+                <a href="{{ SITEURL }}/">ホーム</a>
+                {% if DISPLAY_PAGES_ON_MENU %}
+                    {% for p in pages %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endfor %}
+                {% endif %}
+            </nav>
 
-		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/foundation.css" />
-		{% if not FOUNDATION_PYGMENT_THEME %}
-		{% set FOUNDATION_PYGMENT_THEME = 'monokai' %}
-		{% endif %}
-		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygment/{{ FOUNDATION_PYGMENT_THEME }}.css" />
-		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/custom.css" />
+            <details class="mobile-nav">
+                <summary aria-label="メニューを開く"><span aria-hidden="true">☰</span> メニュー</summary>
+                <nav aria-label="モバイルナビゲーション">
+                    <a href="{{ SITEURL }}/">ホーム</a>
+                    {% for p in pages %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endfor %}
+                    <a href="{{ SITEURL }}/archives.html">記事一覧</a>
+                </nav>
+            </details>
+        </div>
+    </header>
 
-		{% if FOUNDATION_ALTERNATE_FONTS %}
-		<!-- GOOGLE WEB FONTS -->
-		<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="{{ SITEURL }}/theme/css/alt-fonts.css" />
-		{% endif %}
+    <main id="main-content" class="site-shell">
+        <div class="content-column" role="main">
+            {% block content %}{% endblock %}
+        </div>
 
-		<script src="{{ SITEURL }}/theme/js/modernizr.js"></script>
+        <aside class="site-sidebar" aria-label="サイト内ナビゲーション">
+            <section class="sidebar-card sidebar-intro">
+                <span class="eyebrow">WELCOME</span>
+                <h2>みっちーの視点で、<br>毎日を記録。</h2>
+                <p>ゲーム、PC、ランニング、日々の発見を自分の言葉で綴っています。</p>
+                <a class="text-link" href="{{ SITEURL }}/pages/about.html">プロフィールを見る →</a>
+            </section>
 
-		<!-- Feeds -->
-		{% if FEED_ALL_ATOM %}
-		<link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
-		{% endif %}
-		{% if FEED_ALL_RSS %}
-		<link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
-		{% endif %}
+            <section class="sidebar-card">
+                <div class="sidebar-heading"><h2>カテゴリー</h2><a href="{{ SITEURL }}/categories.html">すべて</a></div>
+                <ul class="sidebar-list">
+                    {% for cat, cat_articles in categories %}
+                    <li><a href="{{ SITEURL }}/{{ cat.url }}"><span>{{ cat }}</span><span class="count">{{ cat_articles|count }}</span></a></li>
+                    {% endfor %}
+                </ul>
+            </section>
 
-		{% include "analytics.html" %}
+            <section class="sidebar-card">
+                <div class="sidebar-heading"><h2>よく読まれているタグ</h2></div>
+                <div class="tag-cloud">
+                    {% for tag, tag_articles in tags|sort %}
+                        {% if loop.index <= 14 %}<a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>{% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </aside>
+    </main>
 
-		<!-- mathjax config similar to math.stackexchange -->
-		<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-			jax: ["input/TeX", "output/HTML-CSS"],
-			tex2jax: {
-				inlineMath: [ ['$', '$'] ],
-				displayMath: [ ['$$', '$$']],
-				processEscapes: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-			},
-			messageStyle: "none",
-			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-		});
-		</script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous-basic.min.css">
-	</head>
-	<body>
-		<div class="off-canvas-wrap">
-			<div class="inner-wrap">
-				<!-- mobile top bar to activate nav -->
-				<nav class="tab-bar show-for-small">
-					<section class="left-small">
-						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
-					</section>
-
-					<section class="middle tab-bar-section">
-						<h1 class="title">{{ SITENAME|replace(' ', '&nbsp;') }}</h1>
-					</section>
-				</nav>
-
-				<!-- mobile side bar nav -->
-				<aside class="left-off-canvas-menu">
-					<ul class="off-canvas-list">
-						<li><a href="{{ SITEURL }}">Home</a></li>
-						
-						<li><label>Categories</label></li>
-						{% for cat, articles in categories %}
-							<li {% if cat == category %}class="active"{% endif %}>
-								<a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }} <span class="count">{{ articles|count }}</span></a>
-							</li>
-						{% endfor %}
-				
-						<li><label>Links</label></li>
-						{% for name, link in LINKS %}
-							<li><a href="{{ link }}">{{ name }}</a></li>
-						{% endfor %}
-				
-						<li><label>Tags</label></li>
-						{% for tag, articles in tags|sort %}
-							<li>
-								<a href="{{ SITEURL }}/{{ tag.url|replace(' ', '-') }}">{{ tag }} <span class="count">{{ articles|count }}</span></a>
-							</li>
-						{% endfor %}
-				
-						{% if MONTH_ARCHIVE_SAVE_AS %}
-							<li><label>Monthly Archives</label></li>
-							{% for year, date_year in dates|groupby( 'date.year' )|sort(reverse=True) %}
-								{% for month, articles in date_year|groupby( 'date.month' )|sort(reverse=True) %}
-									<li><a href="/posts/{{ year }}/{{ articles[0].date.strftime('%m') }}/">{{ articles[0].date.strftime('%B') }} {{ year }} ({{ articles|count }})</a></li>
-								{% endfor %}
-							{% endfor %}
-						{% endif %}
-				
-						<li><label>Social</label></li>
-						{% for name, link in SOCIAL|sort %}
-							<li><a href="{{ link }}">{{ name }}</a></li>
-						{% endfor %}
-					</ul>   
-				</aside>
-
-				<!-- top bar nav -->
-				<nav class="top-bar hide-for-small-only" data-topbar>
-					<ul class="title-area">
-						<li class="name">
-							<h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
-						</li>
-					</ul>
-
-					<section class="top-bar-section">
-						<ul class="left">
-							{% if DISPLAY_PAGES_ON_MENU %}
-								{% for p in pages %}
-									<li {% if p == page %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-								{% endfor %}
-							{% endif %}
-					
-							{% for title, link in MENUITEMS %}
-								<li><a href="{{ link }}">{{ title }}</a></li>
-							{% endfor %}
-						</ul>
-					</section>
-				</nav>
-
-				<!-- Main Page Content and Sidebar -->
-				<section class="main-section">
-					<div class="row">
-						<!-- Main Content -->
-						<div class="medium-9 small-12 columns" role="content">
-							{% if pagetitle is defined %}
-							<div class="row">
-								<div class="small-12 columns">
-									<h2>{{ pagetitle }}</h2>
-								</div>
-							</div>
-							{% endif %}
-							{% block content %}{% endblock %}
-						</div>
-						<!-- End Main Content -->
-						<!-- Sidebar -->
-						<aside class="medium-3 hide-for-small-only columns">
-							<div class="panel">
-								<h5>Links</h5>
-								<ul class="side-nav">
-									{% for name, link in LINKS %}
-									<li><a href="{{ link }}" target="_blank" rel="noopener noreferrer">{{ name }}</a></li>
-									{% endfor %}
-									<li style="list-style: none; text-align: center; margin-top: 20px; padding: 0;">
-										<div style="display: inline-block;">
-											<a href="//af.moshimo.com/af/c/click?a_id=5345202&p_id=54&pc_id=54&pl_id=1235" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" attributionsrc>
-												<img src="//image.moshimo.com/af-img/0032/000000001235.gif" width="120" height="120" style="border:none; display: block; margin: 0 auto;">
-											</a>
-											<img src="//i.moshimo.com/af/i/impression?a_id=5345202&p_id=54&pc_id=54&pl_id=1235" width="1" height="1" style="border:none;" loading="lazy">
-										</div>
-									</li>
-								</ul>
-							</div>
-
-							<div class="panel">
-								<h5>Categories</h5>
-								<ul class="side-nav">
-									{% for cat, articles in categories %}
-										<li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}<span class="count">{{ articles|count }}</span></a></li>
-									{% endfor %}
-								</ul>
-							</div>
-
-							<div class="panel">
-								<h5>Tags</h5>
-								<ul class="side-nav"> {% for tag, articles in tags|sort %}
-										<li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}<span class="count">{{ articles|count }}</span></a></li>
-									{% endfor %}
-								</ul>
-							</div>
-
-							{% if MONTH_ARCHIVE_SAVE_AS %}
-							<div class="panel">
-								<h5>Monthly Archives</h5>
-								<ul class="side-nav">
-									{% for year, date_year in dates|groupby( 'date.year' )|sort(reverse=True) %}
-										{% for month, articles in date_year|groupby( 'date.month' )|sort(reverse=True) %}
-											<li><a href="/posts/{{ year }}/{{ articles[0].date.strftime('%m') }}/">{{ articles[0].date.strftime('%B') }} {{ year }} ({{ articles|count }})</a></li>
-										{% endfor %}
-									{% endfor %}
-								</ul>
-							</div>
-							{% endif %}
-
-							<div class="panel">
-								<h5>Links</h5>
-								<ul class="side-nav">
-									{% for name, link in SOCIAL|sort %}
-									<li><a href="{{ link }}">{{ name }}</a></li>
-									{% endfor %}
-								</ul>
-							</div>
-						</aside>
-						<!-- End Sidebar -->
-					</div>
-
-				</section>
-				<a class="exit-off-canvas"></a>
-			</div><!--off-canvas inner-->
-		</div><!--off-canvas wrap-->
-
-		<script src="{{ SITEURL }}/theme/js/jquery.js"></script>
-		<script src="{{ SITEURL }}/theme/js/foundation.min.js"></script>
-		<script>
-			$(document).foundation();
-		</script>
-		<script src="https://cdn.jsdelivr.net/npm/luminous-lightbox@2.4.0/dist/luminous.min.js"></script>
-		<script>
-		window.addEventListener('DOMContentLoaded', function() {
-			// 記事一覧(index)ではなく、記事詳細ページ内の「本文」にある画像だけを選択
-			// テンプレートの構造に合わせて .entry-content や article 内を指定
-			var images = document.querySelectorAll("article .article-content img, article p img");
-			
-			if (images.length > 0 && typeof LuminousGallery !== 'undefined') {
-			new LuminousGallery(images, {}, {
-				sourceAttribute: 'src'
-			});
-			}
-
-			// --- コードコピー機能の追加 ---
-			const highlightBlocks = document.querySelectorAll('.highlight');
-			highlightBlocks.forEach((block) => {
-				// 言語名の取得
-				let langName = "";
-				const pre = block.querySelector('pre');
-				if (pre) {
-					// Pelican/Pygmentsは通常クラス名に言語を含める (例: .highlight .language-python)
-					const classList = block.className.split(' ');
-					classList.forEach(cls => {
-						if (cls !== 'highlight' && cls !== 'hll') {
-							langName = cls;
-						}
-					});
-					
-					// 見つからない場合は内部のspanタグなどから推測
-					if (!langName) {
-						const code = block.querySelector('code');
-						if (code && code.className) {
-							langName = code.className.replace('language-', '');
-						}
-					}
-				}
-
-				// 言語名表示ラベルの作成
-				if (langName) {
-					const langLabel = document.createElement('span');
-					langLabel.className = 'code-lang';
-					langLabel.innerText = langName;
-					block.appendChild(langLabel);
-				}
-
-				// コピーボタンの作成
-				const button = document.createElement('button');
-				button.className = 'copy-code-button';
-				button.type = 'button';
-				button.innerText = 'Copy';
-
-				// ボタンをブロックに追加
-				block.appendChild(button);
-
-				button.addEventListener('click', () => {
-					// code要素またはpre要素からテキストを取得
-					const codeText = block.querySelector('pre').innerText;
-					
-					navigator.clipboard.writeText(codeText).then(() => {
-						button.innerText = 'Copied!';
-						button.classList.add('copied');
-
-						setTimeout(() => {
-							button.innerText = 'Copy';
-							button.classList.remove('copied');
-						}, 2000);
-					}, (err) => {
-						console.error('Could not copy text: ', err);
-						button.innerText = 'Error';
-					});
-				});
-			});
-		});
-		</script>
-	</body>
-	<footer style="background: #333; color: #ccc; padding: 40px 0; margin-top: 50px;">
-		<div class="row">
-			<div class="medium-4 columns">
-				<h5 style="color: #fff;">{{ SITENAME }}</h5>
-				<p style="font-size: 0.8rem;">ゲームのこととかランニングのこととかをゆる～く書くブログ</p>
-			</div>
-	
-			<div class="medium-4 columns">
-				<h5 style="color: #fff;">Links</h5>
-				<ul style="list-style: none; margin: 0; font-size: 0.8rem;">
-					<li><a href="{{ SITEURL }}/" style="color: #ccc;">Home</a></li>
-					{% for p in pages %}
-						<li><a href="{{ SITEURL }}/{{ p.url }}" style="color: #ccc;">{{ p.title }}</a></li>
-					{% endfor %}
-				</ul>
-			</div>
-	
-			<div class="medium-4 columns">
-				<h5 style="color: #fff;">Social</h5>
-				<ul style="list-style: none; margin: 0; font-size: 0.8rem;">
-					{% for name, link in SOCIAL %}
-						<li><a href="{{ link }}" style="color: #ccc;">{{ name }}</a></li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-	
-		<div class="row" style="border-top: 1px solid #444; margin-top: 20px; padding-top: 20px;">
-			<div class="small-12 columns text-center">
-				<p style="font-size: 0.7rem; color: #888; margin-bottom: 5px;">
-					Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.
-				</p>
-				<div class="copyright-notice" style="font-size: 0.8rem; color: #666; line-height: 1.4;">
-					<p>このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。<br>
-					© ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX</p>
-				</div>
-				<ul class="inline-list">
-                <li><a href="{{ SITEURL }}/pages/contact.html">お問い合わせ</a></li>
-                <li><a href="{{ SITEURL }}/pages/privacy-policy.html">プライバシーポリシー</a></li>
-            	</ul>
-				<p style="font-size: 0.7rem;">&copy; 2026 {{ AUTHOR }}. All rights reserved.</p>
-			</div>
-		</div>
-	</footer>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <a class="footer-brand" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+                <p>ゲームのこと、ランニングのこと、暮らしの中の気づきをゆるく記録。</p>
+            </div>
+            <nav aria-label="フッターナビゲーション">
+                <a href="{{ SITEURL }}/pages/about.html">プロフィール</a>
+                <a href="{{ SITEURL }}/pages/contact.html">お問い合わせ</a>
+                <a href="{{ SITEURL }}/pages/privacy-policy.html">プライバシー</a>
+                {% for name, link in SOCIAL %}<a href="{{ link }}" target="_blank" rel="noopener noreferrer">{{ name }}</a>{% endfor %}
+            </nav>
+        </div>
+        <div class="footer-bottom">© 2026 {{ AUTHOR }} · All rights reserved.</div>
+    </footer>
+    <script src="{{ SITEURL }}/theme/js/site.js" defer></script>
+</body>
 </html>

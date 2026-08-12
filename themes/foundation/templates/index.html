@@ -1,79 +1,61 @@
 {% extends "base.html" %}
+
 {% block content %}
-
-{% if articles %}
-{% for article in (articles_page.object_list if articles_page else articles) %}
-<article style="margin-bottom: 40px;">
-    <div class="row">
-        {# --- 左側：アイキャッチ画像 (4列) --- #}
-        <div class="small-12 medium-4 columns">
-            <a href="{{ SITEURL }}/{{ article.url }}">
-                {% if article.image %}
-                    <img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" class="index-thumbnail">
-                {% else %}
-                    <img src="{{ SITEURL }}/images/default-eyecatch.jpg" alt="Default Image" class="index-thumbnail">
-                {% endif %}
-            </a>
-        </div>
-
-        {# --- 右側：記事タイトルと概要 (8列) --- #}
-        <div class="small-12 medium-8 columns">
-            <h3 style="margin-top: 0;"><a href="{{ SITEURL }}/{{ article.url }}" style="color: #333; text-decoration: none;">{{ article.title }}</a></h3>
-            
-            <div class="article-meta" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
-                <span style="margin-right: 10px;">📁 <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></span>
-                <span>📅 {{ article.locale_date }}</span>
-            </div>
-
-            <div class="summary" style="font-size: 0.9rem; line-height: 1.6; color: #555;">
-                {{ article.summary|striptags|truncate(120) }}
-            </div>
-
-            {% if article.tags %}
-            <div class="tags" style="margin-top: 10px;">
-                {% for tag in article.tags %}
-                    <a href="{{ SITEURL }}/{{ tag.url }}" style="font-size: 0.7rem; color: #039be5; background: #e1f5fe; padding: 2px 8px; border-radius: 10px; margin-right: 5px;">#{{ tag }}</a>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            <div style="text-align: right; margin-top: 20px;">
-                <a href="{{ SITEURL }}/{{ article.url }}" class="button tiny radius secondary" style="margin-bottom: 0;">
-                    続きを読む »
-                </a>
-            </div>
-        </div>
+{% set listing = articles_page.object_list if articles_page else articles %}
+{% if not pagetitle is defined %}
+<section class="home-hero">
+    <div class="hero-copy">
+        <span class="eyebrow">MITCHY'S NOTEBOOK</span>
+        <h1>好きなものを、<br><em>深く、楽しく。</em></h1>
+        <p>ゲームの攻略と感想、PCの実験、走った記録。<br>日々の小さな発見を、読みやすく残しています。</p>
+        <a class="primary-link" href="#latest">最新記事を読む <span aria-hidden="true">↓</span></a>
     </div>
-</article>
-<hr />
+    <div class="hero-orbit" aria-hidden="true"><span>GAME</span><span>RUN</span><span>CREATE</span></div>
+</section>
+<div class="section-heading" id="latest"><div><span class="eyebrow">LATEST POSTS</span><h2>新着記事</h2></div><a class="text-link" href="{{ SITEURL }}/archives.html">すべての記事 →</a></div>
+{% elif pagetitle is defined %}
+<div class="listing-heading"><span class="eyebrow">ARCHIVE</span><h1>{{ pagetitle }}</h1><p>気になるテーマの記事をまとめています。</p></div>
+{% endif %}
+
+{% if listing %}
+<div class="post-list">
+{% for article in listing %}
+    {% if not pagetitle is defined and loop.first %}
+    <article class="featured-post">
+        <a class="featured-image" href="{{ SITEURL }}/{{ article.url }}">
+            {% if article.image %}<img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" width="1200" height="675">{% else %}<img src="{{ SITEURL }}/images/default-eyecatch.jpg" alt="" width="1200" height="675">{% endif %}
+        </a>
+        <div class="featured-copy">
+            <div class="post-meta"><span>{{ article.category }}</span><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></div>
+            <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+            <p>{{ article.summary|striptags|truncate(160) }}</p>
+            <a class="text-link" href="{{ SITEURL }}/{{ article.url }}">続きを読む →</a>
+        </div>
+    </article>
+    {% else %}
+    <article class="post-card">
+        <a class="post-card-image" href="{{ SITEURL }}/{{ article.url }}">
+            {% if article.image %}<img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" width="720" height="405" loading="lazy" decoding="async">{% else %}<img src="{{ SITEURL }}/images/default-eyecatch.jpg" alt="" width="720" height="405" loading="lazy" decoding="async">{% endif %}
+        </a>
+        <div class="post-card-copy">
+            <div class="post-meta"><span>{{ article.category }}</span><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></div>
+            <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+            <p>{{ article.summary|striptags|truncate(130) }}</p>
+            <a class="text-link" href="{{ SITEURL }}/{{ article.url }}">続きを読む →</a>
+        </div>
+    </article>
+    {% endif %}
 {% endfor %}
-{% endif %}
-
-{# deal with pagination #}
-{% if articles_page and articles_paginator.num_pages > 1 %}
-<div class="row">
-	<div class="small-12 columns text-center">
-		<div class="pagination-centered">
-			<ul class="pagination">
-			{% if articles_page.has_previous() %}
-				{% set num = articles_page.previous_page_number() %}
-				<li class="arrow"><a href="{{ SITEURL }}/{{ page_name }}{{ num if num > 1 else '' }}.html">&larr; Previous</a></li>
-			{% else %}
-				<li class="arrow unavailable"><a href="#">&larr; Previous</a></li>
-			{% endif %}
-			{% for num in range( 1, 1 + articles_paginator.num_pages ) %}
-				<li class="{{ 'current' if num == articles_page.number else '' }}"><a href="{{ SITEURL }}/{{ page_name }}{{ num if num > 1 else '' }}.html">{{ num }}</a></li>
-			{% endfor %}
-			{% if articles_page.has_next() %}
-				<li class="arrow"><a href="{{ SITEURL }}/{{ page_name }}{{ articles_page.next_page_number() }}.html">Next &rarr;</a></li>
-			{% else %}
-				<li class="arrow unavailable"><a href="#">&rarr; Next</a></li>
-			{% endif %}
-			</ul>
-		</div>
-	</div>
 </div>
+{% else %}
+<p class="empty-state">まだ記事がありません。</p>
 {% endif %}
 
+{% if articles_page and articles_paginator.num_pages > 1 %}
+<nav class="pagination" aria-label="ページネーション">
+    {% if articles_page.has_previous() %}<a href="{{ SITEURL }}/{{ page_name }}{{ articles_page.previous_page_number() if articles_page.previous_page_number() > 1 else '' }}.html">← 新しい記事</a>{% endif %}
+    <span>{{ articles_page.number }} / {{ articles_paginator.num_pages }}</span>
+    {% if articles_page.has_next() %}<a href="{{ SITEURL }}/{{ page_name }}{{ articles_page.next_page_number() }}.html">過去の記事 →</a>{% endif %}
+</nav>
+{% endif %}
 {% endblock %}
-
