@@ -33,7 +33,7 @@ jobs:
       - name: Build site
         run: |
           python scripts/prepare_build_content.py content .build-content
-          pelican .build-content -o output -s pelicanconf.py
+          pelican .build-content -o output -s publishconf.py
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
