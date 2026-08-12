@@ -1,11 +1,19 @@
 {% extends "base.html" %}
-
-{% block title %}{{ SITENAME }} <small>[categories]</small>{% endblock %}
+{% set page_url = 'categories.html' %}
 
 {% block content %}
-	<ul>
-	{% for category, articles in categories %}
-		<li><a href="{{ SITEURL }}/{{ category.url }}">{{ category }}</a></li>
-	{% endfor %}
-	</ul>
+<header class="listing-heading">
+    <span class="eyebrow">EXPLORE</span>
+    <h1>カテゴリー</h1>
+    <p>テーマごとに記事を探せます。</p>
+</header>
+<div class="directory-grid">
+{% for category, articles in categories %}
+    <a class="directory-card" href="{{ SITEURL }}/{{ category.url }}">
+        <span class="directory-icon" aria-hidden="true">→</span>
+        <strong>{{ category }}</strong>
+        <span>{{ articles|count }} 件の記事</span>
+    </a>
+{% endfor %}
+</div>
 {% endblock %}

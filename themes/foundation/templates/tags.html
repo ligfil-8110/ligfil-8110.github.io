@@ -1,11 +1,15 @@
 {% extends "base.html" %}
-
-{% block title %}{{ SITENAME }} <small>[tags]</small>{% endblock %}
+{% set page_url = 'tags.html' %}
 
 {% block content %}
-	<ul>
-	{% for tag, articles in tags %}
-		<li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></li>
-	{% endfor %}
-	</ul>
+<header class="listing-heading">
+    <span class="eyebrow">EXPLORE</span>
+    <h1>タグ一覧</h1>
+    <p>記事に付けたタグから、関連する記録を見つけられます。</p>
+</header>
+<div class="tag-index">
+{% for tag, articles in tags|sort %}
+    <a href="{{ SITEURL }}/{{ tag.url }}"><strong>#{{ tag }}</strong><span>{{ articles|count }}</span></a>
+{% endfor %}
+</div>
 {% endblock %}

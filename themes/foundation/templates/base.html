@@ -9,13 +9,14 @@
     <title>{% block windowtitle %}{{ page_title }}{% endblock %}</title>
     <meta name="description" content="{{ page_description }}">
     <meta name="author" content="{{ AUTHOR }}">
-    <link rel="canonical" href="{{ SITEURL }}/{{ article.url if article else (page.url if page else '') }}">
+    {% set canonical_path = article.url if article else (page.url if page else (page_url if page_url is defined else '')) %}
+    <link rel="canonical" href="{{ SITEURL }}/{{ canonical_path }}">
 
     <meta property="og:site_name" content="{{ SITENAME }}">
     <meta property="og:type" content="{{ 'article' if article else 'website' }}">
     <meta property="og:title" content="{{ page_title }}">
     <meta property="og:description" content="{{ page_description }}">
-    <meta property="og:url" content="{{ SITEURL }}/{{ article.url if article else (page.url if page else '') }}">
+    <meta property="og:url" content="{{ SITEURL }}/{{ canonical_path }}">
     {% if article and article.image %}
     <meta property="og:image" content="{{ SITEURL }}/{{ article.image }}">
     <meta name="twitter:card" content="summary_large_image">
