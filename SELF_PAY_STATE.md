@@ -3,7 +3,7 @@
 ## 2026-09-09
 
 - Goal: CHUWI CoreBook Xの開封記事を、購入検討者が内容を判断しやすい検索向け記事へ改善する
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done:
   - 公開スラッグを維持したまま、タイトル・Summary・導入・見出しを検索意図に合わせて改善する
   - 写真と既存の筆者体験だけを根拠に、確認できた付属品・外観・未検証事項を明確にする
@@ -11,8 +11,8 @@
   - 本番設定でビルドし、メタデータ、canonical、内部リンク、画像、広告・計測、著作権表示範囲を検証する
   - 対象ファイルだけをコミットしてmainへpushし、GitHub Actions成功と公開URLへの反映を確認する
 - このGoalを選んだ理由: 基盤改善は公開済みで、CHUWI記事群は実機写真と実作業記録があり、購入意図のある検索流入と将来の適切な収益導線につながる可能性が高い。一方、開封記事の現状タイトルと本文は検索者が得られる情報を具体的に示せていない。
-- 現在の作業段階: 実装とローカル検証を完了
-- 次に行う作業: 対象ファイルだけをコミットしてmainへpushし、Actionsと公開反映を確認する
+- 現在の作業段階: Goal完了
+- 次に行う作業: 次回MAIN Runで、収益期待値を再比較して次のGoalを決定する
 - 完了済み:
   - AGENTS.md、git status、git log、最近の差分を確認
   - 公開サイト、プライバシーポリシー、著作権表示範囲、GitHub Actions直近5件を確認
@@ -25,6 +25,10 @@
   - title、description、canonical、OG画像、内部リンク、ローカル画像、GA4、AdSense、ads.txt、robots.txt、sitemapを検証
   - CHUWI記事とプライバシーページにドラクエ著作権表示がなく、ドラクエ記事だけに表示されることを検証
   - デスクトップ1440px幅とモバイル500px幅で表示を確認し、記事本文・画像・長いタイトルが正常に収まることを確認
+  - コミット `915a9a3` をmainへpush
+  - GitHub Actions run `34253161698` のbuild・deploy成功を確認
+  - 公開記事で新タイトル、description、canonical、OG画像、内部リンク、CSS更新、GA4、AdSenseを確認
+  - 公開中のads.txt、sitemap、ドラクエ著作権表示範囲を再確認
 - 未解決事項:
   - 作業ツリーにオーナーの未コミット変更（pelicanconf.py、RPG関連ファイル、reset-gamepad.ps1）があるため触れず、ステージ対象を明示する
-- Definition of Doneの残項目: コミット、push、Actions確認、公開確認
+- Definition of Doneの残項目: なし
