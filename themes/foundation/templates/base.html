@@ -61,7 +61,7 @@
     </script>
     {% endif %}
 
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/custom.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/custom.css?v={{ THEME_ASSET_VERSION|default('1') }}">
     {% if GOOGLE_ANALYTICS_ID %}
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
@@ -164,6 +164,6 @@
             <figcaption id="image-lightbox-caption"></figcaption>
         </figure>
     </div>
-    <script src="{{ SITEURL }}/theme/js/site.js" defer></script>
+    <script src="{{ SITEURL }}/theme/js/site.js?v={{ THEME_ASSET_VERSION|default('1') }}" defer></script>
 </body>
 </html>

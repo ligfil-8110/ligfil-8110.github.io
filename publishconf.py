@@ -17,6 +17,9 @@ EXTRA_PATH_METADATA = {
 # Use a stable Japanese date format instead of relying on the build host locale.
 DEFAULT_DATE_FORMAT = "%Y年%m月%d日"
 
+# Increment when theme CSS or JavaScript changes so CDN/browser caches refresh.
+THEME_ASSET_VERSION = "20260908-1"
+
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = "https://ligfil-8110.github.io"
 RELATIVE_URLS = False
