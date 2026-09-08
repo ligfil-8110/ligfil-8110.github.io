@@ -2,6 +2,7 @@ Title: ドラクエ7リメイク、物知りじいさんのもとへ！
 Category: ゲーム
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0118
+Date: 2026-01-18 23:00
 Image: images/dq-viire-20260114-8.jpg
 Summary: 今日もドラクエ7リメイクをプレイ！町はずれの崖っぽうちに住んでるヘンクツな物知りじいさんにあいましたよ！
 

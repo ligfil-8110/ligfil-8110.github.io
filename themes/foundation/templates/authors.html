@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% set page_url = 'authors.html' %}
+{% set pagetitle = '著者一覧' %}
+
+{% block content %}
+<header class="listing-heading">
+    <span class="eyebrow">AUTHORS</span>
+    <h1>著者一覧</h1>
+    <p>このブログの記事を書いている著者です。</p>
+</header>
+<div class="directory-grid">
+{% for author, articles in authors %}
+    <a class="directory-card" href="{{ SITEURL }}/{{ author.url }}">
+        <strong>{{ author }}</strong>
+        <span>{{ articles|count }} 記事</span>
+    </a>
+{% endfor %}
+</div>
+{% endblock %}

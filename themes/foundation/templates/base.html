@@ -4,12 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0f172a">
-    {% set page_title = article.title ~ ' | ' ~ SITENAME if article else (page.title ~ ' | ' ~ SITENAME if page else SITENAME) %}
-    {% set page_description = article.summary|striptags|truncate(150) if article else (SITE_DESCRIPTION|default('ゲーム、ランニング、PC、日々の気づきを記録するブログです。')) %}
+    {% if article %}
+        {% set page_title = article.title ~ ' | ' ~ SITENAME %}
+        {% set page_description = article.summary|striptags|truncate(150) %}
+    {% elif page %}
+        {% set page_title = page.title ~ ' | ' ~ SITENAME %}
+        {% set page_description = page.summary|striptags|truncate(150) if page.summary else SITE_DESCRIPTION %}
+    {% elif pagetitle is defined %}
+        {% set page_title = pagetitle ~ ' | ' ~ SITENAME %}
+        {% set page_description = pagetitle ~ 'に関する記事の一覧です。' %}
+    {% else %}
+        {% set page_title = SITENAME %}
+        {% set page_description = SITE_DESCRIPTION|default('ゲーム、ランニング、PC、日々の気づきを記録するブログです。') %}
+    {% endif %}
     <title>{% block windowtitle %}{{ page_title }}{% endblock %}</title>
     <meta name="description" content="{{ page_description }}">
     <meta name="author" content="{{ AUTHOR }}">
-    {% set canonical_path = article.url if article else (page.url if page else (page_url if page_url is defined else '')) %}
+    {% if article %}
+        {% set canonical_path = article.url %}
+    {% elif page %}
+        {% set canonical_path = page.url %}
+    {% elif articles_page is defined and articles_page and articles_page.number > 1 %}
+        {% set canonical_path = page_name ~ articles_page.number ~ '.html' %}
+    {% else %}
+        {% set canonical_path = page_url if page_url is defined else '' %}
+    {% endif %}
     <link rel="canonical" href="{{ SITEURL }}/{{ canonical_path }}">
 
     <meta property="og:site_name" content="{{ SITENAME }}">
@@ -25,6 +44,22 @@
     {% endif %}
     <meta name="twitter:title" content="{{ page_title }}">
     <meta name="twitter:description" content="{{ page_description }}">
+
+    {% if article %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ article.title|striptags|tojson }},
+      "description": {{ article.summary|striptags|tojson }},
+      "datePublished": {{ article.date.isoformat()|tojson }},
+      "dateModified": {{ (article.modified.isoformat() if article.modified else article.date.isoformat())|tojson }},
+      "author": {"@type": "Person", "name": {{ AUTHOR|tojson }}},
+      "mainEntityOfPage": {{ (SITEURL ~ '/' ~ article.url)|tojson }}{% if article.image %},
+      "image": {{ (SITEURL ~ '/' ~ article.image)|tojson }}{% endif %}
+    }
+    </script>
+    {% endif %}
 
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/custom.css">
     {% if GOOGLE_ANALYTICS_ID %}
@@ -81,14 +116,6 @@
                 <a class="text-link" href="{{ SITEURL }}/pages/about.html">プロフィールを見る →</a>
             </section>
 
-            <section class="sidebar-card affiliate-sidebar" aria-label="広告">
-                <span class="ad-label">ADVERTISEMENT</span>
-                <a href="https://af.moshimo.com/af/c/click?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=1235" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer-when-downgrade" attributionsrc>
-                    <img src="https://image.moshimo.com/af-img/0032/000000001235.gif" width="120" height="120" alt="おすすめ商品" loading="lazy" decoding="async">
-                </a>
-                <img src="https://i.moshimo.com/af/i/impression?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=1235" width="1" height="1" alt="" loading="lazy">
-            </section>
-
             <section class="sidebar-card">
                 <div class="sidebar-heading"><h2>カテゴリー</h2><a href="{{ SITEURL }}/categories.html">すべて</a></div>
                 <ul class="sidebar-list">
@@ -123,7 +150,9 @@
             </nav>
         </div>
         <div class="footer-bottom">
+            {% if article and article.tags|selectattr('name', 'equalto', 'ドラクエ')|list %}
             <div class="rights-notice">このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。<br>© ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX</div>
+            {% endif %}
             <div>© 2026 {{ AUTHOR }} · All rights reserved.</div>
         </div>
     </footer>

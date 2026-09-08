@@ -5,7 +5,7 @@ Tags: PC, CHUWI, CoreBook X, Windows, トラブルシューティング
 Slug: chuwi-corebook-x-os-reinstall
 Summary: CHUWI CoreBook XのOSリカバリ（再インストール）を行いました。USBメモリの作成時に重要な注意点（WINPEラベル）があったので備忘録として残します。
 
-昨日届いた **CHUWI CoreBook X** ですが、使い始める前に一度クリーンな状態にしたかったので、OSの再インストール（リカバリ）を行いました。
+[購入・開封時の様子を紹介したCHUWI CoreBook Xの記事](/chuwi-corebook-x-review.html)に続き、使い始める前に一度クリーンな状態にしたかったので、OSの再インストール（リカバリ）を行いました。
 
 ネット上の記事を参考に進めたのですが、インストールメディアの作成部分で少しハマりポイントがあったので、そこを重点的に解説します。
 

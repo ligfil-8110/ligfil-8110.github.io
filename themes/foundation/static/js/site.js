@@ -65,6 +65,17 @@
         });
     });
 
+    document.querySelectorAll("a[rel~='sponsored']").forEach(function (link) {
+        link.addEventListener("click", function () {
+            if (typeof window.gtag !== "function") return;
+            window.gtag("event", "affiliate_click", {
+                link_url: link.href,
+                link_text: (link.textContent || link.querySelector("img")?.alt || "").trim(),
+                page_path: window.location.pathname
+            });
+        });
+    });
+
     if (lightbox) {
         lightbox.addEventListener("click", function (event) {
             if (event.target === lightbox) closeLightbox();

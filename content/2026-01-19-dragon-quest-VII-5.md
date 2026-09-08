@@ -2,6 +2,7 @@ Title: ドラクエ7リメイク、ついに4枚目の石版のかけらをゲ�
 Category: ゲーム
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0119
+Date: 2026-01-19 23:00
 Image: images/dq-viire-20260114-8.jpg
 Summary: 今日もドラクエ7リメイクをプレイ！ついに4枚目の石版のかけらをゲットです！
 

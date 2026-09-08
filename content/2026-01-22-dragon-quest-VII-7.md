@@ -2,6 +2,7 @@ Title: ドラクエ7リメイク、石版案内人との出会い、そしてつ
 Category: ゲーム
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0122
+Date: 2026-01-22 23:00
 Image: images/dq-viire-20260114-8.jpg
 Summary: 今日もドラクエ7リメイクをプレイ！石版案内人に出会い、ようやく初めての勝利を収めましたよ！
 
