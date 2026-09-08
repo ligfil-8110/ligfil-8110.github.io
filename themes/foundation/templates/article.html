@@ -3,7 +3,7 @@
 {% block content %}
 <article class="article-page">
     <header class="article-header">
-        <div class="post-meta"><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></div>
+        <div class="post-meta"><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a><time datetime="{{ article.date.isoformat() }}">公開: {{ article.locale_date }}</time>{% if article.modified %}<time datetime="{{ article.modified.isoformat() }}">更新: {{ article.modified.strftime('%Y年%m月%d日') }}</time>{% endif %}</div>
         <h1>{{ article.title }}</h1>
         {% if article.summary %}<p class="article-lead">{{ article.summary|striptags }}</p>{% endif %}
     </header>
