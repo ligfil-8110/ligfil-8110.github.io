@@ -5,8 +5,13 @@ on:
     branches:
       - main
   schedule:
-    # 3時間おきに自動実行 (UTC時間基準)
-    - cron: '0 */3 * * *'
+    # Future-dated posts become publishable without requiring a manual push.
+    # 18:17 UTC is 03:17 JST the following day.
+    - cron: '17 18 * * *'
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -23,7 +28,7 @@ jobs:
         run: |
           # exiftool をインストール
           sudo apt-get update && sudo apt-get install -y exiftool
-          pip install pelican markdown pelican-neighbors pelican-sitemap Pygments Pillow
+          pip install -r requirements.txt
 
       - name: Remove Exif metadata
         run: |

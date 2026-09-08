@@ -1,0 +1,6 @@
+pelican==4.11.0.post0
+Markdown==3.10
+pelican-neighbors==1.2.0
+pelican-sitemap==1.2.2
+Pygments==2.18.0
+Pillow==12.3.0

@@ -1,3 +1,7 @@
 venv/
 GEMINI.md
 /.build-content/
+DQMBV
+/output/
+__pycache__/
+*.py[cod]
