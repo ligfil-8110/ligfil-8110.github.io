@@ -3,7 +3,7 @@
 ## 2026-09-10
 
 - Goal: 検索流入が確認できるドラクエ7「じごくのよろい」攻略記事を、実体験に基づく明確な入手・周回ガイドへ改善する
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done:
   - 公開スラッグを維持し、タイトル・Summary・冒頭回答を「入手場所と周回手順」の検索意図に合わせる
   - 筆者が実際に入手した事実と、未測定のドロップ率・環境差を明確に分ける
@@ -12,8 +12,8 @@
   - 本番設定でビルドし、SEO、画像、内部リンク、広告・アフィリエイト、著作権表示を検証する
   - 対象ファイルだけをコミットしてmainへpushし、GitHub Actions成功と公開反映を確認する
 - このGoalを選んだ理由: 公開検索結果に掲載されている具体的な攻略記事であり、検索意図が明確で、既存のプレイ画像と入手実績だけで品質を高められる。ゲーム検索流入はAdSenseと既存の関連商品導線の双方に寄与し得る一方、現状には過度な効率断定、古い導入、Windows形式の画像パスが残っている。
-- 現在の作業段階: 実装とローカル検証を完了
-- 次に行う作業: 対象記事とステートだけをコミットしてmainへpushし、Actionsと公開反映を確認する
+- 現在の作業段階: Goal完了
+- 次に行う作業: 次回MAIN Runで収益期待値を再比較し、次のGoalを決定する
 - 完了済み:
   - AGENTS.md、前回のDONE状態、git status、git log、最近の差分を確認
   - オーナーの未コミットRPG関連変更を特定し、作業対象から除外
@@ -28,10 +28,15 @@
   - title、description、canonical、BlogPosting、更新日、内部リンク、画像、GA4、AdSense、関連商品のsponsored属性、ads.txt、robots.txt、sitemapを検証
   - 対象記事だけにドラクエ著作権表示があり、CHUWI記事とプライバシーページにはないことを検証
   - デスクトップ1440px幅とモバイル500px幅で本文・画像・見出しの表示を確認
+  - コミット `5608aa4` をmainへpush
+  - GitHub Actions run `34378245463` のbuild・deploy成功を確認
+  - 公開記事で新タイトル、本文、canonical、内部リンク、GA4、AdSense、関連商品のsponsored属性、ドラクエ著作権表示を確認
+  - 公開画像4点のHTTP 200と、ホーム・プライバシーでドラクエ著作権表示が出ないことを確認
+  - 公開中のads.txtとsitemapを再確認
 - 未解決事項:
   - Search Console、GA4、AdSense、ASPの非公開レポートにはアクセスできないため、公開検索結果と記事品質を根拠に優先順位を決定
   - オーナーの未コミット変更（pelicanconf.py、RPG関連ファイル、reset-gamepad.ps1）には触れず、ステージ対象を明示する
-- Definition of Doneの残項目: コミット、push、Actions確認、公開確認
+- Definition of Doneの残項目: なし
 
 ## 2026-09-09
 
