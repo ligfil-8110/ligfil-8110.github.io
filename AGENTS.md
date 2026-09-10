@@ -20,6 +20,9 @@ Require owner action only for identity verification, new paid or contractual ser
 - Prefer topics supported by the owner's actual devices, play data, photos, measurements, problems, and solutions.
 - Never invent ownership, hands-on experience, test results, prices, specifications, quotes, or performance measurements.
 - Clearly separate verified facts, the owner's observations, and editorial inference.
+- Preserve the owner's natural Japanese voice, including casual phrasing, enthusiasm, humor, and personal asides. Do not homogenize existing articles into polished, generic, or obviously AI-written prose.
+- Prefer small, purpose-specific edits over full rewrites. Unless the owner explicitly requests a rewrite, keep unaffected sentences and structure intact and limit changes to factual corrections, clarity problems, SEO metadata, broken links, or other concrete issues.
+- Avoid stock AI phrasing, repetitive summaries, excessive caveats, mechanical heading structures, and formulaic introductions. Read neighboring articles before editing so additions sound like the same author.
 - Use descriptive Japanese titles and headings. Answer the main query early, then provide evidence, steps, caveats, and a concise conclusion.
 - Add a unique `Title`, `Date`, `Category`, `Tags`, `Slug`, and `Summary` metadata block to every article. Add `Modified` when materially updating an older article.
 - Preserve existing public slugs. If a slug must change, implement and verify a redirect before release.
