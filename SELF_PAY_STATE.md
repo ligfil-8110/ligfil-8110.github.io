@@ -11,7 +11,7 @@
   - 対象ファイルだけをコミットしてmainへpushし、GitHub Pagesへの公開を確認する
 - このGoalを選んだ理由: AdSense自動取得はオーナーによるGoogle初回認証待ちだが、待機中にも収益判断の精度を上げられる。既存のアフィリエイトクリックはURLとテキストしか記録しておらず、どのASP・商品・掲載位置が反応したか比較しづらかった。
 - 現在の作業段階: Goal完了
-- 次に行う作業: オーナーのGoogleログイン後、非公開の「AI SelfPay 収益モニター」にAdSense Management APIの日次取得を設定し、毎日9:00の運営タスクが実収益を読める状態にする
+- 次に行う作業: 毎日9:00の運営タスクで非公開の収益モニターを確認し、実績値を基に次の収益改善Goalを決定する
 - 完了済み:
   - AGENTS.md、SELF_PAY_STATE、git status、最近のコミット、公開サイト、直近のGitHub Actionsを確認
   - 非公開の収益モニターシートを確認し、データが未取得で0円を実績と誤認しない状態であることを確認
@@ -24,9 +24,13 @@
   - コミット`74c9181`をmainへpush
   - 初回のPages deploy失敗後、変更なしの`76e7d8e`で再実行し、build・deploy成功を確認
   - 公開ページと配信JavaScriptで新しい計測属性を確認し、ホーム、プライバシー、ads.txt、sitemapのHTTP 200を確認
+  - 非公開の収益モニターにAdSense Management API v2を設定し、初回取得の成功を確認
+  - 毎日7:30ごろに前日までのAdSenseデータを更新する時間ベーストリガーを登録
+  - 毎日9:00の運営タスクへ、Summary・Config・Dailyを確認する非公開データ手順を追加
+  - 日次データとSummaryの数式反映を確認し、Dailyの長い見出しが切れないよう列幅を調整
 - 未解決事項:
-  - AdSense日次取得の初回設定には、AdSenseを管理しているGoogleアカウントでのログインとOAuth許可が必要
-  - Search Console、GA4、AdSense、ASPの実データが揃うまでは、計測値に基づく収益施策の順位付けはできない
+  - AdSense APIのページ別レポートは現在空のため、ページ単位の収益判断はGA4等のデータ取得方法も含めて今後検討する
+  - Search Console、GA4、ASPの実データが揃うまでは、AdSense以外を含む純収益ベースの順位付けはできない
   - オーナーの未コミット変更（pelicanconf.py、RPG関連ファイル、reset-gamepad.ps1）には触れず、ステージ対象を明示する
 - Definition of Doneの残項目: なし
 
