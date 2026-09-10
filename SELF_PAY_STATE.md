@@ -1,5 +1,35 @@
 # AI SelfPay State
 
+## 2026-09-11
+
+- Goal: アフィリエイト導線のクリック計測を、記事・掲載位置・ASP別に収益判断できる形へ改善し、本番ビルド・公開確認まで完了する
+- Status: DONE
+- Definition of Done:
+  - GA4の`affiliate_click`イベントにASP、商品、掲載位置、ページを含める
+  - 既存の広告表示、リンク先、`sponsored nofollow`属性、本文の見た目を変えない
+  - 本番設定でビルドし、GA4、AdSense、ads.txt、sitemap、著作権表示範囲を検証する
+  - 対象ファイルだけをコミットしてmainへpushし、GitHub Pagesへの公開を確認する
+- このGoalを選んだ理由: AdSense自動取得はオーナーによるGoogle初回認証待ちだが、待機中にも収益判断の精度を上げられる。既存のアフィリエイトクリックはURLとテキストしか記録しておらず、どのASP・商品・掲載位置が反応したか比較しづらかった。
+- 現在の作業段階: Goal完了
+- 次に行う作業: オーナーのGoogleログイン後、非公開の「AI SelfPay 収益モニター」にAdSense Management APIの日次取得を設定し、毎日9:00の運営タスクが実収益を読める状態にする
+- 完了済み:
+  - AGENTS.md、SELF_PAY_STATE、git status、最近のコミット、公開サイト、直近のGitHub Actionsを確認
+  - 非公開の収益モニターシートを確認し、データが未取得で0円を実績と誤認しない状態であることを確認
+  - 広告リンクにASP名、商品名、掲載位置の計測属性を追加
+  - `affiliate_click`イベントに`affiliate_network`、`affiliate_product`、`link_position`、`page_path`を追加
+  - JavaScriptのキャッシュ更新用バージョンを更新
+  - 本番設定で29記事・4ページをエラーなくビルド
+  - 生成HTMLで19本の対象記事に計測属性があり、GA4、AdSense、`sponsored nofollow`、ads.txt、robots.txt、sitemapが維持されていることを確認
+  - プライバシーページにドラクエ著作権表示がなく、対象記事だけに表示されることを確認
+  - コミット`74c9181`をmainへpush
+  - 初回のPages deploy失敗後、変更なしの`76e7d8e`で再実行し、build・deploy成功を確認
+  - 公開ページと配信JavaScriptで新しい計測属性を確認し、ホーム、プライバシー、ads.txt、sitemapのHTTP 200を確認
+- 未解決事項:
+  - AdSense日次取得の初回設定には、AdSenseを管理しているGoogleアカウントでのログインとOAuth許可が必要
+  - Search Console、GA4、AdSense、ASPの実データが揃うまでは、計測値に基づく収益施策の順位付けはできない
+  - オーナーの未コミット変更（pelicanconf.py、RPG関連ファイル、reset-gamepad.ps1）には触れず、ステージ対象を明示する
+- Definition of Doneの残項目: なし
+
 ## 2026-09-10
 
 - Goal: 検索流入が確認できるドラクエ7「じごくのよろい」攻略記事を、実体験に基づく明確な入手・周回ガイドへ改善する
