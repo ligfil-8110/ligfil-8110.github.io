@@ -69,6 +69,9 @@
         link.addEventListener("click", function () {
             if (typeof window.gtag !== "function") return;
             window.gtag("event", "affiliate_click", {
+                affiliate_network: link.dataset.affiliateNetwork || new URL(link.href).hostname,
+                affiliate_product: link.dataset.affiliateProduct || "",
+                link_position: link.dataset.affiliatePlacement || "本文内",
                 link_url: link.href,
                 link_text: (link.textContent || link.querySelector("img")?.alt || "").trim(),
                 page_path: window.location.pathname
