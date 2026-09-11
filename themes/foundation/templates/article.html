@@ -23,6 +23,29 @@
     </aside>
     {% endif %}
 
+    {% set current_tag_names = article.tags|map(attribute='name')|list %}
+    {% set related = namespace(count=0, opened=false) %}
+    {% for candidate in articles %}
+        {% set shared_tags = candidate.tags|map(attribute='name')|select('in', current_tag_names)|list %}
+        {% if related.count < 3 and candidate.url != article.url and shared_tags %}
+            {% if not related.opened %}
+    <section class="related-articles" aria-labelledby="related-articles-title">
+        <h2 id="related-articles-title">関連記事</h2>
+        <div class="related-articles-list">
+                {% set related.opened = true %}
+            {% endif %}
+            <a class="related-article-card" href="{{ SITEURL }}/{{ candidate.url }}">
+                <strong>{{ candidate.title }}</strong>
+                {% if candidate.summary %}<span>{{ candidate.summary|striptags|truncate(95) }}</span>{% endif %}
+            </a>
+            {% set related.count = related.count + 1 %}
+        {% endif %}
+    {% endfor %}
+    {% if related.opened %}
+        </div>
+    </section>
+    {% endif %}
+
     <div class="share-row"><span>この記事をシェア</span><a href="https://twitter.com/intent/tweet?text={{ article.title|urlencode }}&url={{ SITEURL }}/{{ article.url }}" target="_blank" rel="noopener noreferrer">X</a><a href="https://b.hatena.ne.jp/entry/{{ SITEURL }}/{{ article.url }}" target="_blank" rel="noopener noreferrer">B!</a></div>
     <div class="article-tags"><strong>タグ</strong>{% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>{% endfor %}</div>
 
