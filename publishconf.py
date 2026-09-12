@@ -18,7 +18,7 @@ EXTRA_PATH_METADATA = {
 DEFAULT_DATE_FORMAT = "%Y年%m月%d日"
 
 # Increment when theme CSS or JavaScript changes so CDN/browser caches refresh.
-THEME_ASSET_VERSION = "20260912-1"
+THEME_ASSET_VERSION = "20260913-1"
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = "https://ligfil-8110.github.io"

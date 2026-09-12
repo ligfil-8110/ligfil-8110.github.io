@@ -12,6 +12,24 @@
     </div>
     <div class="hero-orbit" aria-hidden="true"><span>GAME</span><span>RUN</span><span>CREATE</span></div>
 </section>
+<section class="home-picks" aria-labelledby="home-picks-title">
+    <div class="section-heading"><div><span class="eyebrow">PICK UP</span><h2 id="home-picks-title">まずはこちら</h2></div></div>
+    <div class="home-pick-grid">
+    {% set pickup_slugs = ['dq7-re-hell-armor-farming', 'chuwi-corebook-x-os-reinstall'] %}
+    {% for pickup_slug in pickup_slugs %}
+        {% for article in articles %}
+            {% if article.slug == pickup_slug %}
+        <article class="home-pick-card">
+            <span>{{ article.category }}</span>
+            <h3><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h3>
+            <p>{{ article.summary|striptags|truncate(120) }}</p>
+            <a class="text-link" href="{{ SITEURL }}/{{ article.url }}">記事を読む →</a>
+        </article>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </div>
+</section>
 <div class="section-heading" id="latest"><div><span class="eyebrow">LATEST POSTS</span><h2>新着記事</h2></div><a class="text-link" href="{{ SITEURL }}/archives.html">すべての記事 →</a></div>
 {% elif pagetitle is defined %}
 <div class="listing-heading"><span class="eyebrow">ARCHIVE</span><h1>{{ pagetitle }}</h1><p>気になるテーマの記事をまとめています。</p></div>
