@@ -3,7 +3,7 @@
 ## 2026-09-13
 
 - Goal: 検索実績を踏まえてホームの検索結果表示と定番記事への導線を改善し、本番公開まで完了する
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done:
   - ホームのtitleとdescriptionで、ドラクエ7攻略・PC実体験・日々の記録を具体的に伝える
   - ホーム上部から、検索流入のあるドラクエ7攻略記事とCHUWIの実用記事へ直接進める
@@ -12,8 +12,8 @@
   - 非公開の収益・検索実績の数値をリポジトリへ残さない
   - 対象ファイルだけをコミットしてmainへpushし、GitHub Pages公開後のHTMLを確認する
 - このGoalを選んだ理由: Search Consoleでは検索流入の大半が既存のドラクエ7攻略記事に集中している一方、ホームは表示機会に対してクリック率が低い。記事本文を変えず、ホームの説明と定番記事への内部リンクを整えることは、既存の検索評価とAdSense収益機会を伸ばすうえで作業量とリスクが小さい。
-- 現在の作業段階: 実装・本番設定ビルド・生成HTML・表示検証完了
-- 次に行う作業: 差分を確認し、対象5ファイルだけをコミットしてmainへpushする
+- 現在の作業段階: Goal完了
+- 次に行う作業: 次回MAIN Runで収益モニター、Search Console、利用可能なGA4データを確認し、次の収益改善Goalを決定する
 - 完了済み:
   - AGENTS.md、SELF_PAY_STATE.md、git status、git log、最近の差分を確認
   - オーナーの未コミット変更（pelicanconf.py、RPG関連ファイル、reset-gamepad.ps1）を作業対象から除外
@@ -28,11 +28,16 @@
   - 生成HTMLでピックアップ2件、リンク先、title、description、canonical、GA4、AdSense、アフィリエイト属性、ads.txt、sitemap、著作権表示範囲を確認
   - Chromeで1440px幅と390px幅を確認し、カードがデスクトップ2列・モバイル1列となり横スクロールが発生しないことを確認
   - 本日のAdSense取得が予定どおり実行され、更新結果が「成功」であることを確認
+  - 対象5ファイルだけをコミット`e6f83f3`としてmainへpush
+  - GitHub Actions run `34705830355`のbuild・deploy成功を確認
+  - 公開ホームで新しいtitle、description、ピックアップ2件、更新済みCSSを確認
+  - 公開ホーム、ドラクエ7攻略記事、CHUWI記事、ads.txt、sitemap、CSSのHTTP 200を確認
+  - 公開HTMLでGA4、AdSense、アフィリエイト属性、canonical、ドラクエ著作権表示範囲が維持されていることを確認
 - 未解決事項:
   - AdSense APIのページ別レポートは空のため、ページ単位の収益判断はSearch ConsoleやGA4と組み合わせる必要がある
   - ASP収益と確認済み費用が揃うまでは純収益とは断定できない
   - オーナーの未コミット変更には触れず、ステージ対象を明示する
-- Definition of Doneの残項目: 差分確認、コミット、push、GitHub Actions、公開後確認
+- Definition of Doneの残項目: なし
 
 ## 2026-09-12
 
