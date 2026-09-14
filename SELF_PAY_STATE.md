@@ -3,7 +3,7 @@
 ## 2026-09-15
 
 - Goal: PillowのPNG保存でqualityと圧縮設定の違いを実験し、再現できる問題解決記事を本番公開する
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done:
   - 原本や本番設定を変更しないメモリ内の比較スクリプトで、quality、compress_level、optimizeを比較する
   - 出力容量と復号後の画素一致を確認し、実測結果・環境・再現手順を記事にする
@@ -21,12 +21,13 @@
 - 公開情報源: https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html 、https://github.com/python-pillow/Pillow/issues/5986 、https://github.com/python-pillow/Pillow/issues/5587
 - 評価: 基準期間は公開前28日。2026-09-22にインデックス・検索表示と流入、2026-09-29にクリックと収益経路、2026-10-13に28日評価。データ不足は保留とし、需要が確認できなければ同テーマの拡張を止める。実装DONEと収益効果は別判定。
 - 完了済み: 指示・状態・差分と所有者の未コミット変更を確認、収益モニターの更新成功、公開ホームHTTP 200、最新Actions成功を確認。
-- 現在の作業段階: 実験・記事・隔離本番ビルド・表示検証完了、公開待ち
+- 現在の作業段階: Goal完了。実装と公開は検証済み、収益効果は未評価
 - 実験結果: 人工画像と写真由来RGBの2入力で各8設定を比較。quality変更では既定出力とバイト一致、optimize有効時のlevel変更でも一致。16出力すべて復号画素が入力と一致。保存時間は準備運転後5回の中央値。写真原本は変更せず、スクリプトはファイル出力なし。
 - 検証結果: HEADの一時コピーに新記事だけを加え、所有者の未コミット変更を除外した本番ビルドで29記事・3ページ、エラーなし。1440px／390px表示で本文と比較表の横はみ出しなし。title・description・canonical・BlogPosting・GA4・AdSense・内部リンク・ads.txt・sitemap・既存アフィリエイト属性・ゲーム著作権表示範囲を確認。再実験でも容量とバイト一致・画素一致が初回と同じ。写真原本のSHA256はHEADと一致。
-- 次に行う作業: 対象のみcommit・pushし、Actionsと公開ページを確認
+- 公開結果: 対象3ファイルだけをコミットc70be3fとしてmainへpush。Actions run 34870375714成功。公開ホーム・新記事・CHUWI記事・ドラクエ7攻略記事・ads.txt・sitemap・GitHubの再現スクリプトがHTTP 200。公開記事のcanonical・構造化データ・GA4・AdSense・ポリシー導線と、sitemapへの新URL掲載を確認。新記事にゲーム著作権表示がないことを確認。
+- 次に行う作業: 次回MAIN Runで収益と検索データを再確認し、CHUWI購入条件・既存ASP導線の検証と、原本を保護する画像処理の実証候補を比較する。新記事は2026-09-22以降に評価し、同じ実験を薄い記事に分割しない。
 - 未解決事項: ページ別収益・ASP成果・費用が未確認。X投稿は本人操作または許可された公式経路のみ。オーナーの未コミット変更は作業対象外。
-- Definition of Doneの残項目: commit・push・公開確認
+- Definition of Doneの残項目: なし
 
 ## 2026-09-13
 
