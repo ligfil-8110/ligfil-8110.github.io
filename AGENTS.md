@@ -23,6 +23,8 @@ Require owner action only for identity verification, new paid or contractual ser
 - Preserve the owner's natural Japanese voice, including casual phrasing, enthusiasm, humor, and personal asides. Do not homogenize existing articles into polished, generic, or obviously AI-written prose.
 - Prefer small, purpose-specific edits over full rewrites. Unless the owner explicitly requests a rewrite, keep unaffected sentences and structure intact and limit changes to factual corrections, clarity problems, SEO metadata, broken links, or other concrete issues.
 - Avoid stock AI phrasing, repetitive summaries, excessive caveats, mechanical heading structures, and formulaic introductions. Read neighboring articles before editing so additions sound like the same author.
+- Keep internal business caveats (such as unmeasured SEO or revenue effects) in operational records, not in reader-facing articles unless directly relevant to the article's claims. State evidence provenance naturally; do not append defensive lists of things the article never claimed.
+- Match the author's sentence rhythm and personal commentary, not just punctuation. Do not simulate their voice by mechanically adding exclamation marks, humor, or invented reactions and experiences.
 - Use descriptive Japanese titles and headings. Answer the main query early, then provide evidence, steps, caveats, and a concise conclusion.
 - Add a unique `Title`, `Date`, `Category`, `Tags`, `Slug`, and `Summary` metadata block to every article. Add `Modified` when materially updating an older article.
 - Preserve existing public slugs. If a slug must change, implement and verify a redirect before release.
