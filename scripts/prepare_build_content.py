@@ -15,7 +15,9 @@ from PIL import Image, ImageOps
 
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
-MAX_EDGE = 1800
+# The article column is under 800 CSS pixels; 1200 px also covers the
+# high-density mobile layout without shipping the full camera resolution.
+MAX_EDGE = 1200
 MIN_BYTES_TO_REENCODE = 320 * 1024
 
 
