@@ -4,6 +4,7 @@ Modified: 2026-09-15 06:55
 Category: 技術メモ
 Tags: Python, Pillow, 画像圧縮, PC
 Slug: pillow-png-quality-compress-level
+Image: images/2026-09/pillow-png-compression-comparison.png
 Summary: PNG保存のquality、compress_level、optimizeを同じ画像で比較。容量と復号後の画素を確認し、原本を変更しない再現スクリプトも公開します。
 
 PNGを小さくしたくて、Pillowの`quality`を下げる。でも容量が変わらない……。JPEGと同じつもりで使うと、ちょっとややこしいですね！
@@ -11,6 +12,8 @@ PNGを小さくしたくて、Pillowの`quality`を下げる。でも容量が�
 今回の比較では、PNGの`quality=10`と`quality=90`は、指定なしとファイルの中身まで同じでした！PNGで容量を調整するなら、使うのは`compress_level`や`optimize`の方です。
 
 今回はこのブログの作業環境で、Codexにスクリプトを実行してもらいました（2026年9月15日）。結果と、手元でも試せるコードを載せておきますね！
+
+まずは写真で試した結果を図にしました。
 
 ## PNGを小さくするなら？
 
