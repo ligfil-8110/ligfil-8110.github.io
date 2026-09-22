@@ -12,7 +12,8 @@
     {% endif %}
     <div class="article-body">{{ article.content|replace('<img ', '<img loading="lazy" decoding="async" ') }}</div>
 
-    {% if article.slug.startswith('dragon-quest-vii-play-') or article.slug.startswith('dq7-re-') %}
+    {% set is_dq7_reimagined = article.slug.startswith('dragon-quest-vii-play-') or article.slug.startswith('dq7-re-') %}
+    {% if is_dq7_reimagined %}
     <aside class="article-affiliate" aria-label="関連商品">
         <span class="ad-label">広告・関連商品</span>
         <a href="https://af.moshimo.com/af/c/click?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18378428%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbook%2Fi%2F21744753%2F" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer-when-downgrade" data-affiliate-network="もしもアフィリエイト" data-affiliate-product="ドラゴンクエストVII Reimagined Nintendo Switch 2版" data-affiliate-placement="記事下・関連商品">
@@ -27,7 +28,9 @@
     {% set related = namespace(count=0, opened=false) %}
     {% for candidate in articles %}
         {% set shared_tags = candidate.tags|map(attribute='name')|select('in', current_tag_names)|list %}
-        {% if related.count < 3 and candidate.url != article.url and shared_tags %}
+        {% set candidate_is_dq7_reimagined = candidate.slug.startswith('dragon-quest-vii-play-') or candidate.slug.startswith('dq7-re-') %}
+        {% set is_relevant = (is_dq7_reimagined and candidate_is_dq7_reimagined) or (not is_dq7_reimagined and shared_tags) %}
+        {% if related.count < 3 and candidate.url != article.url and is_relevant %}
             {% if not related.opened %}
     <section class="related-articles" aria-labelledby="related-articles-title">
         <h2 id="related-articles-title">関連記事</h2>
