@@ -41,7 +41,7 @@
     {% if not pagetitle is defined and loop.first %}
     <article class="featured-post">
         <a class="featured-image" href="{{ SITEURL }}/{{ article.url }}">
-            {% if article.image %}<img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" width="1200" height="675">{% else %}<img src="{{ SITEURL }}/images/default-eyecatch.jpg" alt="" width="1200" height="675">{% endif %}
+            {% if article.image %}<img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" width="1200" height="675">{% else %}<img src="{{ SITEURL }}/images/default-eyecatch.png" alt="" width="1200" height="675">{% endif %}
         </a>
         <div class="featured-copy">
             <div class="post-meta"><span>{{ article.category }}</span><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></div>
@@ -53,7 +53,7 @@
     {% else %}
     <article class="post-card">
         <a class="post-card-image" href="{{ SITEURL }}/{{ article.url }}">
-            {% if article.image %}<img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" width="720" height="405" loading="lazy" decoding="async">{% else %}<img src="{{ SITEURL }}/images/default-eyecatch.jpg" alt="" width="720" height="405" loading="lazy" decoding="async">{% endif %}
+            {% if article.image %}<img src="{{ SITEURL }}/{{ article.image }}" alt="{{ article.title }}" width="720" height="405" loading="lazy" decoding="async">{% else %}<img src="{{ SITEURL }}/images/default-eyecatch.png" alt="" width="720" height="405" loading="lazy" decoding="async">{% endif %}
         </a>
         <div class="post-card-copy">
             <div class="post-meta"><span>{{ article.category }}</span><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></div>
