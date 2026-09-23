@@ -17,13 +17,13 @@
         {% set page_title = article.title ~ ' | ' ~ site_name %}
         {% set page_description = article.summary|striptags|truncate(150) %}
     {% elif page %}
-        {% set page_title = page.title ~ ' | ' ~ site_name %}
+        {% set page_title = site_name if page.en_home else page.title ~ ' | ' ~ site_name %}
         {% set page_description = page.summary|striptags|truncate(150) if page.summary else SITE_DESCRIPTION %}
     {% elif pagetitle is defined %}
         {% set page_title = pagetitle ~ ' | ' ~ SITENAME %}
         {% set page_description = pagetitle ~ 'に関する記事の一覧です。' %}
     {% else %}
-        {% set page_title = 'ドラクエ7攻略・PC実体験・日々の記録 | ' ~ SITENAME %}
+        {% set page_title = site_name %}
         {% set page_description = 'ドラクエ7 Reimaginedの攻略とプレイ記録、CHUWI CoreBook XなどPC・ガジェットの実体験、日々の記録を発信しています。' %}
     {% endif %}
     <title>{% block windowtitle %}{{ page_title }}{% endblock %}</title>
