@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-{% if page.en_article %}
+{% if page.en_home %}
+<div class="english-home">{{ page.content }}</div>
+{% elif page.en_article %}
 <article class="article-page simple-page">
     <header class="article-header">
         <div class="post-meta"><span>{{ page.category }}</span><time datetime="{{ page.date.isoformat() }}">Published {{ page.date.strftime('%B %d, %Y') }}</time></div>

@@ -41,7 +41,6 @@ a:hover { color: var(--accent-dark); }
 .mobile-nav nav a { padding: .5rem .7rem; }
 
 .site-shell { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 44px; max-width: 1180px; margin: 0 auto; padding: 42px 24px 80px; }
-.site-shell.english-shell { grid-template-columns: minmax(0, 1fr); max-width: 980px; }
 .content-column { min-width: 0; }
 .home-hero { position: relative; display: grid; grid-template-columns: 1.35fr 1fr; align-items: center; min-height: 330px; margin-bottom: 52px; padding: 48px 54px; overflow: hidden; border-radius: 24px; color: #fff; background: radial-gradient(circle at 85% 20%, rgba(255,255,255,.18), transparent 26%), linear-gradient(120deg, #172033, #26395d); box-shadow: var(--shadow); }
 .home-hero::after { position: absolute; content: ""; right: -100px; bottom: -150px; width: 340px; height: 340px; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; box-shadow: 0 0 0 36px rgba(255,255,255,.04), 0 0 0 72px rgba(255,255,255,.03); }
@@ -115,6 +114,7 @@ a:hover { color: var(--accent-dark); }
 
 .site-sidebar { display: grid; align-content: start; gap: 18px; }
 .sidebar-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+.sidebar-note { margin: 12px 0 0; color: var(--muted); font-size: .67rem; line-height: 1.55; }
 .sidebar-intro { background: #fff7f3; border-color: #ffe0d5; }
 .affiliate-sidebar { display: grid; justify-items: center; gap: 8px; padding: 16px; text-align: center; }
 .ad-label { display: block; color: #98a2b3; font-size: .58rem; font-weight: 800; letter-spacing: .16em; }

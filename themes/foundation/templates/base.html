@@ -45,6 +45,12 @@
     {% elif page and page.ja_url is defined %}
     <link rel="alternate" hreflang="ja" href="{{ SITEURL }}/{{ page.ja_url }}">
     <link rel="alternate" hreflang="en" href="{{ SITEURL }}/{{ page.url }}">
+    {% elif page and page.en_url %}
+    <link rel="alternate" hreflang="ja" href="{{ SITEURL }}/{{ page.url }}">
+    <link rel="alternate" hreflang="en" href="{{ SITEURL }}/{{ page.en_url }}">
+    {% elif not article and not page and pagetitle is not defined and (articles_page is not defined or articles_page.number == 1) %}
+    <link rel="alternate" hreflang="ja" href="{{ SITEURL }}/">
+    <link rel="alternate" hreflang="en" href="{{ SITEURL }}/en/">
     {% endif %}
 
     <meta property="og:site_name" content="{{ site_name }}">
@@ -108,10 +114,10 @@
     <header class="site-header">
         <div class="header-inner">
             <a class="brand" href="{{ SITEURL }}/{{ 'en/' if is_english else '' }}" aria-label="{{ site_name }} {{ 'home' if is_english else 'ホーム' }}">
-                <span class="brand-mark" aria-hidden="true">{{ 'M' if is_english else 'み' }}</span>
+                <span class="brand-mark" aria-hidden="true">み</span>
                 <span class="brand-copy">
                     <strong>{{ site_name }}</strong>
-                    <small>{{ 'Practical notes on Python, images, and everyday tech' if is_english else 'ゲーム・ランニング・日々の記録' }}</small>
+                    <small>{{ 'Games, PCs, running, and everyday notes' if is_english else 'ゲーム・ランニング・日々の記録' }}</small>
                 </span>
             </a>
 
@@ -119,13 +125,15 @@
                 {% if is_english %}
                 <a href="{{ SITEURL }}/en/">Home</a>
                 <a href="{{ SITEURL }}/en/#articles">Articles</a>
+                <a href="{{ SITEURL }}/en/about.html">About</a>
+                <a href="{{ SITEURL }}/en/contact.html">Contact</a>
                 <a lang="ja" href="{{ SITEURL }}/{{ page.ja_url if page and page.ja_url is defined else article.url if article else '' }}">日本語</a>
                 {% else %}
                 <a href="{{ SITEURL }}/">ホーム</a>
                     {% if DISPLAY_PAGES_ON_MENU %}
                         {% for p in pages %}{% if p.lang != 'en' %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endif %}{% endfor %}
                     {% endif %}
-                <a lang="en" href="{{ SITEURL }}/{{ article.en_url if article and article.en_url else 'en/' }}">English</a>
+                <a lang="en" href="{{ SITEURL }}/{{ article.en_url if article and article.en_url else page.en_url if page and page.en_url else 'en/' }}">English</a>
                 {% endif %}
             </nav>
 
@@ -135,25 +143,56 @@
                     {% if is_english %}
                     <a href="{{ SITEURL }}/en/">Home</a>
                     <a href="{{ SITEURL }}/en/#articles">Articles</a>
+                    <a href="{{ SITEURL }}/en/about.html">About</a>
+                    <a href="{{ SITEURL }}/en/contact.html">Contact</a>
                     <a lang="ja" href="{{ SITEURL }}/{{ page.ja_url if page and page.ja_url is defined else article.url if article else '' }}">日本語</a>
                     {% else %}
                     <a href="{{ SITEURL }}/">ホーム</a>
                     {% for p in pages %}{% if p.lang != 'en' %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endif %}{% endfor %}
                     <a href="{{ SITEURL }}/archives.html">記事一覧</a>
-                    <a lang="en" href="{{ SITEURL }}/{{ article.en_url if article and article.en_url else 'en/' }}">English</a>
+                    <a lang="en" href="{{ SITEURL }}/{{ article.en_url if article and article.en_url else page.en_url if page and page.en_url else 'en/' }}">English</a>
                     {% endif %}
                 </nav>
             </details>
         </div>
     </header>
 
-    <main id="main-content" class="site-shell{% if is_english %} english-shell{% endif %}">
+    <main id="main-content" class="site-shell">
         <div class="content-column" role="main">
             {% block content %}{% endblock %}
         </div>
 
-        {% if not is_english %}
-        <aside class="site-sidebar" aria-label="サイト内ナビゲーション">
+        <aside class="site-sidebar" aria-label="{{ 'Site navigation' if is_english else 'サイト内ナビゲーション' }}">
+            {% if is_english %}
+            {% set en_category_names = {'ゲーム': 'Games', 'ご挨拶': 'Personal updates', '技術メモ': 'Tech notes', 'お知らせ': 'Announcements', '日記': 'Everyday life', '投資活動': 'Investing'} %}
+            {% set en_tag_names = {'アウトレット': 'Outlet shopping', 'ブログ': 'Blogging', 'ドラクエ': 'Dragon Quest', 'ガジェット': 'Gadgets', 'ゲーム': 'Games', 'グルメ': 'Food', 'ホンダラ': 'Hondara', '画像圧縮': 'Image compression', 'キーファ': 'Kiefer', 'マクドナルド': 'McDonald’s', '日記': 'Everyday life', '投資活動': 'Investing', 'ランニング': 'Running'} %}
+            <section class="sidebar-card sidebar-intro">
+                <span class="eyebrow">WELCOME</span>
+                <h2>Notes from<br>Mitchy’s life.</h2>
+                <p>Game guides and impressions, PC and gadget notes, running, and everyday discoveries from Japan.</p>
+                <a class="text-link" href="{{ SITEURL }}/en/about.html">About Mitchy →</a>
+            </section>
+
+            <section class="sidebar-card">
+                <div class="sidebar-heading"><h2>Categories</h2><a href="{{ SITEURL }}/categories.html">All (Japanese)</a></div>
+                <ul class="sidebar-list">
+                    {% for cat, cat_articles in categories %}
+                    <li><a href="{{ SITEURL }}/{{ cat.url }}"><span>{{ en_category_names.get(cat|string, cat) }}</span><span class="count">{{ cat_articles|count }}</span></a></li>
+                    {% endfor %}
+                </ul>
+                <p class="sidebar-note">These archive links open Japanese posts.</p>
+            </section>
+
+            <section class="sidebar-card">
+                <div class="sidebar-heading"><h2>Topics</h2></div>
+                <div class="tag-cloud">
+                    {% for tag, tag_articles in tags|sort %}
+                        {% if loop.index <= 14 %}<a href="{{ SITEURL }}/{{ tag.url }}">#{{ en_tag_names.get(tag|string, tag) }}</a>{% endif %}
+                    {% endfor %}
+                </div>
+                <p class="sidebar-note">Topic links open Japanese posts.</p>
+            </section>
+            {% else %}
             <section class="sidebar-card sidebar-intro">
                 <span class="eyebrow">WELCOME</span>
                 <h2>みっちーの視点で、<br>毎日を記録。</h2>
@@ -178,20 +217,20 @@
                     {% endfor %}
                 </div>
             </section>
+            {% endif %}
         </aside>
-        {% endif %}
     </main>
 
     <footer class="site-footer">
         <div class="footer-inner">
             <div>
                 <a class="footer-brand" href="{{ SITEURL }}/{{ 'en/' if is_english else '' }}">{{ site_name }}</a>
-                <p>{{ 'Practical notes on Python, image processing, and everyday tech.' if is_english else 'ゲームのこと、ランニングのこと、暮らしの中の気づきをゆるく記録。' }}</p>
+                <p>{{ 'Game stories, PC and gadget notes, running, and everyday discoveries.' if is_english else 'ゲームのこと、ランニングのこと、暮らしの中の気づきをゆるく記録。' }}</p>
             </div>
             <nav aria-label="{{ 'Footer navigation' if is_english else 'フッターナビゲーション' }}">
                 {% if is_english %}
-                <a href="{{ SITEURL }}/pages/about.html">About (Japanese)</a>
-                <a href="{{ SITEURL }}/pages/contact.html">Contact (Japanese)</a>
+                <a href="{{ SITEURL }}/en/about.html">About</a>
+                <a href="{{ SITEURL }}/en/contact.html">Contact</a>
                 <a href="{{ SITEURL }}/pages/privacy-policy.html">Privacy (Japanese)</a>
                 {% else %}
                 <a href="{{ SITEURL }}/pages/about.html">プロフィール</a>

@@ -1,38 +1,70 @@
-Title: Practical Python and Image Processing Notes
+Title: Home
 Date: 2026-09-23 00:00
 Category: English
-Tags: Python, Pillow, Image Processing
+Tags: Blog, Games, PC, Running
 Slug: english-home
-Summary: Practical Pillow notes based on real image files: PNG compression, JPEG quality and progressive scans, and built-in AVIF support.
+Summary: Game guides and impressions, PC and gadget notes, running, and everyday discoveries from Mitchy in Japan.
 Lang: en
 URL: en/
 Save_as: en/index.html
 ja_url:
+en_home: true
 
-## Hello, I’m Mitchy
+<section class="home-hero">
+    <div class="hero-copy">
+        <span class="eyebrow">MITCHY'S NOTEBOOK</span>
+        <h1>A little of what I<br><em>play, try, and enjoy.</em></h1>
+        <p>Game guides and impressions, PC and gadget experiments, running notes, and everyday discoveries from life in Japan.</p>
+        <a class="primary-link" href="#articles">Read the latest posts <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="hero-orbit" aria-hidden="true"><span>GAME</span><span>RUN</span><span>NOTE</span></div>
+</section>
 
-I’m a Japanese hobbyist who likes trying things out and keeping useful notes. This English section starts with practical image-processing experiments using Python and Pillow. The measurements come from the files and setup described in each post, so results may differ with your images or environment.
+<section class="home-picks" aria-labelledby="home-picks-title">
+    <div class="section-heading"><div><span class="eyebrow">PICK UP</span><h2 id="home-picks-title">A little of everything</h2></div></div>
+    <div class="home-pick-grid">
+        <article class="home-pick-card">
+            <span>GAMES</span>
+            <h3><a href="/dq7-re-hell-armor-farming.html">Dragon Quest VII: where I farmed Hell Armor</a></h3>
+            <p>I was hunting this rare drop for the item collector achievement and found a spot where Iziraliels always appear. The full guide is in Japanese.</p>
+            <a class="text-link" href="/dq7-re-hell-armor-farming.html">Read the Japanese article →</a>
+        </article>
+        <article class="home-pick-card">
+            <span>PC &amp; GADGETS</span>
+            <h3><a href="/chuwi-corebook-x-os-reinstall.html">Reinstalling Windows 11 on my CHUWI CoreBook X</a></h3>
+            <p>Notes from my own reinstall, including the difference between a standard Windows install and CHUWI’s factory recovery process. The full guide is in Japanese.</p>
+            <a class="text-link" href="/chuwi-corebook-x-os-reinstall.html">Read the Japanese article →</a>
+        </article>
+    </div>
+</section>
 
-<h2 id="articles">Latest technical posts</h2>
-
-These are English editions of my three latest technical posts. The original Japanese articles remain available from the language switch on each page.
-
-### [Pillow AVIF Support: Save AVIF Without an Extra Plugin](/en/pillow-avif-support.html)
-
-Pillow 11.3.0 and later can include AVIF support in its prebuilt wheels. I checked it with Pillow 12.3.0, then compared `quality` and `speed` on seven resized photos.
-
-### [Pillow JPEG Compression: quality, optimize, and progressive Compared](/en/pillow-jpeg-quality-progressive.html)
-
-I compared JPEG save options on seven photos resized to a 1,200-pixel long edge. In this set, `quality=80, progressive=True` produced files 56.4% smaller than `quality=95`.
-
-### [Pillow PNG Compression: Why quality Does Not Change File Size](/en/pillow-png-compression.html)
-
-In my comparison, `quality=10` and `quality=90` produced identical PNG files. The useful controls here were `compress_level` and `optimize`.
-
-## What you’ll find here
-
-- Repeatable Python examples and comparison scripts
-- Image-format settings explained with actual output sizes and timings
-- Notes about what each experiment did—and did not—measure
-
-For more posts in Japanese, [visit the Japanese home page](/).
+<div class="section-heading" id="articles"><div><span class="eyebrow">LATEST POSTS</span><h2>Latest English articles</h2></div></div>
+<div class="post-list">
+    <article class="featured-post">
+        <a class="featured-image" href="/en/pillow-avif-support.html"><img src="/images/2026-02/0211/P_20260211_194528.jpg" alt="Close-up of a CHUWI CoreBook X keyboard used in the image comparisons." width="1200" height="675" loading="lazy" decoding="async"></a>
+        <div class="featured-copy">
+            <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-19">September 19, 2026</time></div>
+            <h2><a href="/en/pillow-avif-support.html">Pillow AVIF Support: Save AVIF Without an Extra Plugin</a></h2>
+            <p>Pillow 11.3.0 and later can include AVIF support in its prebuilt wheels. I checked Pillow 12.3.0 and compared quality and speed on seven photos.</p>
+            <a class="text-link" href="/en/pillow-avif-support.html">Read the article →</a>
+        </div>
+    </article>
+    <article class="post-card">
+        <a class="post-card-image" href="/en/pillow-jpeg-quality-progressive.html"><img src="/images/2026-02/0211/P_20260211_194528.jpg" alt="Close-up of a CHUWI CoreBook X keyboard used in the JPEG comparison." width="720" height="405" loading="lazy" decoding="async"></a>
+        <div class="post-card-copy">
+            <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-18">September 18, 2026</time></div>
+            <h2><a href="/en/pillow-jpeg-quality-progressive.html">Pillow JPEG Compression: quality, optimize, and progressive Compared</a></h2>
+            <p>Seven photos, resized to the same 1,200-pixel long edge, helped me compare JPEG save options. In this set, quality=80 with progressive output made the smallest files.</p>
+            <a class="text-link" href="/en/pillow-jpeg-quality-progressive.html">Read the article →</a>
+        </div>
+    </article>
+    <article class="post-card">
+        <a class="post-card-image" href="/en/pillow-png-compression.html"><img src="/images/2026-09/pillow-png-compression-comparison.png" alt="Chart comparing PNG file sizes and save times for Pillow compression settings." width="720" height="405" loading="lazy" decoding="async"></a>
+        <div class="post-card-copy">
+            <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-15">September 15, 2026</time></div>
+            <h2><a href="/en/pillow-png-compression.html">Pillow PNG Compression: Why quality Does Not Change File Size</a></h2>
+            <p>In my comparison, quality=10 and quality=90 produced identical PNG files. The useful controls were compress_level and optimize.</p>
+            <a class="text-link" href="/en/pillow-png-compression.html">Read the article →</a>
+        </div>
+    </article>
+</div>
