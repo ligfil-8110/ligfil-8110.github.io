@@ -5,6 +5,7 @@ Tags: Python, Pillow, AVIF, 画像圧縮, PC
 Slug: pillow-avif-built-in-quality-speed
 Image: images/2026-02/0211/P_20260211_194528.jpg
 Summary: PillowでAVIFを保存するのにpillow-avif-pluginは今も必要なのか。Pillow 12.3.0で標準対応を確認し、qualityとspeedを実写真7枚で比較しました。
+en_url: en/pillow-avif-support.html
 
 PillowでAVIFを保存しようと検索すると、`pillow-avif-plugin`を追加する手順が出てきます。でも、今のPillowでも必要なのでしょうか？
 

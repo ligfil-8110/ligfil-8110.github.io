@@ -5,6 +5,7 @@ Tags: Python, Pillow, JPEG, 画像圧縮, PC
 Slug: pillow-jpeg-quality-progressive-comparison
 Image: images/2026-02/0211/P_20260211_194528.jpg
 Summary: PillowのJPEG保存でquality、optimize、progressiveを変えると容量と処理時間はどう変わるのか。実写真7枚を同じ1200pxへ縮小して比較しました。
+en_url: en/pillow-jpeg-quality-progressive.html
 
 PillowでJPEGを軽くするとき、`quality`はいくつがいいのか。`optimize=True`や`progressive=True`も付けた方がいいのか。指定が増えてくると、どれが効いているのか分かりにくいですよね……。
 

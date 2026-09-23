@@ -1,7 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
+{% if page.en_article %}
+<article class="article-page simple-page">
+    <header class="article-header">
+        <div class="post-meta"><span>{{ page.category }}</span><time datetime="{{ page.date.isoformat() }}">Published {{ page.date.strftime('%B %d, %Y') }}</time></div>
+        <h1>{{ page.title }}</h1>
+        {% if page.summary %}<p class="article-lead">{{ page.summary|striptags }}</p>{% endif %}
+    </header>
+    {% if page.image %}<figure class="article-cover"><img src="{{ SITEURL }}/{{ page.image }}" alt="{{ page.image_alt|default(page.title) }}" width="1200" height="675" fetchpriority="high"></figure>{% endif %}
+    <div class="article-body">{{ page.content|replace('<img ', '<img loading="lazy" decoding="async" ') }}</div>
+    <div class="share-row"><span>Share this article</span><a href="https://twitter.com/intent/tweet?text={{ page.title|urlencode }}&amp;url={{ SITEURL }}/{{ page.url }}" target="_blank" rel="noopener noreferrer">X</a></div>
+    <nav class="post-navigation" aria-label="Article navigation">
+        <a href="{{ SITEURL }}/en/"><small>Back to</small><strong>English home</strong></a>
+        <a class="back-home" lang="ja" href="{{ SITEURL }}/{{ page.ja_url }}">日本語版</a>
+        <span></span>
+    </nav>
+</article>
+{% else %}
 <article class="article-page simple-page">
     <header class="article-header"><span class="eyebrow">PAGE</span><h1>{{ page.title }}</h1></header>
     <div class="article-body">{{ page.content }}</div>
 </article>
+{% endif %}
 {% endblock %}

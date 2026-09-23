@@ -1,14 +1,23 @@
 <!doctype html>
-<html lang="{{ DEFAULT_LANG|default('ja') }}">
+{% if article %}
+    {% set content_lang = article.lang|default(DEFAULT_LANG, true) %}
+{% elif page %}
+    {% set content_lang = page.lang|default(DEFAULT_LANG, true) %}
+{% else %}
+    {% set content_lang = DEFAULT_LANG|default('ja') %}
+{% endif %}
+{% set is_english = content_lang == 'en' %}
+{% set site_name = 'Mitchy’s Blog' if is_english else SITENAME %}
+<html lang="{{ content_lang }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0f172a">
     {% if article %}
-        {% set page_title = article.title ~ ' | ' ~ SITENAME %}
+        {% set page_title = article.title ~ ' | ' ~ site_name %}
         {% set page_description = article.summary|striptags|truncate(150) %}
     {% elif page %}
-        {% set page_title = page.title ~ ' | ' ~ SITENAME %}
+        {% set page_title = page.title ~ ' | ' ~ site_name %}
         {% set page_description = page.summary|striptags|truncate(150) if page.summary else SITE_DESCRIPTION %}
     {% elif pagetitle is defined %}
         {% set page_title = pagetitle ~ ' | ' ~ SITENAME %}
@@ -19,7 +28,7 @@
     {% endif %}
     <title>{% block windowtitle %}{{ page_title }}{% endblock %}</title>
     <meta name="description" content="{{ page_description }}">
-    <meta name="author" content="{{ AUTHOR }}">
+    <meta name="author" content="{{ 'Mitchy' if is_english else AUTHOR }}">
     {% if article %}
         {% set canonical_path = article.url %}
     {% elif page %}
@@ -30,14 +39,21 @@
         {% set canonical_path = page_url if page_url is defined else '' %}
     {% endif %}
     <link rel="canonical" href="{{ SITEURL }}/{{ canonical_path }}">
+    {% if article and article.en_url %}
+    <link rel="alternate" hreflang="ja" href="{{ SITEURL }}/{{ article.url }}">
+    <link rel="alternate" hreflang="en" href="{{ SITEURL }}/{{ article.en_url }}">
+    {% elif page and page.ja_url is defined %}
+    <link rel="alternate" hreflang="ja" href="{{ SITEURL }}/{{ page.ja_url }}">
+    <link rel="alternate" hreflang="en" href="{{ SITEURL }}/{{ page.url }}">
+    {% endif %}
 
-    <meta property="og:site_name" content="{{ SITENAME }}">
-    <meta property="og:type" content="{{ 'article' if article else 'website' }}">
+    <meta property="og:site_name" content="{{ site_name }}">
+    <meta property="og:type" content="{{ 'article' if article or (page and page.en_article) else 'website' }}">
     <meta property="og:title" content="{{ page_title }}">
     <meta property="og:description" content="{{ page_description }}">
     <meta property="og:url" content="{{ SITEURL }}/{{ canonical_path }}">
-    {% if article and article.image %}
-    <meta property="og:image" content="{{ SITEURL }}/{{ article.image }}">
+    {% if (article and article.image) or (page and page.image) %}
+    <meta property="og:image" content="{{ SITEURL }}/{{ article.image if article else page.image }}">
     <meta name="twitter:card" content="summary_large_image">
     {% else %}
     <meta name="twitter:card" content="summary">
@@ -59,6 +75,20 @@
       "image": {{ (SITEURL ~ '/' ~ article.image)|tojson }}{% endif %}
     }
     </script>
+    {% elif page and page.en_article %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ page.title|striptags|tojson }},
+      "description": {{ page.summary|striptags|tojson }},
+      "datePublished": {{ page.date.isoformat()|tojson }},
+      "dateModified": {{ (page.modified.isoformat() if page.modified else page.date.isoformat())|tojson }},
+      "author": {"@type": "Person", "name": "Mitchy"},
+      "mainEntityOfPage": {{ (SITEURL ~ '/' ~ page.url)|tojson }}{% if page.image %},
+      "image": {{ (SITEURL ~ '/' ~ page.image)|tojson }}{% endif %}
+    }
+    </script>
     {% endif %}
 
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/custom.css?v={{ THEME_ASSET_VERSION|default('1') }}">
@@ -74,40 +104,55 @@
     {% include "analytics.html" %}
 </head>
 <body>
-    <a class="skip-link" href="#main-content">本文へ移動</a>
+    <a class="skip-link" href="#main-content">{{ 'Skip to content' if is_english else '本文へ移動' }}</a>
     <header class="site-header">
         <div class="header-inner">
-            <a class="brand" href="{{ SITEURL }}/" aria-label="{{ SITENAME }} ホーム">
-                <span class="brand-mark" aria-hidden="true">み</span>
+            <a class="brand" href="{{ SITEURL }}/{{ 'en/' if is_english else '' }}" aria-label="{{ site_name }} {{ 'home' if is_english else 'ホーム' }}">
+                <span class="brand-mark" aria-hidden="true">{{ 'M' if is_english else 'み' }}</span>
                 <span class="brand-copy">
-                    <strong>{{ SITENAME }}</strong>
-                    <small>ゲーム・ランニング・日々の記録</small>
+                    <strong>{{ site_name }}</strong>
+                    <small>{{ 'Practical notes on Python, images, and everyday tech' if is_english else 'ゲーム・ランニング・日々の記録' }}</small>
                 </span>
             </a>
 
-            <nav class="desktop-nav" aria-label="メインナビゲーション">
+            <nav class="desktop-nav" aria-label="{{ 'Primary navigation' if is_english else 'メインナビゲーション' }}">
+                {% if is_english %}
+                <a href="{{ SITEURL }}/en/">Home</a>
+                <a href="{{ SITEURL }}/en/#articles">Articles</a>
+                <a lang="ja" href="{{ SITEURL }}/{{ page.ja_url if page and page.ja_url is defined else article.url if article else '' }}">日本語</a>
+                {% else %}
                 <a href="{{ SITEURL }}/">ホーム</a>
-                {% if DISPLAY_PAGES_ON_MENU %}
-                    {% for p in pages %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endfor %}
+                    {% if DISPLAY_PAGES_ON_MENU %}
+                        {% for p in pages %}{% if p.lang != 'en' %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endif %}{% endfor %}
+                    {% endif %}
+                <a lang="en" href="{{ SITEURL }}/{{ article.en_url if article and article.en_url else 'en/' }}">English</a>
                 {% endif %}
             </nav>
 
             <details class="mobile-nav">
-                <summary aria-label="メニューを開く"><span aria-hidden="true">☰</span> メニュー</summary>
-                <nav aria-label="モバイルナビゲーション">
+                <summary aria-label="{{ 'Open menu' if is_english else 'メニューを開く' }}"><span aria-hidden="true">☰</span> {{ 'Menu' if is_english else 'メニュー' }}</summary>
+                <nav aria-label="{{ 'Mobile navigation' if is_english else 'モバイルナビゲーション' }}">
+                    {% if is_english %}
+                    <a href="{{ SITEURL }}/en/">Home</a>
+                    <a href="{{ SITEURL }}/en/#articles">Articles</a>
+                    <a lang="ja" href="{{ SITEURL }}/{{ page.ja_url if page and page.ja_url is defined else article.url if article else '' }}">日本語</a>
+                    {% else %}
                     <a href="{{ SITEURL }}/">ホーム</a>
-                    {% for p in pages %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endfor %}
+                    {% for p in pages %}{% if p.lang != 'en' %}<a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>{% endif %}{% endfor %}
                     <a href="{{ SITEURL }}/archives.html">記事一覧</a>
+                    <a lang="en" href="{{ SITEURL }}/{{ article.en_url if article and article.en_url else 'en/' }}">English</a>
+                    {% endif %}
                 </nav>
             </details>
         </div>
     </header>
 
-    <main id="main-content" class="site-shell">
+    <main id="main-content" class="site-shell{% if is_english %} english-shell{% endif %}">
         <div class="content-column" role="main">
             {% block content %}{% endblock %}
         </div>
 
+        {% if not is_english %}
         <aside class="site-sidebar" aria-label="サイト内ナビゲーション">
             <section class="sidebar-card sidebar-intro">
                 <span class="eyebrow">WELCOME</span>
@@ -134,18 +179,25 @@
                 </div>
             </section>
         </aside>
+        {% endif %}
     </main>
 
     <footer class="site-footer">
         <div class="footer-inner">
             <div>
-                <a class="footer-brand" href="{{ SITEURL }}/">{{ SITENAME }}</a>
-                <p>ゲームのこと、ランニングのこと、暮らしの中の気づきをゆるく記録。</p>
+                <a class="footer-brand" href="{{ SITEURL }}/{{ 'en/' if is_english else '' }}">{{ site_name }}</a>
+                <p>{{ 'Practical notes on Python, image processing, and everyday tech.' if is_english else 'ゲームのこと、ランニングのこと、暮らしの中の気づきをゆるく記録。' }}</p>
             </div>
-            <nav aria-label="フッターナビゲーション">
+            <nav aria-label="{{ 'Footer navigation' if is_english else 'フッターナビゲーション' }}">
+                {% if is_english %}
+                <a href="{{ SITEURL }}/pages/about.html">About (Japanese)</a>
+                <a href="{{ SITEURL }}/pages/contact.html">Contact (Japanese)</a>
+                <a href="{{ SITEURL }}/pages/privacy-policy.html">Privacy (Japanese)</a>
+                {% else %}
                 <a href="{{ SITEURL }}/pages/about.html">プロフィール</a>
                 <a href="{{ SITEURL }}/pages/contact.html">お問い合わせ</a>
                 <a href="{{ SITEURL }}/pages/privacy-policy.html">プライバシー</a>
+                {% endif %}
                 {% for name, link in SOCIAL %}<a href="{{ link }}" target="_blank" rel="noopener noreferrer">{{ name }}</a>{% endfor %}
             </nav>
         </div>
@@ -153,7 +205,7 @@
             {% if article and article.tags|selectattr('name', 'equalto', 'ドラクエ')|list %}
             <div class="rights-notice">このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。<br>© ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX</div>
             {% endif %}
-            <div>© 2026 {{ AUTHOR }} · All rights reserved.</div>
+            <div>© 2026 {{ 'Mitchy' if is_english else AUTHOR }} · All rights reserved.</div>
         </div>
     </footer>
     <div class="image-lightbox" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="image-lightbox-title" aria-describedby="image-lightbox-caption" hidden>
