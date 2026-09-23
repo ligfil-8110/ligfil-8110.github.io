@@ -3,7 +3,7 @@ Date: 2026-09-23 00:00
 Category: English
 Tags: Blog, Games, PC, Running
 Slug: english-home
-Summary: Game guides and impressions, PC and gadget notes, running, and everyday discoveries from Mitchy in Japan.
+Summary: Game guides and impressions, PC and gadget notes, running, and everyday discoveries from Ligfil in Japan.
 Lang: en
 URL: en/
 Save_as: en/index.html
@@ -12,7 +12,7 @@ en_home: true
 
 <section class="home-hero">
     <div class="hero-copy">
-        <span class="eyebrow">MITCHY'S NOTEBOOK</span>
+        <span class="eyebrow">LIGFIL'S NOTEBOOK</span>
         <h1>A little of what I<br><em>play, try, and enjoy.</em></h1>
         <p>Game guides and impressions, PC and gadget experiments, running notes, and everyday discoveries from life in Japan.</p>
         <a class="primary-link" href="#articles">Read the latest posts <span aria-hidden="true">↓</span></a>

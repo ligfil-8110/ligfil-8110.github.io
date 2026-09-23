@@ -3,7 +3,7 @@ Date: 2026-09-23 00:00
 Category: English pages
 Tags: Contact
 Slug: contact-en
-Summary: Contact Mitchy about blog content or advertising.
+Summary: Contact Ligfil about blog content or advertising.
 Lang: en
 URL: en/contact.html
 Save_as: en/contact.html

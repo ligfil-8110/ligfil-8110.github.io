@@ -1,15 +1,15 @@
-Title: About Mitchy
+Title: About Ligfil
 Date: 2026-09-23 00:00
 Category: English pages
-Tags: About, Mitchy
+Tags: About, Ligfil
 Slug: about-en
-Summary: Meet Mitchy, the Japanese hobbyist behind a blog about games, PC and gadget experiments, running, and everyday life.
+Summary: Meet Ligfil, the Japanese hobbyist behind a blog about games, PC and gadget experiments, running, and everyday life.
 Lang: en
 URL: en/about.html
 Save_as: en/about.html
 ja_url: pages/about.html
 
-## Hi, I’m Mitchy!
+## Hi, I’m Ligfil!
 
 This is where I casually write about the things I enjoy, especially games and running.
 
@@ -19,7 +19,7 @@ This blog uses Google AdSense and affiliate links. I don’t write as if I’ve 
 
 ## A little about me
 
-- **Name:** Mitchy
+- **Name:** Ligfil
 - **Hobbies:** Games, running (I run 5 km about three times a week), and investing
 - **Goals:** Reach 10,000 page views a month and build 100 million yen in assets through investing
 

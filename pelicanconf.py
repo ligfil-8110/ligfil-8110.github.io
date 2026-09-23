@@ -1,5 +1,5 @@
-AUTHOR = 'みっちー'
-SITENAME = 'みっちーのブログ'
+AUTHOR = 'リグフィル'
+SITENAME = 'リグフィルのブログ'
 # Local previews must load CSS, JavaScript, and images from the local server.
 # Production overrides this in publishconf.py.
 SITEURL = ""
