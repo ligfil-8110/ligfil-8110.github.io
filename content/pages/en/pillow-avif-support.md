@@ -1,9 +1,10 @@
 Title: Pillow AVIF Support: Save AVIF Without an Extra Plugin
 Date: 2026-09-19 01:37
+Modified: 2026-09-24
 Category: Image processing
 Tags: Python, Pillow, AVIF, Image compression
 Slug: pillow-avif-support
-Summary: Pillow 11.3.0 and later can include AVIF support in prebuilt wheels. I checked Pillow 12.3.0 and compared quality and speed on seven photos.
+Summary: Pillow 11.3.0 and later can include AVIF support in prebuilt wheels. Tests with Pillow 12.3.0 compare quality and speed on seven photos.
 Lang: en
 URL: en/pillow-avif-support.html
 Save_as: en/pillow-avif-support.html
@@ -14,7 +15,7 @@ en_article: true
 
 Searching for how to save AVIF images with Pillow still turns up instructions for installing `pillow-avif-plugin`. Do you still need it with current Pillow?
 
-With Pillow 12.3.0 on my Windows AMD64 machine, I could save and open AVIF files without an extra plugin. For a basic save, this was enough:
+In a Windows AMD64 test environment, Pillow 12.3.0 saved and opened AVIF files without an extra plugin. For a basic save, this was enough:
 
 ```python
 from PIL import Image
@@ -28,7 +29,7 @@ with Image.open("input.jpg") as image:
     )
 ```
 
-Pillow’s release notes say AVIF reading and writing were included in prebuilt wheels starting with [Pillow 11.3.0](https://pillow.readthedocs.io/en/stable/releasenotes/11.3.0.html#avif-support-in-wheels). Windows ARM64 and iOS are exceptions; the Windows AMD64 wheel I used worked with `pip install Pillow` alone.
+Pillow’s release notes say AVIF reading and writing were included in prebuilt wheels starting with [Pillow 11.3.0](https://pillow.readthedocs.io/en/stable/releasenotes/11.3.0.html#avif-support-in-wheels). Windows ARM64 and iOS are exceptions; the Windows AMD64 wheel in this test worked with `pip install Pillow` alone.
 
 ## Check whether your Pillow build supports AVIF
 
@@ -41,7 +42,7 @@ print(features.check("avif"))
 print(features.version("avif"))
 ```
 
-My output was:
+The test returned:
 
 ```text
 True
@@ -54,9 +55,9 @@ If the check returns `False`, first confirm your Pillow version and where it cam
 
 ## Changing quality on seven photos
 
-I compared seven photos used in my [CHUWI CoreBook X unboxing post](/chuwi-corebook-x-review.html). Each was resized with its aspect ratio preserved and its long edge set to 1,200 pixels. The original files were opened read-only; encoded outputs were held in memory.
+The comparison used seven photos from the [CHUWI CoreBook X unboxing post](/chuwi-corebook-x-review.html). Each was resized with its aspect ratio preserved and its long edge set to 1,200 pixels. The original files were opened read-only; encoded outputs were held in memory.
 
-I did one warm-up save for each setting, then took the median of three saves. The save-time column is the sum of the seven per-image medians.
+Each setting had one warm-up save, followed by three timed saves. The save-time column is the sum of the seven per-image medians.
 
 | AVIF save settings | Total size, 7 photos | Save time | PSNR range |
 | --- | ---: | ---: | ---: |
@@ -68,7 +69,7 @@ I did one warm-up save for each setting, then took the median of three saves. Th
 
 In this set, increasing `quality` raised both file size and the image-quality metric. Pillow’s AVIF `quality` range is 0–100, with a default of 75. The default landed between the smaller and larger results here.
 
-PSNR compares the decoded output with the resized RGB image; a higher value means a smaller pixel-level difference. Results varied by photo, so I would still inspect the images themselves before choosing a setting.
+PSNR compares the decoded output with the resized RGB image; a higher value means a smaller pixel-level difference. Results varied by photo, so inspect the images themselves before choosing a setting.
 
 ## Higher speed made the files larger
 
@@ -87,7 +88,7 @@ Pillow documents `quality`, `speed`, chroma subsampling, and the other options i
 
 ## The same quality number does not guarantee a smaller file
 
-I also saved the same seven photos as JPEG and WebP:
+The same seven photos were also saved as JPEG and WebP:
 
 | Format and settings | Total size, 7 photos | Save time | PSNR range |
 | --- | ---: | ---: | ---: |
@@ -97,11 +98,11 @@ I also saved the same seven photos as JPEG and WebP:
 
 Here, AVIF at `quality=80` was slightly larger than JPEG at `quality=80`. AVIF does not automatically produce a smaller file with the same numeric setting. Different formats also interpret `quality` differently, so file size alone is not a like-for-like quality comparison.
 
-For the JPEG settings, see my [comparison of Pillow JPEG quality and progressive output](/en/pillow-jpeg-quality-progressive.html).
+For the JPEG settings, see the [comparison of Pillow JPEG quality and progressive output](/en/pillow-jpeg-quality-progressive.html).
 
 ## Try the comparison script without overwriting originals
 
-I published the [comparison script on GitHub](https://github.com/ligfil-8110/ligfil-8110.github.io/blob/main/scripts/compare_avif_options.py). It creates AVIF, JPEG, and WebP outputs in memory and reports file size, save time, and PSNR.
+The [comparison script is on GitHub](https://github.com/ligfil-8110/ligfil-8110.github.io/blob/main/scripts/compare_avif_options.py). It creates AVIF, JPEG, and WebP outputs in memory and reports file size, save time, and PSNR.
 
 ```shell
 python -m pip install "Pillow>=11.3"

@@ -45,7 +45,7 @@ en_home: true
         <div class="featured-copy">
             <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-19">September 19, 2026</time></div>
             <h2><a href="/en/pillow-avif-support.html">Pillow AVIF Support: Save AVIF Without an Extra Plugin</a></h2>
-            <p>Pillow 11.3.0 and later can include AVIF support in its prebuilt wheels. I checked Pillow 12.3.0 and compared quality and speed on seven photos.</p>
+            <p>Pillow 11.3.0 and later can include AVIF support in its prebuilt wheels. Tests with Pillow 12.3.0 compare quality and speed on seven photos.</p>
             <a class="text-link" href="/en/pillow-avif-support.html">Read the article →</a>
         </div>
     </article>
@@ -54,7 +54,7 @@ en_home: true
         <div class="post-card-copy">
             <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-18">September 18, 2026</time></div>
             <h2><a href="/en/pillow-jpeg-quality-progressive.html">Pillow JPEG Compression: quality, optimize, and progressive Compared</a></h2>
-            <p>Seven photos, resized to the same 1,200-pixel long edge, helped me compare JPEG save options. In this set, quality=80 with progressive output made the smallest files.</p>
+            <p>Seven photos, resized to the same 1,200-pixel long edge, show how the JPEG save options compare. In this set, quality=80 with progressive output made the smallest files.</p>
             <a class="text-link" href="/en/pillow-jpeg-quality-progressive.html">Read the article →</a>
         </div>
     </article>
@@ -63,7 +63,7 @@ en_home: true
         <div class="post-card-copy">
             <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-15">September 15, 2026</time></div>
             <h2><a href="/en/pillow-png-compression.html">Pillow PNG Compression: Why quality Does Not Change File Size</a></h2>
-            <p>In my comparison, quality=10 and quality=90 produced identical PNG files. The useful controls were compress_level and optimize.</p>
+            <p>In the PNG comparison, quality=10 and quality=90 produced identical files. The useful controls were compress_level and optimize.</p>
             <a class="text-link" href="/en/pillow-png-compression.html">Read the article →</a>
         </div>
     </article>

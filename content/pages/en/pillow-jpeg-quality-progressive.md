@@ -1,9 +1,10 @@
 Title: Pillow JPEG Compression: quality, optimize, and progressive Compared
 Date: 2026-09-18 01:38
+Modified: 2026-09-24
 Category: Image processing
 Tags: Python, Pillow, JPEG, Image compression
 Slug: pillow-jpeg-quality-progressive
-Summary: I compared Pillow’s JPEG quality, optimize, and progressive options on seven photos resized to the same 1,200-pixel long edge.
+Summary: A seven-photo test compares Pillow’s JPEG quality, optimize, and progressive options at the same 1,200-pixel long edge.
 Lang: en
 URL: en/pillow-jpeg-quality-progressive.html
 Save_as: en/pillow-jpeg-quality-progressive.html
@@ -14,7 +15,7 @@ en_article: true
 
 What `quality` should you use to make a JPEG smaller with Pillow? Should you also set `optimize=True` or `progressive=True`? With several options in play, it can be hard to tell which one made a difference.
 
-I resized seven photos used on this blog to the same 1,200-pixel long edge, then changed only the save settings. In this set, `quality=80, progressive=True` produced 1,259,719 bytes in total—56.4% smaller than `quality=95` at 2,887,101 bytes. Adding `optimize=True` did not reduce the size further than progressive output alone.
+Seven photos used on this blog were resized to the same 1,200-pixel long edge, then saved with different settings. In this set, `quality=80, progressive=True` produced 1,259,719 bytes in total—56.4% smaller than `quality=95` at 2,887,101 bytes. Adding `optimize=True` did not reduce the size further than progressive output alone.
 
 ```python
 image.save("output.jpg", quality=80, progressive=True)
@@ -22,9 +23,9 @@ image.save("output.jpg", quality=80, progressive=True)
 
 ## Results from seven photos
 
-The inputs were JPEGs from my [CHUWI CoreBook X unboxing post](/chuwi-corebook-x-review.html). They included original dimensions such as 4,096 × 3,072 pixels. I corrected orientation, converted to RGB, and resized with the aspect ratio preserved so the long edge was 1,200 pixels.
+The inputs were JPEGs from the [CHUWI CoreBook X unboxing post](/chuwi-corebook-x-review.html). They included original dimensions such as 4,096 × 3,072 pixels. The test corrected orientation, converted to RGB, and resized with the aspect ratio preserved so the long edge was 1,200 pixels.
 
-I used the first save for warm-up and took the median of the next five saves for each setting. The save-time values below add the seven per-image medians; they exclude opening and resizing the images. The environment was Windows, Python 3.10.1, and Pillow 12.3.0.
+The first save was a warm-up; the save-time values below add the seven per-image medians from the next five saves. They exclude opening and resizing the images. The environment was Windows, Python 3.10.1, and Pillow 12.3.0.
 
 | JPEG save settings | Total size, 7 photos | Change vs. `quality=95` | Save time | PSNR range |
 | --- | ---: | ---: | ---: | ---: |
@@ -43,7 +44,7 @@ Repeating the comparison produced the same file sizes and PSNR values. Save time
 
 Going from `quality=95` to `quality=90` cut the total size by about 30%. At `quality=80`, it was about 53% smaller.
 
-JPEG is lossy, so decoding the saved file changes pixel values. PSNR compares the decoded file with the resized RGB input; a higher number means a smaller pixel-level difference. Across these photos, `quality=80` ranged from 32.36 to 45.70 dB, while `quality=75` ranged from 31.25 to 45.25 dB. The variation is why I would look at the actual images instead of choosing by file size alone.
+JPEG is lossy, so decoding the saved file changes pixel values. PSNR compares the decoded file with the resized RGB input; a higher number means a smaller pixel-level difference. Across these photos, `quality=80` ranged from 32.36 to 45.70 dB, while `quality=75` ranged from 31.25 to 45.25 dB. That variation makes it worth looking at the actual images, not just file size.
 
 Pillow documents JPEG `quality` as 0–95, with a default of 75. Its documentation advises against values above 95 because they increase size with little quality gain. See [Pillow’s JPEG saving options](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#jpeg-saving).
 
@@ -51,7 +52,7 @@ Pillow documents JPEG `quality` as 0–95, with a default of 75. Its documentati
 
 At `quality=80`, `optimize=True` reduced the total from 1,360,948 to 1,318,954 bytes, about 3.1%, while save time rose from 15.21 to 41.37 ms.
 
-`progressive=True` produced 1,259,719 bytes, but took 97.02 ms to save. In this comparison, combining `optimize=True` with progressive output gave exactly the same file size as progressive output alone. I repeated the combination and got the same result both times.
+`progressive=True` produced 1,259,719 bytes, but took 97.02 ms to save. In this comparison, combining `optimize=True` with progressive output gave exactly the same file size as progressive output alone. A repeat gave the same result.
 
 Pillow describes `optimize` as an extra pass to select encoder settings, while `progressive` saves a JPEG that can be displayed progressively. They do different things, but their effect on size depends on the images and environment—so it is useful to compare them on your own files.
 
@@ -86,6 +87,6 @@ python -m pip install Pillow==12.3.0
 python scripts/compare_jpeg_options.py your-photo.jpg --repeats 5
 ```
 
-With no image argument, the script creates an RGB image for a quick check. Pass multiple photos to compare their total size and PSNR range. For my PNG comparison, see [why changing PNG `quality` did not change the file](/en/pillow-png-compression.html).
+With no image argument, the script creates an RGB image for a quick check. Pass multiple photos to compare their total size and PSNR range. For the PNG comparison, see [why changing PNG `quality` did not change the file](/en/pillow-png-compression.html).
 
-For website JPEGs, I would first resize to the dimensions needed for display, then compare `quality` and progressive output on the images themselves.
+For website JPEGs, first resize to the dimensions needed for display, then compare `quality` and progressive output on the images themselves.
