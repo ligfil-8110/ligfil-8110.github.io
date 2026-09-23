@@ -3,13 +3,14 @@ Date: 2026-09-23 00:00
 Category: English pages
 Tags: About, Ligfil
 Slug: about-en
-Summary: Meet Ligfil, the Japanese hobbyist behind a blog about games, PC and gadget experiments, running, and everyday life.
+Summary: Meet Ligfil, a Japanese hobbyist who writes about games, PC and gadget experiments, running, and a strong interest in AI.
 Lang: en
 URL: en/about.html
 Save_as: en/about.html
 ja_url: pages/about.html
 
 ## Hi, I’m Ligfil!
+I’m also really interested in AI and excited to learn more about what it can do.
 
 This is where I casually write about the things I enjoy, especially games and running.
 
