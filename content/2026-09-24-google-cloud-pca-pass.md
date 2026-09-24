@@ -6,6 +6,7 @@ Slug: google-cloud-professional-cloud-architect-pass-2026
 Image: images/2026-09/google-cloud-pca-certificate-header.png
 Image_alt: 個人情報を除いたGoogle Cloud Professional Cloud Architect合格証のロゴと資格名
 Summary: Google Cloud Professional Cloud Architectに合格しました！学習期間は2週間。新しい試験範囲に対応したUdemyの模擬試験集が特に役立った体験を紹介します。
+en_url: en/google-cloud-professional-cloud-architect-pass-2026.html
 
 先週受験した **Google Cloud Professional Cloud Architect** に合格しました！学習期間は2週間です。短い準備期間のなかで、特に役立ったのが[Udemyの「Google Cloud Professional Cloud Architect模擬試験集」](https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/)でした。
 

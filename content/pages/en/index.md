@@ -1,5 +1,6 @@
 Title: Home
 Date: 2026-09-23 00:00
+Modified: 2026-09-24
 Category: English
 Tags: Blog, Games, PC, Running
 Slug: english-home
@@ -41,8 +42,17 @@ en_home: true
 <div class="section-heading" id="articles"><div><span class="eyebrow">LATEST POSTS</span><h2>Latest English articles</h2></div></div>
 <div class="post-list">
     <article class="featured-post">
-        <a class="featured-image" href="/en/pillow-avif-support.html"><img src="/images/2026-02/0211/P_20260211_194528.jpg" alt="Close-up of a CHUWI CoreBook X keyboard used in the image comparisons." width="1200" height="675" loading="lazy" decoding="async"></a>
+        <a class="featured-image" href="/en/google-cloud-professional-cloud-architect-pass-2026.html"><img src="/images/2026-09/google-cloud-pca-certificate-header.png" alt="Google Cloud logo and Professional Cloud Architect title from a certificate, with personal details omitted." width="1200" height="675" loading="lazy" decoding="async"></a>
         <div class="featured-copy">
+            <div class="post-meta"><span>CLOUD CERTIFICATION</span><time datetime="2026-09-24">September 24, 2026</time></div>
+            <h2><a href="/en/google-cloud-professional-cloud-architect-pass-2026.html">I Passed Google Cloud Professional Cloud Architect: Two Weeks of Study with Udemy Practice Tests</a></h2>
+            <p>I passed after two weeks of study. A Udemy practice test course covering the updated exam scope was especially helpful.</p>
+            <a class="text-link" href="/en/google-cloud-professional-cloud-architect-pass-2026.html">Read the article →</a>
+        </div>
+    </article>
+    <article class="post-card">
+        <a class="post-card-image" href="/en/pillow-avif-support.html"><img src="/images/2026-02/0211/P_20260211_194528.jpg" alt="Close-up of a CHUWI CoreBook X keyboard used in the image comparisons." width="720" height="405" loading="lazy" decoding="async"></a>
+        <div class="post-card-copy">
             <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-19">September 19, 2026</time></div>
             <h2><a href="/en/pillow-avif-support.html">Pillow AVIF Support: Save AVIF Without an Extra Plugin</a></h2>
             <p>Pillow 11.3.0 and later can include AVIF support in its prebuilt wheels. Tests with Pillow 12.3.0 compare quality and speed on seven photos.</p>
