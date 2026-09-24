@@ -18,11 +18,11 @@ I passed the **Google Cloud Professional Cloud Architect** exam last week! I stu
 
 When I choose exam materials, I want to know whether they cover the current scope. This practice test course says it follows the exam guide introduced in March 2026. That was the part I found most useful.
 
-The course combines **English questions with Japanese explanations** and includes case study practice. Its format gives you a chance to think through which option fits a scenario, rather than just memorize product names. Being able to focus on the updated scope helped me during my two weeks of study.
+The course includes case study practice. Its format gives you a chance to think through which option fits a scenario, rather than just memorize product names. Being able to focus on the updated scope helped me during my two weeks of study.
 
 ## A note for English-speaking learners
 
-**This is a Japanese-language Udemy course.** The questions are in English, but the explanations are in Japanese. If you do not read Japanese, try your browser's automatic translation while working through the explanations. If a translated technical term seems unclear, check it against the [official Google Cloud Professional Cloud Architect exam guide](https://cloud.google.com/learn/certification/guides/professional-cloud-architect).
+**This is a Japanese-language Udemy course: the questions and explanations are all in Japanese.** If you do not read Japanese, try your browser's automatic translation while working through the practice tests. If a translated technical term seems unclear, check it against the [official Google Cloud Professional Cloud Architect exam guide](https://cloud.google.com/learn/certification/guides/professional-cloud-architect).
 
 It is a **practice test course**, so it is best suited to checking your understanding through questions. If you are new to Google Cloud, learning the fundamentals first may make the practice tests easier to use.
 
