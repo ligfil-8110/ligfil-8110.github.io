@@ -44,6 +44,7 @@ jobs:
         run: |
           python scripts/prepare_build_content.py content .build-content
           pelican .build-content -o output -s publishconf.py
+          python scripts/check_html_sitemap.py output
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

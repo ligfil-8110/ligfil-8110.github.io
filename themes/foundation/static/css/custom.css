@@ -147,6 +147,7 @@ a:hover { color: var(--accent-dark); }
 .article-body h3 { color: var(--accent-dark); font-size: 1.25rem; }
 .article-body ul, .article-body ol { padding-left: 1.5rem; }
 .article-body li { margin: .35rem 0; }
+.html-sitemap h2 { scroll-margin-top: 100px; }
 .article-body blockquote { margin: 1.5rem 0; padding: .7rem 1.2rem; border-left: 4px solid #cbd5e1; color: var(--muted); background: #f8fafc; }
 .article-body img { width: auto; max-width: 100%; margin: 1.7rem auto; border-radius: 12px; }
 .article-body img.zoomable-image { cursor: zoom-in; }

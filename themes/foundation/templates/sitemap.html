@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% set page_url = 'sitemap.html' %}
+{% set pagetitle = 'サイトマップ' %}
+{% set listing_description = 'カテゴリー別の全記事一覧と、プロフィール・お問い合わせ・英語版などのページへのリンクです。' %}
+
+{% block content %}
+<header class="listing-heading">
+    <span class="eyebrow">SITEMAP</span>
+    <h1>サイトマップ</h1>
+    <p>記事をカテゴリーごとにまとめました。日付順で探すときは<a href="{{ SITEURL }}/archives.html">記事アーカイブ</a>へどうぞ。</p>
+</header>
+<div class="article-body html-sitemap" id="sitemap-content">
+    <nav aria-label="サイトマップ内のカテゴリー">
+        <ul>
+            {% for category, category_articles in categories %}
+            <li><a href="#category-{{ category.slug }}">{{ category }}</a>（{{ category_articles|count }}記事）</li>
+            {% endfor %}
+            <li><a href="#site-pages">固定ページ</a></li>
+            <li><a href="#english-pages" lang="en">English pages</a></li>
+        </ul>
+    </nav>
+
+    {% for category, category_articles in categories %}
+    <section aria-labelledby="category-{{ category.slug }}">
+        <h2 id="category-{{ category.slug }}">{{ category }}</h2>
+        <ul>
+            {% for article in category_articles|sort(attribute='date', reverse=true) %}
+            <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endfor %}
+
+    <section aria-labelledby="site-pages">
+        <h2 id="site-pages">固定ページ</h2>
+        <ul>
+            <li><a href="{{ SITEURL }}/">ホーム</a></li>
+            {% for p in pages if p.lang != 'en' and (not p.date or p.date <= SITEMAP_BUILD_TIME) %}
+            <li><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section aria-labelledby="english-pages" lang="en">
+        <h2 id="english-pages">English pages</h2>
+        <ul>
+            {% for p in pages if p.lang == 'en' and (not p.date or p.date <= SITEMAP_BUILD_TIME) %}
+            <li><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

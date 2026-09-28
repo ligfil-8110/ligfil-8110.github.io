@@ -3,6 +3,8 @@
 
 import os
 import sys
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 sys.path.append(os.curdir)
 from pelicanconf import *
@@ -18,7 +20,11 @@ EXTRA_PATH_METADATA = {
 DEFAULT_DATE_FORMAT = "%Y年%m月%d日"
 
 # Increment when theme CSS or JavaScript changes so CDN/browser caches refresh.
-THEME_ASSET_VERSION = "20260923-2"
+THEME_ASSET_VERSION = "20260929-sitemap"
+
+# Generate a reader-facing map alongside Pelican's existing archive pages.
+DIRECT_TEMPLATES = ["index", "tags", "categories", "authors", "archives", "sitemap"]
+SITEMAP_BUILD_TIME = datetime.now(ZoneInfo(TIMEZONE))
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = "https://ligfil-8110.github.io"
