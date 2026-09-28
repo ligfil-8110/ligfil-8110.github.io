@@ -16,6 +16,7 @@
 - 2026-09-27 Recovery記録の公開: 確認結果を`80361da`でcommitしmainへpush。GitHub Actions run `36308154459`のbuild・deployは成功。公開ホーム、`/sitemap.xml`、`/robots.txt`、`/ads.txt`を再確認し、すべてHTTP 200。Goalは取得成功待ちのため`IN_PROGRESS`を維持する。
 - 2026-09-27 18:10 Blocked監査: Goal開始後3回目の新規取得でも、Search Consoleは送信日・最終読み込み2026-09-25、型「不明」、状態「取得できませんでした」、検出0件で変化なし。公開XML・Googleライブ取得・直近デプロイは正常で、安全な追加修正や再送信の根拠がない。同一のGoogle側処理待ちが3ターン連続したため、実行Goalは外部状態の変化待ちとして`blocked`へ移す。Definition of Doneは変更せず、Search Consoleの取得成功が確認できるまで本記録上の`Status: IN_PROGRESS`を維持する。
 - 2026-09-27 Blocked監査記録の公開: 監査結果を`87053a7`でcommitしmainへpush。GitHub Actions run `36308558582`のbuild・deployは成功。公開ホーム、`/sitemap.xml`、`/robots.txt`、`/ads.txt`はすべてHTTP 200。公開側に新しい異常はなく、外部状態の変化待ちを確定する。
+- 2026-09-28 18:22 Recovery確認: Search Consoleの送信一覧を再取得したが、`/sitemap.xml`は送信日2026-09-25、型「不明」、状態「取得できませんでした」、検出0件のままで変化なし。公開ホーム、`/sitemap.xml`、`/robots.txt`、`/ads.txt`はHTTP 200で、sitemapは`application/xml`。XMLは98 URL、重複・別ホスト混入0件で、`robots.txt`の参照先も正常。最新GitHub Actions run `36351238465`（HEAD `64aa970`）はbuild・deploy成功。公開側・デプロイ側に新しい異常はなく、再送信やXML変更は行わずGoogle側の次回処理待ちを継続する。
 - 記録と公開: 対象の`SELF_PAY_STATE.md`だけを`d529004`でcommitしてmainへpush。公開ステート検査と自己テストは成功。GitHub Actions run `36029055687`のbuild・deployは成功。公開ホーム、DQ7主力記事、sitemap.xml、ads.txtはいずれもHTTP 200。公開側の本文・テンプレートは変更していない。
 - 現在の作業段階: 送信・Googlebotのライブ取得検査、記録のcommit・push・公開確認は完了。Search Console側は取得失敗表示のままで、成功判定は保留。
 - 次に行う作業: Search Consoleの次の取得・処理結果を確認する。公開XMLとGoogleライブ取得に再現する問題が見つからない限り重複送信や推測によるXML変更はしない。[Google公式の診断手順](https://support.google.com/webmasters/answer/7451001)では一時的な取得失敗の可能性と再試行が案内されている。
