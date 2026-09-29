@@ -1,8 +1,16 @@
 # AI SelfPay State
 
+## 2026-09-29 オーナー指示・Search Consoleサイトマップ対応打ち切り
+
+- Decision: オーナーの明示指示により、Search Consoleサイトマップの追加対応を打ち切る。再送信・ライブ検査・取得状態の監視・原因調査・復旧監査を今後のMAIN／RECOVERY実行で自動再開しない。再開には新しい明示依頼が必要。
+- Status: CANCELLED_BY_OWNER（2026-09-25の取得成功確認Goal）。取得成功を確認していないためDONEとは扱わず、元のDefinition of Doneは履歴として保持する。
+- 維持するもの: 公開済みHTMLサイトマップとXMLサイトマップ。通常のビルド・リンク整合性検査は維持するが、Search Consoleへの対応は行わない。
+- 次の作業: 記事制作・既存読者導線・収益改善を優先し、GA4・AdSense・利用可能なASPデータと既存の検索実績記録で評価する。運営時刻・取得トリガー・通知設定は変更しない。
+- 引き継ぎ: 以下の過去記録にあるIN_PROGRESS・取得成功待ち・復旧予定はこの指示で失効。GitHub Pages全般の対応可否を断定する技術的結論ではなく、追加作業を停止する運営判断として記録する。
+
 ## 2026-09-29 MAIN・週次レビュー
 
-- 継続Goal: 2026-09-25のXMLサイトマップ取得成功確認。Status: IN_PROGRESS。元のDefinition of Doneは変更せず、新しいGoalは開始しない。
+- 当時の継続Goal: 2026-09-25のXMLサイトマップ取得成功確認。オーナーの後続指示でCANCELLED_BY_OWNERへ変更。元のDefinition of Doneは変更せず、取得成功とは扱わない。
 - 新しい確認事実: Search Consoleの送信一覧は`/sitemap.xml?gsc=20260929`の1件。送信日・詳細の最終読み込み表示は2026-09-29、型「不明」、取得できませんでした、検出0件。オーナーが報告したクエリ付きURLでも失敗した状態を直接確認した。今回、送信・削除・設定変更は行っていない。
 - 原因の扱い: 過去の「Google側の処理待ち」という説明は原因の断定としては不十分。公開XMLと過去のGoogleライブ取得が正常でも、サイトマップ処理が成功した証拠にはならない。現時点は原因未特定であり、待機だけで解消するとも断定しない。[Google公式の取得診断と再試行の説明](https://support.google.com/webmasters/answer/7451001?hl=ja)を参照し、再現する異常を根拠に修正する。
 - 公開確認: HEAD `316d61a`のActions run `36443085711`は成功。ホーム、HTMLサイトマップ、XMLサイトマップ、robots.txt、ads.txtはHTTP 200。XMLは`application/xml`。公開済みHTMLサイトマップは維持し、XML取得成功の代替判定にはしない。
@@ -38,7 +46,7 @@
 ## 2026-09-25
 
 - Goal: 公開済みのサイトマップをGoogle Search Consoleに登録し、受理・公開状態を確認する
-- Status: IN_PROGRESS
+- Status: CANCELLED_BY_OWNER
 - Definition of Done: 公開`/sitemap.xml`の取得・XML・対象ドメインと`/robots.txt`の参照先を検証する。Search Consoleにサイトマップを送信して受理状態を確認する。対象記録だけをcommit・mainへpushし、Actionsと公開サイトを確認する。検索登録・順位・収益の増加は完了条件としない。
 - このGoalを選んだ理由: Search Consoleの「送信されたサイトマップ」が0件で、既知のURLは8件。一方、公開サイトマップには98件のURLがあり、発見と登録状態の観測に具体的な取りこぼしがある。既存のDQ7導線改善は評価前のため連日変更しない。
 - 候補比較: サイトマップ登録は検索発見・計測経路に対して確信度高、作業量小、低リスクだが検索登録の保証はない。DQ7攻略記事の追加改稿は既存流入とAdSense・商品案内に効く余地があるが、直近変更の評価前で重複リスクあり。CHUWI購入導線は成約価値がある可能性も、現時点の流入と有効な適合商品を確認できず確信度低。新規Google Cloud記事の導線追加は公開直後で需要データがなく保留。
@@ -60,7 +68,7 @@
 - 2026-09-29 Recovery記録の公開: 監査結果を`aae9191`でcommitしmainへpush。GitHub Actions run `36546905036`のbuild・deployは成功。公開ホーム、XML・HTMLサイトマップ、`robots.txt`、`ads.txt`、主力DQ7記事は公開後もHTTP 200。GoalはSearch Consoleの取得成功未確認のため`IN_PROGRESS`を維持する。
 - 記録と公開: 対象の`SELF_PAY_STATE.md`だけを`d529004`でcommitしてmainへpush。公開ステート検査と自己テストは成功。GitHub Actions run `36029055687`のbuild・deployは成功。公開ホーム、DQ7主力記事、sitemap.xml、ads.txtはいずれもHTTP 200。公開側の本文・テンプレートは変更していない。
 - 現在の作業段階: 送信・Googlebotのライブ取得検査、記録のcommit・push・公開確認は完了。Search Console側は取得失敗表示のままで、成功判定は保留。
-- 次に行う作業: Search Consoleの次の取得・処理結果を確認する。公開XMLとGoogleライブ取得に再現する問題が見つからない限り重複送信や推測によるXML変更はしない。[Google公式の診断手順](https://support.google.com/webmasters/answer/7451001)では一時的な取得失敗の可能性と再試行が案内されている。
+- 次に行う作業: なし。2026-09-29のオーナー指示により追加対応を打ち切り、自動復旧・再診断・取得状態の再確認を行わない。
 - 未解決事項: 登録後の一覧で取得失敗表示が続いている。サイトマップ一覧の0件表示は、`robots.txt`経由での発見がない証拠ではない。Googleの次回処理で解消するか要確認。検索流入と収益効果は後日評価する。
 - Definition of Doneの残項目: Search Consoleでの取得成功確認。登録・検索流入・収益効果は別々に評価する。
 

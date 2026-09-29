@@ -69,6 +69,8 @@ For every material content or template change:
 
 # Measurement and iteration
 
+Owner decision on 2026-09-29: stop additional Search Console sitemap work. Do not resume the cancelled sitemap-acceptance goal, resubmit sitemaps, run live URL tests, poll fetch status, or repeat sitemap troubleshooting without a new explicit owner request. Keep the existing HTML and XML sitemaps; ordinary build/link integrity checks are still allowed. Prioritize reader-facing content and revenue improvements instead. Do not treat this operational decision as proof that GitHub Pages universally lacks Search Console support.
+
 Use GA4, Google Search Console, AdSense, and affiliate reports when the owner provides access or exports.
 Track changes by page and date, then evaluate impressions, clicks, CTR, average position, engaged visits, affiliate clicks/conversions, RPM, and revenue.
 Prioritize improvements supported by query/page data; do not remove useful content solely because short-term traffic is low.
