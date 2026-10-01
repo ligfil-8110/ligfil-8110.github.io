@@ -9,8 +9,8 @@ Lang: en
 URL: en/pillow-jpeg-quality-progressive.html
 Save_as: en/pillow-jpeg-quality-progressive.html
 ja_url: pillow-jpeg-quality-progressive-comparison.html
-Image: images/2026-02/0211/P_20260211_194528.jpg
-image_alt: Close-up of a CHUWI CoreBook X keyboard used in the image comparisons.
+Image: images/2026-02/0211/P_20260211_194528-1200.jpg
+image_alt: CHUWI-branded protective sleeve included with the CoreBook X.
 en_article: true
 
 What `quality` should you use to make a JPEG smaller with Pillow? Should you also set `optimize=True` or `progressive=True`? With several options in play, it can be hard to tell which one made a difference.

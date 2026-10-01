@@ -9,8 +9,8 @@ Lang: en
 URL: en/pillow-avif-support.html
 Save_as: en/pillow-avif-support.html
 ja_url: pillow-avif-built-in-quality-speed.html
-Image: images/2026-02/0211/P_20260211_194528.jpg
-image_alt: Close-up of a CHUWI CoreBook X keyboard used in the image comparisons.
+Image: images/2026-02/0211/P_20260211_194528-1200.jpg
+image_alt: CHUWI-branded protective sleeve included with the CoreBook X.
 en_article: true
 
 Searching for how to save AVIF images with Pillow still turns up instructions for installing `pillow-avif-plugin`. Do you still need it with current Pillow?

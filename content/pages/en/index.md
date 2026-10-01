@@ -51,7 +51,7 @@ en_home: true
         </div>
     </article>
     <article class="post-card">
-        <a class="post-card-image" href="/en/pillow-avif-support.html"><img src="/images/2026-02/0211/P_20260211_194528.jpg" alt="Close-up of a CHUWI CoreBook X keyboard used in the image comparisons." width="720" height="405" loading="lazy" decoding="async"></a>
+        <a class="post-card-image" href="/en/pillow-avif-support.html"><img src="/images/2026-02/0211/P_20260211_194528-1200.jpg" alt="CHUWI-branded protective sleeve included with the CoreBook X." width="720" height="405" loading="lazy" decoding="async"></a>
         <div class="post-card-copy">
             <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-19">September 19, 2026</time></div>
             <h2><a href="/en/pillow-avif-support.html">Pillow AVIF Support: Save AVIF Without an Extra Plugin</a></h2>
@@ -60,7 +60,7 @@ en_home: true
         </div>
     </article>
     <article class="post-card">
-        <a class="post-card-image" href="/en/pillow-jpeg-quality-progressive.html"><img src="/images/2026-02/0211/P_20260211_194528.jpg" alt="Close-up of a CHUWI CoreBook X keyboard used in the JPEG comparison." width="720" height="405" loading="lazy" decoding="async"></a>
+        <a class="post-card-image" href="/en/pillow-jpeg-quality-progressive.html"><img src="/images/2026-02/0211/P_20260211_194528-1200.jpg" alt="CHUWI-branded protective sleeve included with the CoreBook X." width="720" height="405" loading="lazy" decoding="async"></a>
         <div class="post-card-copy">
             <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-09-18">September 18, 2026</time></div>
             <h2><a href="/en/pillow-jpeg-quality-progressive.html">Pillow JPEG Compression: quality, optimize, and progressive Compared</a></h2>

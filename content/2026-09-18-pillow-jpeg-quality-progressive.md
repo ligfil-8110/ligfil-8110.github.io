@@ -3,7 +3,8 @@ Date: 2026-09-18 01:38
 Category: 技術メモ
 Tags: Python, Pillow, JPEG, 画像圧縮, PC
 Slug: pillow-jpeg-quality-progressive-comparison
-Image: images/2026-02/0211/P_20260211_194528.jpg
+Image: images/2026-02/0211/P_20260211_194528-1200.jpg
+Image_alt: CHUWIロゴ入りのCoreBook X付属保護スリーブ
 Summary: PillowのJPEG保存でquality、optimize、progressiveを変えると容量と処理時間はどう変わるのか。実写真7枚を同じ1200pxへ縮小して比較しました。
 en_url: en/pillow-jpeg-quality-progressive.html
 
