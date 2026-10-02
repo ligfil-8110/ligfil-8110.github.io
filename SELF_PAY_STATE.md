@@ -17,10 +17,11 @@
 - 継続実験（2026-10-03）: 前回の1600px JPEG案は本番90,450 bytesより重かったため不採用のまま。既存のWindows/Python 3.10.1/Pillow 12.3.0/libavif 1.4.2で原本から1200×675px AVIFを一時生成した。quality=60は47,737 bytes・PSNR 35.62dB、quality=70は60,740 bytes・36.38dB。比較対象の本番相当JPEG quality=80は90,450 bytes・34.49dB。1回測定＋ウォームアップの符号化時間はq60約83ms、JPEG約8ms。AVIFを再読込して寸法・EXIFなしを確認し、q60/70とも画面内のステータスと日本語UIを目視で判読できた。PSNRはこの入力1枚の再縮小画像との比較で、読者体験や収益を証明しない。[Pillow公式形式資料](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html)と[MDNのpicture要素](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture)を再確認。AVIF対応ブラウザーには軽い画像、非対応ブラウザーには既存JPEGを使う候補を検証する。
 - 継続実装: quality=60の47,737 bytes・1200×675px・EXIFなしのAVIFを原本と別名で追加し、レビュー1画像だけ`<picture>`のAVIFソース＋既存JPEGフォールバックに変更。画像以外の本文・タイトル・公開URLと原本は維持し、更新日を追加。原本のGitハッシュはHEADと同じ。
 - ビルド・表示検証: 所有者の未コミット設定を除いたHEAD一時worktreeに対象記事・画像だけをコピーし、`python scripts/prepare_build_content.py content .build-content`、`python -m pelican .build-content -o output -s publishconf.py`を実行して32記事・11ページをエラーなく生成。HTMLサイトマップとDQ7案内の既存検査も成功。出力の旧JPEGは90,450 bytes、新AVIFは47,737 bytes。記事HTMLの`<picture>`と旧JPEGフォールバック、canonical・記事JSON-LD・GA4・AdSense・提携導線・ポリシーリンクを確認。広告解析を除いた使い捨てプレビューでPC幅1280px・スマホ幅390pxを目視確認し、ブラウザーの`currentSrc`がAVIF、読込完了・1200×675px・拡大表示正常、横はみ出しなし。実端末や実ユーザー速度の測定ではない。
-- 現在の作業段階: 画像実験・実装・隔離本番ビルド・PC/モバイル表示まで完了。commit・pushと公開検証待ち。
-- 次に行う作業: 対象3ファイルだけを最終差分確認してcommit・main push。Actions成功後、公開ホーム・記事・AVIF/JPEG・ads.txt等を確認し、ステートを更新する。Search Consoleサイトマップ作業は行わない。
+- commit結果: 対象3ファイルだけを`78805d7`でcommit。`git diff --cached --check`、公開ステートの自己テスト・検査は成功。所有者の設定・RPG関連などの未コミット変更は含めていない。
+- 現在の作業段階: 画像実験・実装・隔離本番ビルド・PC/モバイル表示・commitまで完了。pushと公開検証待ち。
+- 次に行う作業: 本記録をcommitしてmainへpush。Actions成功後、公開ホーム・記事・AVIF/JPEG・ads.txt等を確認し、ステートを更新する。Search Consoleサイトマップ作業は行わない。
 - 未解決事項: 公開PagesでのAVIFのMIMEと実ブラウザーの選択・表示は未確認。ASP成果・費用と収益効果は不明。所有者の未コミット変更は保持する。
-- Definition of Doneの残項目: 最終差分確認・commit・push・Actions・公開後のAVIF/JPEGとページ確認。
+- Definition of Doneの残項目: push・Actions・公開後のAVIF/JPEGとページ確認。
 
 ## 2026-10-02 MAIN・Pillow記事の表紙写真を軽量化
 
