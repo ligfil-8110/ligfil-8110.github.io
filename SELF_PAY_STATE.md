@@ -3,8 +3,8 @@
 ## 2026-10-03 MAIN・DQ7レビュー本文画像の閲覧用最適化
 
 - Date: 2026-10-03
-- Goal: DQ7 Reimaginedの購入検討レビューで使う大きな本文戦闘画像1枚を、原本と筆者の文章・タイトル・公開URLを保持して閲覧用JPEGへ切り替え、公開後まで確認する。
-- Status: ABORTED_NO_BENEFIT
+- Goal: DQ7 Reimaginedの購入検討レビューで使う本文画像1枚を、原本と筆者の文章・タイトル・公開URLを保持して軽い閲覧用画像へ切り替え、公開後まで確認する。
+- Status: IN_PROGRESS
 - Definition of Done: 画像の変更前後の寸法・容量・表示品質・EXIFを隔離場所で比較し、用途に適した出力だけ採用する。記事の画像参照と必要な更新日以外を変えず、保護対象のイズライール／じごくのよろい記事に触れない。隔離本番ビルド、PC/モバイル表示、画像リンク・canonical・metadata・GA4・AdSense・提携導線・ads.txt等を確認する。対象だけcommit・main pushし、Actions成功と公開ホーム・記事・画像を確認する。収益効果は後日評価する。
 - このGoalを選んだ理由: DQ7主力の既存レビューで、本文の戦闘画面のソース原本が約4MBであることを確認。公開ページでも表示可能だった。後述の本番配信量を確認する前に、大きな読者負担だと仮定したのは誤りだった。
 - 3候補比較: DQ7レビュー画像（採用）は既存の購入検討・感想需要からAdSenseと適合する既存商品導線につながる。転送量削減の期待は大・確信度高、収益効果は不明、反映直後から作用、作業小、画面文字の視認性低下リスクを比較で抑える。CHUWIの購入案内追加は筆者資料があるが現行商品の適合性・提携リンクの有効性を未確認で、収益効果の可能性は中・確信度低、確認作業中・誤案内リスクあり。新たなPillow検証記事は既存環境で試せるが独立した日本語需要の根拠不足で、効果小〜中・確信度低、実験・制作中、重複記事リスクがある。DQ7記事案内の追加変更は9月30日公開分の評価待ち。いずれも即時の収益増を証明しない。
@@ -14,10 +14,13 @@
 - 実装結果: 一時的に追加した画像とレビュー内の参照・更新日変更をすべて取り消し、`git diff`で対象記事に差分がないことを確認。原本、公開URL、イズライール／じごくのよろい記事、広告・提携導線は変更していない。読者向け公開変更はしない。
 - 計測: モニターは同日01:32の実行で最終日付が10月2日へ進み、更新結果は成功。開始時点の古い値は次回取得前だった。収集障害と断定しない。ページ別収益、ASP成果・費用は不明。
 - 記録・公開確認: 本セクションだけを`fef12c1`でcommitしてmainへpush。GitHub Actions run `37036181601`のbuild・deployは成功。公開ホーム、レビュー、元画像、ads.txt、XMLサイトマップはHTTP 200。レビューは従来画像参照とcanonicalを維持し、未採用画像への参照はない。元画像の公開配信は90,450 bytes・`image/jpeg`のまま。通常の公開整合性確認のみでSearch Console操作はしない。
-- 現在の作業段階: 仮説を棄却。元のDefinition of Doneは満たしていないためDONEにはしない。効果のない変更を公開しない方針で中止。
-- 次に行う作業: 次回MAINでは公開配信物の実測を先に確認し、10月6日にDQ7主力／CHUWI予備の週次戦略をレビュー。10月7日以降は既存DQ7案内の評価日を守る。Search Consoleのサイトマップ対応は再開しない。
-- 未解決事項: 今回のGoalは公開する改善がなく終了。X投稿案を出す場合はオーナーの手動投稿用に非公開スレッドだけに記載し、投稿済みとは記録しない。所有者の未コミット変更は保持。
-- Definition of Doneの残項目: 採用できる画像がないため、本番変更・commit・push・Actions・公開後確認は実施しない。未達のまま中止。
+- 継続実験（2026-10-03）: 前回の1600px JPEG案は本番90,450 bytesより重かったため不採用のまま。既存のWindows/Python 3.10.1/Pillow 12.3.0/libavif 1.4.2で原本から1200×675px AVIFを一時生成した。quality=60は47,737 bytes・PSNR 35.62dB、quality=70は60,740 bytes・36.38dB。比較対象の本番相当JPEG quality=80は90,450 bytes・34.49dB。1回測定＋ウォームアップの符号化時間はq60約83ms、JPEG約8ms。AVIFを再読込して寸法・EXIFなしを確認し、q60/70とも画面内のステータスと日本語UIを目視で判読できた。PSNRはこの入力1枚の再縮小画像との比較で、読者体験や収益を証明しない。[Pillow公式形式資料](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html)と[MDNのpicture要素](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture)を再確認。AVIF対応ブラウザーには軽い画像、非対応ブラウザーには既存JPEGを使う候補を検証する。
+- 継続実装: quality=60の47,737 bytes・1200×675px・EXIFなしのAVIFを原本と別名で追加し、レビュー1画像だけ`<picture>`のAVIFソース＋既存JPEGフォールバックに変更。画像以外の本文・タイトル・公開URLと原本は維持し、更新日を追加。原本のGitハッシュはHEADと同じ。
+- ビルド・表示検証: 所有者の未コミット設定を除いたHEAD一時worktreeに対象記事・画像だけをコピーし、`python scripts/prepare_build_content.py content .build-content`、`python -m pelican .build-content -o output -s publishconf.py`を実行して32記事・11ページをエラーなく生成。HTMLサイトマップとDQ7案内の既存検査も成功。出力の旧JPEGは90,450 bytes、新AVIFは47,737 bytes。記事HTMLの`<picture>`と旧JPEGフォールバック、canonical・記事JSON-LD・GA4・AdSense・提携導線・ポリシーリンクを確認。広告解析を除いた使い捨てプレビューでPC幅1280px・スマホ幅390pxを目視確認し、ブラウザーの`currentSrc`がAVIF、読込完了・1200×675px・拡大表示正常、横はみ出しなし。実端末や実ユーザー速度の測定ではない。
+- 現在の作業段階: 画像実験・実装・隔離本番ビルド・PC/モバイル表示まで完了。commit・pushと公開検証待ち。
+- 次に行う作業: 対象3ファイルだけを最終差分確認してcommit・main push。Actions成功後、公開ホーム・記事・AVIF/JPEG・ads.txt等を確認し、ステートを更新する。Search Consoleサイトマップ作業は行わない。
+- 未解決事項: 公開PagesでのAVIFのMIMEと実ブラウザーの選択・表示は未確認。ASP成果・費用と収益効果は不明。所有者の未コミット変更は保持する。
+- Definition of Doneの残項目: 最終差分確認・commit・push・Actions・公開後のAVIF/JPEGとページ確認。
 
 ## 2026-10-02 MAIN・Pillow記事の表紙写真を軽量化
 
