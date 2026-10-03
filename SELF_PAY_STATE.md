@@ -1,8 +1,10 @@
 # AI SelfPay State
 
+
 ## 2026-10-04 MAIN・DQ7商品案内の機種違い防止
 
 - Date: 2026-10-04
+- commit後の再開地点: 実装・隔離本番ビルド・PC/モバイル表示確認済み。対象4ファイルを `e17f658` にコミット。次は main に push し、Actions 成功と公開ページを確認する。Status は IN_PROGRESS のまま。
 - Goal: DQ7関連記事に共通表示されるNintendo Switch 2版の商品案内で、初代Switchとの非互換を公式資料に基づき購入前に分かるようにする。
 - Status: IN_PROGRESS
 - Definition of Done: スクウェア・エニックス公式FAQで対応条件を確認し、既存の提携商品URL・表示対象15記事・筆者の本文とタイトルを維持して、案内の近くに機種違いの注意と公式確認先を加える。所有者の未コミット変更と保護対象の記事原稿には触れない。変更前後の15対象と非対象、隔離本番ビルド、PC/モバイル、商品・内部リンク・canonical・metadata・GA4・AdSense・ads.txt等を検証する。対象のみcommit・main pushし、Actions成功と公開ホーム・代表記事を確認する。収益効果は別途評価する。
