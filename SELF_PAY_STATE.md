@@ -4,6 +4,7 @@
 ## 2026-10-04 MAIN・DQ7商品案内の機種違い防止
 
 - Date: 2026-10-04
+- push後の再開地点: `e17f658` と状態記録 `53ebf37` を main に push 済み。次は GitHub Actions の成功と公開ページの反映、リンク・広告・解析の確認。未完了は公開後検証と DONE 記録。
 - commit後の再開地点: 実装・隔離本番ビルド・PC/モバイル表示確認済み。対象4ファイルを `e17f658` にコミット。次は main に push し、Actions 成功と公開ページを確認する。Status は IN_PROGRESS のまま。
 - Goal: DQ7関連記事に共通表示されるNintendo Switch 2版の商品案内で、初代Switchとの非互換を公式資料に基づき購入前に分かるようにする。
 - Status: IN_PROGRESS
