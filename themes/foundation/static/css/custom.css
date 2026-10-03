@@ -167,6 +167,9 @@ a:hover { color: var(--accent-dark); }
 .article-tags strong { margin-right: .3rem; }
 .article-affiliate { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8px 16px; max-width: 650px; margin: 28px auto 0; padding: 18px 20px; border: 1px solid #ffe0d5; border-radius: 14px; background: #fffaf8; }
 .article-affiliate > .ad-label { grid-column: 1 / -1; }
+.article-affiliate > .article-affiliate-note { grid-column: 1 / -1; margin: 0; font-size: .72rem; line-height: 1.6; text-align: left; }
+.article-affiliate .article-affiliate-note a { display: inline; color: var(--accent-dark); text-decoration: underline; text-underline-offset: 2px; }
+.article-affiliate > a[data-affiliate-network] { grid-column: 1 / -1; min-width: 0; }
 .article-affiliate a { justify-content: flex-start; gap: 14px; color: var(--ink); }
 .article-affiliate a:hover { color: var(--accent-dark); }
 .article-affiliate a > span { display: grid; gap: 4px; font-size: .78rem; line-height: 1.5; }
