@@ -29,7 +29,7 @@ Summary: 1週間、寝食を忘れて没頭した『ドラゴンクエストVII 
 2. **職業システムのカスタマイズ性**
    今回はモンスター職が撤廃されているものの、２つの職業を掛け持ちすることができ、非常に戦略の幅が広がっていて面白かったですよ！
 
-   <picture><source srcset="/images/2026-02/0208/dq-viire-20260208-4-1200.avif" type="image/avif"><img src="/images/2026-02/0208/dq-viire-20260208-4.jpg" alt="戦闘シーン" width="1200" height="675"></picture>
+    <picture><source srcset="/images/2026-02/0208/dq-viire-20260208-4-1200.avif" type="image/avif"><img src="/images/2026-02/0208/dq-viire-20260208-4.jpg" alt="戦闘シーン" width="1200" height="675"></picture>
 
 3. **現代風の快適なUI**
    シンボルエンカウントになったことで、探索が格段にスムーズに！石版がマップに表示されるおかげで、昔のPS版で迷子になったあの頃が嘘のようです（笑）。
