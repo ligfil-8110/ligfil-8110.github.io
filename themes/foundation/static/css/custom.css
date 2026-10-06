@@ -169,7 +169,7 @@ a:hover { color: var(--accent-dark); }
 .article-affiliate > .ad-label { grid-column: 1 / -1; }
 .article-affiliate > .article-affiliate-note { grid-column: 1 / -1; margin: 0; font-size: .72rem; line-height: 1.6; text-align: left; }
 .article-affiliate .article-affiliate-note a { display: inline; color: var(--accent-dark); text-decoration: underline; text-underline-offset: 2px; }
-.article-affiliate > a[data-affiliate-network] { grid-column: 1 / -1; min-width: 0; }
+.article-affiliate > a { grid-column: 1 / -1; min-width: 0; }
 .article-affiliate a { justify-content: flex-start; gap: 14px; color: var(--ink); }
 .article-affiliate a:hover { color: var(--accent-dark); }
 .article-affiliate a > span { display: grid; gap: 4px; font-size: .78rem; line-height: 1.5; }

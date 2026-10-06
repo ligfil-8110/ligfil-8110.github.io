@@ -20,7 +20,7 @@ EXTRA_PATH_METADATA = {
 DEFAULT_DATE_FORMAT = "%Y年%m月%d日"
 
 # Increment when theme CSS or JavaScript changes so CDN/browser caches refresh.
-THEME_ASSET_VERSION = "20261004-switch2"
+THEME_ASSET_VERSION = "20261007-dq7-product-link"
 
 # Generate a reader-facing map alongside Pelican's existing archive pages.
 DIRECT_TEMPLATES = ["index", "tags", "categories", "authors", "archives", "sitemap"]

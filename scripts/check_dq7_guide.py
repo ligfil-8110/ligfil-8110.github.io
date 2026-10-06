@@ -11,6 +11,7 @@ from urllib.parse import urlsplit
 
 GUIDE = "pages/dq7-reimagined-guide.html"
 SITE = "https://ligfil-8110.github.io"
+PRODUCT = "https://books.rakuten.co.jp/rb/18378428/"
 
 
 class BodyLinks(HTMLParser):
@@ -67,7 +68,11 @@ def check(output: Path, content: Path, baseline: Path | None) -> None:
             assert f'href="{SITE}/{GUIDE}"' in html
             assert html.index('dq7-guide-entry') < html.index('class="article-cover"')
             assert 'class="article-affiliate"' in html
-            assert 'rel="sponsored nofollow noopener noreferrer"' in html
+            product = html.split('<aside class="article-affiliate"', 1)[1].split("</aside>", 1)[0]
+            assert f'href="{PRODUCT}"' in product, path
+            assert "Nintendo Switch 2版" in product and "初代Nintendo Switchでは遊べません" in product
+            assert "af.moshimo.com" not in product and "data-affiliate-network" not in product
+            assert 'rel="sponsored' not in product
     assert entries == len(expected)
     if baseline:
         # All existing article prose, images, product links, and related cards
