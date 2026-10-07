@@ -14,8 +14,10 @@
 </section>
 <section class="home-picks" aria-labelledby="home-picks-title">
     <div class="section-heading"><div><span class="eyebrow">PICK UP</span><h2 id="home-picks-title">まずはこちら</h2></div></div>
-    <div class="home-pick-grid">
+    {% set is_first_home_page = articles_page is not defined or articles_page.number == 1 %}
+    <div class="home-pick-grid{% if is_first_home_page %} has-featured-review{% endif %}">
     {% set pickup_slugs = ['dq7-re-hell-armor-farming', 'chuwi-corebook-x-os-reinstall'] %}
+    {% if is_first_home_page %}{% set pickup_slugs = ['dq7-re-full-review'] + pickup_slugs %}{% endif %}
     {% for pickup_slug in pickup_slugs %}
         {% for article in articles %}
             {% if article.slug == pickup_slug %}
