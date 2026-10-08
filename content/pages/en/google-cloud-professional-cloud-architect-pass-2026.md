@@ -1,5 +1,6 @@
 Title: I Passed Google Cloud Professional Cloud Architect: Two Weeks of Study with Udemy Practice Tests
 Date: 2026-09-24
+Modified: 2026-10-09
 Category: Cloud certification
 Tags: Google Cloud, Professional Cloud Architect, Certification, Udemy
 Slug: google-cloud-professional-cloud-architect-pass-2026-en
@@ -22,12 +23,12 @@ The course includes case study practice. Its format gives you a chance to think 
 
 ## A note for English-speaking learners
 
-**This is a Japanese-language Udemy course: the questions and explanations are all in Japanese.** If you do not read Japanese, try your browser's automatic translation while working through the practice tests. If a translated technical term seems unclear, check it against the [official Google Cloud Professional Cloud Architect exam guide](https://cloud.google.com/learn/certification/guides/professional-cloud-architect).
+**As of October 9, 2026, the course page describes English questions with Japanese explanations.** If you do not read Japanese, your browser's automatic translation may help with the explanations. If a translated technical term seems unclear, check it against the [official Google Cloud Professional Cloud Architect exam guide](https://cloud.google.com/learn/certification/guides/professional-cloud-architect).
 
 It is a **practice test course**, so it is best suited to checking your understanding through questions. If you are new to Google Cloud, learning the fundamentals first may make the practice tests easier to use.
 
 This Udemy course was a big help in my preparation. If you are studying for Professional Cloud Architect, it is worth considering alongside the official exam guide.
 
-<p><a href="https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/?couponCode=MT260924JPA" rel="sponsored nofollow noopener noreferrer" data-affiliate-placement="In-article course recommendation">View the Udemy practice tests (coupon link, ad)</a></p>
+<p><a href="https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/?couponCode=MT260924JPA" rel="sponsored nofollow noopener noreferrer" data-affiliate-placement="In-article course recommendation">View the Udemy practice tests (ad link)</a></p>
 
-Check the price and whether the coupon still applies at checkout.
+Check the price and any applicable discount at checkout.

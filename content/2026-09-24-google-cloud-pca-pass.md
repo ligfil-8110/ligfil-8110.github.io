@@ -1,5 +1,6 @@
 Title: Google Cloud Professional Cloud Architectに合格！2週間の学習で役立ったUdemy模擬試験
 Date: 2026-09-24
+Modified: 2026-10-09
 Category: 技術メモ
 Tags: Google Cloud, Professional Cloud Architect, 資格, Udemy
 Slug: google-cloud-professional-cloud-architect-pass-2026
@@ -14,7 +15,7 @@ en_url: en/google-cloud-professional-cloud-architect-pass-2026.html
 
 資格試験の勉強で気になるのが、手元の教材が今の試験範囲に合っているかどうか。今回使った講座は、**2026年3月からの新しい試験ガイドに対応した模擬試験集**です。僕にとっては、そこがとても助かりました！
 
-講座は**問題文も解説もすべて日本語**で、ケーススタディを含む問題演習が用意されています。単にサービス名を覚えるだけでなく、「この条件なら何を選ぶか」を考える練習ができる構成です。2週間の学習で、最新の範囲を意識して取り組めたのは大きかったです。
+2026年10月9日時点の[講座ページ](https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/)では、**問題文は英語・解説は日本語**の形式と案内されています。ケーススタディを含む問題演習も用意されています。単にサービス名を覚えるだけでなく、「この条件なら何を選ぶか」を考える練習ができる構成です。2週間の学習で、最新の範囲を意識して取り組めたのは大きかったです。
 
 ## これから受ける人へ
 
@@ -22,6 +23,6 @@ en_url: en/google-cloud-professional-cloud-architect-pass-2026.html
 
 僕は今回の合格に向けた勉強で、このUdemy講座が非常に役立ちました。これからProfessional Cloud Architectを受ける方は、教材選びの候補に入れてみてください！
 
-<p><a href="https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/?couponCode=MT260924JPA" rel="sponsored nofollow noopener noreferrer" data-affiliate-placement="本文内・講座紹介">Udemyの模擬試験集を見る（クーポン付き・広告リンク）</a></p>
+<p><a href="https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/?couponCode=MT260924JPA" rel="sponsored nofollow noopener noreferrer" data-affiliate-placement="本文内・講座紹介">Udemyの模擬試験集を見る（広告リンク）</a></p>
 
-※クーポンの適用状況や価格は、購入画面で確認してください。
+※価格や割引の適用状況は、購入画面で確認してください。
