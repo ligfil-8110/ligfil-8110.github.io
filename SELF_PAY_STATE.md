@@ -15,6 +15,10 @@
 - 現在の作業段階: 障害判定、3候補比較、見送り判断まで完了。状態記録のcommit・pushと公開状態確認が残る。
 - 次に行う作業: この状態記録のみを差分・秘密検査後にcommit・main pushし、Actionsと公開URLを確認する。
 - Definition of Doneの残項目: commit・push・公開確認。
+- commit結果: `SELF_PAY_STATE.md`のみを`c6fd0de`でcommit。公開ステート検査とステージ差分検査に成功し、所有者の未コミット変更・生成物は含めていない。
+- 現在の作業段階: 状態記録のcommitまで完了。main pushとActions・公開URL確認が残る。
+- 次に行う作業: commit結果を記録してmainへpushし、公開状態を確認する。
+- Definition of Doneの残項目: push・公開確認。
 
 ## 2026-10-11 MAIN・DQ7攻略記事の手動X案を引き継ぐ
 
