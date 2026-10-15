@@ -1,6 +1,6 @@
-Title: ドラクエ7リメイクがボリューム満点で最高に面白かった！100時間遊べる神ゲーレビュー
+Title: ドラクエ7リメイクがボリューム満点で最高に面白かった！1週間遊んだレビュー
 Date: 2026-02-09 21:00
-Modified: 2026-10-03
+Modified: 2026-10-16
 Category: ゲーム
 Tags: ドラクエ, Nintendo Switch
 Slug: dq7-re-full-review
