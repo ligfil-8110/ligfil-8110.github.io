@@ -1,6 +1,6 @@
 Title: CHUWI CoreBook XのWindows 11再インストール手順｜WINPE USBの注意点
 Date: 2026-02-12 20:00
-Modified: 2026-10-17
+Modified: 2026-10-20
 Category: 技術メモ
 Tags: PC, CHUWI, CoreBook X, Windows, トラブルシューティング
 Slug: chuwi-corebook-x-os-reinstall
@@ -9,6 +9,15 @@ Summary: CHUWI CoreBook XでWindows 11を再インストールした実体験を
 [購入・開封時の様子を紹介したCHUWI CoreBook Xの記事](/chuwi-corebook-x-review.html)に続き、使い始める前に一度クリーンな状態にしたかったので、Windows 11を再インストールしました。
 
 > **最初に確認してください：** CoreBook Xには世代や構成の異なるモデルがあります。以下は筆者が2026年に作業した個体での記録です。特にCHUWI配布のリカバリデータを使う場合は、本体のモデル名・シリアル番号に合うファイルと手順を[CHUWIサポート](https://support.chuwi.com/)で確認してください。別モデル用のデータを流用しないでください。
+
+CHUWIサポートで入力するシリアル番号は、本体背面のラベルを確認します。Windowsがまだ起動するなら、PowerShellでモデル名とBIOSに登録された番号も照合用に表示できます（[Microsoftの案内](https://learn.microsoft.com/en-us/powershell/scripting/samples/collecting-information-about-computers)）。
+
+```powershell
+(Get-CimInstance -ClassName Win32_ComputerSystem).Model
+(Get-CimInstance -ClassName Win32_BIOS).SerialNumber
+```
+
+BIOSの番号が空欄だったり本体ラベルと異なったりしたら、推測でファイルを選ばずCHUWIに確認してください。シリアル番号が写った画面や写真を公開しないようにしましょう。
 
 ## 結論：通常インストールとCHUWIリカバリは別の手順
 
