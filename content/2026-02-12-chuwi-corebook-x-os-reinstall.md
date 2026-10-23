@@ -1,6 +1,6 @@
 Title: CHUWI CoreBook XのWindows 11再インストール手順｜WINPE USBの注意点
 Date: 2026-02-12 20:00
-Modified: 2026-10-20
+Modified: 2026-10-24
 Category: 技術メモ
 Tags: PC, CHUWI, CoreBook X, Windows, トラブルシューティング
 Slug: chuwi-corebook-x-os-reinstall
@@ -37,7 +37,7 @@ Windows 11を入れ直す方法は、大きく分けて次の2つです。
 - 現在のWindowsエディション（HomeまたはPro）とライセンス認証状態を確認する
 - 対象モデル用のWi-Fi、チップセット、グラフィックスなどのドライバーを入手できる状態にする
 - ACアダプターを接続し、途中で電源が切れないようにする
-- 中身が消えてもよいUSBメモリを用意する。[Microsoft公式のインストールメディア](https://www.microsoft.com/ja-jp/software-download/windows11)なら8GB以上、[CHUWI日本公式FAQ](https://store.chuwi.jp/pages/support-faqs)にある工場出荷状態リカバリなら16GB以上が必要。CHUWI側は手元のモデル向け案内を優先する
+- 中身が消えてもよいUSBメモリを用意する。[Microsoft公式のインストールメディア](https://www.microsoft.com/ja-jp/software-download/windows11)なら8GB以上、[CHUWI公式FAQ（英語）](https://store.chuwi.com/pages/support-faqs)にある工場出荷状態リカバリなら16GB以上が必要。CHUWI側は手元のモデル向け案内を優先する
 - コマンド操作前にUSBのドライブ文字を必ず確認する
 
 Microsoftも、再インストール前のバックアップ、ライセンス認証、エディションの一致を案内しています。クリーンインストールでは、個人ファイル、アプリ、メーカーによるカスタマイズ、設定が削除されます。詳しくは[インストールメディアを使ったWindowsの再インストール（Microsoft）](https://support.microsoft.com/ja-jp/windows/windows-%E3%82%92%E5%86%8D%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B-d8369486-3e33-7d9c-dccc-859e2b022fc7)を確認してください。
