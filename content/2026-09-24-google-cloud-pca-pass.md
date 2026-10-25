@@ -1,6 +1,6 @@
 Title: Google Cloud Professional Cloud Architectに合格！2週間の学習で役立ったUdemy模擬試験
 Date: 2026-09-24
-Modified: 2026-10-09
+Modified: 2026-10-26
 Category: 技術メモ
 Tags: Google Cloud, Professional Cloud Architect, 資格, Udemy
 Slug: google-cloud-professional-cloud-architect-pass-2026
@@ -15,7 +15,7 @@ en_url: en/google-cloud-professional-cloud-architect-pass-2026.html
 
 資格試験の勉強で気になるのが、手元の教材が今の試験範囲に合っているかどうか。今回使った講座は、**2026年3月からの新しい試験ガイドに対応した模擬試験集**です。僕にとっては、そこがとても助かりました！
 
-2026年10月9日時点の[講座ページ](https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/)では、**問題文は英語・解説は日本語**の形式と案内されています。ケーススタディを含む問題演習も用意されています。単にサービス名を覚えるだけでなく、「この条件なら何を選ぶか」を考える練習ができる構成です。2週間の学習で、最新の範囲を意識して取り組めたのは大きかったです。
+2026年10月26日時点の[講座ページ](https://www.udemy.com/course/2026google-cloud-professional-cloud-architect/)では、**日本語の模擬試験で、正解・不正解の理由も日本語で解説する**と案内されています。ケーススタディを含む問題演習も用意されています。単にサービス名を覚えるだけでなく、「この条件なら何を選ぶか」を考える練習ができる構成です。2週間の学習で、最新の範囲を意識して取り組めたのは大きかったです。
 
 ## これから受ける人へ
 

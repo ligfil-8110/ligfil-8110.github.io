@@ -1,6 +1,6 @@
 Title: I Passed Google Cloud Professional Cloud Architect: Two Weeks of Study with Udemy Practice Tests
 Date: 2026-09-24
-Modified: 2026-10-09
+Modified: 2026-10-26
 Category: Cloud certification
 Tags: Google Cloud, Professional Cloud Architect, Certification, Udemy
 Slug: google-cloud-professional-cloud-architect-pass-2026-en
@@ -23,7 +23,7 @@ The course includes case study practice. Its format gives you a chance to think 
 
 ## A note for English-speaking learners
 
-**As of October 9, 2026, the course page describes English questions with Japanese explanations.** If you do not read Japanese, your browser's automatic translation may help with the explanations. If a translated technical term seems unclear, check it against the [official Google Cloud Professional Cloud Architect exam guide](https://cloud.google.com/learn/certification/guides/professional-cloud-architect).
+**As of October 26, 2026, the course page describes practice tests and explanations in Japanese.** If you do not read Japanese, check the course format before buying. You can also review the exam scope in the [official Google Cloud Professional Cloud Architect exam guide](https://cloud.google.com/learn/certification/guides/professional-cloud-architect).
 
 It is a **practice test course**, so it is best suited to checking your understanding through questions. If you are new to Google Cloud, learning the fundamentals first may make the practice tests easier to use.
 
