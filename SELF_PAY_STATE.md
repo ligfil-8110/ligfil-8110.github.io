@@ -20,6 +20,10 @@
 - 現在の作業段階: 状態記録と公開URLの検証まで完了。対象限定commit・main pushとPages・公開後確認待ち。
 - 次に行う作業: `SELF_PAY_STATE.md` だけをcommit・pushし、Pagesと公開ホーム・レビュー・ads.txt・サイトマップを確認する。手動X案を非公開スレッドで提示する。
 - Definition of Doneの残項目: 対象限定commit・push・Pagesと公開後確認、非公開スレッドでの案文提示。
+- commit結果: `96b0c40` に状態記録だけを含めた。所有者の未コミット変更と生成物は含めていない。
+- 現在の作業段階: 状態記録の対象限定commitまで完了。main pushとPages・公開後確認待ち。
+- 次に行う作業: 進捗記録をcommitしてmainへpushし、公開状態を確認する。
+- Definition of Doneの残項目: main push・Pagesと公開後確認、非公開スレッドでの案文提示。
 
 ## 2026-10-29 MAIN・DQ7主力とCoreBook X予備の実害点検
 
