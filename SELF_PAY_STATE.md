@@ -4,7 +4,7 @@
 
 - Date: 2026-10-31
 - Goal: CoreBook X再インストール記事のUSB条件を予定評価し、日本の読者が同じ条件を確認できるCHUWI日本語公式FAQへの案内を最小修正・公開する。定時収益モニターの欠日も検証する。
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done: AGENTS.md、前回状態、git差分、公開サイト・Pages、定時収益モニター・Search Console・GA4を確認する。収益経路と根拠、確信度、時期、作業量、リスクで少なくとも3候補を比較する。CHUWI日本語FAQのノートPC欄とMicrosoft公式メディアのUSB条件を確認し、記事の該当参照先だけを修正する。使い捨て作業領域で本番ビルドを行い、生成記事のリンク・メタデータ・広告・GA4・画像・PC/モバイル表示を検証する。公開ステートの秘密検査、対象限定commit・main push、Pages成功、公開ホーム・記事・ads.txt・サイトマップを確認する。実装と収益効果を区別する。
 - このGoalを選んだ理由: CoreBook X記事は筆者の実作業に基づき、MicrosoftメディアとCHUWIリカバリの混同を解く価値がある。現在の英語FAQへの参照は内容が正しいが、同じ条件を記した日本語の公式FAQを確認できた。作業前にUSB条件を日本語で照合できる導線は、個体差とデータ消去を伴う作業で役立つ。記事の追加改稿や新規記事は検索需要と収益効果の根拠が不足する。
 - 現在の作業段階: 前回DONE、所有者の未コミット変更、Pages成功、公開ホーム・記事・広告ファイル、既存記事、定時モニター・AdSense画面・Search Console・GA4、CHUWI日本語・英語FAQとMicrosoft公式案内を確認。公式資料への最小修正の実装前。
@@ -32,6 +32,14 @@
 - 現在の作業段階: commit完了、mainへのpush前。
 - 次に行う作業: この進捗をコミットしてmainへpushし、Actionsと公開URLを確認する。
 - Definition of Doneの残項目: main push、Pages成功、公開後確認、最終Status更新。
+- push後: `27b0e2e` までを `origin/main` へpush完了。所有者の他の未コミット変更は保持。
+- 現在の作業段階: main push完了、Pages公開と公開後確認待ち。
+- 次に行う作業: 対象SHAのdeploy workflow成功を確認し、公開ホーム・記事・ads.txt・サイトマップを検査する。
+- Definition of Doneの残項目: Pages成功、公開後確認、最終Status更新。
+- 公開確認後: `27b0e2e` を対象にしたGitHub Pages workflow `41093782862` は成功。公開ホーム、CoreBook X再インストール記事、`/ads.txt`、`/sitemap.xml` はすべてHTTP 200。公開記事に日本語FAQへのリンク、canonical、AdSense、GA4を確認した。実装・公開はDONEであり、検索や収益の効果は11月7日以降の評価待ち。
+- 現在の作業段階: Definition of Doneの公開確認まで完了。最終状態をcommit・pushする。
+- 次回候補: 11月3日の週次戦略レビューでは主力DQ7と予備CoreBook Xの実データを再比較する。今回の日本語FAQ導線は11月7日に早期指標、11月14日・28日に利用可能な収益指標を評価する。定時収益モニターの空白日とAdSense画面との差は未解決の計測課題として、取得スクリプトの所在・取得範囲が確認できたときに再検討する。
+- Definition of Doneの残項目: なし。最終ステートの反映だけを行う。
 
 ## 2026-10-30 MAIN・DQ7レビューの予定評価と手動X案
 
