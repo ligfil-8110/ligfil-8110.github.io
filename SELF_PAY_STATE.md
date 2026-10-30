@@ -28,6 +28,10 @@
 - 現在の作業段階: 隔離本番ビルドと生成ページ検査を完了。対象差分の再確認と秘密検査、commit・push前。
 - 次に行う作業: 公開ステートと記事の対象差分を確認し、対象2ファイルだけcommitしてmainへpush、Pagesと公開URLを確認する。
 - Definition of Doneの残項目: 秘密検査、対象限定commit・push、Pages・公開後確認。
+- commit後: 秘密検査と対象限定ステージを確認し、記事と公開ステートを `302bff7` にコミット。所有者の他の未コミット変更はステージしていない。
+- 現在の作業段階: commit完了、mainへのpush前。
+- 次に行う作業: この進捗をコミットしてmainへpushし、Actionsと公開URLを確認する。
+- Definition of Doneの残項目: main push、Pages成功、公開後確認、最終Status更新。
 
 ## 2026-10-30 MAIN・DQ7レビューの予定評価と手動X案
 
