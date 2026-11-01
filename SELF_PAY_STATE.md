@@ -31,6 +31,10 @@
 - 現在の作業段階: 実装commit完了、mainへのpush前。
 - 次に行う作業: この進捗記録をcommitし、2コミットをmainへpushする。
 - Definition of Doneの残項目: push、Pages成功、公開後確認。
+- push結果: `2c21eb1` と進捗記録 `db60202` をorigin/mainへpush。既存の所有者変更は未コミットのまま保持した。
+- 現在の作業段階: mainへの実装push完了、GitHub Pagesのbuild・deploy待ち。
+- 次に行う作業: push記録をcommit・pushし、最終HEADのActions成功後に公開ホーム・記事・ads.txt・サイトマップを検査する。
+- Definition of Doneの残項目: Pages成功、公開後確認。
 
 ## 2026-10-31 MAIN・CoreBook X再インストールの日本語公式資料
 
