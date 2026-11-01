@@ -4,7 +4,7 @@
 
 - Date: 2026-11-01
 - Goal: 商品と読者課題の適合性を説明できないトップページの汎用アフィリエイトバナーを停止し、広告・記事別の商品案内を保ったまま公開する。
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done: AGENTS.md、前回状態、git status/log/diff、公開ホーム・記事・Pages、定時収益モニターを確認する。少なくとも3候補を根拠、収益経路、確信度、時期、作業量、リスクで比較する。トップページ限定の汎用商品バナーを最小差分で外し、隔離本番ビルドでホーム・記事・AdSense・GA4・canonical・構造化データ・内部リンク・ads.txt・サイトマップとPC/モバイル表示を確認する。公開ステートの秘密検査、対象限定commit・main push、Pages成功、公開後のホーム・記事・ads.txt・サイトマップを確認する。効果は後日評価する。
 - このGoalを選んだ理由: トップページの「楽天市場のおすすめ商品」は特定の読者課題や商品を示さず、ゲームとPCの記事を探す読者にとって用途を判断しにくい。公開HTMLとテンプレートでホームだけに表示されることを確認した。販売成果は未確認で、AdSenseやDQ7レビューの個別商品リンクは維持できる。停止は可逆的で、無関係な購入誘導を減らせる。
 - 現在の作業段階: 前回GoalはDONE。所有者の未コミット変更、Pages成功と公開URL、既存記事・広告導線、定時収益モニターを確認。テンプレート修正前。
@@ -35,6 +35,11 @@
 - 現在の作業段階: mainへの実装push完了、GitHub Pagesのbuild・deploy待ち。
 - 次に行う作業: push記録をcommit・pushし、最終HEADのActions成功後に公開ホーム・記事・ads.txt・サイトマップを検査する。
 - Definition of Doneの残項目: Pages成功、公開後確認。
+- 公開結果: 最終実装を含むHEAD `e7452d1` のGitHub Actions run `41291531581` はbuild・deployとも成功。キャッシュ回避付きで公開ホーム、DQ7レビュー、`/ads.txt`、`/sitemap.xml` がすべてHTTP 200であることを確認した。
+- 公開後検証: ホームに汎用バナーの文言、もしもURL、画像URLがなく、AdSense、GA4、canonical、プライバシー導線、DQ7レビュー・じごくのよろい・CoreBook X再インストールの3ピックアップが残る。DQ7レビューには楽天ブックスの商品リンク、BlogPosting、AdSense、GA4、canonicalが残る。`ads.txt` のGoogle publisher行と、XMLサイトマップのホーム・DQ7レビューURLも確認した。
+- 現在の作業段階: Goal完了。実装、隔離本番ビルド、PC/モバイル確認、差分・秘密検査、対象限定commit、main push、Pages成功、公開後確認まで完了。
+- 次に行う作業: 次回MAIN Runで11月3日の週次方針と利用可能な収益・検索データを確認し、既存施策を短期で反転させず次の収益改善Goalを決める。汎用バナー停止は11月8日・15日・29日に評価する。
+- Definition of Doneの残項目: なし
 
 ## 2026-10-31 MAIN・CoreBook X再インストールの日本語公式資料
 
