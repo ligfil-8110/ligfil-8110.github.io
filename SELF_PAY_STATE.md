@@ -27,6 +27,10 @@
 - 現在の作業段階: 復旧、差分・秘密検査まで完了。対象2ファイルのcommit前。
 - 次に行う作業: `SELF_PAY_STATE.md` と `themes/foundation/templates/base.html` だけをステージ・commitし、mainへpushする。
 - Definition of Doneの残項目: commit・push、Pages成功、公開後確認。
+- commit結果: 対象2ファイルだけをcommit `2c21eb1`（`Remove generic homepage affiliate banner`）として記録。既存の所有者変更と生成領域は含めていない。
+- 現在の作業段階: 実装commit完了、mainへのpush前。
+- 次に行う作業: この進捗記録をcommitし、2コミットをmainへpushする。
+- Definition of Doneの残項目: push、Pages成功、公開後確認。
 
 ## 2026-10-31 MAIN・CoreBook X再インストールの日本語公式資料
 
