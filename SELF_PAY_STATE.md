@@ -23,6 +23,10 @@
 - 現在の作業段階: 実装、隔離本番ビルド、生成物とPC/モバイル表示、秘密・差分検査を完了。commit前。
 - 次に行う作業: `SELF_PAY_STATE.md` とレビュー記事だけをステージしてcommitし、mainへpushする。
 - Definition of Doneの残項目: 対象限定commit・push、Pages成功と公開後確認。
+- commit結果: 対象の2ファイルだけを `002ae36` (`Link DQ7 review to armor guide`) としてcommit。所有者の未コミット変更と隔離ビルド領域は含めていない。
+- 現在の作業段階: 実装commit完了。進捗記録をcommitしてmainへpushする前。
+- 次に行う作業: この進捗記録をcommitし、両コミットをmainへpushしてPagesを確認する。
+- Definition of Doneの残項目: 進捗commit・push、Pages成功と公開後確認。
 
 ## 2026-11-01 MAIN・トップページの汎用商品バナー停止
 
