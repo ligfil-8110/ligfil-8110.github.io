@@ -4,7 +4,7 @@
 
 - Date: 2026-11-17
 - Goal: 公開済み施策と定時収益モニターを週次評価し、次の7日間の主力・予備テーマと評価条件を確定する。
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done: AGENTS.md・前回状態・Git差分・公開サイトとPages・収益モニターを確認する。公開施策の効果と欠測を区別し、少なくとも3候補を収益経路・根拠・確信度・時期・作業量・リスクで比較する。次週の主力と予備、候補の次の確認事項、再評価日を記録する。公開してよい情報のみを対象限定でcommit・mainへpushし、Pages成功と公開ホーム・記事・ads.txt・サイトマップを確認する。
 - このGoalを選んだ理由: 前回の週次レビューで11月17日を評価日に設定した。公開施策の結果を確認せずに新しい記事や導線を足すと、少ない根拠のまま変更を重ねることになる。
 - 現在の作業段階: 前回GoalはDONE。所有者の未コミット変更を保持し、定時モニター、Git、公開サイトとPagesの状態を確認。候補比較と週次判断を整理中。
@@ -23,6 +23,14 @@
 - 現在の作業段階: 週次評価と対象限定commitを完了。進捗記録のcommit、main push前。
 - 次に行う作業: 進捗記録をcommitしてmainへpushし、Pages成功と公開URLを確認する。
 - Definition of Doneの残項目: 進捗記録のcommit・main push、Pages成功と公開後確認。
+- push結果: 週次レビューと進捗記録を含む `e046a2f` までorigin/mainへpush。所有者の未コミット変更は保持。
+- 現在の作業段階: main push完了。GitHub Pagesのbuild・deploy待ち。
+- 次に行う作業: 同SHAのActions成功と公開ホーム・主要記事・ads.txt・サイトマップを確認する。
+- Definition of Doneの残項目: Pages成功と公開後確認、最終Status更新。
+- 公開結果: 週次レビューを含む `e046a2f` のGitHub Actions run `43908333371` はbuild・deployとも成功。公開ホーム、DQ7レビュー・実証攻略、CoreBook X再インストール、`/ads.txt`、`/sitemap.xml` はHTTP 200。主要ページのAdSense・GA4・canonicalも残る。記事本文・テンプレートは今回変更していない。
+- 現在の作業段階: 週次レビューGoal完了。戦略判断と3候補比較を記録し、対象限定commit・main push・Pages成功・公開後確認を完了。収益効果は判定保留。
+- 次に行う作業: 11月24日に主力テーマを再評価する。実証できる具体的な読者課題が見つかれば、次のMAINで隔離実験と記事制作に進む。
+- Definition of Doneの残項目: なし
 
 ## 2026-11-10 MAIN・週次戦略レビュー
 
