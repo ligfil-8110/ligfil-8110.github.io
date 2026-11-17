@@ -25,6 +25,10 @@
 - 現在の作業段階: 実装と隔離本番ビルド・PC/モバイル表示・公開要素の検証を完了。差分・秘密検査とcommit前。
 - 次に行う作業: 対象記事と公開ステートだけを差分確認・ステージしてcommit、main push・Pages・公開後確認へ進む。
 - Definition of Doneの残項目: 差分・秘密検査、対象限定commit・push、Pages・公開後確認。
+- commit結果: 記事の1文・更新日と公開ステートの2ファイルだけを `3361962` にコミット。所有者の既存未コミット変更は含めていない。
+- 現在の作業段階: 差分・秘密検査と実装commitを完了。進捗記録のcommit、main push前。
+- 次に行う作業: 進捗をcommitしてmainへpushし、Pages成功・公開後確認へ進む。
+- Definition of Doneの残項目: 進捗記録commit・main push、Pages・公開後確認。
 
 ## 2026-11-17 MAIN・検索流入拡大（DQ7実証攻略2記事の公開と内部導線強化）
 
