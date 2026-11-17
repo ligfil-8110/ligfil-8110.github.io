@@ -4,7 +4,7 @@
 
 - Date: 2026-11-17
 - Goal: リポジトリ内の一次プレイ記録と画面写真から検索意図に直結する『ドラクエ7 Reimagined』攻略記事を2本公開し、記事案内・プレイ日記からの内部導線を強化する。
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done: 現代ウッドパルナの石版・鉱業協会の標語ガイドと、「モンスターの心」仕様・序盤入手場所ガイドの2記事を公開する。`dq7-reimagined-guide.md` とプレイ日記第12・13話からの内部リンクを追加し、隔離本番ビルドで `check_public_state.py`・`check_html_sitemap.py`・`check_dq7_guide.py` を通過させる。対象6ファイルのみをcommit・main pushし、GitHub Pagesでのビルド・公開を確認する。
 - このGoalを選んだ理由: 検索入口の絶対数不足が主な制約である一方、リポジトリ内には検索クエリ単位で切り出せる一次スクリーンショットが豊富に保存されている。既存のプレイ日記本文を壊さずに検索意図別の攻略記事を増やすことで、AdSense閲覧と関連記事回遊の入口を増やす。
 - 公開記事・変更対象:
@@ -12,6 +12,7 @@
   2. `content/2026-11-17-dq7-re-monster-hearts-guide.md`（「モンスターの心」アクセサリー仕様、スライムの心・ゴーレムの心入手場所、いきなり勝利の仕様）
   3. `content/pages/dq7-reimagined-guide.md`（攻略ガイド欄への2記事追加）
   4. `content/2026-01-31-dragon-quest-VII-12.md` / `content/2026-02-01-dragon-quest-VII-13.md`（該当場面から攻略記事への内部リンク追加）
+- 公開結果: 隔離本番ビルド（35記事・11ページ）と `check_public_state.py`・`check_html_sitemap.py`（46ページ）・`check_dq7_guide.py`（17対象・13プレイ日記）が通過。対象6ファイルを `de0672b` でcommitし、`origin/main` へpush。GitHub Actions run `44096481183` が成功し、公開トップ、新規2記事、記事案内、プレイ日記第12・13話、`/ads.txt`、`/sitemap.xml` のHTTP 200とAdSense/GA4コードを確認（収益効果は今後の評価待ち）。
 - 次期制作バックログ（リポジトリ内一次素材ベース）:
   - 過去のカラーストーン採掘場（地下2階・地下4階）の色石ギミック攻略（`images/2026-01/0131/` 写真あり）
   - 既存「CHUWI CoreBook X OS再インストール」記事および「ドラクエ7関連商品」枠の有効なアフィリエイトリンク復旧（オーナー発行URLの差し替え）
