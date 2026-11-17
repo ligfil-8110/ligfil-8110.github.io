@@ -13,6 +13,7 @@
   3. `content/pages/dq7-reimagined-guide.md`（攻略ガイド欄への2記事追加）
   4. `content/2026-01-31-dragon-quest-VII-12.md` / `content/2026-02-01-dragon-quest-VII-13.md`（該当場面から攻略記事への内部リンク追加）
 - 公開結果: 隔離本番ビルド（35記事・11ページ）と `check_public_state.py`・`check_html_sitemap.py`（46ページ）・`check_dq7_guide.py`（17対象・13プレイ日記）が通過。対象6ファイルを `de0672b` でcommitし、`origin/main` へpush。GitHub Actions run `44096481183` が成功し、公開トップ、新規2記事、記事案内、プレイ日記第12・13話、`/ads.txt`、`/sitemap.xml` のHTTP 200とAdSense/GA4コードを確認（収益効果は今後の評価待ち）。
+- もしもアフィリエイト復旧（2026-11-17 追記）: オーナー提示の正規素材に基づき、トップページサイドバーの楽天市場バナー（`pl_id=1223`）を `base.html` へ、DQ7関連記事末尾のNintendo Switch 2版商品リンクおよび計測画素（`pl_id=616`）を `article.html` へ反映し、`check_dq7_guide.py` の検査条件を更新。
 - 次期制作バックログ（リポジトリ内一次素材ベース）:
   - 過去のカラーストーン採掘場（地下2階・地下4階）の色石ギミック攻略（`images/2026-01/0131/` 写真あり）
   - 既存「CHUWI CoreBook X OS再インストール」記事および「ドラクエ7関連商品」枠の有効なアフィリエイトリンク復旧（オーナー発行URLの差し替え）

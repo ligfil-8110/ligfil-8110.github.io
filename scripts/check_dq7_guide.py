@@ -11,7 +11,7 @@ from urllib.parse import urlsplit
 
 GUIDE = "pages/dq7-reimagined-guide.html"
 SITE = "https://ligfil-8110.github.io"
-PRODUCT = "https://books.rakuten.co.jp/rb/18378428/"
+PRODUCT = "//af.moshimo.com/af/c/click?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18378428%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbook%2Fi%2F21744753%2F"
 
 
 class BodyLinks(HTMLParser):
@@ -71,8 +71,9 @@ def check(output: Path, content: Path, baseline: Path | None) -> None:
             product = html.split('<aside class="article-affiliate"', 1)[1].split("</aside>", 1)[0]
             assert f'href="{PRODUCT}"' in product, path
             assert "Nintendo Switch 2版" in product and "初代Nintendo Switchでは遊べません" in product
-            assert "af.moshimo.com" not in product and "data-affiliate-network" not in product
-            assert 'rel="sponsored' not in product
+            assert 'data-affiliate-network="もしもアフィリエイト"' in product
+            assert 'rel="sponsored nofollow"' in product
+            assert '//i.moshimo.com/af/i/impression?a_id=5345202&amp;p_id=54&amp;pc_id=54&amp;pl_id=616' in product
     assert entries == len(expected)
     if baseline:
         # All existing article prose, images, product links, and related cards
