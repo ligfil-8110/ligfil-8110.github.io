@@ -1,6 +1,7 @@
 Title: ドラクエ7リメイクプレイ日記　緑の宝玉の先へ！
 Category: ゲーム
 Date: 2026-01-31 22:15
+Modified: 2026-11-17
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0131-special
 Image: images/dq-viire-20260114-8.jpg
@@ -27,6 +28,8 @@ Summary: 今日はスペシャル版！大量の画像とともに、緑の宝�
 そして最深部にたどり着くと、モンスターの心なるアイテムをゲットしましたよ！！
 ![謎解き35](images/2026-01/0131/dq-viire-20260131-35.jpg)
 ![謎解き36](images/2026-01/0131/dq-viire-20260131-36.jpg)
+
+[「モンスターの心」の仕様や序盤の入手場所まとめはこちら](/dq7-re-monster-hearts-guide.html)
 
 オリジナル版では、モンスターの心は転職システムで利用するものだったのに、今回から変更されていますね！！
 

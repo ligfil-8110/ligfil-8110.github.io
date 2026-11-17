@@ -1,6 +1,7 @@
 Title: ドラクエ7リメイクプレイ日記　東の塔の決戦、そして…哀しき別れ
 Category: ゲーム
 Date: 2026-02-01 22:00
+Modified: 2026-11-17
 Tags: ドラクエ, Nintendo Switch
 Slug: dragon-quest-vii-play-0201-east-tower
 Image: images/dq-viire-20260114-8.jpg
@@ -155,6 +156,8 @@ Summary: 今日は昨日の続き、東の塔の攻略からウッドパルナ�
 ![次回へ230](images/2026-02/0201/dq-viire-20260201-230.jpg)
 ![次回へ240](images/2026-02/0201/dq-viire-20260201-240.jpg)
 ![次回へ250](images/2026-02/0201/dq-viire-20260201-250.jpg)
+
+[現代のウッドパルナ（見晴らし台・カラーストーン採掘場）での石版入手手順はこちら](/dq7-re-woodpalna-green-tablet-mine.html)
 
 ## まとめ
 

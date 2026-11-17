@@ -1,5 +1,22 @@
 # AI SelfPay State
 
+## 2026-11-17 MAIN・検索流入拡大（DQ7実証攻略2記事の公開と内部導線強化）
+
+- Date: 2026-11-17
+- Goal: リポジトリ内の一次プレイ記録と画面写真から検索意図に直結する『ドラクエ7 Reimagined』攻略記事を2本公開し、記事案内・プレイ日記からの内部導線を強化する。
+- Status: IN_PROGRESS
+- Definition of Done: 現代ウッドパルナの石版・鉱業協会の標語ガイドと、「モンスターの心」仕様・序盤入手場所ガイドの2記事を公開する。`dq7-reimagined-guide.md` とプレイ日記第12・13話からの内部リンクを追加し、隔離本番ビルドで `check_public_state.py`・`check_html_sitemap.py`・`check_dq7_guide.py` を通過させる。対象6ファイルのみをcommit・main pushし、GitHub Pagesでのビルド・公開を確認する。
+- このGoalを選んだ理由: 検索入口の絶対数不足が主な制約である一方、リポジトリ内には検索クエリ単位で切り出せる一次スクリーンショットが豊富に保存されている。既存のプレイ日記本文を壊さずに検索意図別の攻略記事を増やすことで、AdSense閲覧と関連記事回遊の入口を増やす。
+- 公開記事・変更対象:
+  1. `content/2026-11-17-dq7-re-woodpalna-green-tablet-mine.md`（現代ウッドパルナ見晴らし台2階の選択肢とカラーストーン採掘場の標語・地下3階石版）
+  2. `content/2026-11-17-dq7-re-monster-hearts-guide.md`（「モンスターの心」アクセサリー仕様、スライムの心・ゴーレムの心入手場所、いきなり勝利の仕様）
+  3. `content/pages/dq7-reimagined-guide.md`（攻略ガイド欄への2記事追加）
+  4. `content/2026-01-31-dragon-quest-VII-12.md` / `content/2026-02-01-dragon-quest-VII-13.md`（該当場面から攻略記事への内部リンク追加）
+- 次期制作バックログ（リポジトリ内一次素材ベース）:
+  - 過去のカラーストーン採掘場（地下2階・地下4階）の色石ギミック攻略（`images/2026-01/0131/` 写真あり）
+  - 既存「CHUWI CoreBook X OS再インストール」記事および「ドラクエ7関連商品」枠の有効なアフィリエイトリンク復旧（オーナー発行URLの差し替え）
+  - `reset-gamepad.ps1` を題材とした Windows でスイッチ風 Pro コントローラーの USB 認識をリセットする実践ガイド
+
 ## 2026-11-17 MAIN・週次戦略レビュー
 
 - Date: 2026-11-17
