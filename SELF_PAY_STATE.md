@@ -4,7 +4,7 @@
 
 - Date: 2026-11-18
 - Goal: 現代ウッドパルナの石版ガイドで「はい」を選んだ場合の説明を、実プレイ記録に沿って誤解なく直す。
-- Status: IN_PROGRESS
+- Status: DONE
 - Definition of Done: AGENTS.md・前回状態・Git差分・公開状態・定時収益モニターを確認し、3候補を比較する。対象記事の冒頭1文だけを実プレイ写真と本文の経過に合わせて修正し、`Modified` を付ける。所有者の未コミット変更から隔離した本番ビルドで記事・画像・内部リンク・メタデータ・広告・GA4・ゲーム著作権表示・ads.txt・サイトマップを検査する。対象記事と公開ステートだけをcommit・main pushし、Pages成功と公開後の主要URLを確認する。
 - このGoalを選んだ理由: 11月17日に公開した記事の冒頭は「選択肢を間違えると受け取れない」と読めるが、同じ記事の画面写真と本文では「はい」の後に話しかけ直して「いいえ」で受け取っている。石版を取り逃したと誤認させる具体的な表現を正す。
 - 現在の作業段階: 前回GoalはDONE。定時モニター、Git・Pages、記事・テンプレート・広告導線と公開資料を確認。対象記事は未修正。
@@ -29,6 +29,14 @@
 - 現在の作業段階: 差分・秘密検査と実装commitを完了。進捗記録のcommit、main push前。
 - 次に行う作業: 進捗をcommitしてmainへpushし、Pages成功・公開後確認へ進む。
 - Definition of Doneの残項目: 進捗記録commit・main push、Pages・公開後確認。
+- push結果: 記事訂正を含む `cc48d03` までorigin/mainへpush。所有者の未コミット変更を保持。
+- 現在の作業段階: main push完了、GitHub Pagesのbuild・deploy待ち。
+- 次に行う作業: 同SHAのActions成功後、公開ホーム・訂正記事・記事案内・ads.txt・サイトマップを確認する。
+- Definition of Doneの残項目: Pages成功・公開後確認・最終Status更新。
+- 公開結果: 訂正を含む `cc48d03` のGitHub Actions run `44128780476` はbuild・deployとも成功。公開ホーム、訂正記事、DQ7記事案内、関連攻略記事、`/ads.txt`、`/sitemap.xml` はすべてHTTP 200。訂正後の文章と旧表現の消失、更新日、canonical、AdSense、GA4、提携リンクを公開HTMLで確認。
+- 現在の作業段階: Goal完了。実プレイ画面の照合、最小訂正、隔離本番ビルド、PC/390pxモバイル表示、公開要素と秘密・差分検査、対象限定commit・main push、Pages成功、公開後確認を完了。
+- 次に行う作業: 11月25日にこの訂正と新記事の先行指標を確認する。実証済み素材から独立した検索課題が確認できれば、次のMAINで制作を検討する。
+- Definition of Doneの残項目: なし
 
 ## 2026-11-17 MAIN・検索流入拡大（DQ7実証攻略2記事の公開と内部導線強化）
 
