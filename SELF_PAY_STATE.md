@@ -18,6 +18,10 @@
 - 現在の作業段階: 3候補比較、記事と公開URL・根拠写真の検証、非公開案文の作成を完了。公開ステートの差分検査とcommit前。
 - 次に行う作業: 公開ステートだけをcommit・main pushしてPages成功と公開URLを確認し、案文を非公開スレッドへ渡す。
 - Definition of Doneの残項目: 非公開受け渡し、対象限定commit・main push、Pages成功と公開後確認。
+- commit結果: 公開ステートだけを `b58e572` にコミット。記事・テンプレート・所有者の既存未コミット変更は含めていない。
+- 現在の作業段階: 候補比較と案文・URLの検証、対象限定commitを完了。進捗記録のcommitとmain push前。
+- 次に行う作業: 進捗をcommitしてmainへpushし、Pages成功と公開後確認へ進む。
+- Definition of Doneの残項目: 非公開受け渡し、進捗記録commit・main push、Pages成功と公開後確認。
 
 ## 2026-11-18 MAIN・現代ウッドパルナ石版ガイドの選択肢説明
 
