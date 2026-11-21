@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>星辰の迷宮 〜空中遺跡の不思議のダンジョンRPG〜</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="md-app">
+    <!-- 温かみのある木製＆真鍮風 HUD -->
+    <header id="md-hud">
+      <div class="hud-left">
+        <div class="floor-badge" id="hud-floor">B1F</div>
+        <div class="lv-badge">LV <strong id="hud-lv">1</strong></div>
+        <div class="meter-group">
+          <div class="meter">
+            <span class="m-lbl">HP</span>
+            <div class="m-track"><div id="bar-hp" class="m-fill hp" style="width:100%"></div></div>
+            <span id="txt-hp" class="m-val">45/45</span>
+          </div>
+          <div class="meter">
+            <span class="m-lbl">MP</span>
+            <div class="m-track"><div id="bar-mp" class="m-fill mp" style="width:100%"></div></div>
+            <span id="txt-mp" class="m-val">20/20</span>
+          </div>
+          <div class="meter">
+            <span class="m-lbl">満腹</span>
+            <div class="m-track"><div id="bar-food" class="m-fill food" style="width:100%"></div></div>
+            <span id="txt-food" class="m-val">100%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <div class="gold-pill">🪙 <strong id="hud-gold">120</strong> G</div>
+        <div class="hud-btns">
+          <button id="btn-inv" class="ui-btn" type="button" title="持ち物・装備 (I)">🎒 道具</button>
+          <button id="btn-skill" class="ui-btn" type="button" title="特技・スキル (K)">✨ 特技</button>
+          <button id="btn-town" class="ui-btn" type="button" title="拠点メニュー">🏘️ 拠点</button>
+          <button id="btn-save" class="ui-btn" type="button" title="記録">💾</button>
+          <button id="btn-sound" class="ui-btn" type="button" title="サウンド">🔊</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- メインダンジョンビュー -->
+    <main id="md-stage">
+      <canvas id="dungeon-canvas"></canvas>
+      <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+      <!-- 被弾フラッシュ＆瀕死警告オーバーレイ -->
+      <div id="damage-flash" aria-hidden="true"></div>
+      <div id="low-hp-vignette" class="hidden" aria-hidden="true"></div>
+
+      <!-- 透過ミニマップ -->
+      <div id="minimap-wrap">
+        <canvas id="minimap-canvas" width="170" height="120"></canvas>
+        <div id="biome-label">天空の石窟</div>
+      </div>
+
+      <!-- 装備チップ -->
+      <div id="equip-chip">
+        <span id="chip-weapon">⚔️ 鉄の剣+0</span>
+        <span id="chip-shield">🛡️ 木の盾+0</span>
+      </div>
+
+      <!-- スキルショートカットバー -->
+      <div id="skill-bar" aria-label="特技ショートカット">
+        <button id="sk-spin" class="sk-btn" type="button" title="周囲8マス攻撃 (1)">🌪️ 回転斬り<small>MP5</small></button>
+        <button id="sk-fire" class="sk-btn" type="button" title="前方直線ファイア (2)">🔥 炎弾<small>MP4</small></button>
+        <button id="sk-heal" class="sk-btn" type="button" title="HP回復 (3)">💚 ヒール<small>MP6</small></button>
+        <button id="sk-rest" class="sk-btn" type="button" title="1ターン足踏み (R)">⏳ 足踏み</button>
+      </div>
+
+      <!-- フローティングログ -->
+      <div id="log-feed" aria-live="polite"></div>
+
+      <!-- 階段確認プロンプト -->
+      <div id="stairs-prompt" class="parchment-card hidden">
+        <div class="prompt-title">🪜 次の階層への階段</div>
+        <p id="stairs-desc">次の階層へ進みますか？</p>
+        <div class="prompt-btns">
+          <button id="btn-stairs-yes" class="ui-btn primary" type="button">次の階へ進む (Enter)</button>
+          <button id="btn-stairs-no" class="ui-btn dark" type="button">もう少し探索する</button>
+        </div>
+      </div>
+
+      <!-- 敗北（やられた！）リザルトオーバーレイ -->
+      <section id="defeat-overlay" class="overlay-screen defeat-bg hidden" aria-label="敗北リザルト">
+        <div class="parchment-card defeat-card">
+          <div class="defeat-badge">GAME OVER · 冒険失敗</div>
+          <h2>💀 力尽きてしまった……</h2>
+          <p id="defeat-cause" class="defeat-cause">魔物の攻撃で倒れてしまった！</p>
+          <div id="defeat-stats" class="defeat-stats"></div>
+          <p class="defeat-note">※ レベル・SP・鍛えた武器と盾はそのまま保持されます。</p>
+          <button id="btn-defeat-return" class="ui-btn primary large-btn" type="button">🏘️ 星見の宿場へ戻る (Enter)</button>
+        </div>
+      </section>
+
+      <!-- 拠点「星見の宿場」オーバーレイ -->
+      <section id="town-overlay" class="overlay-screen hidden" aria-label="拠点 星見の宿場">
+        <div class="town-card">
+          <div class="town-head">
+            <div>
+              <span class="town-eyebrow">SKY SANCTUM · 星見の宿場</span>
+              <h2>星辰の迷宮 — 冒険の準備</h2>
+            </div>
+            <div class="town-gold">所持金: <strong id="town-gold-val">120 G</strong> / SP: <strong id="town-sp-val">1</strong></div>
+          </div>
+
+          <div class="town-tabs">
+            <button class="tab-btn active" type="button" data-tab="dive">⚔️ 出発</button>
+            <button class="tab-btn" type="button" data-tab="smith">🔨 鍛冶屋</button>
+            <button class="tab-btn" type="button" data-tab="shop">🪙 道具屋</button>
+            <button class="tab-btn" type="button" data-tab="skills">✨ スキル強化</button>
+          </div>
+
+          <div id="town-body" class="town-body"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 下部操作コントローラー -->
+    <footer id="md-controls">
+      <div id="pad-8dir" class="pad-8" aria-label="8方向移動パッド">
+        <button class="p8-btn" type="button" data-dx="-1" data-dy="-1" aria-label="左上">↖</button>
+        <button class="p8-btn" type="button" data-dx="0" data-dy="-1" aria-label="上">▲</button>
+        <button class="p8-btn" type="button" data-dx="1" data-dy="-1" aria-label="右上">↗</button>
+        <button class="p8-btn" type="button" data-dx="-1" data-dy="0" aria-label="左">◀</button>
+        <button class="p8-btn p8-center" type="button" id="btn-pad-rest" aria-label="足踏み">・</button>
+        <button class="p8-btn" type="button" data-dx="1" data-dy="0" aria-label="右">▶</button>
+        <button class="p8-btn" type="button" data-dx="-1" data-dy="1" aria-label="左下">↙</button>
+        <button class="p8-btn" type="button" data-dx="0" data-dy="1" aria-label="下">▼</button>
+        <button class="p8-btn" type="button" data-dx="1" data-dy="1" aria-label="右下">↘</button>
+      </div>
+
+      <div class="ctrl-help">
+        移動: WASD / 矢印 / クリック | 攻撃: Space / Z | 斜め: Q E Z C | 足踏み: R | 道具: I
+      </div>
+
+      <div class="act-cluster">
+        <button id="btn-turn-dir" class="act-sub" type="button" title="向きだけ変える (T)">🧭<small>向き</small></button>
+        <button id="btn-attack" class="act-main" type="button" title="攻撃・調べる (Space)">⚔️<small>攻撃</small></button>
+      </div>
+    </footer>
+
+    <!-- 魔王討伐エンディングムービー（フルスクリーンシネマオーバーレイ） -->
+    <section id="ending-overlay" class="ending-overlay hidden" aria-label="エンディングムービー">
+      <div class="cinema-bar top" aria-hidden="true"></div>
+      <div class="cinema-bar bottom" aria-hidden="true"></div>
+      <div id="ending-flash" aria-hidden="true"></div>
+
+      <div class="ending-top-controls">
+        <button id="btn-ending-audio" class="ending-ctrl-btn hidden" type="button">🔊 音楽を再生</button>
+        <button id="btn-ending-skip" class="ending-ctrl-btn" type="button">⏭️ スキップ (Esc)</button>
+      </div>
+
+      <div id="ending-title-banner" class="ending-title-banner hidden" aria-live="polite">
+        <div class="ending-banner-eyebrow">✦ CONGRATULATIONS ✦</div>
+        <h2>星辰の迷宮 — 魔王討伐達成</h2>
+      </div>
+
+      <div id="ending-credits" class="ending-credits hidden" aria-label="スタッフロール">
+        <div id="ending-credits-inner" class="ending-credits-inner"></div>
+      </div>
+
+      <div id="ending-subtitle" class="ending-subtitle" aria-live="polite"></div>
+
+      <div id="ending-result-card" class="parchment-card ending-card hidden">
+        <div class="ending-badge">👑 GRAND CLEAR · 星辰の英雄</div>
+        <h2>魔王ザルガウス討伐 達成！</h2>
+        <p class="ending-lead">星辰の迷宮に再び朝の光が戻った。あなたの名は語り継がれるだろう。</p>
+        <div id="ending-stats" class="ending-stats"></div>
+        <p class="ending-note">※ B11F以降の「星辰の深淵」が解放されました。拠点からいつでもエンディングを再視聴できます。</p>
+        <div class="ending-actions">
+          <button id="btn-ending-continue" class="ui-btn primary large-btn" type="button">⚔️ B11F以降の深淵へ進む</button>
+          <button id="btn-ending-town" class="ui-btn dark large-btn" type="button">🏘️ 星見の宿場へ凱旋する</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 持ち物・装備モーダル -->
+  <div id="inv-modal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="inv-title">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="inv-title">🎒 持ち物・ステータス</h2>
+        <button id="btn-close-inv" class="close-x" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div class="modal-body">
+        <div id="inv-stats" class="stat-cards"></div>
+        <div id="inv-list" class="row-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- セーブ・引き継ぎモーダル -->
+  <div id="save-modal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="save-title">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="save-title">💾 冒険の記録（自動セーブ対応）</h2>
+        <button id="btn-close-save" class="close-x" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="btn-row">
+          <button id="btn-save-now" class="ui-btn primary" type="button">今すぐセーブ</button>
+          <button id="btn-reset-game" class="ui-btn danger" type="button">データを初期化</button>
+        </div>
+        <label class="code-lbl" for="save-code-text">引き継ぎコード</label>
+        <textarea id="save-code-text" rows="3" spellcheck="false"></textarea>
+        <div class="btn-row">
+          <button id="btn-copy-save" class="ui-btn dark" type="button">コピー</button>
+          <button id="btn-load-save" class="ui-btn primary" type="button">コードから復元</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

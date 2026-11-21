@@ -53,7 +53,9 @@ PLUGINS = ['sitemap','neighbors']
 CUSTOM_CSS = 'static/css/custom.css'
 
 # 静的ファイルのパスを通す
-STATIC_PATHS = ['images', 'css', 'extra/ads.txt']
+STATIC_PATHS = ['images', 'css', 'extra/ads.txt', 'rpg-3d']
+ARTICLE_EXCLUDES = ['rpg-3d']
+PAGE_EXCLUDES = ['rpg-3d']
 
 # 出力先を指定（テーマの構造に合わせる）
 EXTRA_PATH_METADATA = {
@@ -63,6 +65,7 @@ EXTRA_PATH_METADATA = {
 # Blogroll (サイドバーなどに表示されるリンク)
 # 不要なサンプルリンクは消すか、自分のSNSなどに書き換えるとスッキリします
 LINKS = (
+    ("🗡️ 不思議のダンジョンRPG『星辰の迷宮』", "/rpg-3d/"),
     ("Google", "https://www.google.com/"),
     ("任天堂公式サイト", "https://www.nintendo.co.jp/"),
     ("RUNNET", "https://runnet.jp/smp/"),
