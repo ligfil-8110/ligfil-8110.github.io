@@ -1,6 +1,6 @@
 Title: Home
 Date: 2026-09-23 00:00
-Modified: 2026-09-24
+Modified: 2026-11-21
 Category: English
 Tags: Blog, Games, PC, Running
 Slug: english-home
@@ -23,7 +23,13 @@ en_home: true
 
 <section class="home-picks" aria-labelledby="home-picks-title">
     <div class="section-heading"><div><span class="eyebrow">PICK UP</span><h2 id="home-picks-title">A little of everything</h2></div></div>
-    <div class="home-pick-grid">
+    <div class="home-pick-grid has-featured-review">
+        <article class="home-pick-card">
+            <span>3D BROWSER RPG</span>
+            <h3><a href="/en/rpg-3d.html">Astral Labyrinth: Playable 3D Mystery Dungeon RPG</a></h3>
+            <p>A turn-based 3D Mystery Dungeon x RPG built with Three.js featuring procedural sky ruins, town smithing, SP skills, and a 5-act ending cutscene.</p>
+            <a class="text-link" href="/en/rpg-3d.html">Play right in your browser →</a>
+        </article>
         <article class="home-pick-card">
             <span>GAMES</span>
             <h3><a href="/dq7-re-hell-armor-farming.html">Dragon Quest VII: where I farmed Hell Armor</a></h3>
@@ -42,8 +48,17 @@ en_home: true
 <div class="section-heading" id="articles"><div><span class="eyebrow">LATEST POSTS</span><h2>Latest English articles</h2></div></div>
 <div class="post-list">
     <article class="featured-post">
-        <a class="featured-image" href="/en/google-cloud-professional-cloud-architect-pass-2026.html"><img src="/images/2026-09/google-cloud-pca-certificate-header.png" alt="Google Cloud logo and Professional Cloud Architect title from a certificate, with personal details omitted." width="1200" height="675" loading="lazy" decoding="async"></a>
+        <a class="featured-image" href="/en/hoshitsuchi-no-meikyu-3d-rpg.html"><img src="/images/default-eyecatch.png" alt="Astral Labyrinth 3D Mystery Dungeon RPG" width="1200" height="675" loading="lazy" decoding="async"></a>
         <div class="featured-copy">
+            <div class="post-meta"><span>GAMES</span><time datetime="2026-11-21">November 21, 2026</time></div>
+            <h2><a href="/en/hoshitsuchi-no-meikyu-3d-rpg.html">Astral Labyrinth: I Built a Free 3D Mystery Dungeon RPG You Can Play Right in Your Browser</a></h2>
+            <p>Play Astral Labyrinth right on the blog with toon-shaded 3D figures, procedural sky ruins, smithing, SP skills, and a 5-act 3D ending movie.</p>
+            <a class="text-link" href="/en/hoshitsuchi-no-meikyu-3d-rpg.html">Read &amp; play →</a>
+        </div>
+    </article>
+    <article class="post-card">
+        <a class="post-card-image" href="/en/google-cloud-professional-cloud-architect-pass-2026.html"><img src="/images/2026-09/google-cloud-pca-certificate-header.png" alt="Google Cloud logo and Professional Cloud Architect title from a certificate, with personal details omitted." width="720" height="405" loading="lazy" decoding="async"></a>
+        <div class="post-card-copy">
             <div class="post-meta"><span>CLOUD CERTIFICATION</span><time datetime="2026-09-24">September 24, 2026</time></div>
             <h2><a href="/en/google-cloud-professional-cloud-architect-pass-2026.html">I Passed Google Cloud Professional Cloud Architect: Two Weeks of Study with Udemy Practice Tests</a></h2>
             <p>I passed after two weeks of study. A Udemy practice test course covering the updated exam scope was especially helpful.</p>

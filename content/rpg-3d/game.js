@@ -1,6 +1,16 @@
 (function () {
   "use strict";
 
+  // --- 言語設定 (?lang=en / ?lang=ja または localStorage) ---
+  const LANG_KEY = "ligfil_mystery_dungeon_lang";
+  const urlLangParam = new URLSearchParams(window.location.search).get("lang");
+  let lang = urlLangParam === "en" ? "en" : urlLangParam === "ja" ? "ja" : (localStorage.getItem(LANG_KEY) === "en" ? "en" : "ja");
+  if (urlLangParam === "en" || urlLangParam === "ja") {
+    try { localStorage.setItem(LANG_KEY, urlLangParam); } catch (_e) {}
+  }
+  const isEn = () => lang === "en";
+  const L = (ja, en) => (lang === "en" ? en : ja);
+
   // --- 基本定数 ---
   const MAP_W = 34;
   const MAP_H = 24;
@@ -19,6 +29,7 @@
   const BIOMES = [
     {
       name: "天空の石窟",
+      nameEn: "Sky Cavern",
       sky: 0x38bdf8,
       fog: 0x60a5fa,
       floorA: "#dfb372",
@@ -34,6 +45,7 @@
     },
     {
       name: "紅蓮の溶岩窟",
+      nameEn: "Crimson Lava Cavern",
       sky: 0x7c2d12,
       fog: 0x451a03,
       floorA: "#c97e54",
@@ -49,6 +61,7 @@
     },
     {
       name: "蒼氷の星晶宮",
+      nameEn: "Azure Star Palace",
       sky: 0x1e3a8a,
       fog: 0x1e40af,
       floorA: "#cbd5e1",
@@ -64,6 +77,7 @@
     },
     {
       name: "星辰の聖域",
+      nameEn: "Astral Sanctum",
       sky: 0x312e81,
       fog: 0x1e1b4b,
       floorA: "#d2b184",
@@ -88,50 +102,57 @@
 
   // --- 装備・アイテム・敵データ ---
   const WEAPONS = [
-    { id: "iron", name: "鉄の剣", baseAtk: 6, color: "#e2e8f0", price: 0 },
-    { id: "flame", name: "紅蓮の大剣", baseAtk: 13, color: "#fb923c", price: 320 },
-    { id: "star", name: "星辰の聖剣", baseAtk: 22, color: "#38bdf8", price: 780 },
+    { id: "iron", name: "鉄の剣", nameEn: "Iron Sword", baseAtk: 6, color: "#e2e8f0", price: 0 },
+    { id: "flame", name: "紅蓮の大剣", nameEn: "Crimson Greatsword", baseAtk: 13, color: "#fb923c", price: 320 },
+    { id: "star", name: "星辰の聖剣", nameEn: "Astral Holy Blade", baseAtk: 22, color: "#38bdf8", price: 780 },
   ];
 
   const SHIELDS = [
-    { id: "wood", name: "木の盾", baseDef: 4, color: "#b45309", price: 0 },
-    { id: "knight", name: "騎士の盾", baseDef: 10, color: "#94a3b8", price: 280 },
-    { id: "star", name: "星辰の大盾", baseDef: 18, color: "#facc15", price: 700 },
+    { id: "wood", name: "木の盾", nameEn: "Wooden Shield", baseDef: 4, color: "#b45309", price: 0 },
+    { id: "knight", name: "騎士の盾", nameEn: "Knight's Shield", baseDef: 10, color: "#94a3b8", price: 280 },
+    { id: "star", name: "星辰の大盾", nameEn: "Astral Greatshield", baseDef: 18, color: "#facc15", price: 700 },
   ];
 
   const ITEM_DEFS = {
-    onigiri: { id: "onigiri", name: "おにぎり", icon: "🍙", desc: "満腹度を 50% 回復", price: 30, kind: "food", val: 50 },
-    big_onigiri: { id: "big_onigiri", name: "大きなおにぎり", icon: "🍙", desc: "満腹度を 100% 回復（満タンなら最大値+5）", price: 70, kind: "food", val: 100 },
-    herb: { id: "herb", name: "やくそう", icon: "🌿", desc: "HPを 35 回復（満タンなら最大HP+2）", price: 35, kind: "heal", val: 35 },
-    otogiri: { id: "otogiri", name: "弟切草", icon: "🍀", desc: "HPを 90 回復（満タンなら最大HP+4）", price: 95, kind: "heal", val: 90 },
-    mana: { id: "mana", name: "星露の小瓶", icon: "🧪", desc: "MPを 15 回復", price: 55, kind: "mp", val: 15 },
-    scroll_fire: { id: "scroll_fire", name: "火炎の巻物", icon: "📜", desc: "周囲・部屋内の敵すべてに炎ダメージ", price: 110, kind: "scroll_fire" },
-    scroll_vacuum: { id: "scroll_vacuum", name: "真空斬りの巻物", icon: "📜", desc: "視界内の敵すべてに大ダメージ", price: 160, kind: "scroll_vacuum" },
-    staff_bind: { id: "staff_bind", name: "かなしばりの杖", icon: "🪄", desc: "前方の敵を 6ターン 行動不能にする", price: 100, kind: "staff_bind" },
-    staff_blow: { id: "staff_blow", name: "吹き飛ばしの杖", icon: "🪄", desc: "前方の敵を吹き飛ばし壁衝突ダメージ", price: 90, kind: "staff_blow" },
-    staff_swap: { id: "staff_swap", name: "場所替えの杖", icon: "🪄", desc: "前方直線上の敵と位置を入れ替える", price: 95, kind: "staff_swap" },
-    scroll_return: { id: "scroll_return", name: "帰還の巻物", icon: "🌀", desc: "装備と所持金を持って拠点へ戻る", price: 80, kind: "return" },
-    smith_stone: { id: "smith_stone", name: "強化の秘石", icon: "💎", desc: "拠点の鍛冶屋で装備強化に使える", price: 180, kind: "material" },
+    onigiri: { id: "onigiri", name: "おにぎり", nameEn: "Rice Ball", icon: "🍙", desc: "満腹度を 50% 回復", descEn: "Restores 50% fullness", price: 30, kind: "food", val: 50 },
+    big_onigiri: { id: "big_onigiri", name: "大きなおにぎり", nameEn: "Large Rice Ball", icon: "🍙", desc: "満腹度を 100% 回復（満タンなら最大値+5）", descEn: "Restores 100% fullness (Max +5 if full)", price: 70, kind: "food", val: 100 },
+    herb: { id: "herb", name: "やくそう", nameEn: "Medicinal Herb", icon: "🌿", desc: "HPを 35 回復（満タンなら最大HP+2）", descEn: "Restores 35 HP (Max HP +2 if full)", price: 35, kind: "heal", val: 35 },
+    otogiri: { id: "otogiri", name: "弟切草", nameEn: "Otokiri Herb", icon: "🍀", desc: "HPを 90 回復（満タンなら最大HP+4）", descEn: "Restores 90 HP (Max HP +4 if full)", price: 95, kind: "heal", val: 90 },
+    mana: { id: "mana", name: "星露の小瓶", nameEn: "Starlight Vial", icon: "🧪", desc: "MPを 15 回復", descEn: "Restores 15 MP", price: 55, kind: "mp", val: 15 },
+    scroll_fire: { id: "scroll_fire", name: "火炎の巻物", nameEn: "Scroll of Flame", icon: "📜", desc: "周囲・部屋内の敵すべてに炎ダメージ", descEn: "Deals fire damage to all enemies in sight", price: 110, kind: "scroll_fire" },
+    scroll_vacuum: { id: "scroll_vacuum", name: "真空斬りの巻物", nameEn: "Scroll of Vacuum", icon: "📜", desc: "視界内の敵すべてに大ダメージ", descEn: "Deals heavy damage to all enemies in sight", price: 160, kind: "scroll_vacuum" },
+    staff_bind: { id: "staff_bind", name: "かなしばりの杖", nameEn: "Bind Staff", icon: "🪄", desc: "前方の敵を 6ターン 行動不能にする", descEn: "Paralyzes the target ahead for 6 turns", price: 100, kind: "staff_bind" },
+    staff_blow: { id: "staff_blow", name: "吹き飛ばしの杖", nameEn: "Knockback Staff", icon: "🪄", desc: "前方の敵を吹き飛ばし壁衝突ダメージ", descEn: "Blasts the enemy back with wall impact damage", price: 90, kind: "staff_blow" },
+    staff_swap: { id: "staff_swap", name: "場所替えの杖", nameEn: "Swap Staff", icon: "🪄", desc: "前方直線上の敵と位置を入れ替える", descEn: "Swaps positions with an enemy ahead", price: 95, kind: "staff_swap" },
+    scroll_return: { id: "scroll_return", name: "帰還の巻物", nameEn: "Return Scroll", icon: "🌀", desc: "装備と所持金を持って拠点へ戻る", descEn: "Returns to Sky Sanctum with your gear and gold", price: 80, kind: "return" },
+    smith_stone: { id: "smith_stone", name: "強化の秘石", nameEn: "Forge Gem", icon: "💎", desc: "拠点の鍛冶屋で装備強化に使える", descEn: "Used at the Smithy to upgrade weapons or shields", price: 180, kind: "material" },
   };
 
   const MONSTER_DEFS = {
-    slime: { id: "slime", name: "ブルースライム", hp: 22, atk: 8, def: 1, exp: 12, gold: 14, color: "#38bdf8", minF: 1, maxF: 4 },
-    shadow_rogue: { id: "shadow_rogue", name: "影のローグ", hp: 32, atk: 12, def: 3, exp: 22, gold: 26, color: "#334155", minF: 1, maxF: 6 },
-    goblin: { id: "goblin", name: "森ゴブリン", hp: 34, atk: 11, def: 3, exp: 20, gold: 22, color: "#4ade80", minF: 1, maxF: 5 },
-    gargoyle: { id: "gargoyle", name: "石のガーゴイル", hp: 46, atk: 15, def: 5, exp: 34, gold: 36, color: "#94a3b8", minF: 2, maxF: 7 },
-    ice_mage: { id: "ice_mage", name: "蒼帽のウィザード", hp: 56, atk: 19, def: 5, exp: 52, gold: 54, color: "#3b82f6", ranged: "ice", minF: 3, maxF: 12 },
-    fire_lizard: { id: "fire_lizard", name: "火炎トカゲ", hp: 66, atk: 21, def: 6, exp: 58, gold: 56, color: "#f97316", ranged: "fire", minF: 4, maxF: 9 },
-    shadow_knight: { id: "shadow_knight", name: "黒曜の騎士", hp: 108, atk: 32, def: 11, exp: 105, gold: 96, color: "#c084fc", minF: 7, maxF: 99 },
-    boss_ifrit: { id: "boss_ifrit", name: "炎獄のガーディアン", hp: 165, atk: 27, def: 8, exp: 180, gold: 240, color: "#ef4444", ranged: "fire", isBoss: true },
-    boss_zargaus: { id: "boss_zargaus", name: "星喰らいの魔王ザルガウス", hp: 320, atk: 39, def: 13, exp: 500, gold: 650, color: "#a855f7", ranged: "dark", isBoss: true },
+    slime: { id: "slime", name: "ブルースライム", nameEn: "Blue Slime", hp: 22, atk: 8, def: 1, exp: 12, gold: 14, color: "#38bdf8", minF: 1, maxF: 4 },
+    shadow_rogue: { id: "shadow_rogue", name: "影のローグ", nameEn: "Shadow Rogue", hp: 32, atk: 12, def: 3, exp: 22, gold: 26, color: "#334155", minF: 1, maxF: 6 },
+    goblin: { id: "goblin", name: "森ゴブリン", nameEn: "Forest Goblin", hp: 34, atk: 11, def: 3, exp: 20, gold: 22, color: "#4ade80", minF: 1, maxF: 5 },
+    gargoyle: { id: "gargoyle", name: "石のガーゴイル", nameEn: "Stone Gargoyle", hp: 46, atk: 15, def: 5, exp: 34, gold: 36, color: "#94a3b8", minF: 2, maxF: 7 },
+    ice_mage: { id: "ice_mage", name: "蒼帽のウィザード", nameEn: "Azure Wizard", hp: 56, atk: 19, def: 5, exp: 52, gold: 54, color: "#3b82f6", ranged: "ice", minF: 3, maxF: 12 },
+    fire_lizard: { id: "fire_lizard", name: "火炎トカゲ", nameEn: "Flame Lizard", hp: 66, atk: 21, def: 6, exp: 58, gold: 56, color: "#f97316", ranged: "fire", minF: 4, maxF: 9 },
+    shadow_knight: { id: "shadow_knight", name: "黒曜の騎士", nameEn: "Obsidian Knight", hp: 108, atk: 32, def: 11, exp: 105, gold: 96, color: "#c084fc", minF: 7, maxF: 99 },
+    boss_ifrit: { id: "boss_ifrit", name: "炎獄のガーディアン", nameEn: "Infernal Guardian", hp: 165, atk: 27, def: 8, exp: 180, gold: 240, color: "#ef4444", ranged: "fire", isBoss: true },
+    boss_zargaus: { id: "boss_zargaus", name: "星喰らいの魔王ザルガウス", nameEn: "Zargaus, Star-Eater Demon Lord", hp: 320, atk: 39, def: 13, exp: 500, gold: 650, color: "#a855f7", ranged: "dark", isBoss: true },
   };
 
   const TRAP_TYPES = [
-    { id: "mine", name: "地雷のワナ", icon: "💥" },
-    { id: "poison", name: "毒矢のワナ", icon: "🏹" },
-    { id: "warp", name: "ワープのワナ", icon: "🌀" },
-    { id: "sleep", name: "眠りガスのワナ", icon: "💤" },
+    { id: "mine", name: "地雷のワナ", nameEn: "Landmine Trap", icon: "💥" },
+    { id: "poison", name: "毒矢のワナ", nameEn: "Poison Arrow Trap", icon: "🏹" },
+    { id: "warp", name: "ワープのワナ", nameEn: "Warp Trap", icon: "🌀" },
+    { id: "sleep", name: "眠りガスのワナ", nameEn: "Sleep Gas Trap", icon: "💤" },
   ];
+
+  const biomeName = (b) => (isEn() ? b.nameEn : b.name);
+  const weaponName = (w) => (isEn() ? w.nameEn : w.name);
+  const shieldName = (s) => (isEn() ? s.nameEn : s.name);
+  const itemName = (d) => (isEn() ? d.nameEn : d.name);
+  const itemDesc = (d) => (isEn() ? d.descEn : d.desc);
+  const monName = (m) => (isEn() ? m.nameEn : m.name);
 
   // --- Web Audio モダンシンセ効果音＆オーケストラ風エンディング楽曲 ---
   class AudioFX {
@@ -502,7 +523,184 @@
     endingStats: document.getElementById("ending-stats"),
     btnEndingAudio: document.getElementById("btn-ending-audio"),
     btnEndingSkip: document.getElementById("btn-ending-skip"),
+    btnLang: document.getElementById("btn-lang"),
   };
+
+  function setElText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  function setElHtml(id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
+
+  function renderDefeatStats() {
+    if (!ui.defeatStats) return;
+    ui.defeatStats.innerHTML = `
+      <div class="defeat-stat-box"><span>${L("到達階層", "Floor Reached")}</span><strong>B${floorNum}F</strong></div>
+      <div class="defeat-stat-box"><span>${L("今回倒した敵", "Enemies Slain")}</span><strong>${L(`${runKills} 体`, `${runKills}`)}</strong></div>
+      <div class="defeat-stat-box"><span>${L("落としたG", "Gold Dropped")}</span><strong>-${pendingDefeatGoldLoss} G</strong></div>
+    `;
+  }
+
+  function buildEndingOverlayTexts() {
+    if (ui.endingCreditsInner) {
+      ui.endingCreditsInner.innerHTML = `
+        <div class="ec-head">TITLE</div>
+        <div class="ec-line">${L("星辰の迷宮 〜空中遺跡の不思議のダンジョンRPG〜", "Astral Labyrinth — 3D Mystery Dungeon RPG")}</div>
+        <div class="ec-head">STARRING HERO</div>
+        <div class="ec-line">${L(`星辰の騎士（あなた） · Lv.${save.lv}`, `Astral Knight (You) · Lv.${save.lv}`)}</div>
+        <div class="ec-line">${L("愛用の剣：", "Weapon: ")}${weaponName(WEAPONS[save.weaponIdx])}+${save.weaponPlus}</div>
+        <div class="ec-line">${L("愛用の盾：", "Shield: ")}${shieldName(SHIELDS[save.shieldIdx])}+${save.shieldPlus}</div>
+        <div class="ec-head">CAST OF SKY SANCTUM</div>
+        <div class="ec-line">${monName(MONSTER_DEFS.boss_zargaus)}</div>
+        <div class="ec-line">${monName(MONSTER_DEFS.boss_ifrit)}</div>
+        <div class="ec-line">${monName(MONSTER_DEFS.slime)} · ${monName(MONSTER_DEFS.shadow_rogue)}</div>
+        <div class="ec-line">${monName(MONSTER_DEFS.gargoyle)} · ${monName(MONSTER_DEFS.ice_mage)}</div>
+        <div class="ec-head">RECORD OF ADVENTURE</div>
+        <div class="ec-line">${L(`最高到達階層：B${save.maxReachedFloor}F`, `Deepest Floor Reached: B${save.maxReachedFloor}F`)}</div>
+        <div class="ec-line">${L(`今回倒した魔物：${runKills} 体`, `Monsters Slain This Run: ${runKills}`)}</div>
+        <div class="ec-head">SPECIAL THANKS</div>
+        <div class="ec-line">${L("星見の宿場の人々", "The People of Sky Sanctum")}</div>
+        <div class="ec-line">${L("そして ここまで遊び抜いた すべての冒険者へ", "And to Every Adventurer Who Played to the End")}</div>
+        <div class="ec-fin">— FIN —</div>
+      `;
+    }
+    if (ui.endingStats) {
+      ui.endingStats.innerHTML = `
+        <div class="defeat-stat-box"><span>${L("最終レベル", "Final Level")}</span><strong>Lv.${save.lv}</strong></div>
+        <div class="defeat-stat-box"><span>${L("装備", "Gear")}</span><strong>${weaponName(WEAPONS[save.weaponIdx])}+${save.weaponPlus} / ${shieldName(SHIELDS[save.shieldIdx])}+${save.shieldPlus}</strong></div>
+        <div class="defeat-stat-box"><span>${L("討伐数", "Slain")}</span><strong>${L(`${runKills} 体`, `${runKills}`)}</strong></div>
+        <div class="defeat-stat-box"><span>${L("所持ゴールド", "Gold")}</span><strong>${save.gold} G</strong></div>
+      `;
+    }
+    setElText("btn-ending-continue", endingReplayFromTown ? L("🏘️ 拠点へ戻る", "🏘️ Back to Town") : L("⚔️ B11F以降の深淵へ進む", "⚔️ Enter B11F+ Astral Abyss"));
+  }
+
+  function applyLanguage(nextLang) {
+    lang = nextLang === "en" ? "en" : "ja";
+    try { localStorage.setItem(LANG_KEY, lang); } catch (_e) {}
+
+    document.documentElement.lang = isEn() ? "en" : "ja";
+    document.title = L("星辰の迷宮 〜空中遺跡の不思議のダンジョンRPG〜", "Astral Labyrinth — 3D Mystery Dungeon RPG");
+    const metaDesc = document.getElementById("meta-desc");
+    if (metaDesc) {
+      metaDesc.setAttribute("content", L(
+        "Three.jsで動く立体トゥーン調の不思議のダンジョン×RPG『星辰の迷宮』。PC・スマホのブラウザから登録不要・無料ですぐ遊べます。",
+        "Play Astral Labyrinth, a free browser 3D Mystery Dungeon x RPG built with Three.js featuring procedural ruins, smithing, skills, and a 5-act ending movie."
+      ));
+    }
+
+    setElText("lbl-food", L("満腹", "FOOD"));
+    setElText("btn-inv", L("🎒 道具", "🎒 Bag"));
+    const bInv = document.getElementById("btn-inv");
+    if (bInv) bInv.title = L("持ち物・装備 (I)", "Bag & Stats (I)");
+    setElText("btn-skill", L("✨ 特技", "✨ Skills"));
+    const bSkill = document.getElementById("btn-skill");
+    if (bSkill) bSkill.title = L("特技・スキル (K)", "Skills (K)");
+    setElText("btn-town", L("🏘️ 拠点", "🏘️ Town"));
+    const bTown = document.getElementById("btn-town");
+    if (bTown) bTown.title = L("拠点メニュー", "Sky Sanctum Town");
+    const bSave = document.getElementById("btn-save");
+    if (bSave) bSave.title = L("記録", "Adventure Save");
+    if (ui.btnLang) ui.btnLang.textContent = isEn() ? "🌐 日本語" : "🌐 EN";
+    const bSound = document.getElementById("btn-sound");
+    if (bSound) bSound.title = L("サウンド", "Sound");
+
+    setElHtml("sk-spin", L("🌪️ 回転斬り<small>MP5</small>", "🌪️ Spin<small>MP5</small>"));
+    const skSpin = document.getElementById("sk-spin");
+    if (skSpin) skSpin.title = L("周囲8マス攻撃 (1)", "Attack all 8 adjacent tiles (1)");
+    setElHtml("sk-fire", L("🔥 炎弾<small>MP4</small>", "🔥 Fire<small>MP4</small>"));
+    const skFire = document.getElementById("sk-fire");
+    if (skFire) skFire.title = L("前方直線ファイア (2)", "Straight firebolt ahead (2)");
+    setElHtml("sk-heal", L("💚 ヒール<small>MP6</small>", "💚 Heal<small>MP6</small>"));
+    const skHeal = document.getElementById("sk-heal");
+    if (skHeal) skHeal.title = L("HP回復 (3)", "Restore HP (3)");
+    setElText("sk-rest", L("⏳ 足踏み", "⏳ Wait"));
+    const skRest = document.getElementById("sk-rest");
+    if (skRest) skRest.title = L("1ターン足踏み (R)", "Pass 1 turn (R)");
+
+    setElText("stairs-title", L("🪜 次の階層への階段", "🪜 Stairs to Next Floor"));
+    if (waitingStairsPrompt && ui.stairsDesc) {
+      ui.stairsDesc.textContent = L(`B${floorNum + 1}F（${biomeName(getBiome(floorNum + 1))}）へ降りますか？`, `Descend to B${floorNum + 1}F (${biomeName(getBiome(floorNum + 1))})?`);
+    }
+    setElText("btn-stairs-yes", L("次の階へ進む (Enter)", "Descend (Enter)"));
+    setElText("btn-stairs-no", L("もう少し探索する", "Keep Exploring"));
+
+    setElText("defeat-badge", L("GAME OVER · 冒険失敗", "GAME OVER · EXPEDITION FAILED"));
+    setElText("defeat-heading", L("💀 力尽きてしまった……", "💀 You Have Fallen..."));
+    setElText("defeat-note", L("※ レベル・SP・鍛えた武器と盾はそのまま保持されます。", "Note: Your Level, SP, and upgraded Weapon & Shield remain intact."));
+    setElText("btn-defeat-return", L("🏘️ 星見の宿場へ戻る (Enter)", "🏘️ Return to Sky Sanctum (Enter)"));
+    if (isDefeated && !ui.defeatOverlay.classList.contains("hidden")) renderDefeatStats();
+
+    setElText("town-eyebrow", L("SKY SANCTUM · 星見の宿場", "SKY SANCTUM · SANCTUARY TOWN"));
+    setElText("town-heading", L("星辰の迷宮 — 冒険の準備", "Astral Labyrinth — Expedition Prep"));
+    setElText("town-gold-lbl", L("所持金:", "Gold:"));
+    setElText("tab-dive", L("⚔️ 出発", "⚔️ Embark"));
+    setElText("tab-smith", L("🔨 鍛冶屋", "🔨 Smithy"));
+    setElText("tab-shop", L("🪙 道具屋", "🪙 Shop"));
+    setElText("tab-skills", L("✨ スキル強化", "✨ Skills"));
+
+    setElText("ctrl-help", L("移動: WASD / 矢印 / クリック | 攻撃: Space / Z | 斜め: Q E Z C | 足踏み: R | 道具: I", "Move: WASD / Arrows / Click | Attack: Space / Z | Diag: Q E Z C | Wait: R | Bag: I"));
+    setElHtml("btn-turn-dir", L("🧭<small>向き</small>", "🧭<small>Turn</small>"));
+    const bTurn = document.getElementById("btn-turn-dir");
+    if (bTurn) bTurn.title = L("向きだけ変える (T)", "Change facing direction (T)");
+    setElHtml("btn-attack", L("⚔️<small>攻撃</small>", "⚔️<small>Attack</small>"));
+    const bAtk = document.getElementById("btn-attack");
+    if (bAtk) bAtk.title = L("攻撃・調べる (Space)", "Attack / Act (Space)");
+
+    setElText("btn-ending-audio", L("🔊 音楽を再生", "🔊 Play Music"));
+    setElText("btn-ending-skip", L("⏭️ スキップ (Esc)", "⏭️ Skip (Esc)"));
+    setElText("ending-banner-main", L("星辰の迷宮 — 魔王討伐達成", "Astral Labyrinth — Demon Lord Vanquished"));
+    setElText("ending-badge-txt", L("👑 GRAND CLEAR · 星辰の英雄", "👑 GRAND CLEAR · HERO OF THE STARS"));
+    setElText("ending-heading", L("魔王ザルガウス討伐 達成！", "Zargaus Defeated!"));
+    setElText("ending-lead-txt", L("星辰の迷宮に再び朝の光が戻った。あなたの名は語り継がれるだろう。", "Morning light returns to Astral Labyrinth. Your legend will echo across the sky."));
+    setElText("ending-note-txt", L("※ B11F以降の「星辰の深淵」が解放されました。拠点からいつでもエンディングを再視聴できます。", "The Astral Abyss (B11F+) is now unlocked. Replay this ending anytime from Town."));
+    setElText("btn-ending-town", L("🏘️ 星見の宿場へ凱旋する", "🏘️ Return Triumphantly to Town"));
+    if (isEndingPlaying && endingData) {
+      endingData.lastSub = null;
+      buildEndingOverlayTexts();
+    }
+
+    setElText("inv-title", L("🎒 持ち物・ステータス", "🎒 Bag & Status"));
+    setElText("save-title", L("💾 冒険の記録（自動セーブ対応）", "💾 Adventure Save (Auto-Saved)"));
+    setElText("btn-save-now", L("今すぐセーブ", "Save Now"));
+    setElText("btn-reset-game", L("データを初期化", "Reset Data"));
+    setElText("save-code-lbl", L("引き継ぎコード", "Transfer Code"));
+    setElText("btn-copy-save", L("コピー", "Copy"));
+    setElText("btn-load-save", L("コードから復元", "Load Code"));
+
+    // 全画面プレイ時の下部フッター案内
+    setElText("sf-title", L("星辰の迷宮（Astral Labyrinth）— 全画面プレイガイド", "Astral Labyrinth — Fullscreen Play Guide"));
+    setElText("sf-top-btn", L("▲ ゲーム画面へ戻る", "▲ Back to Game"));
+    setElText("sf-desc", L(
+      "Three.jsで描かれる空中遺跡の不思議のダンジョンRPGです。ターン制のローグライク探索と、拠点「星見の宿場」での鍛冶強化・スキル育成を組み合わせて、B10Fに待ち受ける魔王ザルガウスの討伐を目指します。",
+      "A 3D Mystery Dungeon x RPG set in floating sky ruins, powered by Three.js. Explore procedural floors turn-by-turn, upgrade weapons and skills at Sky Sanctum, and defeat Demon Lord Zargaus on B10F."
+    ));
+    setElHtml("sf-controls", L(
+      "<strong>基本操作：</strong>移動（WASD / 矢印キー / 画面タップ・8方向パッド）｜ 斜め移動（Q / E / C）｜ 通常攻撃（Space / Z）｜ 向き変更（T）｜ 足踏み（R）｜ 道具（I）｜ 特技（K：回転斬り 1 / 炎弾 2 / ヒール 3）",
+      "<strong>Controls:</strong> Move (WASD / Arrow keys / Tap / 8-way D-pad) | Diagonal (Q / E / C) | Attack (Space / Z) | Turn (T) | Wait (R) | Bag (I) | Skills (K: Spin 1 / Fire 2 / Heal 3)"
+    ));
+
+    const lHome = document.getElementById("sf-link-home");
+    if (lHome) { lHome.href = isEn() ? "/en/" : "/"; lHome.textContent = L("🏠 みっちーのブログ Home", "🏠 Ligfil's Blog Home"); }
+    const lArt = document.getElementById("sf-link-article");
+    if (lArt) { lArt.href = isEn() ? "/en/hoshitsuchi-no-meikyu-3d-rpg.html" : "/hoshitsuchi-no-meikyu-3d-rpg.html"; lArt.textContent = L("📖 ゲーム紹介記事を読む", "📖 Read Release Article"); }
+    const lPage = document.getElementById("sf-link-page");
+    if (lPage) { lPage.href = isEn() ? "/en/rpg-3d.html" : "/pages/rpg-3d.html"; lPage.textContent = L("🕹️ ブログ埋め込み版ページ", "🕹️ Blog Embedded Page"); }
+    const lPriv = document.getElementById("sf-link-privacy");
+    if (lPriv) { lPriv.href = "/privacy-policy.html"; lPriv.textContent = L("🔒 プライバシーポリシー", "🔒 Privacy Policy"); }
+    const lCont = document.getElementById("sf-link-contact");
+    if (lCont) { lCont.href = isEn() ? "/en/contact.html" : "/contact.html"; lCont.textContent = L("✉️ お問い合わせ", "✉️ Contact"); }
+    const lMap = document.getElementById("sf-link-sitemap");
+    if (lMap) { lMap.href = "/sitemap.html"; lMap.textContent = L("🗺️ サイトマップ", "🗺️ Sitemap"); }
+
+    updateHud();
+    if (inTown) renderTownTab();
+    if (ui.invModal && !ui.invModal.classList.contains("hidden")) openInventory();
+  }
 
   function triggerDamageFlash() {
     shakeTime = Math.max(shakeTime, 0.22);
@@ -527,19 +725,15 @@
     triggerDamageFlash();
     shakeTime = 0.45;
     addRingFx(player.x, player.y, "#ef4444", 115);
-    addFloatText(player.x, player.y, "💀 力尽きた！", "#fecaca");
-    pushLog("💀 力尽きてしまった……！", "danger");
+    addFloatText(player.x, player.y, L("💀 力尽きた！", "💀 Defeated!"), "#fecaca");
+    pushLog(L("💀 力尽きてしまった……！", "💀 You collapsed...!"), "danger");
     updateHud();
 
     pendingDefeatGoldLoss = Math.floor(save.gold * 0.3);
     if (defeatModalTimer) clearTimeout(defeatModalTimer);
     defeatModalTimer = setTimeout(() => {
-      ui.defeatCause.textContent = lastDamageCause || `B${floorNum}Fで力尽きてしまった……`;
-      ui.defeatStats.innerHTML = `
-        <div class="defeat-stat-box"><span>到達階層</span><strong>B${floorNum}F</strong></div>
-        <div class="defeat-stat-box"><span>今回倒した敵</span><strong>${runKills} 体</strong></div>
-        <div class="defeat-stat-box"><span>落としたG</span><strong>-${pendingDefeatGoldLoss} G</strong></div>
-      `;
+      ui.defeatCause.textContent = lastDamageCause || L(`B${floorNum}Fで力尽きてしまった……`, `Fell on B${floorNum}F...`);
+      renderDefeatStats();
       ui.defeatOverlay.classList.remove("hidden");
     }, 550);
   }
@@ -557,7 +751,7 @@
     ui.defeatOverlay.classList.add("hidden");
     sfx.unlock();
     sfx.stairs();
-    pushLog("🏘️ 星見の宿場へ運び込まれた……装備・レベル・SPは無事だ！", "warn");
+    pushLog(L("🏘️ 星見の宿場へ運び込まれた……装備・レベル・SPは無事だ！", "🏘️ Carried back to Sky Sanctum... Your gear, Lv, and SP are safe!"), "warn");
     openTown("dive");
   }
 
@@ -672,7 +866,7 @@
       floorItems.push({ x: 12, y: 16, id: "otogiri" });
       floorItems.push({ x: 20, y: 16, id: "scroll_fire" });
 
-      pushLog(`⚠️ B${fl}F：強大な魔力を感じる……【${bossTpl.name}】が待ち受けている！`, "danger");
+      pushLog(L(`⚠️ B${fl}F：強大な魔力を感じる……【${monName(bossTpl)}】が待ち受けている！`, `⚠️ B${fl}F: Overwhelming dark aura... [${monName(bossTpl)}] awaits!`), "danger");
     } else {
       // 通常の不思議のダンジョン（5〜7部屋＋L字通路＋水路＋柱＋松明）
       const targetRooms = randInt(5, 7);
@@ -806,7 +1000,7 @@
         }
       }
 
-      pushLog(`B${fl}F「${getBiome(fl).name}」へ降り立った！`, "good");
+      pushLog(L(`B${fl}F「${biomeName(getBiome(fl))}」へ降り立った！`, `Arrived at B${fl}F: ${biomeName(getBiome(fl))}!`), "good");
     }
 
     recomputeFov();
@@ -879,7 +1073,7 @@
         r.triggered = true;
         shakeTime = 0.3;
         sfx.trap();
-        pushLog("🚨 モンスターハウスだ！！ 魔物たちが目を覚ました！", "danger");
+        pushLog(L("🚨 モンスターハウスだ！！ 魔物たちが目を覚ました！", "🚨 IT'S A MONSTER HOUSE!! Enemies awaken!"), "danger");
       }
     }
     // 通路・周囲の松明視界（半径3マス）
@@ -902,7 +1096,7 @@
     if (!stairsFoundNotified && visible[stairsPos.y]?.[stairsPos.x]) {
       stairsFoundNotified = true;
       addRingFx(stairsPos.x, stairsPos.y, "#fde047", 70);
-      pushLog("🪜 次の階への階段を見つけた！", "good");
+      pushLog(L("🪜 次の階への階段を見つけた！", "🪜 Found the stairs to the next floor!"), "good");
     }
     if (typeof updateVisibility3D === "function") updateVisibility3D();
   }
@@ -925,13 +1119,13 @@
 
     if (turnDirOnly) {
       turnDirOnly = false;
-      pushLog("向きを変えた。");
+      pushLog(L("向きを変えた。", "Changed facing direction."));
       return;
     }
 
     if (player.sleepTurns > 0) {
       player.sleepTurns--;
-      pushLog("眠っていて動けない……！", "warn");
+      pushLog(L("眠っていて動けない……！", "Asleep and unable to move...!"), "warn");
       endPlayerTurn();
       return;
     }
@@ -962,9 +1156,9 @@
         floorItems.splice(itemIdx, 1);
         save.bag.push(picked.id);
         sfx.pickup();
-        pushLog(`${ITEM_DEFS[picked.id].icon} ${ITEM_DEFS[picked.id].name} を拾った！`, "good");
+        pushLog(`${ITEM_DEFS[picked.id].icon} ${L(`${itemName(ITEM_DEFS[picked.id])} を拾った！`, `Picked up ${itemName(ITEM_DEFS[picked.id])}!`)}`, "good");
       } else {
-        pushLog("持ち物がいっぱいで拾えない！", "warn");
+        pushLog(L("持ち物がいっぱいで拾えない！", "Your bag is full!"), "warn");
       }
     }
 
@@ -978,10 +1172,10 @@
     if (grid[player.y][player.x] === T.STAIRS) {
       const bossAlive = enemies.some((e) => e.hp > 0 && e.tpl.isBoss);
       if (bossAlive) {
-        pushLog("ボスを倒すまで次の階へは進めない！", "warn");
+        pushLog(L("ボスを倒すまで次の階へは進めない！", "Defeat the boss to unlock the stairs!"), "warn");
       } else {
         waitingStairsPrompt = true;
-        ui.stairsDesc.textContent = `B${floorNum + 1}F（${getBiome(floorNum + 1).name}）へ降りますか？`;
+        ui.stairsDesc.textContent = L(`B${floorNum + 1}F（${biomeName(getBiome(floorNum + 1))}）へ降りますか？`, `Descend to B${floorNum + 1}F (${biomeName(getBiome(floorNum + 1))})?`);
         ui.stairsPrompt.classList.remove("hidden");
         updateHud();
         return;
@@ -1001,14 +1195,14 @@
       triggerDamageFlash();
       addRingFx(player.x, player.y, "#ef4444", 110);
       addFloatText(player.x, player.y, `-${dmg}`, "#f87171");
-      pushLog(`💥 地雷を踏んだ！ ${dmg} のダメージ！`, "danger");
+      pushLog(L(`💥 地雷を踏んだ！ ${dmg} のダメージ！`, `💥 Stepped on a Landmine! Took ${dmg} damage!`), "danger");
     } else if (trap.type.id === "poison") {
       const dmg = 7 + floorNum;
       save.hp = Math.max(1, save.hp - dmg);
       player.atkDebuff = 5;
       triggerDamageFlash();
-      addFloatText(player.x, player.y, `毒 -${dmg}`, "#a855f7");
-      pushLog(`🏹 毒矢のワナ！ ${dmg} ダメージ＆しばらく攻撃力低下！`, "danger");
+      addFloatText(player.x, player.y, L(`毒 -${dmg}`, `Poison -${dmg}`), "#a855f7");
+      pushLog(L(`🏹 毒矢のワナ！ ${dmg} ダメージ＆しばらく攻撃力低下！`, `🏹 Poison Arrow Trap! ${dmg} damage & ATK lowered!`), "danger");
     } else if (trap.type.id === "warp") {
       const rm = rooms[randInt(0, rooms.length - 1)];
       const pt = pickFreeTileInRoom(rm);
@@ -1018,11 +1212,11 @@
       player.ry = pt.y;
       recomputeFov();
       addRingFx(player.x, player.y, "#38bdf8", 75);
-      pushLog("🌀 ワープのワナ！ 別の部屋へ飛ばされた！", "warn");
+      pushLog(L("🌀 ワープのワナ！ 別の部屋へ飛ばされた！", "🌀 Warp Trap! Teleported to another room!"), "warn");
     } else if (trap.type.id === "sleep") {
       player.sleepTurns = 2;
-      addFloatText(player.x, player.y, "💤 睡眠", "#93c5fd");
-      pushLog("💤 眠りガスを浴びてしまった！", "warn");
+      addFloatText(player.x, player.y, L("💤 睡眠", "💤 Asleep"), "#93c5fd");
+      pushLog(L("💤 眠りガスを浴びてしまった！", "💤 Hit by Sleep Gas Trap!"), "warn");
     }
   }
 
@@ -1039,9 +1233,9 @@
     foe.bindTurns = 0; // 殴るとかなしばり解除（シレン仕様！）
     sfx.hit();
     addSlashFx(foe.x, foe.y, crit ? "#fb923c" : "#38bdf8");
-    addFloatText(foe.x, foe.y, crit ? `会心! -${dmg}` : `-${dmg}`, crit ? "#fb923c" : "#fde047");
+    addFloatText(foe.x, foe.y, crit ? L(`会心! -${dmg}`, `CRIT! -${dmg}`) : `-${dmg}`, crit ? "#fb923c" : "#fde047");
     if (crit) shakeTime = 0.14;
-    pushLog(`${label || "攻撃！"} ${foe.tpl.name} に ${dmg} のダメージ！${crit ? "（会心！）" : ""}`);
+    pushLog(`${label || L("攻撃！", "Attack!")} ${monName(foe.tpl)}${L(` に ${dmg} のダメージ！${crit ? "（会心！）" : ""}`, ` took ${dmg} damage!${crit ? " (CRIT!)" : ""}`)}`);
     checkEnemyDefeated(foe);
   }
 
@@ -1051,7 +1245,7 @@
     addRingFx(foe.x, foe.y, "#facc15", 64);
     save.exp += foe.tpl.exp;
     save.gold += foe.tpl.gold;
-    pushLog(`${foe.tpl.name} を倒した！ (+${foe.tpl.exp} EXP / +${foe.tpl.gold} G)`, "good");
+    pushLog(`${monName(foe.tpl)} ${L("を倒した！", "defeated!")} (+${foe.tpl.exp} EXP / +${foe.tpl.gold} G)`, "good");
 
     // 確率で強化石やアイテムをドロップ
     if (Math.random() < (foe.tpl.isBoss ? 1.0 : 0.16)) {
@@ -1074,7 +1268,7 @@
       sfx.lvUp();
       addRingFx(player.x, player.y, "#4ade80", 90);
       addFloatText(player.x, player.y, `LEVEL UP! Lv.${save.lv}`, "#4ade80");
-      pushLog(`✨ レベルアップ！ Lv.${save.lv} になり、SP +1 を獲得！`, "good");
+      pushLog(L(`✨ レベルアップ！ Lv.${save.lv} になり、SP +1 を獲得！`, `✨ LEVEL UP! Reached Lv.${save.lv} and gained SP +1!`), "good");
     }
 
     if (foe.tpl.id === "boss_zargaus") {
@@ -1087,7 +1281,7 @@
         }
       });
       persistSave();
-      pushLog("👑 祝・星喰らいの魔王ザルガウスを撃破！！ B11F以降の深淵も解放された！", "good");
+      pushLog(L("👑 祝・星喰らいの魔王ザルガウスを撃破！！ B11F以降の深淵も解放された！", "👑 Zargaus defeated!! B11F+ Astral Abyss is now unlocked!"), "good");
       if (!pendingEndingMovie && !isEndingPlaying) {
         pendingEndingMovie = true;
         endingTimerId = setTimeout(() => {
@@ -1104,7 +1298,7 @@
     if (inTown || isDefeated || isEndingPlaying || pendingEndingMovie || waitingStairsPrompt) return;
     sfx.unlock();
     const cost = 5;
-    if (save.mp < cost) { pushLog("MPが足りない！", "warn"); return; }
+    if (save.mp < cost) { pushLog(L("MPが足りない！", "Not enough MP!"), "warn"); return; }
     save.mp -= cost;
     sfx.magic();
     addRingFx(player.x, player.y, "#38bdf8", 85);
@@ -1112,11 +1306,11 @@
     let hits = 0;
     enemies.slice().forEach((e) => {
       if (Math.abs(e.x - player.x) <= 1 && Math.abs(e.y - player.y) <= 1) {
-        meleeAttack(e, mult, "🌪️ 回転斬り！");
+        meleeAttack(e, mult, L("🌪️ 回転斬り！", "🌪️ Whirlwind!"));
         hits++;
       }
     });
-    if (hits === 0) pushLog("🌪️ 回転斬りを放ったが、周囲に敵がいなかった！");
+    if (hits === 0) pushLog(L("🌪️ 回転斬りを放ったが、周囲に敵がいなかった！", "🌪️ Unleashed Whirlwind, hitting empty air!"));
     endPlayerTurn();
   }
 
@@ -1124,7 +1318,7 @@
     if (inTown || isDefeated || isEndingPlaying || pendingEndingMovie || waitingStairsPrompt) return;
     sfx.unlock();
     const cost = 4;
-    if (save.mp < cost) { pushLog("MPが足りない！", "warn"); return; }
+    if (save.mp < cost) { pushLog(L("MPが足りない！", "Not enough MP!"), "warn"); return; }
     save.mp -= cost;
     sfx.magic();
     let cx = player.x;
@@ -1146,10 +1340,10 @@
       hitEnemy.bindTurns = 0;
       addRingFx(hitEnemy.x, hitEnemy.y, "#fb923c", 60);
       addFloatText(hitEnemy.x, hitEnemy.y, `-${dmg}`, "#fb923c");
-      pushLog(`🔥 炎弾が ${hitEnemy.tpl.name} に命中！ ${dmg} のダメージ！`);
+      pushLog(L(`🔥 炎弾が ${monName(hitEnemy.tpl)} に命中！ ${dmg} のダメージ！`, `🔥 Fireball hit ${monName(hitEnemy.tpl)} for ${dmg} damage!`));
       checkEnemyDefeated(hitEnemy);
     } else {
-      pushLog("🔥 炎弾は壁に当たって消えた。");
+      pushLog(L("🔥 炎弾は壁に当たって消えた。", "🔥 Fireball fizzled against the wall."));
     }
     endPlayerTurn();
   }
@@ -1158,14 +1352,14 @@
     if (inTown || isDefeated || isEndingPlaying || pendingEndingMovie || waitingStairsPrompt) return;
     sfx.unlock();
     const cost = 6;
-    if (save.mp < cost) { pushLog("MPが足りない！", "warn"); return; }
+    if (save.mp < cost) { pushLog(L("MPが足りない！", "Not enough MP!"), "warn"); return; }
     save.mp -= cost;
     const heal = 32 + save.lv * 4 + (save.skills.heal - 1) * 14;
     save.hp = Math.min(getMaxHp(), save.hp + heal);
     sfx.pickup();
     addRingFx(player.x, player.y, "#4ade80", 70);
     addFloatText(player.x, player.y, `+${heal}`, "#4ade80");
-    pushLog(`💚 ヒールを唱えた！ HPが ${heal} 回復！`, "good");
+    pushLog(L(`💚 ヒールを唱えた！ HPが ${heal} 回復！`, `💚 Cast Heal! Restored ${heal} HP!`), "good");
     endPlayerTurn();
   }
 
@@ -1190,13 +1384,13 @@
       foodStepAcc = 0;
       if (save.food > 0) {
         save.food = Math.max(0, save.food - 1);
-        if (save.food === 20) pushLog("⚠️ お腹が空いてきた……おにぎりを食べよう！", "warn");
+        if (save.food === 20) pushLog(L("⚠️ お腹が空いてきた……おにぎりを食べよう！", "⚠️ Getting hungry... Eat a Rice Ball!"), "warn");
       } else {
         save.hp = Math.max(0, save.hp - 2);
-        lastDamageCause = `B${floorNum}Fで空腹により力尽きてしまった……`;
+        lastDamageCause = L(`B${floorNum}Fで空腹により力尽きてしまった……`, `Starved to collapse on B${floorNum}F...`);
         triggerDamageFlash();
         addFloatText(player.x, player.y, "-2", "#f87171");
-        pushLog("🍙 空腹で体力が減っている！", "danger");
+        pushLog(L("🍙 空腹で体力が減っている！", "🍙 Starving! Losing HP!"), "danger");
       }
     }
 
@@ -1234,11 +1428,11 @@
         e.lungeX = e.dx * 0.42;
         e.lungeY = e.dy * 0.42;
         player.hitFlash = 0.18;
-        lastDamageCause = `B${floorNum}Fで【${e.tpl.name}】の攻撃を受けて倒れてしまった！`;
+        lastDamageCause = L(`B${floorNum}Fで【${monName(e.tpl)}】の攻撃を受けて倒れてしまった！`, `Slain by [${monName(e.tpl)}] on B${floorNum}F!`);
         sfx.hurt();
         triggerDamageFlash();
         addFloatText(player.x, player.y, `-${dmg}`, "#f87171");
-        pushLog(`${e.tpl.name} の攻撃！ ${dmg} のダメージ！`, "danger");
+        pushLog(L(`${monName(e.tpl)} の攻撃！ ${dmg} のダメージ！`, `${monName(e.tpl)} struck! Took ${dmg} damage!`), "danger");
         if (save.hp <= 0) break;
         continue;
       }
@@ -1250,12 +1444,12 @@
         e.dx = Math.sign(ddx);
         e.dy = Math.sign(ddy);
         player.hitFlash = 0.18;
-        lastDamageCause = `B${floorNum}Fで【${e.tpl.name}】の魔弾を受けて倒れてしまった！`;
+        lastDamageCause = L(`B${floorNum}Fで【${monName(e.tpl)}】の魔弾を受けて倒れてしまった！`, `Fell to [${monName(e.tpl)}]'s ranged bolt on B${floorNum}F!`);
         sfx.hurt();
         triggerDamageFlash();
         addBeamFx(e.x, e.y, player.x, player.y, e.tpl.ranged === "ice" ? "#38bdf8" : e.tpl.ranged === "dark" ? "#c084fc" : "#fb923c");
         addFloatText(player.x, player.y, `-${dmg}`, "#f87171");
-        pushLog(`${e.tpl.name} の遠距離魔弾！ ${dmg} のダメージ！`, "danger");
+        pushLog(L(`${monName(e.tpl)} の遠距離魔弾！ ${dmg} のダメージ！`, `${monName(e.tpl)} fired a bolt! Took ${dmg} damage!`), "danger");
         if (save.hp <= 0) break;
         continue;
       }
@@ -1302,7 +1496,7 @@
     const def = ITEM_DEFS[id];
     if (!def) return;
     if (def.kind === "material") {
-      pushLog("💎 強化の秘石は拠点の鍛冶屋で装備強化に使えます！");
+      pushLog(L("💎 強化の秘石は拠点の鍛冶屋で装備強化に使えます！", "💎 Use Forge Gems at the Sky Sanctum Smithy to upgrade gear!"));
       return;
     }
 
@@ -1314,10 +1508,10 @@
       if (save.food >= save.maxFood && id === "big_onigiri") {
         save.maxFood += 5;
         save.food = save.maxFood;
-        pushLog("🍙 大きなおにぎりを食べた！ 最大満腹度が 5 増えた！", "good");
+        pushLog(L("🍙 大きなおにぎりを食べた！ 最大満腹度が 5 増えた！", "🍙 Ate Large Rice Ball! Max fullness increased by 5!"), "good");
       } else {
         save.food = Math.min(save.maxFood, save.food + def.val);
-        pushLog(`🍙 ${def.name} を食べた！ お腹が満たされた！`, "good");
+        pushLog(L(`🍙 ${itemName(def)} を食べた！ お腹が満たされた！`, `🍙 Ate ${itemName(def)}! Fullness restored!`), "good");
       }
       sfx.pickup();
     } else if (def.kind === "heal") {
@@ -1326,17 +1520,17 @@
         const up = id === "otogiri" ? 4 : 2;
         save.maxHp += up;
         save.hp = getMaxHp();
-        pushLog(`${def.icon} ${def.name} を飲んだ！ 最大HPが ${up} 増えた！`, "good");
+        pushLog(L(`${def.icon} ${itemName(def)} を飲んだ！ 最大HPが ${up} 増えた！`, `${def.icon} Used ${itemName(def)}! Max HP increased by ${up}!`), "good");
       } else {
         save.hp = Math.min(mhp, save.hp + def.val);
         addFloatText(player.x, player.y, `+${def.val}`, "#4ade80");
-        pushLog(`${def.icon} ${def.name} でHPが ${def.val} 回復！`, "good");
+        pushLog(L(`${def.icon} ${itemName(def)} でHPが ${def.val} 回復！`, `${def.icon} ${itemName(def)} restored ${def.val} HP!`), "good");
       }
       sfx.pickup();
     } else if (def.kind === "mp") {
       save.mp = Math.min(save.maxMp, save.mp + def.val);
       sfx.pickup();
-      pushLog(`🧪 MPが ${def.val} 回復した！`, "good");
+      pushLog(L(`🧪 MPが ${def.val} 回復した！`, `🧪 Restored ${def.val} MP!`), "good");
     } else if (def.kind === "scroll_fire" || def.kind === "scroll_vacuum") {
       sfx.magic();
       shakeTime = 0.28;
@@ -1352,7 +1546,7 @@
           count++;
         }
       });
-      pushLog(`📜 ${def.name} を読んだ！ 視界の敵 ${count} 体に ${dmg} のダメージ！`, "good");
+      pushLog(L(`📜 ${itemName(def)} を読んだ！ 視界の敵 ${count} 体に ${dmg} のダメージ！`, `📜 Read ${itemName(def)}! Dealt ${dmg} damage to ${count} enemies in sight!`), "good");
     } else if (def.kind.startsWith("staff_")) {
       sfx.magic();
       let cx = player.x;
@@ -1369,11 +1563,11 @@
       }
       addBeamFx(player.x, player.y, cx, cy, "#a855f7");
       if (!hit) {
-        pushLog(`🪄 ${def.name} を振ったが当たらなかった！`, "warn");
+        pushLog(L(`🪄 ${itemName(def)} を振ったが当たらなかった！`, `🪄 Waved ${itemName(def)}, but it missed!`), "warn");
       } else if (def.kind === "staff_bind") {
         hit.bindTurns = 6;
-        addFloatText(hit.x, hit.y, "❄️ 硬直", "#7dd3fc");
-        pushLog(`🪄 ${hit.tpl.name} をかなしばりにした！`, "good");
+        addFloatText(hit.x, hit.y, L("❄️ 硬直", "❄️ Bound"), "#7dd3fc");
+        pushLog(L(`🪄 ${monName(hit.tpl)} をかなしばりにした！`, `🪄 Paralyzed ${monName(hit.tpl)}!`), "good");
       } else if (def.kind === "staff_blow") {
         let bx = hit.x;
         let by = hit.y;
@@ -1390,7 +1584,7 @@
         const dmg = wallHit ? 22 + save.lv * 2 : 10;
         hit.hp -= dmg;
         addFloatText(hit.x, hit.y, `-${dmg}`, "#fde047");
-        pushLog(`🪄 ${hit.tpl.name} を吹き飛ばした！（${dmg}ダメージ）`, "good");
+        pushLog(L(`🪄 ${monName(hit.tpl)} を吹き飛ばした！（${dmg}ダメージ）`, `🪄 Blasted ${monName(hit.tpl)} back (${dmg} damage)!`), "good");
         checkEnemyDefeated(hit);
       } else if (def.kind === "staff_swap") {
         const ox = player.x;
@@ -1400,11 +1594,11 @@
         hit.x = ox;
         hit.y = oy;
         recomputeFov();
-        pushLog(`🪄 ${hit.tpl.name} と場所を入れ替えた！`, "good");
+        pushLog(L(`🪄 ${monName(hit.tpl)} と場所を入れ替えた！`, `🪄 Swapped places with ${monName(hit.tpl)}!`), "good");
       }
     } else if (def.kind === "return") {
       sfx.stairs();
-      pushLog("🌀 帰還の巻物で拠点「星見の宿場」へ戻った！", "good");
+      pushLog(L("🌀 帰還の巻物で拠点「星見の宿場」へ戻った！", "🌀 Read Return Scroll and warped back to Sky Sanctum!"), "good");
       openTown("dive");
       return;
     }
@@ -1416,7 +1610,7 @@
   // --- HUD・モーダル・拠点「星見の宿場」UI ---
   function updateHud() {
     const mhp = getMaxHp();
-    ui.floor.textContent = inTown ? "拠点" : `B${floorNum}F`;
+    ui.floor.textContent = inTown ? L("拠点", "Town") : `B${floorNum}F`;
     ui.lv.textContent = save.lv;
     ui.barHp.style.width = `${Math.max(0, Math.min(100, (save.hp / mhp) * 100))}%`;
     ui.txtHp.textContent = `${save.hp}/${mhp}`;
@@ -1425,9 +1619,9 @@
     ui.barFood.style.width = `${Math.max(0, Math.min(100, (save.food / save.maxFood) * 100))}%`;
     ui.txtFood.textContent = `${save.food}%`;
     ui.gold.textContent = save.gold;
-    ui.biome.textContent = inTown ? getBiome(floorNum).name : `${getBiome(floorNum).name}${stairsFoundNotified ? " · 🪜発見" : ""}`;
-    ui.chipWeapon.textContent = `⚔️ ${WEAPONS[save.weaponIdx].name}+${save.weaponPlus}`;
-    ui.chipShield.textContent = `🛡️ ${SHIELDS[save.shieldIdx].name}+${save.shieldPlus}`;
+    ui.biome.textContent = inTown ? biomeName(getBiome(floorNum)) : `${biomeName(getBiome(floorNum))}${stairsFoundNotified ? L(" · 🪜発見", " · 🪜 Stairs") : ""}`;
+    ui.chipWeapon.textContent = `⚔️ ${weaponName(WEAPONS[save.weaponIdx])}+${save.weaponPlus}`;
+    ui.chipShield.textContent = `🛡️ ${shieldName(SHIELDS[save.shieldIdx])}+${save.shieldPlus}`;
     if (ui.lowHpVignette) {
       const lowHp = !inTown && !isDefeated && save.hp > 0 && save.hp / mhp <= 0.28;
       ui.lowHpVignette.classList.toggle("hidden", !lowHp);
@@ -1438,25 +1632,25 @@
     ui.invModal.classList.remove("hidden");
     const mhp = getMaxHp();
     document.getElementById("inv-stats").innerHTML = `
-      <div class="stat-c"><span>レベル / 次Lv</span><strong>Lv.${save.lv} (${save.exp}/${save.nextExp})</strong></div>
-      <div class="stat-c"><span>攻撃 / 防御</span><strong>攻 ${getTotalAtk()} / 守 ${getTotalDef()}</strong></div>
-      <div class="stat-c"><span>会心率 / SP</span><strong>${Math.round(getCritChance() * 100)}% / SP ${save.sp}</strong></div>
+      <div class="stat-c"><span>${L("レベル / 次Lv", "Level / Next")}</span><strong>Lv.${save.lv} (${save.exp}/${save.nextExp})</strong></div>
+      <div class="stat-c"><span>${L("攻撃 / 防御", "ATK / DEF")}</span><strong>${L(`攻 ${getTotalAtk()} / 守 ${getTotalDef()}`, `ATK ${getTotalAtk()} / DEF ${getTotalDef()}`)}</strong></div>
+      <div class="stat-c"><span>${L("会心率 / SP", "Crit / SP")}</span><strong>${Math.round(getCritChance() * 100)}% / SP ${save.sp}</strong></div>
     `;
     const list = document.getElementById("inv-list");
     list.innerHTML = "";
     if (save.bag.length === 0) {
-      list.innerHTML = `<div class="row-item"><div>持ち物がありません</div></div>`;
+      list.innerHTML = `<div class="row-item"><div>${L("持ち物がありません", "Your bag is empty")}</div></div>`;
       return;
     }
     save.bag.forEach((id, idx) => {
       const d = ITEM_DEFS[id];
       const row = document.createElement("div");
       row.className = "row-item";
-      row.innerHTML = `<div><strong>${d.icon} ${d.name}</strong><small>${d.desc}</small></div>`;
+      row.innerHTML = `<div><strong>${d.icon} ${itemName(d)}</strong><small>${itemDesc(d)}</small></div>`;
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "ui-btn primary";
-      btn.textContent = d.kind === "food" ? "食べる" : d.kind.startsWith("scroll") ? "読む" : d.kind.startsWith("staff") ? "振る" : "使う";
+      btn.textContent = d.kind === "food" ? L("食べる", "Eat") : d.kind.startsWith("scroll") ? L("読む", "Read") : d.kind.startsWith("staff") ? L("振る", "Wave") : L("使う", "Use");
       btn.disabled = d.kind === "material";
       btn.addEventListener("click", () => useBagItem(idx));
       row.appendChild(btn);
@@ -1493,25 +1687,25 @@
       body.innerHTML = `
         <div class="row-item">
           <div>
-            <strong>🌟 拠点で全回復しました！</strong>
-            <small>到達最高階層: B${save.maxReachedFloor}F ${save.clearedB10 ? "（👑 B10F魔王討伐済）" : "（目標：B5F中ボス・B10F魔王ザルガウス）"}</small>
+            <strong>${L("🌟 拠点で全回復しました！", "🌟 Fully restored at Sky Sanctum!")}</strong>
+            <small>${L(`到達最高階層: B${save.maxReachedFloor}F ${save.clearedB10 ? "（👑 B10F魔王討伐済）" : "（目標：B5F中ボス・B10F魔王ザルガウス）"}`, `Deepest floor: B${save.maxReachedFloor}F ${save.clearedB10 ? "(👑 Demon Lord Defeated)" : "(Goals: B5F Guardian · B10F Demon Lord Zargaus)"}`)}</small>
           </div>
         </div>
       `;
       const starts = [
-        { f: 1, label: "B1F 古代の石窟から出発", req: 1 },
-        { f: 4, label: "B4F 紅蓮の溶岩窟へワープ", req: 4 },
-        { f: 7, label: "B7F 蒼氷の星晶宮へワープ", req: 7 },
-        { f: 10, label: "B10F 魔王ザルガウスの間へ挑む", req: 10 },
+        { f: 1, label: L("B1F 古代の石窟から出発", "B1F Sky Cavern Entrance"), req: 1 },
+        { f: 4, label: L("B4F 紅蓮の溶岩窟へワープ", "B4F Crimson Lava Cavern"), req: 4 },
+        { f: 7, label: L("B7F 蒼氷の星晶宮へワープ", "B7F Azure Star Palace"), req: 7 },
+        { f: 10, label: L("B10F 魔王ザルガウスの間へ挑む", "B10F Demon Lord's Chamber"), req: 10 },
       ];
       starts.forEach((st) => {
         const row = document.createElement("div");
         row.className = "row-item";
-        row.innerHTML = `<div><strong>${st.label}</strong><small>${save.maxReachedFloor >= st.req ? "すぐに潜れます" : `B${st.req}F 到達で解放`}</small></div>`;
+        row.innerHTML = `<div><strong>${st.label}</strong><small>${save.maxReachedFloor >= st.req ? L("すぐに潜れます", "Ready to enter") : L(`B${st.req}F 到達で解放`, `Unlocks upon reaching B${st.req}F`)}</small></div>`;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "ui-btn primary";
-        btn.textContent = "出発する";
+        btn.textContent = L("出発する", "Enter");
         btn.disabled = save.maxReachedFloor < st.req;
         btn.addEventListener("click", () => {
           inTown = false;
@@ -1529,11 +1723,11 @@
       if (save.clearedB10) {
         const replayRow = document.createElement("div");
         replayRow.className = "row-item";
-        replayRow.innerHTML = `<div><strong>🎬 魔王討伐エンディングムービー</strong><small>星辰の英雄の物語をもう一度鑑賞する</small></div>`;
+        replayRow.innerHTML = `<div><strong>${L("🎬 魔王討伐エンディングムービー", "🎬 Grand Ending Movie")}</strong><small>${L("星辰の英雄の物語をもう一度鑑賞する", "Rewatch the 5-act victory ending cutscene")}</small></div>`;
         const rBtn = document.createElement("button");
         rBtn.type = "button";
         rBtn.className = "ui-btn primary";
-        rBtn.textContent = "鑑賞する";
+        rBtn.textContent = L("鑑賞する", "Watch");
         rBtn.addEventListener("click", () => {
           sfx.unlock();
           startEndingMovie({ replayFromTown: true });
@@ -1568,7 +1762,7 @@
           const btnS = document.createElement("button");
           btnS.type = "button";
           btnS.className = "ui-btn";
-          btnS.textContent = `💎秘石×1`;
+          btnS.textContent = L("💎秘石×1", "💎 Gem×1");
           btnS.addEventListener("click", () => {
             const idx = save.bag.indexOf("smith_stone");
             if (idx >= 0) save.bag.splice(idx, 1);
@@ -1581,14 +1775,14 @@
       };
 
       makeUpgradeRow(
-        `⚔️ ${WEAPONS[save.weaponIdx].name}+${save.weaponPlus} を鍛える`,
-        `攻撃力 +2（現在総攻撃力: ${getTotalAtk()} / 所持秘石: ${stoneCount}）`,
+        L(`⚔️ ${weaponName(WEAPONS[save.weaponIdx])}+${save.weaponPlus} を鍛える`, `⚔️ Upgrade ${weaponName(WEAPONS[save.weaponIdx])}+${save.weaponPlus}`),
+        L(`攻撃力 +2（現在総攻撃力: ${getTotalAtk()} / 所持秘石: ${stoneCount}）`, `ATK +2 (Total ATK: ${getTotalAtk()} / Gems: ${stoneCount})`),
         wCost,
         () => { save.weaponPlus++; sfx.lvUp(); updateHud(); persistSave(); renderTownTab(); }
       );
       makeUpgradeRow(
-        `🛡️ ${SHIELDS[save.shieldIdx].name}+${save.shieldPlus} を鍛える`,
-        `防御力 +2（現在総防御力: ${getTotalDef()} / 所持秘石: ${stoneCount}）`,
+        L(`🛡️ ${shieldName(SHIELDS[save.shieldIdx])}+${save.shieldPlus} を鍛える`, `🛡️ Upgrade ${shieldName(SHIELDS[save.shieldIdx])}+${save.shieldPlus}`),
+        L(`防御力 +2（現在総防御力: ${getTotalDef()} / 所持秘石: ${stoneCount}）`, `DEF +2 (Total DEF: ${getTotalDef()} / Gems: ${stoneCount})`),
         sCost,
         () => { save.shieldPlus++; sfx.lvUp(); updateHud(); persistSave(); renderTownTab(); }
       );
@@ -1598,7 +1792,7 @@
         if (idx <= save.weaponIdx) return;
         const row = document.createElement("div");
         row.className = "row-item";
-        row.innerHTML = `<div><strong>✨ 鍛造：${w.name}</strong><small>基本攻撃力 ${w.baseAtk}（強化値+${save.weaponPlus}は引き継ぎ！）</small></div>`;
+        row.innerHTML = `<div><strong>${L(`✨ 鍛造：${weaponName(w)}`, `✨ Forge: ${weaponName(w)}`)}</strong><small>${L(`基本攻撃力 ${w.baseAtk}（強化値+${save.weaponPlus}は引き継ぎ！）`, `Base ATK ${w.baseAtk} (+${save.weaponPlus} bonus carries over!)`)}</small></div>`;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "ui-btn primary";
@@ -1620,7 +1814,7 @@
         if (idx <= save.shieldIdx) return;
         const row = document.createElement("div");
         row.className = "row-item";
-        row.innerHTML = `<div><strong>✨ 鍛造：${sh.name}</strong><small>基本防御力 ${sh.baseDef}（強化値+${save.shieldPlus}は引き継ぎ！）</small></div>`;
+        row.innerHTML = `<div><strong>${L(`✨ 鍛造：${shieldName(sh)}`, `✨ Forge: ${shieldName(sh)}`)}</strong><small>${L(`基本防御力 ${sh.baseDef}（強化値+${save.shieldPlus}は引き継ぎ！）`, `Base DEF ${sh.baseDef} (+${save.shieldPlus} bonus carries over!)`)}</small></div>`;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "ui-btn primary";
@@ -1643,7 +1837,7 @@
         const d = ITEM_DEFS[id];
         const row = document.createElement("div");
         row.className = "row-item";
-        row.innerHTML = `<div><strong>${d.icon} ${d.name}</strong><small>${d.desc}</small></div>`;
+        row.innerHTML = `<div><strong>${d.icon} ${itemName(d)}</strong><small>${itemDesc(d)}</small></div>`;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "ui-btn primary";
@@ -1662,11 +1856,11 @@
       });
     } else if (activeTownTab === "skills") {
       const defs = [
-        { k: "spin", name: "🌪️ 回転斬り", desc: "周囲8マス同時攻撃の威力を強化" },
-        { k: "fire", name: "🔥 炎弾", desc: "直線遠距離魔法の威力を強化" },
-        { k: "heal", name: "💚 ヒール", desc: "回復魔法の回復量をアップ" },
-        { k: "crit", name: "⚡ 心眼（パッシブ）", desc: "1Lvごとに会心率 +8%" },
-        { k: "tough", name: "🛡️ 鉄壁（パッシブ）", desc: "1Lvごとに最大HP +15" },
+        { k: "spin", name: L("🌪️ 回転斬り", "🌪️ Whirlwind"), desc: L("周囲8マス同時攻撃の威力を強化", "Boosts 8-tile spin attack power") },
+        { k: "fire", name: L("🔥 炎弾", "🔥 Fireball"), desc: L("直線遠距離魔法の威力を強化", "Boosts straight ranged fire magic power") },
+        { k: "heal", name: L("💚 ヒール", "💚 Heal"), desc: L("回復魔法の回復量をアップ", "Increases HP restored by Heal") },
+        { k: "crit", name: L("⚡ 心眼（パッシブ）", "⚡ Mind's Eye (Passive)"), desc: L("1Lvごとに会心率 +8%", "+8% Critical rate per level") },
+        { k: "tough", name: L("🛡️ 鉄壁（パッシブ）", "🛡️ Iron Body (Passive)"), desc: L("1Lvごとに最大HP +15", "+15 Max HP per level") },
       ];
       defs.forEach((sk) => {
         const lv = save.skills[sk.k] || 0;
@@ -1676,7 +1870,7 @@
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "ui-btn primary";
-        btn.textContent = lv >= 5 ? "MAX" : "SP 1 で強化";
+        btn.textContent = lv >= 5 ? "MAX" : L("SP 1 で強化", "Upgrade (1 SP)");
         btn.disabled = save.sp < 1 || lv >= 5;
         btn.addEventListener("click", () => {
           save.sp -= 1;
@@ -2825,7 +3019,7 @@
     if (explored[stairsPos.y]?.[stairsPos.x] === 1) {
       const pt = projectToScreen(stairsPos.x, 1.62 + Math.sin(tSec * 4.2) * 0.08, stairsPos.y, cw, ch);
       if (pt.visible && pt.x >= -40 && pt.x <= cw + 40 && pt.y >= -20 && pt.y <= ch + 20) {
-        const label = bossAlive ? "🔒 ボス撃破で解放" : `🪜 B${floorNum + 1}Fへ`;
+        const label = bossAlive ? L("🔒 ボス撃破で解放", "🔒 Defeat Boss") : L(`🪜 B${floorNum + 1}Fへ`, `🪜 To B${floorNum + 1}F`);
         fxCtx.save();
         fxCtx.font = "800 12px sans-serif";
         const tw = fxCtx.measureText(label).width;
@@ -3189,39 +3383,11 @@
     ui.townOverlay.classList.add("hidden");
     ui.defeatOverlay.classList.add("hidden");
     ui.app.classList.add("cinema-mode");
+    document.body.classList.add("cinema-locked");
     ui.endingOverlay.classList.remove("hidden");
 
     endingData = buildEndingScene();
-
-    ui.endingCreditsInner.innerHTML = `
-      <div class="ec-head">TITLE</div>
-      <div class="ec-line">星辰の迷宮 〜空中遺跡の不思議のダンジョンRPG〜</div>
-      <div class="ec-head">STARRING HERO</div>
-      <div class="ec-line">星辰の騎士（あなた） · Lv.${save.lv}</div>
-      <div class="ec-line">愛用の剣：${WEAPONS[save.weaponIdx].name}+${save.weaponPlus}</div>
-      <div class="ec-line">愛用の盾：${SHIELDS[save.shieldIdx].name}+${save.shieldPlus}</div>
-      <div class="ec-head">CAST OF SKY SANCTUM</div>
-      <div class="ec-line">星喰らいの魔王ザルガウス</div>
-      <div class="ec-line">炎獄のガーディアン</div>
-      <div class="ec-line">ブルースライム · 影のローグ</div>
-      <div class="ec-line">石のガーゴイル · 蒼帽のウィザード</div>
-      <div class="ec-head">RECORD OF ADVENTURE</div>
-      <div class="ec-line">最高到達階層：B${save.maxReachedFloor}F</div>
-      <div class="ec-line">今回倒した魔物：${runKills} 体</div>
-      <div class="ec-head">SPECIAL THANKS</div>
-      <div class="ec-line">星見の宿場の人々</div>
-      <div class="ec-line">そして ここまで遊び抜いた すべての冒険者へ</div>
-      <div class="ec-fin">— FIN —</div>
-    `;
-    ui.endingStats.innerHTML = `
-      <div class="defeat-stat-box"><span>最終レベル</span><strong>Lv.${save.lv}</strong></div>
-      <div class="defeat-stat-box"><span>装備</span><strong>${WEAPONS[save.weaponIdx].name}+${save.weaponPlus} / ${SHIELDS[save.shieldIdx].name}+${save.shieldPlus}</strong></div>
-      <div class="defeat-stat-box"><span>討伐数</span><strong>${runKills} 体</strong></div>
-      <div class="defeat-stat-box"><span>所持ゴールド</span><strong>${save.gold} G</strong></div>
-    `;
-
-    const contBtn = document.getElementById("btn-ending-continue");
-    contBtn.textContent = replayFromTown ? "🏘️ 拠点へ戻る" : "⚔️ B11F以降の深淵へ進む";
+    buildEndingOverlayTexts();
 
     ui.endingTitleBanner.classList.add("hidden");
     ui.endingCredits.classList.add("hidden");
@@ -3276,6 +3442,7 @@
     isEndingPlaying = false;
     pendingEndingMovie = false;
     ui.app.classList.remove("cinema-mode");
+    document.body.classList.remove("cinema-locked");
     ui.endingOverlay.classList.add("hidden");
     ui.endingTitleBanner.classList.add("hidden");
     ui.endingCredits.classList.add("hidden");
@@ -3322,12 +3489,12 @@
 
     // 字幕更新ヘルパー
     let nextSub = "";
-    if (t < 2.8) nextSub = "「星を喰らう闇は、いま聖なる刃によって討ち払われた！」";
-    else if (t < 5.8) nextSub = "「魔王ザルガウスは光の粒子へと砕け、長き戦いに終止符が打たれた——」";
-    else if (t < 9.4) nextSub = "「晴れた朝空の下、星辰の迷宮に再び希望の太陽が昇る。」";
-    else if (t < 12.5) nextSub = "「剣を掲げよ、星辰の英雄！」";
-    else if (t < 17.2) nextSub = "「空の仲間たちも集い、あなたの勝利を祝福している！」";
-    else if (t < 21.5) nextSub = "「雲海に祝福の花火が舞い上がる——。」";
+    if (t < 2.8) nextSub = L("「星を喰らう闇は、いま聖なる刃によって討ち払われた！」", "\"The darkness that devoured the stars is vanquished by your holy blade!\"");
+    else if (t < 5.8) nextSub = L("「魔王ザルガウスは光の粒子へと砕け、長き戦いに終止符が打たれた——」", "\"Demon Lord Zargaus shatters into motes of light, ending the long battle—\"");
+    else if (t < 9.4) nextSub = L("「晴れた朝空の下、星辰の迷宮に再び希望の太陽が昇る。」", "\"Beneath the clear morning sky, the sun of hope rises once more over Astral Labyrinth.\"");
+    else if (t < 12.5) nextSub = L("「剣を掲げよ、星辰の英雄！」", "\"Raise your sword high, Hero of the Stars!\"");
+    else if (t < 17.2) nextSub = L("「空の仲間たちも集い、あなたの勝利を祝福している！」", "\"Even the creatures of the sky gather to celebrate your triumph!\"");
+    else if (t < 21.5) nextSub = L("「雲海に祝福の花火が舞い上がる——。」", "\"Celebratory fireworks blossom across the sea of clouds—\"");
     else nextSub = "";
 
     if (nextSub !== ed.lastSub) {
@@ -3707,10 +3874,10 @@
     else if (k === "enter" && grid[player.y][player.x] === T.STAIRS && ui.invModal.classList.contains("hidden") && ui.saveModal.classList.contains("hidden")) {
       const bossAlive = enemies.some((e) => e.hp > 0 && e.tpl.isBoss);
       if (bossAlive) {
-        pushLog("ボスを倒すまで次の階へは進めない！", "warn");
+        pushLog(L("ボスを倒すまで次の階へは進めない！", "Defeat the boss to unlock the stairs!"), "warn");
       } else {
         waitingStairsPrompt = true;
-        ui.stairsDesc.textContent = `B${floorNum + 1}F（${getBiome(floorNum + 1).name}）へ降りますか？`;
+        ui.stairsDesc.textContent = L(`B${floorNum + 1}F（${biomeName(getBiome(floorNum + 1))}）へ降りますか？`, `Descend to B${floorNum + 1}F (${biomeName(getBiome(floorNum + 1))})?`);
         ui.stairsPrompt.classList.remove("hidden");
       }
     } else if (k === " " || k === "enter") {
@@ -3718,7 +3885,7 @@
       if (foe) { meleeAttack(foe); endPlayerTurn(); }
       else { player.swingTimer = 0.22; addSlashFx(player.x + player.dx, player.y + player.dy, "#94a3b8"); endPlayerTurn(); }
     } else if (k === "r") restOneTurn();
-    else if (k === "t") { turnDirOnly = !turnDirOnly; pushLog(turnDirOnly ? "🧭 向き変更モード：次の入力で向きだけ変えます" : "向き変更モード解除"); }
+    else if (k === "t") { turnDirOnly = !turnDirOnly; pushLog(turnDirOnly ? L("🧭 向き変更モード：次の入力で向きだけ変えます", "🧭 Turn Mode: Next input changes facing only") : L("向き変更モード解除", "Turn mode canceled")); }
     else if (k === "1") useSkillSpin();
     else if (k === "2") useSkillFire();
     else if (k === "3") useSkillHeal();
@@ -3762,7 +3929,7 @@
   document.getElementById("btn-turn-dir").addEventListener("click", () => {
     if (inTown || isDefeated || isEndingPlaying || pendingEndingMovie) return;
     turnDirOnly = !turnDirOnly;
-    pushLog(turnDirOnly ? "🧭 向き変更モードON" : "向き変更モードOFF");
+    pushLog(turnDirOnly ? L("🧭 向き変更モードON", "🧭 Turn Mode ON") : L("向き変更モードOFF", "Turn Mode OFF"));
   });
 
   document.getElementById("btn-defeat-return").addEventListener("click", confirmDefeatReturn);
@@ -3799,12 +3966,12 @@
   document.getElementById("btn-skill").addEventListener("click", () => {
     if (isDefeated || isEndingPlaying || pendingEndingMovie) return;
     if (inTown) { activeTownTab = "skills"; renderTownTab(); }
-    else pushLog("✨ スキル強化は拠点の「スキル強化」タブで行えます（ショートカット 1/2/3 で発動）");
+    else pushLog(L("✨ スキル強化は拠点の「スキル強化」タブで行えます（ショートカット 1/2/3 で発動）", "✨ Upgrade skills in Town's Skills tab (use keys 1/2/3 to cast in battle)"));
   });
   document.getElementById("btn-town").addEventListener("click", () => {
     if (inTown || isDefeated || isEndingPlaying || pendingEndingMovie) return;
     if (floorNum === 1 && enemies.every((e) => !e.awake)) openTown("dive");
-    else pushLog("🌀 ダンジョン探索中は「帰還の巻物」で拠点へ戻れます！", "warn");
+    else pushLog(L("🌀 ダンジョン探索中は「帰還の巻物」で拠点へ戻れます！", "🌀 Use a Return Scroll to return to Town from deep floors!"), "warn");
   });
 
   document.querySelectorAll(".town-tabs .tab-btn").forEach((btn) => {
@@ -3823,11 +3990,11 @@
   document.getElementById("btn-save-now").addEventListener("click", () => {
     persistSave();
     document.getElementById("save-code-text").value = encodeSave();
-    pushLog("💾 冒険の記録をセーブしました！", "good");
+    pushLog(L("💾 冒険の記録をセーブしました！", "💾 Adventure saved!"), "good");
   });
   document.getElementById("btn-copy-save").addEventListener("click", () => {
     const t = document.getElementById("save-code-text").value;
-    if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => pushLog("引き継ぎコードをコピーしました！", "good"));
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => pushLog(L("引き継ぎコードをコピーしました！", "Transfer code copied!"), "good"));
   });
   document.getElementById("btn-load-save").addEventListener("click", () => {
     try {
@@ -3835,9 +4002,9 @@
       persistSave();
       ui.saveModal.classList.add("hidden");
       openTown("dive");
-      pushLog("セーブコードから復元しました！", "good");
+      pushLog(L("セーブコードから復元しました！", "Restored from transfer code!"), "good");
     } catch (_e) {
-      pushLog("セーブコードが正しくありません", "danger");
+      pushLog(L("セーブコードが正しくありません", "Invalid save code"), "danger");
     }
   });
   document.getElementById("btn-reset-game").addEventListener("click", () => {
@@ -3849,8 +4016,15 @@
     ui.defeatOverlay.classList.add("hidden");
     ui.saveModal.classList.add("hidden");
     openTown("dive");
-    pushLog("データを初期化しました。");
+    pushLog(L("データを初期化しました。", "Save data reset."));
   });
+
+  if (ui.btnLang) {
+    ui.btnLang.addEventListener("click", () => {
+      applyLanguage(isEn() ? "ja" : "en");
+      pushLog(L("🌐 表示言語を日本語に切り替えました", "🌐 Switched language to English"));
+    });
+  }
 
   document.getElementById("btn-sound").addEventListener("click", (e) => {
     sfx.on = !sfx.on;
@@ -3862,6 +4036,7 @@
 
   // --- 初回起動（Three.js 3D初期化＆B1Fを即座に生成してすぐ遊べる状態に） ---
   initThree();
+  applyLanguage(lang);
   generateFloor(1);
   requestAnimationFrame(renderFrame);
   if (new URLSearchParams(window.location.search).get("ending") === "1") {

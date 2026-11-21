@@ -2,9 +2,22 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>星辰の迷宮 〜空中遺跡の不思議のダンジョンRPG〜</title>
+  <meta id="meta-desc" name="description" content="Three.jsで動く立体トゥーン調の不思議のダンジョン×RPG『星辰の迷宮』。PC・スマホのブラウザから登録不要・無料ですぐ遊べます。">
+  <link rel="canonical" href="https://ligfil-8110.github.io/rpg-3d/">
+  <link rel="alternate" hreflang="ja" href="https://ligfil-8110.github.io/rpg-3d/">
+  <link rel="alternate" hreflang="en" href="https://ligfil-8110.github.io/rpg-3d/?lang=en">
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add("in-iframe");
+    }
+  </script>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JDKE8JVXLC"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JDKE8JVXLC');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8290235019998561" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="md-app">
@@ -25,7 +38,7 @@
             <span id="txt-mp" class="m-val">20/20</span>
           </div>
           <div class="meter">
-            <span class="m-lbl">満腹</span>
+            <span id="lbl-food" class="m-lbl">満腹</span>
             <div class="m-track"><div id="bar-food" class="m-fill food" style="width:100%"></div></div>
             <span id="txt-food" class="m-val">100%</span>
           </div>
@@ -39,6 +52,7 @@
           <button id="btn-skill" class="ui-btn" type="button" title="特技・スキル (K)">✨ 特技</button>
           <button id="btn-town" class="ui-btn" type="button" title="拠点メニュー">🏘️ 拠点</button>
           <button id="btn-save" class="ui-btn" type="button" title="記録">💾</button>
+          <button id="btn-lang" class="ui-btn" type="button" title="Switch language / 言語切替">🌐 EN</button>
           <button id="btn-sound" class="ui-btn" type="button" title="サウンド">🔊</button>
         </div>
       </div>
@@ -78,7 +92,7 @@
 
       <!-- 階段確認プロンプト -->
       <div id="stairs-prompt" class="parchment-card hidden">
-        <div class="prompt-title">🪜 次の階層への階段</div>
+        <div id="stairs-title" class="prompt-title">🪜 次の階層への階段</div>
         <p id="stairs-desc">次の階層へ進みますか？</p>
         <div class="prompt-btns">
           <button id="btn-stairs-yes" class="ui-btn primary" type="button">次の階へ進む (Enter)</button>
@@ -89,11 +103,11 @@
       <!-- 敗北（やられた！）リザルトオーバーレイ -->
       <section id="defeat-overlay" class="overlay-screen defeat-bg hidden" aria-label="敗北リザルト">
         <div class="parchment-card defeat-card">
-          <div class="defeat-badge">GAME OVER · 冒険失敗</div>
-          <h2>💀 力尽きてしまった……</h2>
+          <div id="defeat-badge" class="defeat-badge">GAME OVER · 冒険失敗</div>
+          <h2 id="defeat-heading">💀 力尽きてしまった……</h2>
           <p id="defeat-cause" class="defeat-cause">魔物の攻撃で倒れてしまった！</p>
           <div id="defeat-stats" class="defeat-stats"></div>
-          <p class="defeat-note">※ レベル・SP・鍛えた武器と盾はそのまま保持されます。</p>
+          <p id="defeat-note" class="defeat-note">※ レベル・SP・鍛えた武器と盾はそのまま保持されます。</p>
           <button id="btn-defeat-return" class="ui-btn primary large-btn" type="button">🏘️ 星見の宿場へ戻る (Enter)</button>
         </div>
       </section>
@@ -103,17 +117,17 @@
         <div class="town-card">
           <div class="town-head">
             <div>
-              <span class="town-eyebrow">SKY SANCTUM · 星見の宿場</span>
-              <h2>星辰の迷宮 — 冒険の準備</h2>
+              <span id="town-eyebrow" class="town-eyebrow">SKY SANCTUM · 星見の宿場</span>
+              <h2 id="town-heading">星辰の迷宮 — 冒険の準備</h2>
             </div>
-            <div class="town-gold">所持金: <strong id="town-gold-val">120 G</strong> / SP: <strong id="town-sp-val">1</strong></div>
+            <div class="town-gold"><span id="town-gold-lbl">所持金:</span> <strong id="town-gold-val">120 G</strong> / <span id="town-sp-lbl">SP:</span> <strong id="town-sp-val">1</strong></div>
           </div>
 
           <div class="town-tabs">
-            <button class="tab-btn active" type="button" data-tab="dive">⚔️ 出発</button>
-            <button class="tab-btn" type="button" data-tab="smith">🔨 鍛冶屋</button>
-            <button class="tab-btn" type="button" data-tab="shop">🪙 道具屋</button>
-            <button class="tab-btn" type="button" data-tab="skills">✨ スキル強化</button>
+            <button id="tab-dive" class="tab-btn active" type="button" data-tab="dive">⚔️ 出発</button>
+            <button id="tab-smith" class="tab-btn" type="button" data-tab="smith">🔨 鍛冶屋</button>
+            <button id="tab-shop" class="tab-btn" type="button" data-tab="shop">🪙 道具屋</button>
+            <button id="tab-skills" class="tab-btn" type="button" data-tab="skills">✨ スキル強化</button>
           </div>
 
           <div id="town-body" class="town-body"></div>
@@ -135,7 +149,7 @@
         <button class="p8-btn" type="button" data-dx="1" data-dy="1" aria-label="右下">↘</button>
       </div>
 
-      <div class="ctrl-help">
+      <div id="ctrl-help" class="ctrl-help">
         移動: WASD / 矢印 / クリック | 攻撃: Space / Z | 斜め: Q E Z C | 足踏み: R | 道具: I
       </div>
 
@@ -158,7 +172,7 @@
 
       <div id="ending-title-banner" class="ending-title-banner hidden" aria-live="polite">
         <div class="ending-banner-eyebrow">✦ CONGRATULATIONS ✦</div>
-        <h2>星辰の迷宮 — 魔王討伐達成</h2>
+        <h2 id="ending-banner-main">星辰の迷宮 — 魔王討伐達成</h2>
       </div>
 
       <div id="ending-credits" class="ending-credits hidden" aria-label="スタッフロール">
@@ -168,11 +182,11 @@
       <div id="ending-subtitle" class="ending-subtitle" aria-live="polite"></div>
 
       <div id="ending-result-card" class="parchment-card ending-card hidden">
-        <div class="ending-badge">👑 GRAND CLEAR · 星辰の英雄</div>
-        <h2>魔王ザルガウス討伐 達成！</h2>
-        <p class="ending-lead">星辰の迷宮に再び朝の光が戻った。あなたの名は語り継がれるだろう。</p>
+        <div id="ending-badge-txt" class="ending-badge">👑 GRAND CLEAR · 星辰の英雄</div>
+        <h2 id="ending-heading">魔王ザルガウス討伐 達成！</h2>
+        <p id="ending-lead-txt" class="ending-lead">星辰の迷宮に再び朝の光が戻った。あなたの名は語り継がれるだろう。</p>
         <div id="ending-stats" class="ending-stats"></div>
-        <p class="ending-note">※ B11F以降の「星辰の深淵」が解放されました。拠点からいつでもエンディングを再視聴できます。</p>
+        <p id="ending-note-txt" class="ending-note">※ B11F以降の「星辰の深淵」が解放されました。拠点からいつでもエンディングを再視聴できます。</p>
         <div class="ending-actions">
           <button id="btn-ending-continue" class="ui-btn primary large-btn" type="button">⚔️ B11F以降の深淵へ進む</button>
           <button id="btn-ending-town" class="ui-btn dark large-btn" type="button">🏘️ 星見の宿場へ凱旋する</button>
@@ -180,6 +194,29 @@
       </div>
     </section>
   </div>
+
+  <!-- 全画面版（直アクセス時のみ表示）フッターガイド -->
+  <footer id="standalone-footer" class="standalone-footer" aria-label="ゲームガイドとブログリンク">
+    <div class="sf-card">
+      <div class="sf-header">
+        <div>
+          <span class="sf-eyebrow">AUTUMN BUILD · 3D MYSTERY DUNGEON RPG</span>
+          <h2 id="sf-title">星辰の迷宮（Astral Labyrinth）— 全画面プレイガイド</h2>
+        </div>
+        <a id="sf-top-btn" class="ui-btn primary" href="#md-app">▲ ゲーム画面へ戻る</a>
+      </div>
+      <p id="sf-desc" class="sf-desc">Three.jsで描かれる空中遺跡の不思議のダンジョンRPGです。ターン制のローグライク探索と、拠点「星見の宿場」での鍛冶強化・スキル育成を組み合わせて、B10Fに待ち受ける魔王ザルガウスの討伐を目指します。</p>
+      <p id="sf-controls" class="sf-controls"><strong>基本操作：</strong>移動（WASD / 矢印キー / 画面タップ・8方向パッド）｜ 斜め移動（Q / E / C）｜ 通常攻撃（Space / Z）｜ 向き変更（T）｜ 足踏み（R）｜ 道具（I）｜ 特技（K：回転斬り 1 / 炎弾 2 / ヒール 3）</p>
+      <nav id="sf-links" class="sf-links" aria-label="サイト案内リンク">
+        <a id="sf-link-home" href="/">🏠 みっちーのブログ Home</a>
+        <a id="sf-link-article" href="/hoshitsuchi-no-meikyu-3d-rpg.html">📖 ゲーム紹介記事を読む</a>
+        <a id="sf-link-page" href="/pages/rpg-3d.html">🕹️ ブログ埋め込み版ページ</a>
+        <a id="sf-link-privacy" href="/privacy-policy.html">🔒 プライバシーポリシー</a>
+        <a id="sf-link-contact" href="/contact.html">✉️ お問い合わせ</a>
+        <a id="sf-link-sitemap" href="/sitemap.html">🗺️ サイトマップ</a>
+      </nav>
+    </div>
+  </footer>
 
   <!-- 持ち物・装備モーダル -->
   <div id="inv-modal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="inv-title">
@@ -207,7 +244,7 @@
           <button id="btn-save-now" class="ui-btn primary" type="button">今すぐセーブ</button>
           <button id="btn-reset-game" class="ui-btn danger" type="button">データを初期化</button>
         </div>
-        <label class="code-lbl" for="save-code-text">引き継ぎコード</label>
+        <label id="save-code-lbl" class="code-lbl" for="save-code-text">引き継ぎコード</label>
         <textarea id="save-code-text" rows="3" spellcheck="false"></textarea>
         <div class="btn-row">
           <button id="btn-copy-save" class="ui-btn dark" type="button">コピー</button>

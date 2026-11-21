@@ -21,13 +21,29 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #1d4ed8;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #1d4ed8 0%, #172554 100dvh, #0f172a 100%);
   color: #fef3c7;
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
   user-select: none;
   touch-action: manipulation;
+}
+
+html.in-iframe, html.in-iframe body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.cinema-locked {
+  height: 100%;
+  overflow: hidden;
+}
+
+html.in-iframe #standalone-footer,
+body.cinema-locked #standalone-footer {
+  display: none !important;
 }
 
 .hidden {
@@ -767,10 +783,15 @@ html, body {
 
 @media (max-width: 680px) {
   .ctrl-help { display: none; }
+  #md-hud { padding: 6px 8px; gap: 6px 8px; }
+  .hud-btns { gap: 4px; }
+  .hud-btns .ui-btn { padding: 4px 7px; font-size: 10.5px; }
   #minimap-canvas { width: 118px; height: 84px; }
   #log-feed { width: calc(100% - 20px); bottom: 56px; }
   #skill-bar { left: 10px; right: 10px; justify-content: space-between; }
   .sk-btn { flex: 1; padding: 4px; font-size: 10px; }
+  .standalone-footer { padding: 12px 10px 24px; }
+  .sf-card { padding: 14px; }
 }
 
 /* =========================================================================
@@ -1017,4 +1038,85 @@ html, body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+}
+
+/* 全画面直アクセス時の下部ガイド（iframe内およびエンディング視聴時は非表示） */
+.standalone-footer {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 18px 14px 32px;
+  user-select: text;
+}
+
+.sf-card {
+  background: linear-gradient(180deg, #fffbeb 0%, #f5e6c8 100%);
+  color: #2c1810;
+  border: 3px solid var(--wood-dark);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.35);
+}
+
+.sf-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sf-header .ui-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sf-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #92400e;
+  margin-bottom: 2px;
+}
+
+.sf-header h2 {
+  font-size: 18px;
+  color: #451a03;
+}
+
+.sf-desc,
+.sf-controls {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #432818;
+  margin-bottom: 10px;
+}
+
+.sf-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(120, 53, 15, 0.25);
+}
+
+.sf-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(92, 58, 33, 0.09);
+  border: 1px solid rgba(92, 58, 33, 0.24);
+  color: #78350f;
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.sf-links a:hover {
+  background: rgba(217, 119, 6, 0.16);
+  color: #451a03;
 }

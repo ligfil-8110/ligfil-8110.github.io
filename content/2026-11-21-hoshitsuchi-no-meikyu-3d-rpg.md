@@ -1,9 +1,11 @@
 Title: 【自作3Dゲーム】ブラウザで遊べる不思議のダンジョンRPG『星辰の迷宮』を公開しました！
 Date: 2026-11-21 09:30
+Modified: 2026-11-21
 Category: ゲーム
 Tags: ゲーム, 自作ゲーム, 不思議のダンジョン, 3DRPG
 Slug: hoshitsuchi-no-meikyu-3d-rpg
 Summary: Three.jsで動く立体トゥーン調の不思議のダンジョン×RPG『星辰の迷宮』をこのブログで公開しました。PC・スマホのブラウザから登録不要ですぐ遊べ、自動生成ダンジョン・鍛冶屋とスキル育成・B10F魔王討伐後の3Dエンディングムービーまで搭載しています。
+en_url: en/hoshitsuchi-no-meikyu-3d-rpg.html
 
 こんにちは、リグフィルです！
 
