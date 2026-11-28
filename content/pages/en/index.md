@@ -1,6 +1,6 @@
 Title: Home
 Date: 2026-09-23 00:00
-Modified: 2026-11-21
+Modified: 2026-11-28
 Category: English
 Tags: Blog, Games, PC, Running
 Slug: english-home
@@ -48,8 +48,17 @@ en_home: true
 <div class="section-heading" id="articles"><div><span class="eyebrow">LATEST POSTS</span><h2>Latest English articles</h2></div></div>
 <div class="post-list">
     <article class="featured-post">
-        <a class="featured-image" href="/en/hoshitsuchi-no-meikyu-3d-rpg.html"><img src="/images/default-eyecatch.png" alt="Astral Labyrinth 3D Mystery Dungeon RPG" width="1200" height="675" loading="lazy" decoding="async"></a>
+        <a class="featured-image" href="/en/seria-micro-usb-cable.html"><img src="/images/2026-11/seria-micro-usb-cable-15m.jpg" alt="Package photo of a 1.5m USB-A to MicroUSB charging and data transfer cable bought at Seria in Japan for 110 yen." width="712" height="1024" loading="lazy" decoding="async"></a>
         <div class="featured-copy">
+            <div class="post-meta"><span>GADGETS</span><time datetime="2026-11-28">November 28, 2026</time></div>
+            <h2><a href="/en/seria-micro-usb-cable.html">I Bought a MicroUSB Cable at Seria for 110 Yen: Why Japan's 100-Yen Shops Are Amazing</a></h2>
+            <p>I picked up a 1.5m USB-A to MicroUSB charging and data transfer cable with fast-charging support and reinforced strain relief at Seria for 110 yen.</p>
+            <a class="text-link" href="/en/seria-micro-usb-cable.html">Read the article →</a>
+        </div>
+    </article>
+    <article class="post-card">
+        <a class="post-card-image" href="/en/hoshitsuchi-no-meikyu-3d-rpg.html"><img src="/images/default-eyecatch.png" alt="Astral Labyrinth 3D Mystery Dungeon RPG" width="720" height="405" loading="lazy" decoding="async"></a>
+        <div class="post-card-copy">
             <div class="post-meta"><span>GAMES</span><time datetime="2026-11-21">November 21, 2026</time></div>
             <h2><a href="/en/hoshitsuchi-no-meikyu-3d-rpg.html">Astral Labyrinth: I Built a Free 3D Mystery Dungeon RPG You Can Play Right in Your Browser</a></h2>
             <p>Play Astral Labyrinth right on the blog with toon-shaded 3D figures, procedural sky ruins, smithing, SP skills, and a 5-act 3D ending movie.</p>
