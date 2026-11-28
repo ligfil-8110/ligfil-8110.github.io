@@ -110,3 +110,9 @@ python scripts/compare_png_options.py your-photo.jpg --repeats 5
 今回の写真だと、`optimize=True`で減った容量は意外と少なかったですね……。
 
 PNGを小さくしたいときは、まず画像の縦横サイズが大きすぎないか。そのあとに圧縮設定を比べてみるとよさそうです。毎回`optimize=True`にするかは、容量と処理時間を見て決めたいところですね！
+
+JPEGやAVIFでの圧縮結果、拡張子`.jpg`の中身がPNGだったときの判別方法も別記事で比較しています。
+
+* [PillowでJPEGを小さくするなら？qualityとprogressiveを実写真7枚で比較](/pillow-jpeg-quality-progressive-comparison.html)
+* [Pillow 11.3以降ならAVIFをそのまま保存できる！qualityとspeedを実写真で比較](/pillow-avif-built-in-quality-speed.html)
+* [jpgなのに中身はPNG？Pillowで画像の形式を確かめて変換する方法](/jpg-actually-png-pillow.html)

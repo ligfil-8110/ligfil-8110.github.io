@@ -81,4 +81,4 @@ with Image.open(output) as image:
 
 なお、古いPythonの例にある`imghdr`は、[Python公式資料](https://docs.python.org/3/library/imghdr.html)によるとPython 3.13で削除されています。ここで試したのはPython 3.10.1ですが、形式確認には既に使っているPillowの`format`を使いました。
 
-形式を揃えたあと、JPEGの`quality`や`progressive`で容量がどう変わるかは、[写真7枚で比較した記事](/pillow-jpeg-quality-progressive-comparison.html)にまとめています。PNGを使い続ける場合は、[PNGの保存設定を比べた記事](/pillow-png-quality-compress-level.html)も参考にしてください。
+形式を揃えたあと、JPEGの`quality`や`progressive`で容量がどう変わるかは、[写真7枚で比較した記事](/pillow-jpeg-quality-progressive-comparison.html)にまとめています。PNGを使い続ける場合は[PNGの保存設定を比べた記事](/pillow-png-quality-compress-level.html)、AVIFでの圧縮も検討する場合は[Pillow 11.3以降のAVIF比較](/pillow-avif-built-in-quality-speed.html)も参考にしてください。

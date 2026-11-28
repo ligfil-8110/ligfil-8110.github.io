@@ -1,5 +1,6 @@
 Title: 3D Mystery Dungeon RPG: Astral Labyrinth
 Date: 2026-11-21 09:30
+Modified: 2026-11-28
 Category: Games
 Tags: Games, Indie Game, Mystery Dungeon, 3D RPG, Three.js
 Slug: rpg-3d-en
@@ -9,7 +10,7 @@ URL: en/rpg-3d.html
 Save_as: en/rpg-3d.html
 ja_url: pages/rpg-3d.html
 
-# Astral Labyrinth — 3D Mystery Dungeon RPG
+## Astral Labyrinth — 3D Mystery Dungeon RPG
 
 Play a turn-based **Mystery Dungeon roguelike** rendered with **Three.js 3D toon figures and oblique overhead ruins dioramas**, paired with **town smithing, item shop prep, SP skill upgrades, and a 5-act ending movie after conquering B10F**.
 
@@ -23,7 +24,7 @@ Play instantly in your browser on PC or mobile with no installation required ([r
 
 ---
 
-### 🎮 Play Right Here
+## 🎮 Play Right Here
 
 <div style="width: 100%; max-width: 820px; margin: 0 auto; aspect-ratio: 4/3; min-height: 560px; border: 2px solid #f59e0b; border-radius: 12px; overflow: hidden; background: #090706; box-shadow: 0 12px 32px rgba(0,0,0,0.6);">
   <iframe src="/rpg-3d/?lang=en" style="width: 100%; height: 100%; border: none;" allow="autoplay" title="Astral Labyrinth — 3D Mystery Dungeon RPG"></iframe>
@@ -31,7 +32,7 @@ Play instantly in your browser on PC or mobile with no installation required ([r
 
 ---
 
-### 🕹️ Controls & Features
+## 🕹️ Controls & Features
 
 * **3D Character Models & Intuitive Turn-Based Controls:**
   * The hero, slimes, rogues, gargoyles, wizards, and bosses all move and strike as articulated 3D toon figures.

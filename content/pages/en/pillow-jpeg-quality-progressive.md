@@ -87,6 +87,6 @@ python -m pip install Pillow==12.3.0
 python scripts/compare_jpeg_options.py your-photo.jpg --repeats 5
 ```
 
-With no image argument, the script creates an RGB image for a quick check. Pass multiple photos to compare their total size and PSNR range. For the PNG comparison, see [why changing PNG `quality` did not change the file](/en/pillow-png-compression.html).
+With no image argument, the script creates an RGB image for a quick check. Pass multiple photos to compare their total size and PSNR range. For the PNG comparison, see [why changing PNG `quality` did not change the file](/en/pillow-png-compression.html), and for AVIF results on the same set, see [Pillow AVIF support without an extra plugin](/en/pillow-avif-support.html).
 
 For website JPEGs, first resize to the dimensions needed for display, then compare `quality` and progressive output on the images themselves.

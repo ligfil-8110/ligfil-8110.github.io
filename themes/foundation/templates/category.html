@@ -1,4 +1,13 @@
 {% extends "index.html" %}
 
+{% set category_descriptions = {
+    'ゲーム': 'ドラクエ7 Reimaginedの攻略ガイド・プレイ日記・レビューや自作ブラウザRPGの紹介記事一覧です。',
+    '技術メモ': 'CHUWI CoreBook Xの再インストール手順、Python Pillow画像最適化、PowerShellトラブルシューティング、資格体験記の一覧です。',
+    '日記': 'PC・ガジェットの購入記録、ランニング、日々の出来事や発見をまとめた日記記事の一覧です。',
+    'ご挨拶': 'ブログ運営のお知らせや近況のご挨拶記事一覧です。',
+    'お知らせ': 'リグフィルのブログの運営に関するお知らせ記事一覧です。',
+    '投資活動': '投資活動に関する記録・雑記の一覧です。'
+} %}
 {% set pagetitle = category ~ 'の記事一覧' %}
+{% set listing_description = category_descriptions.get(category|string, category ~ 'カテゴリーの記事一覧です。') %}
 {% set page_url = category.url %}

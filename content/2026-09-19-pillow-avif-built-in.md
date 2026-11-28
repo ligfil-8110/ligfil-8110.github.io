@@ -99,7 +99,7 @@ Pillowで指定できる`quality`、`speed`、色差サブサンプリングな�
 
 そもそも形式が違えば、同じ`quality=80`でも同じ画質にはなりません。容量だけを横に並べて勝ち負けを決めるより、必要な画質に合わせて設定を探す方が使いやすいです。
 
-JPEG側のqualityとprogressiveの違いは、[PillowのJPEG保存設定を実写真で比べた記事](/pillow-jpeg-quality-progressive-comparison.html)に詳しく載せています。
+JPEG側のqualityとprogressiveの違いは、[PillowのJPEG保存設定を実写真で比べた記事](/pillow-jpeg-quality-progressive-comparison.html)に詳しく載せています。PNGの圧縮設定は[PNG保存設定の実測比較](/pillow-png-quality-compress-level.html)、拡張子`.jpg`の中身がPNGだったときの確認は[Pillowで形式を確かめて変換する方法](/jpg-actually-png-pillow.html)も参考にしてください。
 
 ## 元写真を上書きせずに比較できます
 

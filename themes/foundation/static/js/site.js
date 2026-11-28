@@ -1,6 +1,35 @@
 (function () {
     "use strict";
 
+    document.querySelectorAll(".article-body").forEach(function (body) {
+        if (body.classList.contains("html-sitemap") || body.closest(".english-home")) return;
+        var headings = Array.prototype.slice.call(body.querySelectorAll("h2[id], h3[id]"));
+        var h2Count = headings.filter(function (el) { return el.tagName === "H2"; }).length;
+        if (h2Count < 3) return;
+        var isEnglish = document.documentElement.lang === "en";
+        var details = document.createElement("details");
+        details.className = "article-toc";
+        details.open = true;
+        var summary = document.createElement("summary");
+        summary.textContent = isEnglish ? "Table of contents" : "目次";
+        var list = document.createElement("ol");
+        headings.forEach(function (heading) {
+            var item = document.createElement("li");
+            if (heading.tagName === "H3") item.className = "toc-h3";
+            var link = document.createElement("a");
+            link.href = "#" + heading.id;
+            link.textContent = heading.textContent.trim();
+            item.appendChild(link);
+            list.appendChild(item);
+        });
+        details.appendChild(summary);
+        details.appendChild(list);
+        var firstH2 = body.querySelector("h2[id]");
+        if (firstH2 && firstH2.parentNode) {
+            firstH2.parentNode.insertBefore(details, firstH2);
+        }
+    });
+
     document.querySelectorAll(".highlight").forEach(function (block) {
         var button = document.createElement("button");
         button.type = "button";

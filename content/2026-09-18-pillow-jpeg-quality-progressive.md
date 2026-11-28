@@ -92,6 +92,6 @@ python scripts/compare_jpeg_options.py your-photo.jpg --repeats 5
 
 引数なしなら、スクリプト内で作る同じRGB画像を使って動作確認できます。複数の写真を渡すと、合計容量とPSNRの範囲をまとめて表示します。
 
-PNGの`quality`を変えても容量が変わらない理由は、[PillowでPNGの保存設定を比べた記事](/pillow-png-quality-compress-level.html)にまとめました。JPEGとPNGでは、同じ`quality`という名前でも挙動が違います。
+PNGの`quality`を変えても容量が変わらない理由は、[PillowでPNGの保存設定を比べた記事](/pillow-png-quality-compress-level.html)にまとめました。JPEGとPNGでは、同じ`quality`という名前でも挙動が違います。AVIFとの比較は[Pillow 11.3以降のAVIF保存比較](/pillow-avif-built-in-quality-speed.html)、拡張子と実体が違うときの確認方法は[jpgなのに中身はPNG？の判別と変換](/jpg-actually-png-pillow.html)もあわせてどうぞ。
 
 Webサイト用のJPEGなら、まず表示に必要な縦横サイズへ縮小する。そのうえでqualityとprogressiveを、自分の写真で比べて決める。この順番が分かりやすいですね！

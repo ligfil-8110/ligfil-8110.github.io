@@ -4,6 +4,12 @@
 <div class="english-home">{{ page.content }}</div>
 {% elif page.en_article %}
 <article class="article-page simple-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="{{ SITEURL }}/en/">Home</a></li>
+            <li aria-current="page">{{ page.title }}</li>
+        </ol>
+    </nav>
     <header class="article-header">
         <div class="post-meta"><span>{{ page.category }}</span><time datetime="{{ page.date.isoformat() }}">Published {{ page.date.strftime('%B %d, %Y') }}</time></div>
         <h1>{{ page.title }}</h1>
@@ -20,6 +26,12 @@
 </article>
 {% else %}
 <article class="article-page simple-page">
+    <nav class="breadcrumb" aria-label="{{ 'Breadcrumb' if page.lang == 'en' else 'パンくずリスト' }}">
+        <ol>
+            <li><a href="{{ SITEURL }}/{{ 'en/' if page.lang == 'en' else '' }}">{{ 'Home' if page.lang == 'en' else 'ホーム' }}</a></li>
+            <li aria-current="page">{{ page.title }}</li>
+        </ol>
+    </nav>
     <header class="article-header"><span class="eyebrow">PAGE</span><h1>{{ page.title }}</h1></header>
     <div class="article-body">{{ page.content }}</div>
 </article>

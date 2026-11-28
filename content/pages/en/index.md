@@ -48,8 +48,17 @@ en_home: true
 <div class="section-heading" id="articles"><div><span class="eyebrow">LATEST POSTS</span><h2>Latest English articles</h2></div></div>
 <div class="post-list">
     <article class="featured-post">
-        <a class="featured-image" href="/en/seria-micro-usb-cable.html"><img src="/images/2026-11/seria-micro-usb-cable-15m.jpg" alt="Package photo of a 1.5m USB-A to MicroUSB charging and data transfer cable bought at Seria in Japan for 110 yen." width="712" height="1024" loading="lazy" decoding="async"></a>
+        <a class="featured-image" href="/en/windows-gamepad-usb-reset-powershell.html"><img src="/images/default-eyecatch.png" alt="Reset a USB Gamepad or Switch Pro Controller on Windows with PowerShell" width="1200" height="675" fetchpriority="high"></a>
         <div class="featured-copy">
+            <div class="post-meta"><span>TECH NOTES</span><time datetime="2026-11-28">November 28, 2026</time></div>
+            <h2><a href="/en/windows-gamepad-usb-reset-powershell.html">Reset a USB Gamepad or Switch Pro Controller on Windows with PowerShell (Without Unplugging)</a></h2>
+            <p>Restart only a USB-connected Switch Pro Controller or gamepad on Windows using built-in Get-PnpDevice and pnputil /restart-device without resetting USB hubs.</p>
+            <a class="text-link" href="/en/windows-gamepad-usb-reset-powershell.html">Read the article →</a>
+        </div>
+    </article>
+    <article class="post-card">
+        <a class="post-card-image" href="/en/seria-micro-usb-cable.html"><img src="/images/2026-11/seria-micro-usb-cable-15m.jpg" alt="Package photo of a 1.5m USB-A to MicroUSB charging and data transfer cable bought at Seria in Japan for 110 yen." width="712" height="1024" loading="lazy" decoding="async"></a>
+        <div class="post-card-copy">
             <div class="post-meta"><span>GADGETS</span><time datetime="2026-11-28">November 28, 2026</time></div>
             <h2><a href="/en/seria-micro-usb-cable.html">I Bought a MicroUSB Cable at Seria for 110 Yen: Why Japan's 100-Yen Shops Are Amazing</a></h2>
             <p>I picked up a 1.5m USB-A to MicroUSB charging and data transfer cable with fast-charging support and reinforced strain relief at Seria for 110 yen.</p>

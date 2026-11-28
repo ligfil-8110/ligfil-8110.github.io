@@ -3,6 +3,13 @@
 {% block content %}
 <article class="article-page">
     {% set is_dq7_reimagined = article.slug.startswith('dragon-quest-vii-play-') or article.slug.startswith('dq7-re-') %}
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+        <ol>
+            <li><a href="{{ SITEURL }}/">ホーム</a></li>
+            <li><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></li>
+            <li aria-current="page">{{ article.title }}</li>
+        </ol>
+    </nav>
     <header class="article-header">
         <div class="post-meta"><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a><time datetime="{{ article.date.isoformat() }}">公開: {{ article.locale_date }}</time>{% if article.modified %}<time datetime="{{ article.modified.isoformat() }}">更新: {{ article.modified.strftime('%Y年%m月%d日') }}</time>{% endif %}</div>
         <h1>{{ article.title }}</h1>
@@ -25,26 +32,30 @@
     {% endif %}
 
     {% set current_tag_names = article.tags|map(attribute='name')|list %}
-    {% set related = namespace(count=0, opened=false) %}
+    {% set scored_related = [] %}
     {% for candidate in articles %}
-        {% set shared_tags = candidate.tags|map(attribute='name')|select('in', current_tag_names)|list %}
-        {% set candidate_is_dq7_reimagined = candidate.slug.startswith('dragon-quest-vii-play-') or candidate.slug.startswith('dq7-re-') %}
-        {% set is_relevant = (is_dq7_reimagined and candidate_is_dq7_reimagined) or (not is_dq7_reimagined and shared_tags) %}
-        {% if related.count < 3 and candidate.url != article.url and is_relevant %}
-            {% if not related.opened %}
+        {% if candidate.url != article.url %}
+            {% set shared_tags = candidate.tags|map(attribute='name')|select('in', current_tag_names)|list %}
+            {% set candidate_is_dq7_reimagined = candidate.slug.startswith('dragon-quest-vii-play-') or candidate.slug.startswith('dq7-re-') %}
+            {% set is_relevant = (is_dq7_reimagined and candidate_is_dq7_reimagined) or (not is_dq7_reimagined and (shared_tags or candidate.category == article.category)) %}
+            {% if is_relevant %}
+                {% set is_dq7_pillar = 1 if (is_dq7_reimagined and candidate.slug.startswith('dq7-re-')) else 0 %}
+                {% set same_cat = 1 if candidate.category == article.category else 0 %}
+                {% set _ = scored_related.append((-is_dq7_pillar, -(shared_tags|length), -same_cat, -candidate.date.timestamp(), candidate.slug, candidate)) %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% set top_related = (scored_related|sort)[:4] %}
+    {% if top_related %}
     <section class="related-articles" aria-labelledby="related-articles-title">
         <h2 id="related-articles-title">関連記事</h2>
         <div class="related-articles-list">
-                {% set related.opened = true %}
-            {% endif %}
+            {% for _, _, _, _, _, candidate in top_related %}
             <a class="related-article-card" href="{{ SITEURL }}/{{ candidate.url }}">
                 <strong>{{ candidate.title }}</strong>
                 {% if candidate.summary %}<span>{{ candidate.summary|striptags|truncate(95) }}</span>{% endif %}
             </a>
-            {% set related.count = related.count + 1 %}
-        {% endif %}
-    {% endfor %}
-    {% if related.opened %}
+            {% endfor %}
         </div>
     </section>
     {% endif %}

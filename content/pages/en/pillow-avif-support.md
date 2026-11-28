@@ -98,7 +98,7 @@ The same seven photos were also saved as JPEG and WebP:
 
 Here, AVIF at `quality=80` was slightly larger than JPEG at `quality=80`. AVIF does not automatically produce a smaller file with the same numeric setting. Different formats also interpret `quality` differently, so file size alone is not a like-for-like quality comparison.
 
-For the JPEG settings, see the [comparison of Pillow JPEG quality and progressive output](/en/pillow-jpeg-quality-progressive.html).
+For the JPEG settings, see the [comparison of Pillow JPEG quality and progressive output](/en/pillow-jpeg-quality-progressive.html). For lossless PNG compression behavior on the same test setup, see [why PNG `quality` does not change file size](/en/pillow-png-compression.html).
 
 ## Try the comparison script without overwriting originals
 

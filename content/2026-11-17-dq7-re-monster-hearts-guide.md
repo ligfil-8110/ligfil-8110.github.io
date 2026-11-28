@@ -70,3 +70,4 @@ Summary: 『ドラゴンクエストVII Reimagined』で仕様が変わった「
 
 * [現代ウッドパルナの石版入手場所とカラーストーン採掘場に入る標語（合言葉）](/dq7-re-woodpalna-green-tablet-mine.html)
 * [じごくのよろいのレアドロップ狙いとイズライールの出現場所（地底ピラミッドB2F）](/dq7-re-hell-armor-farming.html)
+* [1週間やり込んだドラクエ7リメイクのレビュー](/dq7-re-full-review.html)

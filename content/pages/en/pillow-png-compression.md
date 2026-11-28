@@ -101,3 +101,5 @@ python scripts/compare_png_options.py your-photo.jpg --repeats 5
 The input is opened read-only; orientation correction, RGB conversion, and resizing happen in memory. Results depend on the input, and timings can vary with the computer and its workload. Compare the file size and pixels, then choose the setting that fits your use case.
 
 For PNGs, first check whether the image dimensions are larger than you need. Then compare compression settings. `optimize=True` is not automatically worthwhile: on the photo in this test, it took much longer for a small reduction in size.
+
+For lossy formats on the same seven photos, see [comparing JPEG `quality`, `optimize`, and `progressive`](/en/pillow-jpeg-quality-progressive.html) and [saving AVIF in Pillow without an extra plugin](/en/pillow-avif-support.html).

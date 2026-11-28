@@ -66,3 +66,4 @@ Summary: 『ドラゴンクエストVII Reimagined』でウッドパルナクリ
 
 * [「モンスターの心」の仕様変更と序盤（過去の採掘場・東の塔）での入手場所](/dq7-re-monster-hearts-guide.html)
 * [じごくのよろいのレアドロップ狙いとイズライールの出現場所（地底ピラミッドB2F）](/dq7-re-hell-armor-farming.html)
+* [1週間やり込んだドラクエ7リメイクのレビュー](/dq7-re-full-review.html)
